@@ -1,0 +1,37 @@
+//* Paleta de colores
+
+$main: #0195ff;
+$--main--900: #0c44ac;
+$--main--800: #0d63cb;
+$--main--700: #0c75dd;
+$--main--600: #0a87f0;
+$--main--500: #0195ff;
+$--main--400: #37a5ff;
+$--main--300: #5eb5ff;
+$--main--200: #8ecaff;
+$--main--100: #badeff;
+$--main--50: #e3f2ff;
+
+//* Responsive widths
+
+$medium: 48rem;
+$large: 64rem;
+$extra-large: 100rem;
+
+@mixin media-md {
+    @media screen and (min-width: $medium) {
+        @content;
+    }
+}
+
+@mixin media-lg {
+    @media screen and (min-width: $large) {
+        @content;
+    }
+}
+
+@mixin media-xl {
+    @media screen and (min-width: $extra-large) {
+        @content;
+    }
+}
