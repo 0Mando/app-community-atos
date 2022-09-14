@@ -1,7 +1,7 @@
 @import '../../../../sass/variables';
 
 main{
-    z-index: 1;
+    z-index: -2;
 }
 
 .welcome{
@@ -32,6 +32,7 @@ main{
         width: 40%;
         padding: 0.5rem 1rem;
         font-size: 1.25rem;
+        cursor: pointer;
     }
 }
 
@@ -45,7 +46,7 @@ main{
     width: 500px;
     background-color: none;
     border-radius: 50%;
-    z-index: -1;
+    z-index: -2;
 
     &:before {
         position: absolute;
@@ -184,3 +185,5 @@ main{
         }
     }
 }
+
+

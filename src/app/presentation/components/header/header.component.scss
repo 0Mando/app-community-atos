@@ -1,0 +1,11 @@
+@import './sass/header', './sass/profile', './sass/responsive';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.active{
+    text-decoration: underline;
+}
