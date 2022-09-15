@@ -7,13 +7,14 @@
 }
 
 .login{
-    width: 400px;
-    padding: 1rem;
-    margin: 6rem auto;
+	width: min(100% - 2rem, 400px);
+	margin-inline: auto;
+	padding: 1rem;
 
     &__logo{
         color: $main;
         text-align: center;
+		margin-top: 4rem;
         margin-bottom: 2rem;
         font-size: 50px;
     }
@@ -115,7 +116,7 @@
         border: none;
         border-radius: 5px;
         background-color: #76a9ea;
-        padding: 1.2rem 1.5rem;
+        padding: 1rem 1.2rem;
         margin-left: auto;
         margin-right: 12px;
     }
@@ -125,7 +126,7 @@
         border: none;
         border-radius: 5px;
         background-color: #475993;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.4rem;
         margin-right: auto;
         margin-left: 12px;
     }
@@ -151,18 +152,19 @@
 
 @include media-lg{
 
-    body{
-        overflow: hidden;
-    }
-
     main{
-        display: flex;
-    }
+		display: flex;
+		height: 100vh;
+		overflow: auto;
+	}
 
     .bg-img{
+		width: 60%;
+
         &__developers{
             display: block;
             height: 100vh;
-        }
+			width: 100%;
+		}
     }
 }

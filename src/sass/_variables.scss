@@ -18,9 +18,9 @@ $description-text: #888888;
 
 //* Responsive widths
 
-$medium: 48rem;
-$large: 64rem;
-$extra-large: 100rem;
+$medium: 786px;
+$large: 1024px;
+$extra-large: 1600px;
 
 @mixin media-md {
     @media screen and (min-width: $medium) {
