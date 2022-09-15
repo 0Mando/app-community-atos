@@ -24,6 +24,8 @@ main{
     }
 
     &__join-btn{
+		text-align: center;
+		text-decoration: none;
         border: none;
         border-radius: 0.313rem;
         display: block;
@@ -112,13 +114,13 @@ main{
       transform: translate(-50%, -150%);
     }
   }
-  
+
   @keyframes spin {
     100% {
       transform: rotateZ(360deg);
     }
   }
-  
+
   @keyframes spin2 {
     100% {
       transform: rotateZ(-360deg);

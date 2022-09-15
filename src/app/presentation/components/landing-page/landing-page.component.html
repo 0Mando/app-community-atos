@@ -1,10 +1,5 @@
 
-<!-- <img src="assets/logos-landing-page/Logos/Angular_Logo.png" alt="" class="logo logo_angular" />
-<img src="assets/logos-landing-page/Logos/AWS_Logo.png" alt="" class="logo logo_aws" />
-<img src="assets/logos-landing-page/Logos/Azure_Logo.png" alt="" class="logo logo_azure" />
-<img src="assets/logos-landing-page/Logos/Csharp_Logo.png" alt="" class="logo logo_csharp" />
-<img src="assets/logos-landing-page/Logos/Google_Cloud_Logo.png" alt="" class="logo logo_google" />
-<img src="assets/logos-landing-page/Logos/React_Logo.png" alt="" class="logo logo_react" /> -->
+<app-header></app-header>
 <main class="container">
 	<div class="circle">
 		<div class ="mid-circle">
@@ -18,9 +13,9 @@
 		<p class="welcome__content-description">
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit maiores vero, asperiores aliquid quaerat et velit officiis sequi harum ullam!
 		</p>
-		<button class="welcome__join-btn">
+		<a [routerLink]="['/sign-in']" class="welcome__join-btn">
 			Join
-		</button>
+		</a>
 	</section>
 	<section class="about">
 		<div class="about__wrapper-content">
