@@ -8,6 +8,7 @@ import { HeaderComponent } from './presentation/components/header/header.compone
 import { LoginComponent } from './presentation/components/login/login.component';
 import { BoardsComponent } from './presentation/components/boards/boards.component';
 import { CardBoardItemComponent } from './presentation/components/boards/card-board-item/card-board-item.component';
+import { ChannelsComponent } from './presentation/components/channels/channels.component';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { CardBoardItemComponent } from './presentation/components/boards/card-bo
     HeaderComponent,
     LoginComponent,
     BoardsComponent,
-    CardBoardItemComponent
+    CardBoardItemComponent,
+    ChannelsComponent
 	],
 	imports: [
 		BrowserModule,
