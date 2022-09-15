@@ -36,14 +36,19 @@ main{
     }
 }
 
+.container{
+    overflow-x: hidden;
+}
+
 .circle {
     animation: go-down 0.3s linear;
     position: absolute;
     left: 50%;
     top: 12%;
     transform: translate(-50%, -5%);
-    height: 500px;
-    width: 500px;
+    margin-top: 10vh;
+    height: 400px;
+    width: 400px;
     background-color: none;
     border-radius: 50%;
     z-index: -2;
