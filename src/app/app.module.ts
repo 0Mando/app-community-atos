@@ -14,11 +14,11 @@ import { ChannelsComponent } from './presentation/components/channels/channels.c
 	declarations: [
 		AppComponent,
   		LandingPageComponent,
-    HeaderComponent,
-    LoginComponent,
-    BoardsComponent,
-    CardBoardItemComponent,
-    ChannelsComponent
+		HeaderComponent,
+		LoginComponent,
+		BoardsComponent,
+		CardBoardItemComponent,
+		ChannelsComponent
 	],
 	imports: [
 		BrowserModule,
