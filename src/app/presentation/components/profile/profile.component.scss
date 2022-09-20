@@ -1,0 +1,17 @@
+@import 'sass/profile', 'sass/resume', 'sass/icons', 'sass/responsive';
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.banner{
+    height: 35vh;
+    background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+}
+
+.fa-check{
+    font-size: 1.1rem;
+    color: white;
+}

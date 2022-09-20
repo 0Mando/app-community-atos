@@ -1,3 +1,4 @@
+import { ProfileComponent } from './presentation/components/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
 	{
 		path: 'boards/channels',
 		component: ChannelsComponent
+	},
+	{
+		path: 'profile',
+		component: ProfileComponent
 	}
 ];
 

@@ -9,6 +9,7 @@ import { LoginComponent } from './presentation/components/login/login.component'
 import { BoardsComponent } from './presentation/components/boards/boards.component';
 import { CardBoardItemComponent } from './presentation/components/boards/card-board-item/card-board-item.component';
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
+import { ProfileComponent } from './presentation/components/profile/profile.component';
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import { ChannelsComponent } from './presentation/components/channels/channels.c
     LoginComponent,
     BoardsComponent,
     CardBoardItemComponent,
-    ChannelsComponent
+    ChannelsComponent,
+    ProfileComponent
 	],
 	imports: [
 		BrowserModule,
