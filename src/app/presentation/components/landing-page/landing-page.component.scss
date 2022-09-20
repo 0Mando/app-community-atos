@@ -173,6 +173,7 @@ main{
 @include media-lg {
 
     .welcome{
+        margin-top: 10rem;
 
         &__title-landing-page{
             font-size: 3.2rem;

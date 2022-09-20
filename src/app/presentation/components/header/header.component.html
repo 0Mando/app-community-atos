@@ -3,7 +3,7 @@
         <a><img src="./assets/Logos/Atos_Logo.png" alt="" class="header__logo"></a>
         <div (click)="toggleMenu()" class="header__toggle"></div>
         <ul class="header__menu">
-            <li><a  class="active">Home</a></li>
+            <li><a [routerLink]="['/']">Home</a></li>
             <li><a>Categories</a></li>
             <li><a>QA</a></li>
             <li class="profile__dropdown">

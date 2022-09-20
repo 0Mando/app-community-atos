@@ -6,6 +6,12 @@
     }
 }
 
+main{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
 .login{
 	width: min(100% - 2rem, 400px);
 	margin-inline: auto;
@@ -14,8 +20,8 @@
     &__logo{
         color: $main;
         text-align: center;
-		margin-top: 4rem;
-        margin-bottom: 2rem;
+		// margin-top: 4rem;
+        margin-bottom: 1rem;
         font-size: 50px;
     }
 
@@ -154,7 +160,7 @@
 
     main{
 		display: flex;
-		height: 100vh;
+		height: 90vh;
 		overflow: auto;
 	}
 
@@ -163,7 +169,7 @@
 
         &__developers{
             display: block;
-            height: 100vh;
+            height: 90vh;
 			width: 100%;
 		}
     }
