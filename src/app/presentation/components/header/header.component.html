@@ -1,6 +1,6 @@
 <main class="header">
     <section class="header__web">
-        <a  [routerLink]="['/']"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Atos_logo.png" alt="" class="header__logo"></a>
+        <a (click)="iconToggleMenu()" [routerLink]="['/']"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Atos_logo.png" alt="" class="header__logo"></a>
         <div (click)="toggleMenu()" class="header__toggle"></div>
         <ul class="header__menu">
             <li><a>Home</a></li>
@@ -18,8 +18,8 @@
             </li>
         </ul> 
     </section>
-    <section class="header__mobile">
-        <div class="header__mobile-menu" (click)="toggleMenu()"> 
+    <section class="header__mobile" (click)="toggleMenu()">
+        <div class="header__mobile-menu"> 
             <a>Home</a>
             <a>Categories</a>
             <a>QA</a>
