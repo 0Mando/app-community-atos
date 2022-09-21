@@ -4,6 +4,7 @@ import { ChannelsComponent } from './presentation/components/channels/channels.c
 import { BoardsComponent } from './presentation/components/boards/boards.component';
 import { LandingPageComponent } from './presentation/components/landing-page/landing-page.component';
 import { LoginComponent } from './presentation/components/login/login.component';
+import { ArticlesComponent } from './presentation/components/articles/articles.component';
 
 const routes: Routes = [
 	{
@@ -21,6 +22,10 @@ const routes: Routes = [
 	{
 		path: 'boards/channels',
 		component: ChannelsComponent
+	},
+	{
+		path: 'articles',
+		component: ArticlesComponent
 	}
 ];
 
