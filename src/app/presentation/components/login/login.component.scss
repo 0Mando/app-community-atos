@@ -108,8 +108,10 @@ main{
     }
 
     &__sign-up-link{
+		display: inline;
         color: $main;
         text-decoration: none;
+		cursor: pointer;
     }
 }
 
