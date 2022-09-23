@@ -10,11 +10,12 @@ import { BoardsComponent } from './presentation/components/boards/boards.compone
 import { CardBoardItemComponent } from './presentation/components/boards/card-board-item/card-board-item.component';
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
 import { ProfileComponent } from './presentation/components/profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
+import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
 	declarations: [
@@ -28,11 +29,13 @@ import { CardArticleItemComponent } from './presentation/components/articles/car
 		RegisterComponent,
 		ArticlesComponent,
 		CardArticleItemComponent,
-    	ProfileComponent
+    	ProfileComponent,
+     LoadingSpinnerComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule
 	],

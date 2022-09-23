@@ -1,19 +1,27 @@
 <main>
-	<section class="register">
+	<div *ngIf="isLoading" style="text-align: center;">
+		<app-loading-spinner></app-loading-spinner>
+	</div>
+	<section class="register" *ngIf="!isLoading">
 		<h3 class="register__logo">AtoS</h3>
 
 		<p class="register__sign-up">Sign up</p>
 
 		<label class="register__description">Register to continue using Atos Community</label>
 
-		<form>
-			<input class="register__input" type="text" name="first-name" id="first-name" placeholder="First Name">
+		<div class="register__alert-danger" *ngIf="errorMessage">
+			<p>{{ errorMessage }}</p>
+		</div>
+		<form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+			<!-- <input class="disabled-input" type="text" name="firstName" id="firstName" placeholder="First Name" ngModel required>
 
-			<input class="register__input" type="text" name="last-name" id="last-name" placeholder="Last Name">
+			<input class="disabled-input" type="text" name="lastName" id="lastName" placeholder="Last Name" ngModel required>
 
-			<input class="register__input" type="date" name="birthday" id="birthday" placeholder="date">
+			<input class="disabled-input" type="date" name="birthday" id="birthday" ngModel required> -->
 
-			<input class="register__input" type="email" name="email" id="email" placeholder="Email">
+			<input class="register__input" type="email" name="email" id="email" placeholder="Email" ngModel required email>
+
+			<input class="register__input" type="password" name="password" id="password" placeholder="Password" ngModel required minlength="6">
 
 			<button class="register__btn-register" type="submit">Sign up</button>
 		</form>
