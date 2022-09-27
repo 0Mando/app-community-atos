@@ -73,19 +73,19 @@
             }
         }
 
-        &__btn-i{
-            margin-top: 3.125rem;
-            display: block;
-            width: 100%;
-            border: none;
-            background-color: $main;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.313rem;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-        }
+		&__btn-i{
+			margin-top: 3.125rem;
+			display: block;
+			width: 100%;
+			border: none;
+			background-color: $main;
+			color: white;
+			padding: 0.5rem 1rem;
+			border-radius: 0.313rem;
+			font-family: 'Roboto', sans-serif;
+			font-size: 1rem;
+			cursor: pointer;
+		}
 
         &___stadistics{
             display: grid;

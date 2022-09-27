@@ -3,9 +3,13 @@
 		<h2>Boards</h2>
 	</section>
 	<section class="board">
-		<app-card-board-item></app-card-board-item>
-		<app-card-board-item></app-card-board-item>
-		<app-card-board-item></app-card-board-item>
-		<app-card-board-item></app-card-board-item>
+		<!-- <app-card-board-item
+			*ngFor="let cardBoardItem of getBoardsList; let impar = odd;let par = even;"
+			[ngStyle]="{':nth-child(3)':'background-color:red'}"
+			[boardList]="cardBoardItem" [styleImpar]="impar" [stylePar]="par">
+		</app-card-board-item> -->
+		<app-card-board-item
+			*ngFor="let cardBoardItem of getBoardsList" [boardList]="cardBoardItem">
+		</app-card-board-item>
 	</section>
 </main>

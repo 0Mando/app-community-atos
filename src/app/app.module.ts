@@ -29,8 +29,8 @@ import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/l
 		RegisterComponent,
 		ArticlesComponent,
 		CardArticleItemComponent,
-    	ProfileComponent,
-     LoadingSpinnerComponent
+		ProfileComponent,
+		LoadingSpinnerComponent,
 	],
 	imports: [
 		BrowserModule,

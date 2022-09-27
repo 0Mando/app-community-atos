@@ -1,8 +1,8 @@
 <article class="board__item">
 	<div class="board__about-channel">
-		<h4 class="board__about-channel__title">Título</h4>
-		<p class="board__about-channel__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, voluptatem nam ratione vel exercitationem similique.</p>
-		<a href="" class="board__about-channel__link">Go to section</a>
+		<h4 class="board__about-channel__title">{{ boardList.title }}</h4>
+		<p class="board__about-channel__description">{{ boardList.content }}</p>
+		<a (click)="goToChannels()" class="board__about-channel__link">Go to section</a>
 	</div>
 	<div class="board__more-information">
 		<div class="board___stadistics">
@@ -19,6 +19,6 @@
 				<p>Lorem, ipsum dolor.</p>
 			</div>
 		</div>
-		<button class="board__btn-i">Access</button>
+		<button class="board__btn-i" (click)="goToChannels()">Access</button>
 	</div>
 </article>
