@@ -1,22 +1,49 @@
 <main>
     <div class="banner"></div>
     <section class="profile">
-        <article class="profile__actions">
-            <button class="profile__actions-block">Block Account</button>
-            <button class="profile__actions-verify">Verify Account</button>
-        </article>
-        <div class="profile__image">
-            <div class="profile__image-check"><i class="fa-solid fa-check"></i></div>
-        </div>
+        <div class="profile__image"></div>
         <article class="profile__info">
-            <h2 class="profile__info-name">{{name | firstword}}</h2>
-            <span class="profile__info-description">22 years | Frontend</span>
+            <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
+            <span class="profile__info-description">{{myProfile.age}} years | {{ myProfile.work }} </span>
         </article>
     </section>
-    <section class="follow">
-        <button class="follow__btn" (click)="follow()"></button>
+    <section class="info">
+        <h2>Personal Information</h2>
+        <form class="info__items" [formGroup]="profileForm" (keydown.enter)="$event.preventDefault()">
+            <article class="info__items-item">
+                <label for="name">Name</label>
+                <input 
+                    type="text" 
+                    id="name"
+                    formControlName="name">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Email</label>
+                <input 
+                    type="text" 
+                    id="email"
+                    formControlName="email">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Work</label>
+                <input 
+                    type="text" 
+                    id="work"
+                    formControlName="work">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Website</label>
+                <input 
+                    type="text" 
+                    id="website"
+                    formControlName="website">
+            </article>
+            <div class="info__items-edit" (click)="enableEditing()">
+                <i class="fa-solid fa-pen"></i>
+            </div>
+        </form>
     </section>
-    <section class="resume">
+    <!-- <section class="resume">
         <article class="resume__list">
             <h3>Skills / Languages</h3>
             <div class="resume__list-items">
@@ -54,5 +81,6 @@
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </article>
-    </section>
+    </section> -->
 </main>
+

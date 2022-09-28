@@ -1,0 +1,25 @@
+import { Profile } from './../models/Profile';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable, Subject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MyprofileService {
+  // private profile$ = new Subject<any>();
+
+  constructor(private firebase: AngularFirestore) { }
+
+  // saveInfo(profile: Profile): Promise<any> {
+  //   return this.firebase.collection('profiles').add(profile)
+  // }
+
+  saveInfo(id: string, profile: any): Promise<any>{
+    return this.firebase.collection('profiles').doc(id).update(profile);
+  }
+
+  getInfo(): Observable<any> {
+    return this.firebase.collection('profiles').snapshotChanges();
+  }
+}

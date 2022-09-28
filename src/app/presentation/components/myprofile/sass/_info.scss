@@ -1,0 +1,54 @@
+.info{
+    width: 90%;
+    margin-inline: auto;
+    box-shadow: 0 0 3px 1px lightgrey;;
+    padding: 12px 20px 24px 20px;
+
+    h2{
+        font-weight: 500;
+    }
+
+    &__items{
+        display: flex;
+        justify-content: space-between;
+
+        &-edit{
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            border: none;
+            color: red;
+            margin-top: -25px;
+            background: #e3e2e2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-item{
+            display: flex;
+            flex-direction: column;
+
+            label{
+                font-weight: 500;
+                font-size: 1.1rem;
+            }
+
+            input {
+                background: none;
+                border: none;
+
+                &:enabled{
+                    text-decoration: underline;
+                }
+                
+                &:focus{
+                    outline: none;
+                }
+            }
+
+        }
+    }
+}
