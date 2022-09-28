@@ -10,7 +10,7 @@ import { Board } from 'src/app/domain/models/board.model';
 })
 export class BoardsComponent implements OnInit {
 
-	getBoardsList: Board[] = [];
+	boards: Board[] = [];
 	lista:string[]=["hola","que","tal","estas"];
 
 	constructor(private http: HttpClient) { }
@@ -36,7 +36,7 @@ export class BoardsComponent implements OnInit {
 			)
 		).subscribe(
 			boards =>{
-				this.getBoardsList = boards;
+				this.boards = boards;
 			}
 		)
 	}

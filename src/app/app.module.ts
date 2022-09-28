@@ -7,7 +7,6 @@ import { LandingPageComponent } from './presentation/components/landing-page/lan
 import { HeaderComponent } from './presentation/components/header/header.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { BoardsComponent } from './presentation/components/boards/boards.component';
-import { CardBoardItemComponent } from './presentation/components/boards/card-board-item/card-board-item.component';
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
 import { ProfileComponent } from './presentation/components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +23,6 @@ import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/l
 		HeaderComponent,
 		LoginComponent,
 		BoardsComponent,
-		CardBoardItemComponent,
 		ChannelsComponent,
 		RegisterComponent,
 		ArticlesComponent,
