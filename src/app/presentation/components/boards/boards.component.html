@@ -7,7 +7,7 @@
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.title }}</h4>
 				<p class="board__about-channel__description">{{ board.content }}</p>
-				<a routerLink="/channels/{{ board.title }}" class="board__about-channel__link">Go to section</a>
+				<a (click)="getId(board.title)" routerLink="/channel/{{ board.title | formatUrl | lowercase }}" class="board__about-channel__link">Go to section</a>
 			</div>
 			<div class="board__more-information">
 				<div class="board___stadistics">
@@ -24,7 +24,7 @@
 						<p>Lorem, ipsum dolor.</p>
 					</div>
 				</div>
-				<a routerLink="/channels/{{ board.title }}" class="board__btn-i">Access</a>
+				<a routerLink="/channel/{{ board.title | formatUrl | lowercase }}" (click)="getId(board.title)" class="board__btn-i">Access</a>
 			</div>
 		</article>
 	</section>

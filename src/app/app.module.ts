@@ -15,6 +15,10 @@ import { RegisterComponent } from './presentation/components/register/register.c
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
 import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/loading-spinner.component';
+import { ChannelComponent } from './presentation/components/channel/channel.component';
+import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
+import { BoardComponent } from './presentation/admin/board/board.component';
+import { FormBoardComponent } from './presentation/admin/board/form-board/form-board.component';
 
 @NgModule({
 	declarations: [
@@ -29,6 +33,10 @@ import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/l
 		CardArticleItemComponent,
 		ProfileComponent,
 		LoadingSpinnerComponent,
+		ChannelComponent,
+		FormatUrlPipe,
+  BoardComponent,
+  FormBoardComponent
 	],
 	imports: [
 		BrowserModule,

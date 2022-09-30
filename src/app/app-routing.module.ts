@@ -7,6 +7,7 @@ import { LandingPageComponent } from './presentation/components/landing-page/lan
 import { LoginComponent } from './presentation/components/login/login.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { RegisterComponent } from './presentation/components/register/register.component';
+import { ChannelComponent } from './presentation/components/channel/channel.component';
 
 const routes: Routes = [
 	{
@@ -36,6 +37,10 @@ const routes: Routes = [
 	{
 		path: 'sign-up',
 		component: RegisterComponent
+	},
+	{
+		path: 'channel/:channel-name',
+		component: ChannelComponent
 	}
 ];
 

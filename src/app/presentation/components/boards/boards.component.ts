@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Board } from 'src/app/domain/models/board.model';
+import { BoardService } from 'src/app/infrastructure/services/board.service';
 
 @Component({
 	selector: 'app-boards',
@@ -11,33 +12,14 @@ import { Board } from 'src/app/domain/models/board.model';
 export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
-	lista:string[]=["hola","que","tal","estas"];
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private boardService : BoardService) { }
 
 	ngOnInit(): void {
-		this.fetchBoards();
-	}
-
-	private fetchBoards(){
-		this.http.get<{ [key:string]: Board }>(
-			'https://atos-community-upgrade-default-rtdb.firebaseio.com/boards.json'
-		).pipe(
-			map(
-				response =>{
-					const boardsArray: Board[] = [];
-					for(const key in response){
-						if(response.hasOwnProperty(key)){
-							boardsArray.push({...response[key], id: key})
-						}
-					}
-					return boardsArray;
-				}
-			)
-		).subscribe(
+		this.boardService.fetchBoards().subscribe(
 			boards =>{
 				this.boards = boards;
 			}
-		)
+		);
 	}
 }
