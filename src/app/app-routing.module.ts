@@ -8,6 +8,8 @@ import { LoginComponent } from './presentation/components/login/login.component'
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { ChannelComponent } from './presentation/components/channel/channel.component';
+import { BoardComponent } from './presentation/admin/board/board.component';
+import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
 
 const routes: Routes = [
 	{
@@ -41,6 +43,14 @@ const routes: Routes = [
 	{
 		path: 'channel/:channel-name',
 		component: ChannelComponent
+	},
+	{
+		path: 'admin/board',
+		component: BoardComponent
+	},
+	{
+		path: 'admin/channel',
+		component: AdminChannelComponent
 	}
 ];
 

@@ -14,8 +14,8 @@ body{
 }
 
 .container{
-    margin: 0 auto;
-    max-width: 75rem;
+    width: min(100% - 2rem, 1200px);
+	margin-inline: auto;
     padding: 0 1.25rem;
     height: 100%;
 }

@@ -19,6 +19,8 @@ import { ChannelComponent } from './presentation/components/channel/channel.comp
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 import { BoardComponent } from './presentation/admin/board/board.component';
 import { FormBoardComponent } from './presentation/admin/board/form-board/form-board.component';
+import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
+import { FormChannelComponent } from './presentation/admin/admin-channel/form-channel/form-channel.component';
 
 @NgModule({
 	declarations: [
@@ -35,8 +37,10 @@ import { FormBoardComponent } from './presentation/admin/board/form-board/form-b
 		LoadingSpinnerComponent,
 		ChannelComponent,
 		FormatUrlPipe,
-  BoardComponent,
-  FormBoardComponent
+		BoardComponent,
+		FormBoardComponent,
+  AdminChannelComponent,
+  FormChannelComponent,
 	],
 	imports: [
 		BrowserModule,

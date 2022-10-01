@@ -1,6 +1,7 @@
 export interface Channel {
-	boardName: string;
 	id?: number;
-	title: string;
-	imageChannel: string;
+	channelName: string;
+	channelDescription: string;
+	parentBoard: string;
+	// channelImage: string;
 }
