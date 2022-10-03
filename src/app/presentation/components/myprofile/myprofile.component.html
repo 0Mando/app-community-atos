@@ -43,18 +43,26 @@
             </div>
         </form>
     </section>
-    <!-- <section class="resume">
+    <section class="resume">
         <article class="resume__list">
             <h3>Skills / Languages</h3>
             <div class="resume__list-items">
-                <ul>
-                    <li *ngFor="let skill of skills">
+                <ul class="resume__list-ul">
+                    <li *ngFor="let skill of myProfile.skills">
                         {{skill}}
                     </li>
+                    <!-- <li>
+                        <input type="text" class="resume__list-added" placeholder="Add Skill">
+                    </li> -->
+                    <li class="resume__list-add-li">
+                        <button class="resume__list-add" (click)="addSkill()">+</button>
+                    </li>
                 </ul>
+                
             </div>
+            
         </article>
-        <article class="resume__list second">
+        <!-- <article class="resume__list second">
             <div class="resume__list-paged">
                 <div class="resume__list-posts">
                     <h3>Posts</h3>
@@ -80,7 +88,7 @@
                 <div class="pagination"><p>1</p></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
-        </article>
-    </section> -->
+        </article> -->
+    </section>
 </main>
 

@@ -1,8 +1,9 @@
 .info{
-    width: 90%;
+    width: 95vw;
     margin-inline: auto;
     box-shadow: 0 0 3px 1px lightgrey;;
     padding: 12px 20px 24px 20px;
+    margin-bottom: 20px;
 
     h2{
         font-weight: 500;
@@ -25,6 +26,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .skills{
+                position: absolute;
+                margin-left: 90%;
+            }
         }
 
         &-item{
@@ -51,4 +57,8 @@
 
         }
     }
+}
+
+.resume__list{
+    margin: 0;
 }

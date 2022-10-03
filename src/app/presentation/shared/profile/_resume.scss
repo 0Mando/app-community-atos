@@ -15,11 +15,10 @@
         }
 
         &-items {
-
             margin: 10px;
 
             ul{
-                width: 90%;
+                width: 100%;
                 margin: 0 auto;
                 list-style: none;
                 display: grid;
@@ -60,6 +59,17 @@
                 margin-top: -5px;
                 line-height: 25px;
             }
+        }
+
+        &-add{
+            width: 20px;
+            height: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        &-added{
+            width: 80px;
         }
     }
 

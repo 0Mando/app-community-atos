@@ -9,76 +9,7 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./myprofile.component.scss']
 })
 export class MyprofileComponent implements OnInit {
-  profile = {
-    pfp: "https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    banner: "https://images.pexels.com/photos/1022928/pexels-photo-1022928.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    email: "someone@example.com",
-    work: "Frontend",
-    website: "kale.biz",
-    age: 22,
-    skills:  [
-      "HTML",
-      "SASS",
-      "CSS",
-      "GIT",
-      "JS6",
-      "Azure",
-      "Angular",
-      "React",
-      "RxJS",
-      "VUE",
-      "FIREBASE",
-      "Mongo"
-    ],
-    posts: [
-      {
-        title: "Complete Guide: Angular lifecycle hooks",
-        date: "5 Jun",
-        likes: 14,
-        comments: 4
-      },
-      {
-        title: "Las piedras rodando se encuentran",
-        date: "28 Aug",
-        likes: 23,
-        comments: 8
-      },
-      {
-        title: "La Casa de Cafe",
-        date: "7 Sep",
-        likes: 166,
-        comments: 67
-      },
-      {
-        title: "Historia entre tus dedos",
-        date: "31 Jan",
-        likes: 420,
-        comments: 69
-      },
-      {
-        title: "Gavilan o Paloma",
-        date: "20 Oct",
-        likes: 9999,
-        comments: 9999
-      }
-    ],
-    archived: [
-      {
-        title: "Aeroplanos",
-        date: "45 Jan",
-        likes: 100,
-        comments: 50
-      },
-      {
-        title: "Los Felices",
-        date: "69 Dec",
-        likes: 200,
-        comments: 100
-      }
-    ]
-  }
-
-  myProfile: any = {};
+    myProfile: any = {};
   profileForm: FormGroup = new FormGroup({
     'name': new FormControl(),
     'email': new FormControl(),
@@ -87,6 +18,20 @@ export class MyprofileComponent implements OnInit {
   });
   isDisabled: boolean = true;
   id: string;
+  skills: string[] = [
+    "HTML",
+    "SASS",
+    "CSS",
+    "GIT",
+    "JS6",
+    "Azure",
+    "Angular",
+    "React",
+    "RxJS",
+    "VUE",
+    "FIREBASE",
+    "Mongo"
+  ]
 
   constructor(private _profileService: MyprofileService) { }
 
@@ -123,6 +68,53 @@ export class MyprofileComponent implements OnInit {
     this._profileService.saveInfo(this.id, PROFILE)
   }
 
+  addSkill(){
+    let ul = document.querySelector('.resume__list-ul');
+    let last = document.querySelector('.resume__list-add-li');
+    let li = document.createElement("li");
+    let input = this.createInput();
+
+    li.appendChild(input)
+    // li.setAttribute('class', 'resume__list-added')
+
+    ul?.insertBefore(li, last);
+    // ul?.appendChild(li);
+    
+  }
+
+  createInput(){
+    let input = document.createElement('input');
+    input.setAttribute("type","text");
+    input.setAttribute("class", "resume__list-added");
+    input.setAttribute("placeholder", "Add Skill");
+    input.setAttribute("style", `width: 80px; height: 23px; border-radius: 5px; border: 1px solid; margin-bottom: 5px;`);
+    input.addEventListener('keyup', (e) => {
+      if(e.key === 'Enter'){
+        this.setSkills();
+      }
+      
+    });
+    
+    return input;
+  }
+
+  setSkills(){
+    const SKILLS = {
+      skills: this.myProfile.skills
+    }
+
+    let remove = document.querySelectorAll('.resume__list-added')!as NodeListOf<HTMLInputElement>;
+    remove?.forEach( e => {
+      if(e.value){
+        SKILLS.skills.push(e.value);
+        e.parentElement?.remove();
+        this._profileService.saveInfo(this.id, SKILLS);
+      }else{
+        alert('Please add a value')
+      }
+    })
+  }
+
   setImages(pfp: string, banner: string){
     let img = document.querySelector('.profile__image')! as HTMLDivElement;
     let bg = document.querySelector('.banner')! as HTMLDivElement;
@@ -141,6 +133,7 @@ export class MyprofileComponent implements OnInit {
       this.profileForm.get('email')?.disable();
       this.profileForm.get('work')?.disable();
       this.profileForm.get('website')?.disable();
+
       btn.innerHTML = '<i class="fa-solid fa-pen"></i>';
       btn.style.color = 'red';
     } else{
@@ -148,6 +141,7 @@ export class MyprofileComponent implements OnInit {
       this.profileForm.get('email')?.enable();
       this.profileForm.get('work')?.enable();
       this.profileForm.get('website')?.enable();
+
       btn.innerHTML = '<i class="fa-solid fa-check"></i>';
       btn.style.color = 'green';
     }
