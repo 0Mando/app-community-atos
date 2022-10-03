@@ -15,12 +15,12 @@ import { RegisterComponent } from './presentation/components/register/register.c
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
 import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/loading-spinner.component';
-import { ChannelComponent } from './presentation/components/channel/channel.component';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-import { BoardComponent } from './presentation/admin/board/board.component';
-import { FormBoardComponent } from './presentation/admin/board/form-board/form-board.component';
 import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
 import { FormChannelComponent } from './presentation/admin/admin-channel/form-channel/form-channel.component';
+import { AdminBoardComponent } from './presentation/admin/admin-board/admin-board.component';
+import { FormBoardComponent } from './presentation/admin/admin-board/form-board/form-board.component';
+import { ListBoardComponent } from './presentation/admin/admin-board/list-board/list-board.component';
 
 @NgModule({
 	declarations: [
@@ -35,12 +35,12 @@ import { FormChannelComponent } from './presentation/admin/admin-channel/form-ch
 		CardArticleItemComponent,
 		ProfileComponent,
 		LoadingSpinnerComponent,
-		ChannelComponent,
 		FormatUrlPipe,
-		BoardComponent,
+		AdminChannelComponent,
+		FormChannelComponent,
+		AdminBoardComponent,
 		FormBoardComponent,
-  AdminChannelComponent,
-  FormChannelComponent,
+  ListBoardComponent,
 	],
 	imports: [
 		BrowserModule,

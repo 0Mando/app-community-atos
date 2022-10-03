@@ -7,9 +7,8 @@ import { LandingPageComponent } from './presentation/components/landing-page/lan
 import { LoginComponent } from './presentation/components/login/login.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { RegisterComponent } from './presentation/components/register/register.component';
-import { ChannelComponent } from './presentation/components/channel/channel.component';
-import { BoardComponent } from './presentation/admin/board/board.component';
 import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
+import { AdminBoardComponent } from './presentation/admin/admin-board/admin-board.component';
 
 const routes: Routes = [
 	{
@@ -25,7 +24,7 @@ const routes: Routes = [
 		component: BoardsComponent
 	},
 	{
-		path: 'channels',
+		path: 'channels/:boardName',
 		component: ChannelsComponent
 	},
 	{
@@ -41,12 +40,8 @@ const routes: Routes = [
 		component: RegisterComponent
 	},
 	{
-		path: 'channel/:channel-name',
-		component: ChannelComponent
-	},
-	{
 		path: 'admin/board',
-		component: BoardComponent
+		component: AdminBoardComponent
 	},
 	{
 		path: 'admin/channel',

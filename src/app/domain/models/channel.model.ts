@@ -1,7 +1,7 @@
 export interface Channel {
-	id?: number;
+	id?: string;
 	channelName: string;
 	channelDescription: string;
+	channelImage: string;
 	parentBoard: string;
-	// channelImage: string;
 }
