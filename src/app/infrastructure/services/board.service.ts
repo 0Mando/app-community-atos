@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Board } from 'src/app/domain/models/board.model';
 
 @Injectable({
@@ -8,36 +8,21 @@ import { Board } from 'src/app/domain/models/board.model';
 })
 export class BoardService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private firestore: Firestore) { }
 
-	createBoard(title: string, content: string){
-		const boardData: Board = { title : title, content : content };
-
-		this.http.post<{ name: string }>(
-			'https://atos-community-upgrade-default-rtdb.firebaseio.com/boards.json',
-			boardData
-		).subscribe(
-			responseData =>{
-				console.log(responseData);
-			}
-		)
+	createBoard(board: Board) {
+		const boardRef = collection(this.firestore, 'boards');
+		return addDoc(boardRef, board);
 	}
 
-	fetchBoards(){
-		return this.http.get<{ [key:string]: Board }>(
-			'https://atos-community-upgrade-default-rtdb.firebaseio.com/boards.json'
-		).pipe(
-			map(
-				response =>{
-					const boardsArray: Board[] = [];
-					for(const key in response){
-						if(response.hasOwnProperty(key)){
-							boardsArray.push({...response[key], id: key})
-						}
-					}
-					return boardsArray;
-				}
-			)
-		);
+	fetchBoards(): Observable<Board[]> {
+		const boardRef = collection(this.firestore, 'boards');
+		return collectionData(boardRef, { idField: 'id' }) as Observable<Board[]>;
 	}
+
+	deleteBoard(board: Board) {
+		const boardDocRef = doc(this.firestore, `boards/${board.id}`);
+		return deleteDoc(boardDocRef);
+	}
+
 }

@@ -11,7 +11,7 @@
 	<br>
 	<label for="parentBoard">PARENT BOARD</label><br>
 	<select name="parentBoard" id="parentBoard" formControlName="parentBoard">
-		<option *ngFor="let board of boards" [value]="board.title | lowercase | formatUrl ">{{ board.title }}</option>
+		<option *ngFor="let board of boards" [value]="board.boardName | lowercase | formatUrl ">{{ board.boardName }}</option>
 	</select>
 	<br>
 	<button>CREATE NEW BOARD</button>

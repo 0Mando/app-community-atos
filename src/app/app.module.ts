@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 //* Angular Firebase Set up
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +59,7 @@ import { environment } from 'src/environments/environment';
 		AngularFireAuthModule,
 		AngularFirestoreModule
 	],
-	providers: [],
+	providers: [AngularFirestore],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

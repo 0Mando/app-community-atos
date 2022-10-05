@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Board } from 'src/app/domain/models/board.model';
 import { BoardService } from 'src/app/infrastructure/services/board.service';
 
 @Component({
@@ -11,8 +11,9 @@ import { BoardService } from 'src/app/infrastructure/services/board.service';
 export class FormBoardComponent implements OnInit {
 
 	formBoard : FormGroup;
+	currentBoard : Board;
 
-	constructor(private http: HttpClient,private boardService: BoardService) { }
+	constructor(private boardService : BoardService) { }
 
 	ngOnInit(): void {
 		this.formBoard = new FormGroup({
@@ -21,16 +22,22 @@ export class FormBoardComponent implements OnInit {
 		});
 	}
 
-	onSubmit(){
+	async onSubmit(){
 		console.log(this.formBoard.get('boardName').value);
 		console.log(this.formBoard.get('boardDescription').value);
 
 		const boardName = this.formBoard.get('boardName').value;
 		const boardDescription = this.formBoard.get('boardDescription').value;
 
-		this.boardService.createBoard(boardName, boardDescription);
+		this.currentBoard = {
+			boardName : boardName,
+			boardDescription : boardDescription
+		}
 
-		this.formBoard.reset();
+		const response = await this.boardService.createBoard(this.currentBoard);
+
+		// console.log(response);
+
+		// this.formBoard.reset();
 	}
-
 }

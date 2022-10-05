@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Board } from 'src/app/domain/models/board.model';
-import { BoardService } from 'src/app/infrastructure/services/board.service';
 
 @Component({
 	selector: 'app-boards',
@@ -13,13 +10,13 @@ export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
 
-	constructor(private http: HttpClient, private boardService : BoardService) { }
+	constructor() { }
 
 	ngOnInit(): void {
-		this.boardService.fetchBoards().subscribe(
-			boards =>{
-				this.boards = boards;
-			}
-		);
+		// this.boardService.fetchBoards().subscribe(
+		// 	boards =>{
+		// 		this.boards = boards;
+		// 	}
+		// );
 	}
 }

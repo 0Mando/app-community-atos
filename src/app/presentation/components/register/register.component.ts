@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthenticationService } from 'src/app/infrastructure/services/authentication.service';
-import { FirestoredbService } from 'src/app/infrastructure/services/firestoredb.service';
 
 @Component({
 	selector: 'app-register',
@@ -19,8 +18,7 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private authenticationService : AuthenticationService,
-		private firestoreDataBase : FirestoredbService
+		private authenticationService : AuthenticationService
 	) { }
 
 	ngOnInit(): void {
@@ -44,8 +42,6 @@ export class RegisterComponent implements OnInit {
 			userType : 'normal-user'
 		}
 
-		console.log(this.user);
-
 		this.isLoading = true;
 
 		const response = await this.authenticationService.registerUser(this.user).catch(
@@ -61,7 +57,7 @@ export class RegisterComponent implements OnInit {
 			console.log('Created user');
 			const path = 'Users';
 			const id = response.user.uid;
-			this.firestoreDataBase.createDocument(this.user, path, id);
+			this.authenticationService.createDocument(this.user, path, id);
 			this.isLoading = false;
 			this.router.navigate(['/sign-in']);
 		}

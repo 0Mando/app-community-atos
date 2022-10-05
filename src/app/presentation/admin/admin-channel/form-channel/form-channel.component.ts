@@ -29,11 +29,11 @@ export class FormChannelComponent implements OnInit {
 			'parentBoard' : new FormControl(null, Validators.required)
 		});
 
-		this.boardService.fetchBoards().subscribe(
-			boards =>{
-				this.boards = boards;
-			}
-		);
+		// this.boardService.fetchBoards().subscribe(
+		// 	boards =>{
+		// 		this.boards = boards;
+		// 	}
+		// );
 	}
 
 	onSubmit(){
