@@ -49,6 +49,35 @@
 
         img{
             margin-bottom: 10px;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    &__sign{
+        margin-inline: auto 3vw;
+        display: flex;
+
+        *{
+            border-radius: 15px;
+            padding: 8px 15px;
+            width: 85px;
+            margin-inline: 5px;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        &-in{
+            background: #0195ff;
+            color: white;
+            font-weight: 700;
+        }
+
+        &-up{
+            background: none;
         }
     }
 }

@@ -1,33 +1,37 @@
 @media screen and (max-width: 920px) {
-    .profile__dropdown{
-        &-name{
-            display: none;
+    .profile{
+        &__dropdown{
+            &-name{
+                display: none;
+            }
+    
+            &-content{
+                margin-left: -50px;
+            }
         }
 
-        &-content{
-            margin-left: -50px;
+        &__sign{
+            *{
+                padding: 8px 12px;
+                width: 75px;
+                font-size: 0.9rem;
+                margin-inline: 2px;
+            }
         }
     }
+   
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 540px) {
 
     .header{
         &__menu{
             display: none;
         }
-        
-        // &__web{
-        //     height: 10vh;
-        // }
 
         &__toggle{
             display: flex;
         }
-
-        // &__mobile{
-        //     display: none;
-        // }
 
         &.active-menu {
 
@@ -46,16 +50,16 @@
             }
 
             .header__mobile{
-                position:fixed;
-                background: white;
+                // position:fixed;
+                // background: white;
                 padding: 25px;
-                z-index: 10;
+                // z-index: 10;
                 width: 85vw;
                 transition: width 0.5s, padding 0.2s;
                 box-shadow: 0 0 3px 4px lightgray;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
+                // height: 100vh;
+                // display: flex;
+                // flex-direction: column;
 
                 *{
                     visibility: visible;
@@ -68,15 +72,6 @@
                     text-decoration: none;
                 }
             }
-        }
-    }
-
-    .profile__mobile{
-        img{
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            object-fit: cover;
         }
     }
 }
