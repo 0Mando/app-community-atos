@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { retry } from 'rxjs';
+import { Router } from '@angular/router'; 
 import { User } from 'src/app/domain/models/user.model';
 import { AuthenticationService } from 'src/app/infrastructure/services/authentication.service';
 import { FirestoredbService } from 'src/app/infrastructure/services/firestoredb.service';

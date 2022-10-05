@@ -15,16 +15,21 @@
 
 			<label class="login__login-email">Login with email</label>
 
-			<div class="login__alert-danger" *ngIf="errorMessage">
+			<div class="alert-danger" *ngIf="errorMessage">
 				<p>{{ errorMessage }}</p>
 			</div>
 
-			<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-				<input class="login__input" type="email" name="email" id="email" placeholder="Email" ngModel required email>
+			<form [formGroup]="loginUserForm" (ngSubmit)="onSubmit()">
+				<input class="login__input" type="email" name="email" id="email" placeholder="Email" formControlName="email">
+				<span class="alert-danger" *ngIf="!loginUserForm.get('email').valid && loginUserForm.get('email').touched">
+					Please enter a valid email
+				</span>
+				<input class="login__input" type="password" name="password" id="password" placeholder="Password" formControlName="password">
+				<span class="alert-danger" *ngIf="!loginUserForm.get('password').valid && loginUserForm.get('password').touched">
+					Please enter your password
+				</span>
 
-				<input class="login__input" type="password" name="password" id="password" placeholder="Password" ngModel required minlength="6">
-
-				<div class="login__options">
+				<!-- <div class="login__options">
 
 					<div class="login__options__remember">
 						<input class="login__options__remember__input" type="radio" id="remember">
@@ -34,7 +39,7 @@
 					</div>
 
 					<a class="login__options__forgot-password" href="">Forgot password?</a>
-				</div>
+				</div> -->
 
 				<button class="login__btn-login" type="submit">Login</button>
 			</form>

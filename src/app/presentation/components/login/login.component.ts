@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { AuthenticationService } from 'src/app/infrastructure/services/authentication.service';
 
 @Component({
 	selector: 'app-login',
@@ -12,37 +13,51 @@ export class LoginComponent implements OnInit {
 
 	isLoading = false;
 	errorMessage: string = '';
+	loginUserForm : FormGroup;
 
-	constructor(private authService: AuthService, private router: Router) { }
+	constructor(
+		private authenticationService : AuthenticationService,
+		private router: Router
+	) { }
 
 	ngOnInit(): void {
+		this.loginUserForm = new FormGroup({
+			'email' : new FormControl(null, [Validators.required, Validators.email]),
+			'password' : new FormControl(null, Validators.required)
+		})
 	}
 
-	onSubmit(form: NgForm){
-		if(!form.valid){
-			return;
-		}
+	async onSubmit(){
+		const email = this.loginUserForm.get('email').value;
+		const password = this.loginUserForm.get('password').value;
 
-		console.log(form.value);
+		const response = await this.authenticationService.login(email, password).catch(
+			//! Errores de Firebase
+			error => {
+				switch(error.code){
+					case 'auth/invalid-email':
+						this.errorMessage = 'Invalid email';
+					break;
+					case 'auth/missing-email':
+						this.errorMessage = 'Missing credentials';
+					break;
+					case 'auth/user-not-found':
+					case 'auth/wrong-password':
+						this.errorMessage = 'User not found';
+					break;
+				}
 
-		const email = form.value.email;
-		const password = form.value.password;
-
-		this.isLoading = true;
-
-		this.authService.login(email, password).subscribe(
-			responseData => {
-				console.log(responseData);
-				this.isLoading = false;
-				this.router.navigate(['/boards']);
-			},
-			errorMessage => {
-				console.log(errorMessage);
-				this.errorMessage = errorMessage;
 				this.isLoading = false;
 			}
 		)
 
-		form.reset();
+		//* Acceso a boards
+		if(response){
+			console.log(response);
+			this.isLoading = false;
+			this.router.navigate(['/boards']);
+		}
+
+		this.loginUserForm.reset();
 	}
 }
