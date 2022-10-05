@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+//* Angular Firebase Set up
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './presentation/components/landing-page/landing-page.component';
@@ -21,6 +26,7 @@ import { FormChannelComponent } from './presentation/admin/admin-channel/form-ch
 import { AdminBoardComponent } from './presentation/admin/admin-board/admin-board.component';
 import { FormBoardComponent } from './presentation/admin/admin-board/form-board/form-board.component';
 import { ListBoardComponent } from './presentation/admin/admin-board/list-board/list-board.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
 	declarations: [
@@ -40,14 +46,18 @@ import { ListBoardComponent } from './presentation/admin/admin-board/list-board/
 		FormChannelComponent,
 		AdminBoardComponent,
 		FormBoardComponent,
-  ListBoardComponent,
+		ListBoardComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+		//* Angular Firebase Set up
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireAuthModule,
+		AngularFirestoreModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
