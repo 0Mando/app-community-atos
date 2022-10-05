@@ -35,4 +35,20 @@
             flex-direction: column;
         }
     }
+
+    &__mobile{
+        text-decoration: none;
+        color: black;
+
+        h3, p{
+            margin-left: 5px;
+        }
+        p{
+            font-size: 0.8rem;
+        }
+
+        img{
+            margin-bottom: 10px;
+        }
+    }
 }

@@ -13,41 +13,70 @@
 @media screen and (max-width: 520px) {
 
     .header{
-        transition: height 0.5s;
-
         &__menu{
             display: none;
         }
-
-        &__web{
-            height: 10vh;
-
-        }
+        
+        // &__web{
+        //     height: 10vh;
+        // }
 
         &__toggle{
             display: flex;
         }
 
-        &.active-menu {
-            display: flex;
-            height: 100vh;
-            cursor: pointer;
+        // &__mobile{
+        //     display: none;
+        // }
 
-            .header__web{
+        &.active-menu {
+
+            .header__web{   
+                height: 0;
+                box-shadow: none;
+                transition: height 0.5s, box-shadow 1s;
+            }
+
+            .header__none{
+                position: fixed;
+                width: 15vw !important;
+                height: 100%;
+                right: 0;
                 background: none;
             }
 
             .header__mobile{
-                height: 100%;
-                width: 100%;
+                position:fixed;
+                background: white;
+                padding: 25px;
+                z-index: 10;
+                width: 85vw;
+                transition: width 0.5s, padding 0.2s;
+                box-shadow: 0 0 3px 4px lightgray;
+                height: 100vh;
                 display: flex;
-                align-items: center;
+                flex-direction: column;
+
+                *{
+                    visibility: visible;
+                    opacity: 1;
+                    transition: visibility 0.5s, opacity 0.5s linear;
+                }
 
                 &-menu a{
                     color: black;
                     text-decoration: none;
                 }
             }
+        }
+    }
+
+    .profile__mobile{
+        img{
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
         }
     }
 }

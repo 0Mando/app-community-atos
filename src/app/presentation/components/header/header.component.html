@@ -18,12 +18,24 @@
             </li>
         </ul> 
     </section>
-    <section class="header__mobile" (click)="toggleMenu()">
+    <section class="header__mobile" >
+        <div class="profile__mobile" [routerLink]="['/profile']">
+            <img src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="profile__img">
+            <h3 class="profile__mobile-name">Lesly</h3>
+            <p class="profile__mobile-email">someone@example.com</p>
+        </div>
+        <hr>
+        <div class="boards" *ngFor="">
+            
+        </div>
+    </section>
+    <section class="header__none" (click)="toggleMenu()"></section>
+    <!-- <section class="header__mobile" (click)="toggleMenu()">
         <div class="header__mobile-menu"> 
             <a>Home</a>
             <a>Categories</a>
             <a>QA</a>
             <a [routerLink]="['/profile']">My Profile</a>
         </div>
-    </section>
+    </section> -->
 </main>
