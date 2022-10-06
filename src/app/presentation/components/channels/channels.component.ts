@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
+
 @Component({
 	selector: 'app-channels',
 	templateUrl: './channels.component.html',
@@ -10,7 +11,10 @@ import { ChannelService } from 'src/app/infrastructure/services/channel.service'
 })
 export class ChannelsComponent implements OnInit {
 
-	constructor(private route: ActivatedRoute, private channelService : ChannelService) { }
+	constructor(
+		private route: ActivatedRoute,
+		private channelService : ChannelService
+	) { }
 
 	channels: Channel[];
 
@@ -31,8 +35,14 @@ export class ChannelsComponent implements OnInit {
 
 		const boardName : string = this.channel.boardName;
 
-		this.channelService.fetchChannel(boardName).subscribe(
-			channels => {
+		// this.channelService.fetchChannel(boardName).subscribe(
+		// 	channels => {
+		// 		this.channels = channels;
+		// 	}
+		// )
+
+		this.channelService.displayChannelsOfParenBoard<Channel>(boardName).subscribe(
+			channels =>{
 				this.channels = channels;
 			}
 		)

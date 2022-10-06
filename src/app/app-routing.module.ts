@@ -7,8 +7,9 @@ import { LandingPageComponent } from './presentation/components/landing-page/lan
 import { LoginComponent } from './presentation/components/login/login.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { RegisterComponent } from './presentation/components/register/register.component';
-import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
-import { AdminBoardComponent } from './presentation/admin/admin-board/admin-board.component';
+import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
+import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
+
 
 const routes: Routes = [
 	{
@@ -40,12 +41,12 @@ const routes: Routes = [
 		component: RegisterComponent
 	},
 	{
-		path: 'admin/board',
-		component: AdminBoardComponent
+		path : 'admin/boards',
+		component : AdminBoardFormComponent
 	},
 	{
-		path: 'admin/channel',
-		component: AdminChannelComponent
+		path: 'admin/channels',
+		component : AdminChannelFormComponent
 	}
 ];
 

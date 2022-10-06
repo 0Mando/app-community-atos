@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Board } from 'src/app/domain/models/board.model';
 
 @Injectable({
@@ -8,21 +7,27 @@ import { Board } from 'src/app/domain/models/board.model';
 })
 export class BoardService {
 
-	constructor(private firestore: Firestore) { }
+	constructor(
+		private afs : AngularFirestore
+	) { }
 
-	createBoard(board: Board) {
-		const boardRef = collection(this.firestore, 'boards');
-		return addDoc(boardRef, board);
+	/**
+	 * Create a new board on data base
+	 * @param boardData Board model
+	 * @returns Insert a new board on data base
+	 */
+	createBoard(boardData : Board){
+		console.log('Creating board...');
+		const newBoard = this.afs.collection('boards');
+		return newBoard.doc(this.afs.createId()).set(boardData);
 	}
 
-	fetchBoards(): Observable<Board[]> {
-		const boardRef = collection(this.firestore, 'boards');
-		return collectionData(boardRef, { idField: 'id' }) as Observable<Board[]>;
+	/**
+	 * Display a list of boards
+	 * @returns All the boards on data base
+	 */
+	getBoardsList<Board>(){
+		const boardList = this.afs.collection<Board>('boards');
+		return boardList.valueChanges();
 	}
-
-	deleteBoard(board: Board) {
-		const boardDocRef = doc(this.firestore, `boards/${board.id}`);
-		return deleteDoc(boardDocRef);
-	}
-
 }

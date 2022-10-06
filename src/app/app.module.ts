@@ -21,12 +21,9 @@ import { ArticlesComponent } from './presentation/components/articles/articles.c
 import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
 import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/loading-spinner.component';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-import { AdminChannelComponent } from './presentation/admin/admin-channel/admin-channel.component';
-import { FormChannelComponent } from './presentation/admin/admin-channel/form-channel/form-channel.component';
-import { AdminBoardComponent } from './presentation/admin/admin-board/admin-board.component';
-import { FormBoardComponent } from './presentation/admin/admin-board/form-board/form-board.component';
-import { ListBoardComponent } from './presentation/admin/admin-board/list-board/list-board.component';
 import { environment } from 'src/environments/environment';
+import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
+import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
 
 @NgModule({
 	declarations: [
@@ -42,11 +39,8 @@ import { environment } from 'src/environments/environment';
 		ProfileComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-		AdminChannelComponent,
-		FormChannelComponent,
-		AdminBoardComponent,
-		FormBoardComponent,
-		ListBoardComponent,
+  AdminBoardFormComponent,
+  AdminChannelFormComponent,
 	],
 	imports: [
 		BrowserModule,

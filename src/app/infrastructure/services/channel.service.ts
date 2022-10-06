@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/app/domain/models/channel.model';
 
 @Injectable({
@@ -8,41 +7,26 @@ import { Channel } from 'src/app/domain/models/channel.model';
 })
 export class ChannelService {
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private afs : AngularFirestore
+	) { }
 
-	createChannel(channelName: string, channelDescription: string, channelImage: string, parentBoard: string){
-		const channelData: Channel = {
-			channelName: channelName,
-			channelDescription: channelDescription,
-			channelImage: channelImage,
-			parentBoard: parentBoard
-		}
-
-		this.http.post<{ name: string }>(
-			'https://atos-community-upgrade-default-rtdb.firebaseio.com/'+ parentBoard + '.json',
-			channelData
-		).subscribe(
-			responseData =>{
-				console.log(responseData);
-			}
-		)
+	/**
+	 * Create a new channel on data base
+	 * @param channelData Channel model
+	 * @returns Insert a new channel on data base
+	 */
+	createChannel(channelData : Channel){
+		console.log('Creating channel...');
+		const newChannel = this.afs.collection('channels');
+		return newChannel.doc(this.afs.createId()).set(channelData);
 	}
 
-	fetchChannel(parentBoard : string){
-		return this.http.get<{ [key:string]: Channel }>(
-			'https://atos-community-upgrade-default-rtdb.firebaseio.com/'+ parentBoard + '.json',
-		).pipe(
-			map(
-				response =>{
-					const channelsArray: Channel[] = [];
-					for(const key in response){
-						if(response.hasOwnProperty(key)){
-							channelsArray.push({...response[key], id: key})
-						}
-					}
-					return channelsArray;
-				}
-			)
-		);
+	displayChannelsOfParenBoard<Channel>(parentBoard : string){
+		const collection = this.afs.collection<Channel>(
+			'channels',
+			ref => ref.where('parentBoard', '==', parentBoard)
+		)
+		return collection.valueChanges();
 	}
 }

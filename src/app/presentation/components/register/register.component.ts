@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/domain/models/user.model';
-import { AuthenticationService } from 'src/app/infrastructure/services/authentication.service';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
 	selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private authenticationService : AuthenticationService
+		private authenticationService : AuthService
 	) { }
 
 	ngOnInit(): void {
