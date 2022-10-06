@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Channel } from 'src/app/domain/models/channel.model';
-import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
 @Component({
 	selector: 'app-channels',
@@ -10,33 +9,32 @@ import { ChannelService } from 'src/app/infrastructure/services/channel.service'
 })
 export class ChannelsComponent implements OnInit {
 
-	constructor(private route: ActivatedRoute, private channelService : ChannelService) { }
+	// constructor(private route: ActivatedRoute, private channelService : ChannelService) { }
+	constructor() { }
 
-	channels: Channel[];
+	// channels: Channel[];
 
-	channel : {
-		boardName: string
-	}
+	// channel : {
+	// 	boardName: string
+	// }
 
 	ngOnInit(): void {
-		this.channel = {
-			boardName : this.route.snapshot.params['boardName']
-		}
+		// this.channel = {
+		// 	boardName : this.route.snapshot.params['boardName']
+		// }
 
-		this.route.params.subscribe(
-			(params: Params)=>{
-				this.channel.boardName = params['boardName'];
-			}
-		)
+		// this.route.params.subscribe(
+		// 	(params: Params)=>{
+		// 		this.channel.boardName = params['boardName'];
+		// 	}
+		// )
 
-		const boardName : string = this.channel.boardName;
+		// const boardName : string = this.channel.boardName;
 
-		this.channelService.fetchChannel(boardName).subscribe(
-			channels => {
-				this.channels = channels;
-			}
-		)
-
+		// this.channelService.fetchChannel(boardName).subscribe(
+		// 	channels => {
+		// 		this.channels = channels;
+		// 	}
+		// )
 	}
-
 }
