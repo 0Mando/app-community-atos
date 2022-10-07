@@ -18,25 +18,110 @@ export class MyprofileComponent implements OnInit {
   });
   isDisabled: boolean = true;
   id: string;
-  skills: string[] = [
-    "HTML",
-    "SASS",
-    "CSS",
-    "GIT",
-    "JS6",
-    "Azure",
-    "Angular",
-    "React",
-    "RxJS",
-    "VUE",
-    "FIREBASE",
-    "Mongo"
-  ]
+
+  posts: {
+    title: string,
+    date: string,
+    likes: number,
+    comments: number,
+    visulizations: number
+  }[] = [
+    {
+      title: "Complete Guide: Angular lifecycle hooks",
+      date: "5 Jun",
+      likes: 14,
+      comments: 4,
+      visulizations: 21
+    },
+    {
+      title: "Las piedras rodando se encuentran",
+      date: "28 Aug",
+      likes: 23,
+      comments: 8,
+      visulizations: 34
+    },
+    {
+      title: "La Casa de Cafe",
+      date: "7 Sep",
+      likes: 166,
+      comments: 67,
+      visulizations: 212
+    },
+    {
+      title: "Historia entre tus dedos",
+      date: "31 Jan",
+      likes: 420,
+      comments: 69,
+      visulizations: 777
+    },
+    {
+      title: "Gavilan o Paloma",
+      date: "20 Oct",
+      likes: 9999,
+      comments: 9999,
+      visulizations: 9999
+    }
+  ];
+
+  // postsNum: number;
+  postsBool = false;
+  
 
   constructor(private _profileService: MyprofileService) { }
 
   ngOnInit(): void {
     this.getInfo();
+  }
+
+  switchPosts(type: number){
+    let buttons = document.querySelectorAll('.posts__header-button')!as NodeListOf<HTMLButtonElement>;
+    
+    buttons.forEach( element => {
+      element.classList.remove('selected');
+    });
+
+    buttons[type].classList.add('selected');
+
+    if(type === 0){
+      this.posts = [
+        {
+          title: "Complete Guide: Angular lifecycle hooks",
+          date: "5 Jun",
+          likes: 14,
+          comments: 4,
+          visulizations: 21
+        },
+        {
+          title: "Las piedras rodando se encuentran",
+          date: "28 Aug",
+          likes: 23,
+          comments: 8,
+          visulizations: 34
+        },
+        {
+          title: "La Casa de Cafe",
+          date: "7 Sep",
+          likes: 166,
+          comments: 67,
+          visulizations: 212
+        },
+        {
+          title: "Historia entre tus dedos",
+          date: "31 Jan",
+          likes: 420,
+          comments: 69,
+          visulizations: 777
+        },
+        {
+          title: "Gavilan o Paloma",
+          date: "20 Oct",
+          likes: 9999,
+          comments: 9999,
+          visulizations: 9999
+        }]
+    } else{
+      this.posts = [];
+    }
   }
 
   getInfo(){

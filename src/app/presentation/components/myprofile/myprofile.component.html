@@ -58,10 +58,49 @@
                         <button class="resume__list-add" (click)="addSkill()">+</button>
                     </li>
                 </ul>
-                
             </div>
-            
         </article>
+        <article class="posts">
+            <div class="posts__header">
+                <button class="posts__header-button selected" (click)="switchPosts(0)">My Posts</button>
+                <button class="posts__header-button" (click)="switchPosts(1)">Archived</button>
+            </div>
+            <div class="posts__content">
+                <div class="posts__content-header">
+                    <h3>Total</h3>
+                    <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
+                </div>
+                <div *ngIf="posts.length; else noPosts">
+                    <div class="posts__content-list" *ngFor="let post of posts | slice:0:5">
+                        <div class="posts__content-text">  
+                            <div class="content-title">{{post.title}}</div>
+                            <div class="content-date">Published: {{post.date}}</div>
+                        </div>
+                        <div class="posts__content-util">
+                            <div class="content-misc">
+                                <i class="fa-solid fa-heart"></i>
+                                {{post.likes}}
+                            </div>
+                            <div class="content-misc">
+                                <i class="fa-solid fa-comment"></i>
+                                {{post.comments}}
+                            </div>
+                            <div class="content-misc">
+                                <i class="fa-solid fa-eye"></i>
+                                {{post.visulizations}}
+                            </div>
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #noPosts>
+                    <div class="posts__content-empty">
+                        No content to display
+                    </div>
+                </ng-template>
+            </div>
+        </article>
+    </section>
         <!-- <article class="resume__list second">
             <div class="resume__list-paged">
                 <div class="resume__list-posts">
@@ -89,6 +128,5 @@
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
         </article> -->
-    </section>
 </main>
 

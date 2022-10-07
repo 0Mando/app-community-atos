@@ -21,7 +21,7 @@ const routes: Routes = [
 		component: BoardsComponent
 	},
 	{
-		path: 'boards/channels',
+		path: 'channels',
 		component: ChannelsComponent
 	},
 	{
