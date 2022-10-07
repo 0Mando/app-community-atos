@@ -19,6 +19,9 @@ export class MyprofileComponent implements OnInit {
   isDisabled: boolean = true;
   id: string;
 
+  totalLength: any;
+  page: number = 1
+
   posts: {
     title: string,
     date: string,
@@ -26,6 +29,41 @@ export class MyprofileComponent implements OnInit {
     comments: number,
     visulizations: number
   }[] = [
+    {
+      title: "CComplete Guide: Angular lifecycle hooks",
+      date: "5 Jun",
+      likes: 14,
+      comments: 4,
+      visulizations: 21
+    },
+    {
+      title: "Las piedras rodando se encuentran",
+      date: "28 Aug",
+      likes: 23,
+      comments: 8,
+      visulizations: 34
+    },
+    {
+      title: "La Casa de Cafe",
+      date: "7 Sep",
+      likes: 166,
+      comments: 67,
+      visulizations: 212
+    },
+    {
+      title: "Historia entre tus dedos",
+      date: "31 Jan",
+      likes: 420,
+      comments: 69,
+      visulizations: 777
+    },
+    {
+      title: "Gavilan o Paloma",
+      date: "20 Oct",
+      likes: 9999,
+      comments: 9999,
+      visulizations: 9999
+    },
     {
       title: "Complete Guide: Angular lifecycle hooks",
       date: "5 Jun",
@@ -71,6 +109,8 @@ export class MyprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInfo();
+    this.totalLength = this.posts.length;
+    
   }
 
   switchPosts(type: number){
@@ -118,10 +158,47 @@ export class MyprofileComponent implements OnInit {
           likes: 9999,
           comments: 9999,
           visulizations: 9999
+        },
+        {
+          title: "Complete Guide: Angular lifecycle hooks",
+          date: "5 Jun",
+          likes: 14,
+          comments: 4,
+          visulizations: 21
+        },
+        {
+          title: "Las piedras rodando se encuentran",
+          date: "28 Aug",
+          likes: 23,
+          comments: 8,
+          visulizations: 34
+        },
+        {
+          title: "La Casa de Cafe",
+          date: "7 Sep",
+          likes: 166,
+          comments: 67,
+          visulizations: 212
+        },
+        {
+          title: "Historia entre tus dedos",
+          date: "31 Jan",
+          likes: 420,
+          comments: 69,
+          visulizations: 777
+        },
+        {
+          title: "Gavilan o Paloma",
+          date: "20 Oct",
+          likes: 9999,
+          comments: 9999,
+          visulizations: 9999
         }]
     } else{
       this.posts = [];
     }
+
+    this.page = 1;
   }
 
   getInfo(){

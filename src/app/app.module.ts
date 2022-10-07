@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 		ChannelsComponent,
 		ProfileComponent,
 		MyprofileComponent,
-		FirstwordPipe
+		FirstwordPipe,
+		
 	],
 	imports: [
 		BrowserModule,
@@ -40,6 +42,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 		// provideFirestore(() => getFirestore()),
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule,
+		NgxPaginationModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
