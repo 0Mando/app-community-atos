@@ -3,7 +3,9 @@
 		<h2>Boards</h2>
 	</section>
 	<section class="board" id="board">
-		<article class="board__item" *ngFor="let board of boards">
+		<article class="board__item"
+			*ngFor="let board of boards |
+			paginate : { itemsPerPage: 2, currentPage: page, totalItems: boardsLength }">
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
 				<p class="board__about-channel__description">{{ board.boardDescription }}</p>
@@ -27,5 +29,6 @@
 				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
 			</div>
 		</article>
+		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
 	</section>
 </main>

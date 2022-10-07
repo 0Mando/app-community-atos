@@ -11,6 +11,10 @@ export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
 
+	//* Pagination stuff
+	boardsLength: number;
+	page : number = 1;
+
 	constructor(private boardService : BoardService) { }
 
 	ngOnInit(): void {
@@ -22,6 +26,7 @@ export class BoardsComponent implements OnInit {
 			boards =>{
 				this.boards = boards;
 				console.log(boards);
+				this.boardsLength = this.boards.length;
 			}
 		);
 	}

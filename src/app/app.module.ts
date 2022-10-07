@@ -6,6 +6,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
+//* NGX Pagination
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './presentation/components/landing-page/landing-page.component';
@@ -39,8 +42,8 @@ import { AdminChannelFormComponent } from './presentation/admin/admin-channel-fo
 		ProfileComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-  AdminBoardFormComponent,
-  AdminChannelFormComponent,
+		AdminBoardFormComponent,
+		AdminChannelFormComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -51,7 +54,9 @@ import { AdminChannelFormComponent } from './presentation/admin/admin-channel-fo
 		//* Angular Firebase Set up
 		AngularFireModule.initializeApp(environment.firebaseConfig),
 		AngularFireAuthModule,
-		AngularFirestoreModule
+		AngularFirestoreModule,
+		//* NGX Pagination
+		NgxPaginationModule
 	],
 	providers: [AngularFirestore],
 	bootstrap: [AppComponent]
