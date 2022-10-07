@@ -1,11 +1,14 @@
 <main class="container">
 	<section class="title-page">
 		<h2>Boards</h2>
+		<form [formGroup]="searchBoard" (ngSubmit)="onSearch()">
+			<input type="text" name="searchBoardName" id="searchBoardName" formControlName="searchBoardName" placeholder="Search board">
+		</form>
 	</section>
 	<section class="board" id="board">
 		<article class="board__item"
 			*ngFor="let board of boards |
-			paginate : { itemsPerPage: 2, currentPage: page, totalItems: boardsLength }">
+			paginate : { itemsPerPage: 4, currentPage: page, totalItems: boardsLength }">
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
 				<p class="board__about-channel__description">{{ board.boardDescription }}</p>

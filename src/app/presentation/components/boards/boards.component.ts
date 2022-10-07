@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Board } from 'src/app/domain/models/board.model';
 import { BoardService } from 'src/app/infrastructure/services/board.service';
 
@@ -10,6 +11,7 @@ import { BoardService } from 'src/app/infrastructure/services/board.service';
 export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
+	searchBoard : FormGroup;
 
 	//* Pagination stuff
 	boardsLength: number;
@@ -19,15 +21,29 @@ export class BoardsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.showBoardsList();
+		this.searchBoard = new FormGroup({
+			'searchBoardName' : new FormControl(null, Validators.required)
+		})
 	}
 
 	showBoardsList(){
 		this.boardService.getBoardsList<Board>().subscribe(
 			boards =>{
 				this.boards = boards;
-				console.log(boards);
 				this.boardsLength = this.boards.length;
 			}
 		);
+	}
+
+	onSearch(){
+		const board : string = this.searchBoard.get('searchBoardName').value;
+		console.log(this.searchBoard.value);
+		this.boardService.searchBoard<Board>(board).subscribe(
+			boards=>{
+				this.boards = boards;
+				console.log(boards);
+			}
+		)
+		this.searchBoard.reset();
 	}
 }

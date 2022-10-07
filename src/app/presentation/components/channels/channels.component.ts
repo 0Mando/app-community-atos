@@ -35,18 +35,10 @@ export class ChannelsComponent implements OnInit {
 
 		const boardName : string = this.channel.boardName;
 
-		// this.channelService.fetchChannel(boardName).subscribe(
-		// 	channels => {
-		// 		this.channels = channels;
-		// 	}
-		// )
-
 		this.channelService.displayChannelsOfParenBoard<Channel>(boardName).subscribe(
 			channels =>{
 				this.channels = channels;
 			}
 		)
-
 	}
-
 }
