@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/sass/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -96,15 +96,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/sass/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }
