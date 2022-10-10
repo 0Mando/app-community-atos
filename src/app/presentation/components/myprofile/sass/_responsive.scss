@@ -1,0 +1,57 @@
+@media screen and (max-width:540px) {
+    .posts{
+        &__content{
+
+            &-text{
+                width: 65% !important;
+            }
+
+            &-util{
+                width: 35% !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                padding-inline: none;
+                margin-right: 20px;
+
+                .content-misc{
+                    width: 75px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:760px){
+    .info{
+        &__items{
+            display: flex;
+            flex-direction: column;
+
+            &-edit{
+                position: absolute !important;
+                right: 5vw;
+            }
+        }
+    }
+
+    .resume{
+        &__list{
+            width: auto;
+        }
+    }
+}
+
+@media screen and (max-width:840px) {
+    .posts{
+        margin-top: 15px;
+        &__header, &__content {
+            width: 100% !important;
+        }
+    }
+
+    .resume{
+        &__list{
+            width: 100%;
+        }
+    }
+}

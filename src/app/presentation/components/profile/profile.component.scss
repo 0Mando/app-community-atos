@@ -1,4 +1,4 @@
-@import 'sass/profile', 'sass/resume', 'sass/icons', 'sass/responsive';
+@import '../../shared/profile/profile', '../../shared/profile/resume', '../../shared/profile/icons', '../../shared/profile/responsive', 'sass/follow';
 
 *{
     padding: 0;
@@ -7,7 +7,7 @@
 
 .banner{
     height: 35vh;
-    background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    // background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-size: cover;
 }
 

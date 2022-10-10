@@ -1,0 +1,137 @@
+<main>
+    <div class="banner"></div>
+    <section class="profile">
+        <div class="profile__image"></div>
+        <article class="profile__info">
+            <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
+            <span class="profile__info-description">{{myProfile.age}} years | {{ myProfile.work }} </span>
+        </article>
+    </section>
+    <section class="info">
+        <h2>Personal Information</h2>
+        <form class="info__items" [formGroup]="profileForm" (keydown.enter)="$event.preventDefault()">
+            <article class="info__items-item">
+                <label for="name">Name</label>
+                <input 
+                    type="text" 
+                    id="name"
+                    formControlName="name">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Email</label>
+                <input 
+                    type="text" 
+                    id="email"
+                    formControlName="email">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Work</label>
+                <input 
+                    type="text" 
+                    id="work"
+                    formControlName="work">
+            </article>
+            <article class="info__items-item">
+                <label for="name">Website</label>
+                <input 
+                    type="text" 
+                    id="website"
+                    formControlName="website">
+            </article>
+            <div class="info__items-edit" (click)="enableEditing()">
+                <i class="fa-solid fa-pen"></i>
+            </div>
+        </form>
+    </section>
+    <section class="resume">
+        <article class="resume__list">
+            <h3>Skills / Languages</h3>
+            <div class="resume__list-items">
+                <ul class="resume__list-ul">
+                    <li *ngFor="let skill of myProfile.skills">
+                        {{skill}}
+                    </li>
+                    <!-- <li>
+                        <input type="text" class="resume__list-added" placeholder="Add Skill">
+                    </li> -->
+                    <li class="resume__list-add-li">
+                        <button class="resume__list-add" (click)="addSkill()">+</button>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <article class="posts">
+            <div class="posts__header">
+                <button class="posts__header-button selected" (click)="switchPosts(0)">My Posts</button>
+                <button class="posts__header-button" (click)="switchPosts(1)">Archived</button>
+            </div>
+            <div class="posts__content">
+                <div class="posts__content-header">
+                    <h3>Total</h3>
+                    <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
+                </div>
+                <div *ngIf="posts.length; else noPosts">
+                    <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                        <div class="posts__content-text">  
+                            <div class="content-title">{{post.title}}</div>
+                            <div class="content-date">Published: {{post.date}}</div>
+                        </div>
+                        <div class="posts__content-util">
+                            <div class="content-misc">
+                                <i class="fa-solid fa-heart"></i>
+                                {{post.likes}}
+                            </div>
+                            <div class="content-misc">
+                                <i class="fa-solid fa-comment"></i>
+                                {{post.comments}}
+                            </div>
+                            <div class="content-misc">
+                                <i class="fa-solid fa-eye"></i>
+                                {{post.visulizations}}
+                            </div>
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                    </div>
+                    <pagination-controls 
+                        (pageChange)="page = $event" 
+                        class="my-pagination"
+                        previousLabel=""
+                        nextLabel=""></pagination-controls>
+                </div>
+                <ng-template #noPosts>
+                    <div class="posts__content-empty">
+                        No content to display
+                    </div>
+                </ng-template>
+            </div>
+        </article>
+    </section>
+        <!-- <article class="resume__list second">
+            <div class="resume__list-paged">
+                <div class="resume__list-posts">
+                    <h3>Posts</h3>
+                    <h3>Total</h3>
+                    <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
+                </div>
+                <div class="resume__list-items">
+                    <div class="resume__list-item" *ngFor="let post of posts">
+                        <div class="item__text-content">
+                            <h4>{{post.title}}</h4>
+                            <p>Published: {{post.date}} </p>
+                        </div>
+                        <div class="item__icons">
+                            <p><i class="fa-solid fa-heart"></i> {{post.likes}} </p>
+                            <p><i class="fa-solid fa-comment"></i> {{post.comments}} </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="resume__list-pagination">
+                <i class="fa-solid fa-chevron-left"></i>
+                <div class="pagination"><p>1</p></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </article> -->
+</main>
+

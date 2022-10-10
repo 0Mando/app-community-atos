@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule} from '@angular/forms'
 
 //* Angular Firebase Set up
 import { AngularFireModule } from '@angular/fire/compat';
@@ -18,6 +19,14 @@ import { BoardsComponent } from './presentation/components/boards/boards.compone
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
 import { ProfileComponent } from './presentation/components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyprofileComponent } from './presentation/components/myprofile/myprofile.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { FirstwordPipe } from './presentation/pipes/firstword.pipe';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
@@ -37,15 +46,17 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 		LoginComponent,
 		BoardsComponent,
 		ChannelsComponent,
+		ProfileComponent,
+		MyprofileComponent,
+		FirstwordPipe,
 		RegisterComponent,
 		ArticlesComponent,
 		CardArticleItemComponent,
-		ProfileComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-  SearchFilterPipe,
+    SearchFilterPipe,
 	],
 	imports: [
 		BrowserModule,
