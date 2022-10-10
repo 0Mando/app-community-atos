@@ -1,14 +1,15 @@
 <main class="container">
 	<section class="title-page">
 		<h2>Boards</h2>
-		<form [formGroup]="searchBoard" (ngSubmit)="onSearch()">
+		<!-- <form [formGroup]="searchBoard" (ngSubmit)="onSearch()">
 			<input type="text" name="searchBoardName" id="searchBoardName" formControlName="searchBoardName" placeholder="Search board">
-		</form>
+		</form> -->
+		<app-search-bar (searchTextChanged)="onSearch($event)"></app-search-bar>
 	</section>
-	<section class="board" id="board">
+	<section class="board" id="board" *ngFor="let board of boards |
+	paginate : { itemsPerPage: 4, currentPage: page, totalItems: boardsLength }">
 		<article class="board__item"
-			*ngFor="let board of boards |
-			paginate : { itemsPerPage: 4, currentPage: page, totalItems: boardsLength }">
+		*ngIf="searchBoard === '' || board.boardName.toLowerCase().includes(searchBoard)">
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
 				<p class="board__about-channel__description">{{ board.boardDescription }}</p>
@@ -32,6 +33,6 @@
 				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
 			</div>
 		</article>
-		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
 	</section>
+	<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
 </main>

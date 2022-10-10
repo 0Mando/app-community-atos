@@ -11,7 +11,7 @@ import { BoardService } from 'src/app/infrastructure/services/board.service';
 export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
-	searchBoard : FormGroup;
+	searchBoard : string = '';
 
 	//* Pagination stuff
 	boardsLength: number;
@@ -21,9 +21,6 @@ export class BoardsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.showBoardsList();
-		this.searchBoard = new FormGroup({
-			'searchBoardName' : new FormControl(null, Validators.required)
-		})
 	}
 
 	showBoardsList(){
@@ -35,15 +32,8 @@ export class BoardsComponent implements OnInit {
 		);
 	}
 
-	onSearch(){
-		const board : string = this.searchBoard.get('searchBoardName').value;
-		console.log(this.searchBoard.value);
-		this.boardService.searchBoard<Board>(board).subscribe(
-			boards=>{
-				this.boards = boards;
-				console.log(boards);
-			}
-		)
-		this.searchBoard.reset();
+	onSearch(searchValue: string){
+		this.searchBoard = searchValue;
+		this.searchBoard.toLocaleLowerCase();
 	}
 }
