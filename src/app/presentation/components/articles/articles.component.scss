@@ -1,0 +1,176 @@
+@import '../../../../sass/variables';
+
+.wrapper-content{
+    display: flex;
+}
+
+.articles{
+    max-width: 50rem;
+
+	&__header{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__title{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+	&__create-post{
+        display: block;
+        width: auto;
+        margin-left: auto;
+        margin-top: .5rem;
+        margin-bottom: 2rem;
+        background-color: black;
+        color: white;
+        padding: 0.75rem 3rem;
+        border: none;
+        border-radius: 0.313rem;
+    }
+}
+
+.list-articles{
+
+    &__card{
+        border: 0.125rem solid #ccc;
+        border-radius: 0.313rem;
+        display: flex;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+
+        &__btn-interacction{
+            display: none;
+
+            margin: 0 1rem;
+
+            &__btn-arrow-up{
+                background: none;
+                border: none;
+                color: #ccc;
+
+                &__positive{
+                    color: $main;
+                    background: none;
+                    border: none;
+                }
+            }
+
+            &__btn-arrow-down{
+                background: none;
+                border: none;
+                color: #ccc;
+
+                &__negative{
+                    background: none;
+                    border: none;
+                    color: red;
+                }
+            }
+
+            &__counter{
+                text-align: center;
+                color: #ccc;
+                font-weight: bold;
+                font-size: 0.75rem;
+            }
+
+        }
+
+        &__content{
+            padding: 1rem;
+        }
+
+        &__header{
+            display: flex;
+            padding: 0.2rem 0.5rem 0.8rem;
+            border-bottom: 0.125rem solid #ccc;
+            align-items: flex-start;
+
+            &__btn-interacction{
+                display: flex;
+                flex-direction: column;
+
+                &__btn-arrow-up{
+                    background: none;
+                    border: none;
+                    color: #ccc;
+
+                    &__positive{
+                        color: $main;
+                        background: none;
+                        border: none;
+                    }
+                }
+
+                &__btn-arrow-down{
+                    background: none;
+                    border: none;
+                    color: #ccc;
+
+                    &__negative{
+                        background: none;
+                        border: none;
+                        color: red;
+                    }
+                }
+
+                &__counter{
+                    text-align: center;
+                    color: #ccc;
+                    font-weight: bold;
+                    font-size: 0.75rem;
+                }
+            }
+
+            &__user{
+                display: flex;
+                margin-top: 15px;
+                margin-left: 1.5rem; //! <-------Medium
+            }
+
+            &__user-profile{
+                border-radius: 50%;
+                width: 2.5rem;
+                height: 2.5rem;
+                margin-right: 1.5rem;
+            }
+
+
+            &__user-post-information{
+                label{
+                    color: #888888;
+                }
+            }
+
+            &__btn-interacction-btn{
+                border: none;
+                background: none;
+                margin-top: 15px;
+                margin-left: auto;
+            }
+        }
+
+        &__body{
+            margin-top: 1rem;
+
+            h4{
+                line-height: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            a{
+                display: block;
+                margin-top: 1rem;
+                color: black;
+            }
+        }
+    }
+}
+
+.speakers{
+    display: none;
+}

@@ -11,6 +11,7 @@ import { BoardsComponent } from './presentation/components/boards/boards.compone
 import { CardBoardItemComponent } from './presentation/components/boards/card-board-item/card-board-item.component';
 import { ChannelsComponent } from './presentation/components/channels/channels.component';
 import { ProfileComponent } from './presentation/components/profile/profile.component';
+
 import { MyprofileComponent } from './presentation/components/myprofile/myprofile.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FirstwordPipe } from './presentation/pipes/firstword.pipe';
@@ -19,11 +20,16 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './presentation/components/register/register.component';
+import { ArticlesComponent } from './presentation/components/articles/articles.component';
+import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-  		LandingPageComponent,
+		LandingPageComponent,
 		HeaderComponent,
 		LoginComponent,
 		BoardsComponent,
@@ -32,17 +38,18 @@ import {NgxPaginationModule} from 'ngx-pagination';
 		ProfileComponent,
 		MyprofileComponent,
 		FirstwordPipe,
-		
+		RegisterComponent,
+		ArticlesComponent,
+		CardArticleItemComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		ReactiveFormsModule,
-		// provideFirebaseApp(() => initializeApp(environment.firebase)),
-		// provideFirestore(() => getFirestore()),
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule,
 		NgxPaginationModule
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
