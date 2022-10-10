@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule} from '@angular/forms'
 
 //* Angular Firebase Set up
 import { AngularFireModule } from '@angular/fire/compat';
@@ -20,20 +19,16 @@ import { ChannelsComponent } from './presentation/components/channels/channels.c
 import { ProfileComponent } from './presentation/components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyprofileComponent } from './presentation/components/myprofile/myprofile.component';
-import { AngularFireModule } from '@angular/fire/compat';
 import { FirstwordPipe } from './presentation/pipes/firstword.pipe';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import {NgxPaginationModule} from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
 import { CardArticleItemComponent } from './presentation/components/articles/card-article-item/card-article-item.component';
 import { LoadingSpinnerComponent } from './presentation/shared/loading-spinner/loading-spinner.component';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-import { environment } from 'src/environments/environment';
 import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
 import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
@@ -56,7 +51,7 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-    SearchFilterPipe,
+    	SearchFilterPipe,
 	],
 	imports: [
 		BrowserModule,
