@@ -1,43 +1,29 @@
 <main>
-    <article class="banner"></article>
+    <div class="banner"></div>
     <section class="profile">
-        <article class="profile__image">
-            <div class="profile__image-check"><i class="fa-solid fa-check"></i></div>
+        <article class="profile__actions">
+            <button class="profile__actions-block">Block Account</button>
+            <button class="profile__actions-verify">Verify Account</button>
         </article>
+        <div class="profile__image">
+            <div class="profile__image-check"><i class="fa-solid fa-check"></i></div>
+        </div>
         <article class="profile__info">
-            <h2 class="profile__info-name">Lesly</h2>
+            <h2 class="profile__info-name">{{name | firstword}}</h2>
             <span class="profile__info-description">22 years | Frontend</span>
         </article>
+    </section>
+    <section class="follow">
+        <button class="follow__btn" (click)="follow()"></button>
     </section>
     <section class="resume">
         <article class="resume__list">
             <h3>Skills / Languages</h3>
             <div class="resume__list-items">
                 <ul>
-                    <li>HTML</li>
-                    <li>SASS</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>JS6</li>
-                    <li>Azure</li>
-                    <li>Angular</li>
-                    <li>React</li>
-                    <li>RxJS</li>
-                    <li>VUE</li>
-                    <li>FIREBASE</li>
-                    <li>Mongo</li>
-                    <li>HTML</li>
-                    <li>SASS</li>
-                    <li>CSS</li>
-                    <li>GIT</li>
-                    <li>JS6</li>
-                    <li>Azure</li>
-                    <li>Angular</li>
-                    <li>React</li>
-                    <li>RxJS</li>
-                    <li>VUE</li>
-                    
-                    
+                    <li *ngFor="let skill of skills">
+                        {{skill}}
+                    </li>
                 </ul>
             </div>
         </article>
@@ -46,59 +32,20 @@
                 <div class="resume__list-posts">
                     <h3>Posts</h3>
                     <h3>Total</h3>
-                    <p><i class="fa-solid fa-paste"></i>&nbsp&nbsp3 Posts</p>
+                    <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
                 </div>
                 <div class="resume__list-items">
-                    <div class="resume__list-item">
+                    <div class="resume__list-item" *ngFor="let post of posts">
                         <div class="item__text-content">
-                            <h4>Complete Guide: Angular lifecycle hooks</h4>
-                            <p>Published: 5 Jun</p>
+                            <h4>{{post.title}}</h4>
+                            <p>Published: {{post.date}} </p>
                         </div>
                         <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i>&nbsp 14</p>
-                            <p><i class="fa-solid fa-comment"></i>&nbsp 4</p>
+                            <p><i class="fa-solid fa-heart"></i> {{post.likes}} </p>
+                            <p><i class="fa-solid fa-comment"></i> {{post.comments}} </p>
                         </div>
                     </div>
-                    <div class="resume__list-item">
-                        <div class="item__text-content">
-                            <h4>Complete Guide: Angular lifecycle hooks</h4>
-                            <p>Published: 5 Jun</p>
-                        </div>
-                        <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i>&nbsp 14</p>
-                            <p><i class="fa-solid fa-comment"></i>&nbsp 4</p>
-                        </div>
-                    </div>
-                    <div class="resume__list-item">
-                        <div class="item__text-content">
-                            <h4>Complete Guide: Angular lifecycle hooks</h4>
-                            <p>Published: 5 Jun</p>
-                        </div>
-                        <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i>&nbsp 14</p>
-                            <p><i class="fa-solid fa-comment"></i>&nbsp 4</p>
-                        </div>
-                    </div>
-                    <div class="resume__list-item">
-                        <div class="item__text-content">
-                            <h4>Complete Guide: Angular lifecycle hooks</h4>
-                            <p>Published: 5 Jun</p>
-                        </div>
-                        <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i>&nbsp 14</p>
-                            <p><i class="fa-solid fa-comment"></i>&nbsp 4</p>
-                        </div>
-                    </div>
-                    <div class="resume__list-item">
-                        <div class="item__text-content">
-                            <h4>Complete Guide: Angular lifecycle hooks</h4>
-                            <p>Published: 5 Jun</p>
-                        </div>
-                        <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i>&nbsp 14</p>
-                            <p><i class="fa-solid fa-comment"></i>&nbsp 4</p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="resume__list-pagination">

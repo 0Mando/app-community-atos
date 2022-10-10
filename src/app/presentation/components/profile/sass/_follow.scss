@@ -1,0 +1,24 @@
+.follow{
+    display: flex;
+    justify-content: center;
+    
+    &__btn{
+        width: 120px;
+        height: 40px;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        border: none;
+        background: #04B0FF;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.5s ;
+    }
+
+    .following{
+        background: none;
+        border: 2px solid rgb(124, 124, 124);
+        color: rgb(124, 124, 124);
+    }
+}

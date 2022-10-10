@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dummy-profile-76979": {
+      "hosting": {
+        "app-community-atos": [
+          "dummy-profile-76979"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dummy-profile-76979"
+  }
+}

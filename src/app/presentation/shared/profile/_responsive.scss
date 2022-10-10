@@ -1,0 +1,55 @@
+@media screen and (max-width:840px) {
+    .resume{
+        display: flex;
+        flex-direction: column;
+
+        &__list{
+            width: 80vw;
+            margin: 10px auto;
+
+            &-paged{
+                width: 80vw;
+                margin: 0 auto;
+            }
+        }
+
+        .second{
+            width: inherit;
+        }
+    }
+}
+
+@media screen and (max-width:540px) {
+    .item__icons > *{
+        width: 45px;
+    }
+
+    .resume__list > *{
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width:720px) {
+    .profile{
+        &__actions{
+            flex-direction: column;
+            margin-top: 5px;
+
+            > *{
+                margin: 2px 5px
+            }
+        }
+    }
+}
+
+@media screen and (max-width:490px) {
+    .profile{
+        &__actions{
+            > *{
+                font-size: 0.55rem;
+                align-self: flex-end;
+                padding: 5px;
+            }
+        }
+    }
+}

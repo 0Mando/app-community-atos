@@ -4,8 +4,16 @@
         align-self: center;
         display: flex;
 
+        > *{
+            width: 60px;
+        }
+
         p{
             margin: 0 8px;
         }
     }
+}
+
+.fa-chevron-right, .fa-chevron-left{
+    cursor: pointer;
 }
