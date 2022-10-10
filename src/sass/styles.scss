@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import 'variables';
+
 *{
     padding: 0;
     margin: 0;
@@ -12,8 +14,8 @@ body{
 }
 
 .container{
-    margin: 0 auto;
-    max-width: 75rem;
+    width: min(100% - 2rem, 1200px);
+	margin-inline: auto;
     padding: 0 1.25rem;
     height: 100%;
 }
@@ -22,4 +24,26 @@ body{
 .fa-brands{
 	color: #FFFFFF;
 	font-size: 1.4rem;
+}
+
+//* Ocular campos en formularios
+.disabled-input{
+	visibility: hidden;
+}
+
+//* Formularios invalidos
+input.ng-invalid.ng-touched{
+	border: 1px solid red;
+}
+
+.alert-danger{
+	display: block;
+	border: 1px solid #ff4136;
+	background-color: #f8d7da;
+	color: #842029;
+	padding: .5rem;
+	border-radius: 5px;
+	margin: 1rem auto;
+	width: 100%;
+	text-align: center;
 }

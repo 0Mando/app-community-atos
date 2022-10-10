@@ -1,35 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment';
-
-//! Información que necesita firebase
-interface AuthResponseData{
-	kind: string;
-	idToken: string;
-	email: string;
-	refreshToken: string;
-	expiresIn: string;
-	localId: string;
-}
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { User } from 'src/app/domain/models/user.model';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) { }
 
-	signUp(email: string, password: string){
-		return this.http.post<AuthResponseData>(
-			//! Endpoint de firebase -> sustituir por el end point de C#
-			'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
-			{
-				email: email,
-				password: password,
-				returnSecureToken: true
-			}
-		);
+	login(email: string, password: string){
+		return this.fireAuth.signInWithEmailAndPassword(email, password);
+	}
+
+	registerUser(user : User){
+		return this.fireAuth.createUserWithEmailAndPassword(user.email, user.password);
+	}
+
+	createDocument(data: any, path: string, id: string){
+		const collection = this.afs.collection(path);
+		return collection.doc(id).set(data);
 	}
 }
-
-// TODO Crear servicio que registre usuarios en la aplicación y que puedan iniciar sesión
