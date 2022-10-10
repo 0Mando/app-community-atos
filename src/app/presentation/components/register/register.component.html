@@ -1,0 +1,45 @@
+<main>
+	<div *ngIf="isLoading" style="text-align: center;">
+		<app-loading-spinner></app-loading-spinner>
+	</div>
+	<section class="register" *ngIf="!isLoading">
+		<h3 class="register__logo">AtoS</h3>
+
+		<p class="register__sign-up">Sign up</p>
+
+		<label class="register__description">Register to continue using Atos Community</label>
+
+		<div class="alert-danger" *ngIf="errorMessage">
+			<p>{{ errorMessage }}</p>
+		</div>
+
+		<form [formGroup]="formRegisterUser" (ngSubmit)="onSubmit()">
+			<input type="text" class="register__input" name="firstName" id="firstName" placeholder="First Name" formControlName="firstName">
+			<span class="alert-danger" *ngIf="!formRegisterUser.get('firstName').valid && formRegisterUser.get('firstName').touched">
+				Please enter your first name
+			</span>
+
+			<input class="register__input" type="text" name="lastName" id="lastName" placeholder="Last Name" formControlName="lastName">
+			<span class="alert-danger" *ngIf="!formRegisterUser.get('lastName').valid && formRegisterUser.get('lastName').touched">
+				Please enter your last name
+			</span>
+
+			<input class="register__input" type="date" name="birthday" id="birthday" placeholder="Birthday" formControlName="birthday">
+			<span class="alert-danger" *ngIf="!formRegisterUser.get('birthday').valid && formRegisterUser.get('birthday').touched">
+				Please enter your birthday
+			</span>
+
+			<input class="register__input" type="email" name="email" id="email" placeholder="Email" formControlName="email">
+			<span class="alert-danger" *ngIf="!formRegisterUser.get('email').valid && formRegisterUser.get('email').touched">
+				Please enter a valid email
+			</span>
+
+			<input class="register__input" type="password" name="password" id="password" placeholder="Password" minlength="6" formControlName="password">
+			<span class="alert-danger" *ngIf="!formRegisterUser.get('password').valid && formRegisterUser.get('password').touched">
+				Please enter a password of 6 characters
+			</span>
+
+			<button class="register__btn-register" type="submit">Sign up</button>
+		</form>
+	</section>
+</main>

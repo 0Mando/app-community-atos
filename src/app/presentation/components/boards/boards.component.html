@@ -1,0 +1,35 @@
+<main class="container">
+	<section class="title-page">
+		<h2>Boards</h2>
+		<input type="text" name="boardFilter" id="boardFilter" placeholder="Search a board" [(ngModel)]="boardFilter">
+	</section>
+	<section class="board" id="board">
+		<article class="board__item"
+			*ngFor="let board of boards | searchFilter: boardFilter |
+			paginate : { itemsPerPage: 4, currentPage: page, totalItems: boardsLength }">
+			<div class="board__about-channel">
+				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
+				<p class="board__about-channel__description">{{ board.boardDescription }}</p>
+				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__about-channel__link">Go to section</a>
+			</div>
+			<div class="board__more-information">
+				<div class="board___stadistics">
+					<div class="board__more-information__item">
+						<label>Last topics</label>
+						<p>7</p>
+					</div>
+					<div class="board__more-information__item">
+						<label>Last Users</label>
+						<p>7</p>
+					</div>
+					<div class="board__more-information__item">
+						<label>Most recent</label>
+						<p>Lorem, ipsum dolor.</p>
+					</div>
+				</div>
+				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
+			</div>
+		</article>
+		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+	</section>
+</main>

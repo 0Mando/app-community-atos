@@ -1,0 +1,13 @@
+<section class="container">
+	<form [formGroup]="formBoard" (ngSubmit)="onCreateBoard()"style="margin-top: 3rem;">
+		<label for="boardName">BOARD NAME</label><br>
+		<input type="text" placeholder="Your amazing new Board name" name="boardName" id="boardName" formControlName="boardName">
+		<br>
+		<br>
+		<label for="boardDescription">BOARD DESCRIPTION</label><br>
+		<input type="text" name="boardDescription" id="boardDescription" placeholder="Amazing channel description..." formControlName="boardDescription">
+		<br>
+		<br>
+		<button>CREATE NEW BOARD</button>
+	</form>
+</section>

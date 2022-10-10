@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	//* Angular Firebase Set up
+	firebaseAPIKey: 'AIzaSyAvXBjkILL17sNq9ys8S1X51Nkld4AsX3A',
+	firebaseConfig : {
+		apiKey: "AIzaSyAvXBjkILL17sNq9ys8S1X51Nkld4AsX3A",
+		authDomain: "atos-community-upgrade.firebaseapp.com",
+		databaseURL: "https://atos-community-upgrade-default-rtdb.firebaseio.com",
+		projectId: "atos-community-upgrade",
+		storageBucket: "atos-community-upgrade.appspot.com",
+		messagingSenderId: "806304666512",
+		appId: "1:806304666512:web:78203b44c10f6ec87c9915"
+	}
 };
 
 /*

@@ -1,0 +1,53 @@
+@media screen and (max-width: 920px) {
+    .profile__dropdown{
+        &-name{
+            display: none;
+        }
+
+        &-content{
+            margin-left: -50px;
+        }
+    }
+}
+
+@media screen and (max-width: 520px) {
+
+    .header{
+        transition: height 0.5s;
+
+        &__menu{
+            display: none;
+        }
+
+        &__web{
+            height: 10vh;
+
+        }
+
+        &__toggle{
+            display: flex;
+        }
+
+        &.active-menu {
+            display: flex;
+            height: 100vh;
+            cursor: pointer;
+
+            .header__web{
+                background: none;
+            }
+
+            .header__mobile{
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                &-menu a{
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
