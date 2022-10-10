@@ -27,6 +27,7 @@ import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 import { environment } from 'src/environments/environment';
 import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
+import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 
 @NgModule({
 	declarations: [
@@ -44,6 +45,7 @@ import { AdminChannelFormComponent } from './presentation/admin/admin-channel-fo
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
+  SearchFilterPipe,
 	],
 	imports: [
 		BrowserModule,
