@@ -24,7 +24,7 @@
                 <div class="list-item" *ngFor="let channel of channels">
                     <img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}" class="channel__image">
                     <h3 class="channel-title">{{ channel.channelName }}</h3>
-                    <a>Show More<i class="fa-solid fa-chevron-right"></i></a>
+                    <a routerLink="/articles/{{ channel.channelName }}/posts">Show More<i class="fa-solid fa-chevron-right"></i></a>
                 </div>
                 <!-- <div class="list-item">
                     <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="channel__image">

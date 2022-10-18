@@ -8,7 +8,20 @@ import { User } from 'src/app/domain/models/user.model';
 })
 export class AuthService {
 
-	constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) { }
+	userData : any;
+
+	constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) {
+		this.fireAuth.authState.subscribe((user) => {
+			if(user) {
+				this.userData = user;
+				localStorage.setItem('user', JSON.stringify(this.userData));
+				JSON.parse(localStorage.getItem('user')!);
+			} else {
+				localStorage.setItem('user', 'null');
+				JSON.parse(localStorage.getItem('user')!);
+			}
+		})
+	}
 
 	login(email: string, password: string){
 		return this.fireAuth.signInWithEmailAndPassword(email, password);
@@ -21,5 +34,16 @@ export class AuthService {
 	createDocument(data: any, path: string, id: string){
 		const collection = this.afs.collection(path);
 		return collection.doc(id).set(data);
+	}
+
+	get isLoggedIn() : boolean {
+		const user = JSON.parse(localStorage.getItem('user')!);
+		return user !== null;
+	}
+
+	logout() {
+		return this.fireAuth.signOut().then(() => {
+			localStorage.removeItem('user');
+		})
 	}
 }

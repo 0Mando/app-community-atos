@@ -1,0 +1,241 @@
+@import '../../../../../sass/variables';
+@import '../../../../../sass/pagination';
+
+.list-articles{
+
+    &__card{
+        border: 0.125rem solid #ccc;
+        border-radius: 0.313rem;
+        display: flex;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+
+        &__btn-interacction{
+            display: none;
+
+            margin: 0 1rem;
+
+            &__btn-arrow-up{
+                background: none;
+                border: none;
+                color: #ccc;
+
+                &__positive{
+                    color: $main;
+                    background: none;
+                    border: none;
+                }
+            }
+
+            &__btn-arrow-down{
+                background: none;
+                border: none;
+                color: #ccc;
+
+                &__negative{
+                    background: none;
+                    border: none;
+                    color: red;
+                }
+            }
+
+            &__counter{
+                text-align: center;
+                color: #ccc;
+                font-weight: bold;
+                font-size: 0.75rem;
+            }
+
+        }
+
+        &__content{
+            padding: 1rem;
+        }
+
+        &__header{
+            display: flex;
+            padding: 0.2rem 0.5rem 0.8rem;
+            border-bottom: 0.125rem solid #ccc;
+            align-items: flex-start;
+
+            &__btn-interacction{
+                display: flex;
+                flex-direction: column;
+
+                &__btn-arrow-up{
+                    background: none;
+                    border: none;
+                    color: #ccc;
+
+                    &__positive{
+                        color: $main;
+                        background: none;
+                        border: none;
+                    }
+                }
+
+                &__btn-arrow-down{
+                    background: none;
+                    border: none;
+                    color: #ccc;
+
+                    &__negative{
+                        background: none;
+                        border: none;
+                        color: red;
+                    }
+                }
+
+                &__counter{
+                    text-align: center;
+                    color: #ccc;
+                    font-weight: bold;
+                    font-size: 0.75rem;
+                }
+            }
+
+            &__user{
+                display: flex;
+                margin-top: 15px;
+                margin-left: 1.5rem; //! <-------Medium
+            }
+
+            &__user-profile{
+                border-radius: 50%;
+                width: 2.5rem;
+                height: 2.5rem;
+                margin-right: 1.5rem;
+            }
+
+
+            &__user-post-information{
+                label{
+                    color: #888888;
+                }
+            }
+
+            &__btn-interacction-btn{
+                border: none;
+                background: none;
+                margin-top: 15px;
+                margin-left: auto;
+            }
+        }
+
+        &__body{
+            margin-top: 1rem;
+
+            h4{
+                line-height: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            a{
+                display: block;
+                margin-top: 1rem;
+                color: black;
+            }
+        }
+    }
+}
+
+@include media-md {
+    .articles{
+
+        &__header{
+            flex-direction: row;
+        }
+
+        &__title{
+            margin-bottom: 2rem;
+        }
+
+        &__create-post{
+            margin-top: 2rem;
+        }
+    }
+
+
+    .speakers{
+        display: none;
+    }
+
+    .list-articles{
+
+        &__card{
+
+            padding-right: 5rem;
+
+            &__btn-interacction{
+                display: flex;
+                flex-direction: column;
+                margin-top: 2.2rem;
+                padding: 0 1rem;
+            }
+
+            &__header{
+
+                &__btn-interacction{
+                    display: none;
+                }
+
+                &__user{
+                    margin-left: 0;
+                }
+
+                &__btn-interacction-btn{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .btn-interacction-btn{
+        display: none;
+    }
+
+    //! Colocar un position sticky
+    .speakers{
+        display: block;
+        margin-top: 2rem;
+        margin-left: 2.8rem;
+
+        &__title{
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        &__item{
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            &__profile{
+                border-radius: 50%;
+                width: 2.5rem;
+                height: 2.5rem;
+                margin-right: 0.5rem;
+            }
+
+            &__username{
+                color: #888888;
+                margin-right: 0.625rem;
+            }
+
+            &__top-speakers{
+                color: #888888;
+                display: flex;
+            }
+
+            label{
+                margin-left: 0.625rem;
+            }
+        }
+    }
+}
+
+.controls{
+	display: flex;
+	justify-content: center;
+}

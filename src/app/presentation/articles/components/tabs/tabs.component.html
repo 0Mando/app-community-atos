@@ -1,0 +1,8 @@
+<section class="tabs__view">
+	<ul class="tabs__wrapper">
+		<li class="tabs__items" *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.tabs__items__active]="tab.active">
+			{{tab.tabTitle}}
+		</li>
+	</ul>
+	<ng-content></ng-content>
+</section>

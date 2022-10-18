@@ -39,7 +39,7 @@ const routes: Routes = [
   },
 	{
 		path: 'articles',
-		component: ArticlesComponent
+		loadChildren : () => import('./presentation/articles/articles.module').then(m => m.ArticlesModule)
 	},
 	{
 		path: 'sign-up',

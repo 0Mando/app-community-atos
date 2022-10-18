@@ -1,0 +1,89 @@
+@import '../../../../../sass/variables';
+
+.wrapper-content {
+    display: flex;
+}
+
+.articles {
+    max-width: 50rem;
+
+	&__header {
+		display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__title {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+	&__create-post {
+        display: block;
+        width: auto;
+        margin-left: auto;
+        margin-top: .5rem;
+        margin-bottom: 2rem;
+        background-color: black;
+        color: white;
+        padding: 0.75rem 3rem;
+        border: none;
+        border-radius: 0.313rem;
+    }
+
+	&__btn-create-post-none {
+		display: none;
+	}
+
+	&__verify-account {
+		display: block;
+        width: auto;
+        margin-left: auto;
+        margin-top: .5rem;
+        margin-bottom: 2rem;
+        background-color: black;
+        color: white;
+        padding: 0.75rem 3rem;
+        border: none;
+        border-radius: 0.313rem;
+	}
+
+	&__verify-account:hover {
+        background-color: #fefefe;
+        color: $description-text;
+		border: 1px solid $description-text;
+	}
+
+	&__verify-account:hover::before {
+		font-family: "Material Icons";
+		content: '\e897';
+		background-color: #fefefe;
+		color: $description-text;
+	}
+}
+
+@include media-md {
+    .articles{
+
+        &__header {
+            flex-direction: row;
+        }
+
+        &__title {
+            margin-bottom: 2rem;
+        }
+
+        &__create-post {
+            margin-top: 2rem;
+        }
+
+		&__verify-account{
+			margin-top: 2rem;
+		}
+
+		&__verify-account:hover{
+			margin-top: 2rem;
+		}
+    }
+}

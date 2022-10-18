@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
 			this.router.navigate(['/boards']);
 		}
 
+		console.log(this.authenticationService.isLoggedIn);
+
 		this.loginUserForm.reset();
 	}
 }
