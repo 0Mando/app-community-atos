@@ -1,45 +1,43 @@
 @import '../../../../../sass/variables';
 
+
 .speakers{
-    display: none;
+	display: block;
+	margin-top: 2rem;
+	position: sticky;
+	top: 5rem;
+
+	&__title{
+		margin-top: 1rem;
+		font-size: 1.2rem;
+		margin-bottom: 2rem;
+	}
+
+	&__item{
+		display: flex;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		&__profile{
+			border-radius: 50%;
+			width: 2.5rem;
+			height: 2.5rem;
+			margin-right: 0.5rem;
+		}
+
+		&__username{
+			color: #888888;
+			margin-right: 0.625rem;
+		}
+
+		&__top-speakers{
+			color: #888888;
+			display: flex;
+		}
+
+		label{
+			margin-left: 0.625rem;
+		}
+	}
 }
 
-@include media-md {
-	.speakers{
-        display: block;
-        margin-top: 2rem;
-
-        &__title{
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        &__item{
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-
-            &__profile{
-                border-radius: 50%;
-                width: 2.5rem;
-                height: 2.5rem;
-                margin-right: 0.5rem;
-            }
-
-            &__username{
-                color: #888888;
-                margin-right: 0.625rem;
-            }
-
-            &__top-speakers{
-                color: #888888;
-                display: flex;
-            }
-
-            label{
-                margin-left: 0.625rem;
-            }
-        }
-    }
-}

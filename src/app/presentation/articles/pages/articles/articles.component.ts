@@ -42,6 +42,6 @@ export class ArticlesComponent implements OnInit {
 
 	isVerified() : boolean {
 		console.log('Verificado falso');
-		return false;
+		return true;
 	}
 }

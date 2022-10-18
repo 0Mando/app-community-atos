@@ -5,7 +5,12 @@
     display: flex;
 }
 
+.speakers{
+	display: none;
+}
+
 .articles {
+	width: 100%;
     max-width: 50rem;
 
 	&__header {
@@ -35,7 +40,7 @@
         background-color: black;
         color: white;
         padding: 0.75rem 3rem;
-        border: none;
+        border: 1px solid black;
         border-radius: 0.313rem;
     }
 
@@ -52,7 +57,7 @@
         background-color: black;
         color: white;
         padding: 0.75rem 3rem;
-        border: none;
+        border: 1px solid black;
         border-radius: 0.313rem;
 	}
 
@@ -90,4 +95,16 @@
             margin-top: 2rem;
         }
     }
+}
+
+@include media-lg {
+	.articles {
+		width: min(100% - 2rem, 1000px);
+	}
+
+	.speakers {
+		margin-left: 2.4rem;
+		display: block;
+		width: min(100% - 2rem, 300px);
+	}
 }
