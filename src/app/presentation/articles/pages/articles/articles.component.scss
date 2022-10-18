@@ -1,6 +1,7 @@
 @import '../../../../../sass/variables';
 
 .wrapper-content {
+	margin-top: 1rem;
     display: flex;
 }
 
@@ -18,6 +19,12 @@
         margin-bottom: 1rem;
         font-size: 2rem;
     }
+
+	&__action {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
 
 	&__create-post {
         display: block;
@@ -61,6 +68,11 @@
 		background-color: #fefefe;
 		color: $description-text;
 	}
+
+	&__not-verified{
+		border: 1px solid black;
+		padding: 2px;
+	}
 }
 
 @include media-md {
@@ -77,13 +89,5 @@
         &__create-post {
             margin-top: 2rem;
         }
-
-		&__verify-account{
-			margin-top: 2rem;
-		}
-
-		&__verify-account:hover{
-			margin-top: 2rem;
-		}
     }
 }

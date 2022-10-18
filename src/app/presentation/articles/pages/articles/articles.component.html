@@ -4,16 +4,19 @@
 			<h2 class="articles__title">
 				{{ articleName }}
 			</h2>
-			<button
-				[ngClass]="
-				{
-					'articles__create-post' : userIsLogged() === true && isVerified() === true,
-					'articles__btn-create-post-none' : userIsLogged() === false,
-					'articles__verify-account' : userIsLogged() === true && isVerified() === false
-				}"
-				(click)="onCreatePost()">
-				Create Post
-			</button>
+			<div class="articles__action">
+				<small class="articles__not-verified" *ngIf="userIsLogged()===true && isVerified()===false">Your account is not verified</small>
+				<button
+					[ngClass]="
+					{
+						'articles__create-post' : userIsLogged() === true && isVerified() === true,
+						'articles__btn-create-post-none' : userIsLogged() === false,
+						'articles__verify-account' : userIsLogged() === true && isVerified() === false
+					}"
+					(click)="onCreatePost()">
+					Create Post
+				</button>
+			</div>
 		</section>
 		<section class="list-articles">
 			<app-articles-list></app-articles-list>
