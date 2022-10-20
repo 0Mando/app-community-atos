@@ -2,10 +2,13 @@
 	<h2 class="post__title">New Post</h2>
 	<tabs>
 		<tab tabTitle="Editor" class="tab">
-			<form [formGroup]="mdeForm" (ngSubmit)="onSubmitPost()">
-				<input type="text" class="post__title-post" placeholder="Title" formControlName="titlePostForm" [(ngModel)]="post.title">
+			<form [formGroup]="markdownForm" (ngSubmit)="submitPost()">
+
+				<input type="text" class="post__title-post" placeholder="Title" formControlName="titlePostForm" [(ngModel)]="previewArticle.title">
+
 				<span>{{currentDate | date : 'longDate' }}</span>
-				<input type="text" class="post__date-post" value="{{currentDate | date : 'longDate' }}" formControlName="currentDateForm" [(ngModel)]="post.date">
+				<input type="text" class="post__date-post" value="{{currentDate | date : 'longDate' }}" formControlName="currentDateForm">
+
 				<quill-editor class="post__quill-editor" [modules]="editorModules" formControlName="mdeInput" (onEditorChanged)="changeEditor($event)" [styles]="{height: '300px'}">
 				</quill-editor>
 				<br>
@@ -13,9 +16,9 @@
 			</form>
 		</tab>
 		<tab tabTitle="Preview">
-			<h1>{{ post.title }}</h1>
+			<h1>{{ previewArticle.title }}</h1>
 			<span>{{ currentDate | date : 'longDate' }}</span>
-			<p [innerHTML]="editorContent"></p>
+			<p [innerHTML]="quilleditorContent"></p>
 		</tab>
 	</tabs>
 </main>

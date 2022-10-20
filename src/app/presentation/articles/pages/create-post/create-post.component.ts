@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { User } from 'src/app/domain/models/user.model';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { IPost } from '../../model/ipost';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
 	selector: 'app-create-post',
@@ -9,15 +13,17 @@ import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 })
 export class CreatePostComponent implements OnInit {
 
-	mdeForm: FormGroup;
-	editorContent : string;
+	markdownForm: FormGroup;
+	quilleditorContent : string;
 	currentDate : Date = new Date();
-	post = { title : '', date : '' }
+	previewArticle = { title : '' }
+	post : IPost;
+	currentUser = { firtsName : '', lastName : '' }
 
-	constructor() {
-		this.mdeForm = new FormGroup({
+	constructor(private authenticationService : AuthService, private articleService : ArticleService) {
+		this.markdownForm = new FormGroup({
 			'titlePostForm' : new FormControl(null, Validators.required),
-			'currentDateForm' : new FormControl(null),
+			'currentDateForm' : new FormControl(this.currentDate),
 			'mdeInput': new FormControl(null, Validators.required)
 		})
 	}
@@ -25,10 +31,28 @@ export class CreatePostComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	onSubmitPost() {
-		console.log(this.mdeForm.get('titlePostForm').value);
-		console.log(this.mdeForm.get('currentDateForm').value);
-		console.log(this.mdeForm.get('mdeInput').value);
+	submitPost() : void {
+		// *Get the user's first and last name
+		this.authenticationService.getUserById<User>().subscribe(
+			user => {
+				this.post = {
+					'title' : this.markdownForm.get('titlePostForm').value,
+					'date' : this.markdownForm.get('currentDateForm').value,
+					'content' : this.markdownForm.get('mdeInput').value,
+					'firstName' : this.currentUser.firtsName = user.firstName,
+					'lastName' : this.currentUser.lastName = user.lastName,
+				}
+
+				//* Submit the content of the post
+				this.articleService.createPost(this.post).catch(
+					error => {
+						console.log('An error ocurred -> '+error);
+					}
+				)
+
+				this.markdownForm.reset();
+			}
+		)
 	}
 
 	/**
@@ -36,9 +60,9 @@ export class CreatePostComponent implements OnInit {
 	 * @param event Change on the quill editor
 	 */
 	changeEditor(event: EditorChangeContent | EditorChangeSelection){
-		this.editorContent = event['editor']['root']['innerHTML'];
-		this.post.title = this.mdeForm.get('titlePostForm').value;
-		this.post.date = this.mdeForm.get('currentDateForm').value;
+		this.quilleditorContent = event['editor']['root']['innerHTML'];
+		this.previewArticle.title = this.markdownForm.get('titlePostForm').value;
+		// this.article.date = this.markdownForm.get('currentDateForm').value;
 	}
 
 	//* Toolbar settings input text for create a post
