@@ -19,4 +19,14 @@ export class ArticleService {
 		const newPost = this.afs.collection('posts');
 		return newPost.doc(this.afs.createId()).set(postData);
 	}
+
+	displayPost<IPost>(channelParent : string) {
+		const post = this.afs.collection<IPost>(
+			'posts',
+			ref => ref.where('channelParent', '==', channelParent)
+		)
+		console.log(post.valueChanges());
+
+		return post.valueChanges();
+	}
 }

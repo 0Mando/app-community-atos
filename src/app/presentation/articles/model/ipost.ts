@@ -5,5 +5,5 @@ export interface IPost {
 	content : string;
 	firstName : string;
 	lastName : string;
-	// channelParent : string;
+	channelParent : string;
 }

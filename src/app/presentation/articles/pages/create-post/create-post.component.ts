@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
@@ -19,8 +20,14 @@ export class CreatePostComponent implements OnInit {
 	previewArticle = { title : '' }
 	post : IPost;
 	currentUser = { firtsName : '', lastName : '' }
+	channelParentParam : string = '';
 
-	constructor(private authenticationService : AuthService, private articleService : ArticleService) {
+	constructor(
+		private authenticationService : AuthService,
+		private articleService : ArticleService,
+		private route : ActivatedRoute,
+		private router : Router
+	) {
 		this.markdownForm = new FormGroup({
 			'titlePostForm' : new FormControl(null, Validators.required),
 			'currentDateForm' : new FormControl(this.currentDate),
@@ -29,6 +36,11 @@ export class CreatePostComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.route.queryParams.subscribe(
+			(params : Params) => {
+				this.channelParentParam = params['channel']
+			}
+		)
 	}
 
 	submitPost() : void {
@@ -41,6 +53,7 @@ export class CreatePostComponent implements OnInit {
 					'content' : this.markdownForm.get('mdeInput').value,
 					'firstName' : this.currentUser.firtsName = user.firstName,
 					'lastName' : this.currentUser.lastName = user.lastName,
+					'channelParent' : this.channelParentParam
 				}
 
 				//* Submit the content of the post
@@ -50,6 +63,7 @@ export class CreatePostComponent implements OnInit {
 					}
 				)
 
+				this.router.navigate(['/boards']);
 				this.markdownForm.reset();
 			}
 		)

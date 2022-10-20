@@ -28,7 +28,7 @@ export class ArticlesComponent implements OnInit {
 
 	onCreatePost() {
 		if(this.userIsLogged() && this.isVerified()){
-			this.router.navigate(['articles/create-post']);
+			this.router.navigate(['articles/create-post'], { queryParams : { channel : this.articleName } });
 		} else if(this.userIsLogged() && !this.isVerified()) {
 			alert('Please verified your accout');
 		} else {
@@ -41,7 +41,6 @@ export class ArticlesComponent implements OnInit {
 	}
 
 	isVerified() : boolean {
-		console.log('Verificado falso');
 		return true;
 	}
 }

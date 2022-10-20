@@ -1,4 +1,4 @@
-<section class="list-articles" *ngFor="let article of articles |
+<section class="list-articles" *ngFor="let post of posts |
 	paginate : { itemsPerPage: 4, currentPage: page, totalItems: articlesLength }">
 	<article class="list-articles__card">
 		<div class="list-articles__card__btn-interacction">
@@ -21,7 +21,7 @@
 					<img class="list-articles__card__header__user-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile">
 
 					<div class="list-articles__card__header__user-post-information">
-						<h4>Username LastName</h4>
+						<h4>{{ post.firstName +' ' + post.lastName}}</h4>
 						<small>4 days ago</small>
 					</div>
 				</div>
@@ -31,12 +31,8 @@
 			</div>
 
 			<div class="list-articles__card__body">
-				<h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, ipsa!</h4>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex repudiandae amet modi, saepe est
-					nostrum, eveniet nesciunt laboriosam repellat perferendis quos ab corrupti? Optio adipisci
-					necessitatibus explicabo vero assumenda veniam at quod expedita placeat. Minima molestiae ut
-					ipsa doloribus nulla dolorem placeat praesentium est, natus doloremque? Tempore in hic
-					doloremque!</p>
+				<h4>{{ post.title }}</h4>
+				<p [innerHTML]="post.content"></p>
 				<a href="#">Show more</a>
 			</div>
 		</div>
