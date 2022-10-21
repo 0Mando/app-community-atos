@@ -63,7 +63,7 @@ export class CreatePostComponent implements OnInit {
 					}
 				)
 
-				this.router.navigate(['/boards']);
+				this.router.navigate(['/articles/'+ this.channelParentParam +'/posts']);
 				this.markdownForm.reset();
 			}
 		)

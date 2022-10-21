@@ -25,8 +25,8 @@ export class ArticleService {
 			'posts',
 			ref => ref.where('channelParent', '==', channelParent)
 		)
-		console.log(post.valueChanges());
-
-		return post.valueChanges();
+		return post.valueChanges({ idField : 'id' });
 	}
+
+	// TODO: Recuperar artículo por ID
 }

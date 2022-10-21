@@ -14,6 +14,7 @@ import { TabComponent } from './components/tab/tab.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ArticlePageComponent } from './pages/article-page/article-page.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 		TabsComponent,
 		TabComponent,
 		CreatePostComponent,
+  ArticlePageComponent,
 	],
 	imports: [
 		CommonModule,

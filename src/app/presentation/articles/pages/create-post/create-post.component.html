@@ -5,12 +5,18 @@
 			<form [formGroup]="markdownForm" (ngSubmit)="submitPost()">
 
 				<input type="text" class="post__title-post" placeholder="Title" formControlName="titlePostForm" [(ngModel)]="previewArticle.title">
+				<span class="alert-danger" *ngIf="!markdownForm.get('titlePostForm').valid && markdownForm.get('titlePostForm').touched">
+					Please enter a title for the post
+				</span>
 
 				<span>{{currentDate | date : 'longDate' }}</span>
 				<input type="text" class="post__date-post" value="{{currentDate | date : 'longDate' }}" formControlName="currentDateForm">
 
 				<quill-editor class="post__quill-editor" [modules]="editorModules" formControlName="mdeInput" (onEditorChanged)="changeEditor($event)" [styles]="{height: '300px'}">
 				</quill-editor>
+				<span class="alert-danger" *ngIf="!markdownForm.get('mdeInput').valid && markdownForm.get('mdeInput').touched">
+					Please write a content
+				</span>
 				<br>
 				<button class="post__submit">Publish</button>
 			</form>

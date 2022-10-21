@@ -1,43 +1,52 @@
-<section class="list-articles" *ngFor="let post of posts |
-	paginate : { itemsPerPage: 4, currentPage: page, totalItems: articlesLength }">
-	<article class="list-articles__card">
-		<div class="list-articles__card__btn-interacction">
-			<button class="list-articles__card__btn-interacction__btn-arrow-up"><span class="material-icons">arrow_upward</span></button>
-			<label class="list-articles__card__btn-interacction__counter">17</label>
-			<button class="list-articles__card__btn-interacction__btn-arrow-down"><span class="material-icons">arrow_downward</span></button>
-		</div>
+<ng-container *ngIf="articlesLength > 1; else noDataAvailable">
+	<section class="list-articles" *ngFor="let post of posts |
+		paginate : { itemsPerPage: 4, currentPage: page, totalItems: articlesLength }">
+		<article class="list-articles__card">
+			<div class="list-articles__card__btn-interacction">
+				<button class="list-articles__card__btn-interacction__btn-arrow-up"><span class="material-icons">arrow_upward</span></button>
+				<label class="list-articles__card__btn-interacction__counter">17</label>
+				<button class="list-articles__card__btn-interacction__btn-arrow-down"><span class="material-icons">arrow_downward</span></button>
+			</div>
 
-		<div class="list-articles__card__content">
+			<div class="list-articles__card__content">
 
-			<div class="list-articles__card__header">
+				<div class="list-articles__card__header">
 
-				<div class="list-articles__card__header__btn-interacction">
-					<button class="list-articles__card__header__btn-interacction__btn-arrow-up__positive"><span class="material-icons">arrow_upward</span></button>
-					<label class="list-articles__card__header__btn-interacction__counter">17</label>
-					<button class="list-articles__card__header__btn-interacction__btn-arrow-down__negative"><span class="material-icons">arrow_downward</span></button>
-				</div>
-
-				<div class="list-articles__card__header__user">
-					<img class="list-articles__card__header__user-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile">
-
-					<div class="list-articles__card__header__user-post-information">
-						<h4>{{ post.firstName +' ' + post.lastName}}</h4>
-						<small>4 days ago</small>
+					<div class="list-articles__card__header__btn-interacction">
+						<button class="list-articles__card__header__btn-interacction__btn-arrow-up__positive"><span class="material-icons">arrow_upward</span></button>
+						<label class="list-articles__card__header__btn-interacction__counter">17</label>
+						<button class="list-articles__card__header__btn-interacction__btn-arrow-down__negative"><span class="material-icons">arrow_downward</span></button>
 					</div>
+
+					<div class="list-articles__card__header__user">
+						<img class="list-articles__card__header__user-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile">
+
+						<div class="list-articles__card__header__user-post-information">
+							<h4>{{ post.firstName +' ' + post.lastName}}</h4>
+							<small>{{ post.date }}</small>
+						</div>
+					</div>
+
+					<button class="list-articles__card__header__btn-interacction-btn"><span class="material-icons">more_vert</span></button>
+
 				</div>
 
-				<button class="list-articles__card__header__btn-interacction-btn"><span class="material-icons">more_vert</span></button>
-
+				<div class="list-articles__card__body">
+					<h4>{{ post.title }}</h4>
+					<p [innerHTML]="post.content"></p>
+					<a routerLink="/articles/post/{{ post.id }}">Show more</a>
+					<!-- <a>Show more {{ post.id }} </a> -->
+				</div>
 			</div>
-
-			<div class="list-articles__card__body">
-				<h4>{{ post.title }}</h4>
-				<p [innerHTML]="post.content"></p>
-				<a href="#">Show more</a>
-			</div>
-		</div>
-	</article>
-</section>
-<section class="controls">
-	<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
-</section>
+		</article>
+	</section>
+	<section class="controls">
+		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+	</section>
+</ng-container>
+<ng-template #noDataAvailable>
+	<h3>
+		Aún no hay artículos disponibles.
+	</h3>
+	<p>Crea el primer artículo</p>
+</ng-template>

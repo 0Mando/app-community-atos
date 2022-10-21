@@ -37,6 +37,7 @@ input.ng-invalid.ng-touched{
 	border: 1px solid red;
 }
 
+//* Mensaje de alerta
 .alert-danger{
 	display: block;
 	border: 1px solid #ff4136;
@@ -47,4 +48,12 @@ input.ng-invalid.ng-touched{
 	margin: 1rem auto;
 	width: 100%;
 	text-align: center;
+}
+
+//* Bloque de código
+pre {
+	border-radius: 5px;
+	padding: 1rem;
+	background-color: $--main--50;
+	color: $--main--800;
 }
