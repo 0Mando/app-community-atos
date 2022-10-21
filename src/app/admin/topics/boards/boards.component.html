@@ -1,0 +1,191 @@
+<main class="boards">
+    <section class="boards__list">
+        <article class="list">
+            <div class="list__header">
+                <div class="list__header-title">Boards</div>
+                <button class="list__header-new">New Board</button>
+            </div>
+            <form class="list__query">
+                <input 
+                    type="text" 
+                    class="searchbox"
+                    placeholder=" &#xF002;  Search"
+                    style="font-family:Arial, FontAwesome">
+            </form>
+            <div class="list__current">
+                <div class="list__current-title">On edition</div>
+                <div class="card">
+                    <div class="card__header">
+                        <div class="card__header-tag">#QA</div>
+                        <div class="card__header-users">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">                                
+                        </div>
+                        <div class="card__header-timer">20 min ago</div>
+                    </div>
+                    <div class="card__content">QA Automation</div>
+                </div>
+            </div>
+            <div class="list__all">
+                <div class="list__all-title">Boards</div>
+                <div *ngFor="let card of cards">
+                    <div class="card">
+                        <div class="card__header">
+                            <div class="card__header-status"></div>
+                            <div class="card__header-users">
+                                <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">                                
+                            </div>
+                            <div class="card__header-timer">20 min ago</div>
+                        </div>
+                        <div class="card__content">QA Automation</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <section class="boards__screen">
+        <article class="menu">
+            <div class="menu__header">
+                <div class="menu__header-info">
+                    <div class="info__title">
+                        New board
+                    </div>
+                    <div class="info__users">
+                        <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                        <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                        <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                        <div class="info__users-add"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                </div>
+                <div class="menu__header-options">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="menu__edit">
+                <div class="edit__header">
+                    <span class="edit__spacing"></span>
+                    <div class="edit__header-title">EDITING BOARD</div>
+                    <button class="edit__header-close close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <form class="edit__form">
+                    <div class="left">
+                        <div class="field">
+                            <label for="boardName"class="board-label">BOARD NAME</label>
+                            <input type="text" class="board-input" name="boardName" id="boardName" placeholder="Your amazing new Board name">
+                        </div>
+                        <div class="field">
+                            <label for="boardDescription" class="board-label">BOARD DESCRIPTION</label>
+                            <textarea name="boardDescription" id="boardDescription" cols="30" rows="10" class="board-input" placeholder="Your amazing board description"></textarea>
+                        </div>
+                        <div class="field">
+                            <div class="field-image"></div>
+                            <label class="custom-file">
+                                <input 
+                                    type="file" 
+                                    name="boardImage" 
+                                    id="boardImage"
+                                    accept="image/jpeg, image/png, image/jpg">
+                                SELECT PICTURE FOR BOARD
+                            </label>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="field">
+                            <label for="boardVisibility" class="board-label">VISIBILITY</label>
+                            <select 
+                                name="boardVisibility" 
+                                id="boardVisibility" 
+                                class="board-input">
+                                <option value="default" hidden>Pick a visibility for your board</option>
+                                <option value="visible">Visible</option>
+                                <option value="invisible">Invisible</option>
+                                <option value="...?">...?</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="moderators" class="board-label">MODERATORS</label>
+                            <input 
+                                list="mods" 
+                                class="board-input" 
+                                name="moderators" 
+                                placeholder=" &#xF002;  Search Moderator by Name or ID"
+                                style="font-family:Arial, FontAwesome">
+                            <datalist id="mods">
+                                <option value="Jonathan | 12345">
+                                <option value="Luis Angel | 34567">
+                                <option value="Luis Perez | 78901">
+                                <option value="Alan | 62473">
+                                <option value="Cristian | 158487">
+                            </datalist>  
+                        </div>
+                        <div class="field last">
+                            <div class="field__mods">
+                                <label for="modsList" class="board-label">MODERATOR TEAM FOR NEW BOARD</label>
+                                <div class="field__mods-list">
+                                    <div class="mod">
+                                        <div class="mod-image">
+                                            <img 
+                                                src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                                                class="mod-image" 
+                                                alt="">
+                                        </div>
+                                        <div class="mod-name">Elver Galarga</div>
+                                        <div class="mod__buttons">
+                                            <button type="button" class="mod__buttons-details close-button">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="mod__buttons-close close-button">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mod">
+                                        <div class="mod-image">
+                                            <img 
+                                                src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                                                class="mod-image" 
+                                                alt="">
+                                        </div>
+                                        <div class="mod-name">Elver Galarga</div>
+                                        <div class="mod__buttons">
+                                            <button type="button" class="mod__buttons-details close-button">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="mod__buttons-close close-button">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mod">
+                                        <div class="mod-image">
+                                            <img 
+                                                src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                                                class="mod-image" 
+                                                alt="">
+                                        </div>
+                                        <div class="mod-name">Elver Galarga</div>
+                                        <div class="mod__buttons">
+                                            <button type="button" class="mod__buttons-details close-button">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                            <button type="button" class="mod__buttons-close close-button">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="create-board">
+                            CREATE NEW BOARD
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>

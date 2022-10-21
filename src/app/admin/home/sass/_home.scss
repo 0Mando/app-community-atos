@@ -1,0 +1,56 @@
+.home{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background: #FAFBFE;
+
+    &__left{
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+
+        &-header{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 150px;
+        }
+    }
+
+    &__right{
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: rgb(224, 223, 223);
+            outline: 1px solid rgb(178, 194, 210);
+        }
+
+        &-menu{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 30px 50px;
+
+            *{
+                cursor: pointer;
+            }
+        }
+
+        &-reports{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}

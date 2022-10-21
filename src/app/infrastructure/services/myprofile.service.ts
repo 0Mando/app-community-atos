@@ -1,4 +1,4 @@
-import { Profile } from './../models/Profile';
+import { Profile } from 'src/app/domain/models/profile.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, Subject } from 'rxjs';

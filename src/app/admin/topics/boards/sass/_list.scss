@@ -1,0 +1,42 @@
+.list{
+    margin-left: 0.5vw;
+    box-shadow: 0 0 10px 1px lightgray;
+    border-radius: 10px;
+    background: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+
+        &-title{
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        &-new{
+            background: #03A79D;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.7em;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+    }
+
+    &__current{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+
+        &-title, .list__all-title{
+            font-weight: 600;
+        }
+    }
+}

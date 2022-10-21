@@ -1,0 +1,31 @@
+.container{
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark:after {
+        left: 4px;
+        top: 0;
+        width: 3px;
+        height: 7px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ecf4ff;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #96befb;
+}

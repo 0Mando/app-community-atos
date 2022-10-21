@@ -1,0 +1,159 @@
+<main class="users">
+    <section class="users__filter">
+        <input 
+            type="text" 
+            placeholder=" &#xF002; Name or id" 
+            name="filter" 
+            id="filter" 
+            style="font-family:Arial, FontAwesome" 
+            class="users__filter-filter"/>
+        <select name="selection" id="selection" class="users__filter-select">
+            <option value="none" selected disabled hidden>Select Filter</option>
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+            <option value="title">Title</option>
+        </select>
+    </section>
+    <section class="users__list">
+        <div class="users__list-menu">
+            <p class="users__quantity">Users (100)</p>
+            <button class="add__user">Add New <i class="fa-thin fa-plus"></i></button>
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        <span class="disable__title">Disable</span>
+
+        <div class="users__list-header">
+            <div class="users__list-check">
+                <label class="container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="users__list-name">Name</div>
+            <div class="users__list-email">Email</div>
+            <div class="users__list-title">Title</div>
+            <div class="users__list-date">Date Modified</div>
+            <div class="users__list-karma">Karma</div>
+            <div class="users__list-options"></div>
+        </div>
+
+        <div class="users__list-table" *ngFor="let user of users">
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">Michael Scott</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title admin">Administrator</div></div>
+                <div class="users__list-date">07/04/1927</div>
+                <div class="users__list-karma">16</div>
+                <div class="users__list-options"><span class="material-symbols-outlined">
+                    drag_indicator
+                    </span></div>
+            </div>
+            
+            <!-- <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1542206395-9feb3edaa68d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">Dwight Schrute</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title mod">Moderator</div></div>
+                <div class="users__list-date">05/12/1983</div>
+                <div class="users__list-karma">15</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=389&q=80" alt="">Jim Harpert</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title user">User</div></div>
+                <div class="users__list-date">08/08/1921</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">Pam Beesly</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title verified-user">Verified User</div></div>
+                <div class="users__list-date">26/08/1949</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">Jim Harpert</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title user">User</div></div>
+                <div class="users__list-date">08/08/1921</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">Jim Harpert</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title user">User</div></div>
+                <div class="users__list-date">08/08/1921</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80" alt="">Jim Harpert</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title user">User</div></div>
+                <div class="users__list-date">08/08/1921</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div>
+            <div class="users__list-user">
+                <div class="users__list-check">
+                    <label class="container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1504593811423-6dd665756598?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">Jim Harpert</div>
+                <div class="users__list-email">someone@atos.net</div>
+                <div class="users__list-title"><div class="users__title user">User</div></div>
+                <div class="users__list-date">08/08/1921</div>
+                <div class="users__list-karma">11</div>
+                <div class="users__list-options"></div>
+            </div> -->
+            
+        </div>
+    </section>
+</main>

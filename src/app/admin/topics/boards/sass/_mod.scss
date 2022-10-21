@@ -1,0 +1,54 @@
+.mod{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-block: 17px;
+    
+    &-image{
+        width: 30px;
+        height: 30px;
+        margin-left: 3px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: relative;
+
+        &::after{
+            content: '';
+            margin-left: 3px;
+            height: 35px;
+            width: 35px;
+            position: absolute;
+            background: none;
+            border: 2px solid #03A79D;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &-name{
+        margin-left: 15px;
+    }
+
+    &__buttons{
+        margin-left: auto;
+        display: flex;
+        width: 20%;
+        justify-content: space-evenly;
+
+        &-close{
+            background: #FF3C66;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8em;
+        }
+
+        &-details{
+            background: #03A79D;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8em;
+        }
+    }
+}

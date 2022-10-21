@@ -1,0 +1,149 @@
+.users{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+
+    &-pfp{
+        width: 40px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+
+    &__filter {
+        width: 90%;
+        padding-top: 20px;
+        margin: 0 20px 20px 20px;
+
+        &-filter{
+            padding: 8px;
+            width: 20%;
+            border: 1px solid lightgray;
+        }
+
+        &-select{
+            margin-left: 20px;
+            padding: 8px 4px 8px 0;
+            width: 10%;
+            border: 1px solid lightgray;
+        }
+    }
+
+    &__list{
+        align-self: center;
+        width: 90%;
+        background: white;
+        box-shadow: 0 0 8px 1px lightgray;
+
+        &-name{
+            width: 25%;
+            display: flex;
+            align-items: center;
+        }
+
+        &-email{
+            width: 25%;
+        }
+
+        &-title{
+            width: 15%;
+
+            .admin{
+                background: rgb(52, 255, 52);
+            }
+            
+            .mod{
+                background: rgb(87, 181, 239);
+                color: rgb(45, 62, 251);
+            }
+            
+            .user{
+                background: rgb(248, 255, 113);
+            }
+            
+            .verified-user{
+                background: rgb(249, 157, 157);
+            }
+        }
+
+        &-date{
+            width: 15%;
+        }
+
+        &-karma{
+            width: 8%;
+        }
+
+        &-options{
+            width: 7%;
+            cursor: pointer;
+        }
+        
+        &-menu{
+            display: flex;
+            flex-direction: row;
+        }
+
+        &-header{
+            display: flex;
+            flex-direction: row;
+            border-top: 2px solid #a5c9ff;
+            border-bottom: 1px solid #a5c9ff;
+            padding: 10px 0;
+
+            .checkmark{
+                top: 2px;
+            }
+
+            *{
+                
+                cursor: pointer;
+            }
+        }
+
+        &-user{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            transition: margin 1s;
+            transition: border 0.1s;
+            border-top: 1px solid #a5c9ff;
+
+            &:hover{
+                background: #ecf4ff;
+                margin: 0 -20px;
+                border: 1px solid #a5c9ff;
+                transition: margin 0.5s;
+                font-size: 0.9rem;
+            }
+
+            *{
+                padding: 5px 0;
+            }
+
+            .checkmark{
+                top: -3px;
+            }
+        }
+
+        &-check{
+            width: 5%;
+            text-align: center;
+            display: inline-block;
+            position: relative;
+        }
+    }
+    
+    &__quantity{
+        padding: 20px;
+    }
+
+    &__title{
+        border-radius: 5px;
+        max-width: 130px;
+        text-align: center;
+        padding: 5px 0;
+    }
+}

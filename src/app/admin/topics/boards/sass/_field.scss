@@ -1,0 +1,41 @@
+.field{
+    margin-block: 25px;
+
+    &__mods{
+        width: 100%;
+        height: 183px;
+        padding: 5px;
+        box-shadow: 0 0 5px 1px lightgray;
+        border-radius: 5px;
+
+        &-list{
+            width: 100%;
+            height: 158px;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            &::-webkit-scrollbar-track {
+                border-radius: 5px;
+                background: white; 
+                box-shadow: 0 0 10px 1px lightgray; 
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background-color: #b9b6af;
+            }
+        }
+    }
+
+    &-image{
+        width: 100%;
+        height: 160px;
+        margin-bottom: 5px;
+        background-image: url('https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png');
+        background-position: center;
+        background-size: cover;
+    }
+}
