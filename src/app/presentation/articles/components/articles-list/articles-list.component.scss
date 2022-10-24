@@ -4,6 +4,7 @@
 .list-articles{
 
     &__card{
+		width: 100%;
         border: 0.125rem solid #ccc;
         border-radius: 0.313rem;
         display: flex;
@@ -55,7 +56,7 @@
         &__header{
             display: flex;
             padding: 0.2rem 0.5rem 0.8rem;
-            border-bottom: 0.125rem solid #ccc;
+            // border-bottom: 0.125rem solid #ccc;
             align-items: flex-start;
 
             &__btn-interacction{
@@ -124,6 +125,9 @@
 
         &__body{
             margin-top: 1rem;
+			display: block;
+			width: 100%;
+			// background-color: red;
 
             h4{
                 line-height: 1.8rem;
@@ -135,8 +139,41 @@
                 margin-top: 1rem;
                 color: black;
             }
+
+			p {
+				display: block;
+				width: 100%;
+			}
+
+			pre {
+				display: block;
+				width: 100%;
+				overflow-x: scroll;
+			}
+
+			span {
+				display: block;
+				width: 100%;
+			}
         }
     }
+}
+
+
+.line {
+	display: block;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+pre {
+	border-radius: 5px;
+	padding: 1rem;
+	background-color: $--main--50;
+	color: $--main--800;
+	display: block;
+	width: 100%;
+	overflow-x: scroll;
 }
 
 @include media-md {

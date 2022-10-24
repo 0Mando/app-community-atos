@@ -1,0 +1,82 @@
+@import '../../../../../sass/variables';
+
+#code {
+	color: white;
+	cursor: unset;
+}
+
+.post {
+
+	margin-top: 1rem;
+
+	&__title {
+		font-size: 2.5rem;
+	}
+
+	&__bar-about {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+
+		li {
+			// background-color: #27c327;
+			display: inline-block;
+			margin: 0.5rem 0;
+			list-style-type: none;
+			font-weight: bold;
+			color: #707070;
+			padding: 3px 0;
+			// border: 1px solid black;
+			vertical-align: text-bottom;
+		}
+
+		span {
+			// background-color: red;
+			vertical-align: text-bottom;
+		}
+
+	}
+
+	&__bar {
+		border: 1px solid $text-secondary;
+		margin: 1rem 0;
+	}
+
+	&__author {
+		display: flex;
+
+		&__profile {
+			border-radius: 50%;
+			width: 3.4rem;
+			height: 3.4rem;
+			margin-right: 1.5rem;
+		}
+
+		&__name {
+			display: block;
+			padding-top: .5rem;
+		}
+	}
+
+	&__days {
+		color: $description-text;
+	}
+
+	&__content {
+		display: block;
+		width: 100%;
+		margin-top: 1rem;
+	}
+}
+
+@include media-md {
+	.post {
+		&__bar-about {
+			flex-direction: row;
+		}
+
+		li {
+			margin-right: 7rem;
+		}
+	}
+}

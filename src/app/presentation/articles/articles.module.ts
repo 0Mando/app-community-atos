@@ -24,7 +24,7 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
 		TabsComponent,
 		TabComponent,
 		CreatePostComponent,
-  ArticlePageComponent,
+		ArticlePageComponent,
 	],
 	imports: [
 		CommonModule,

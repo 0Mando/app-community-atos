@@ -23,13 +23,13 @@
 
 						<div class="list-articles__card__header__user-post-information">
 							<h4>{{ post.firstName +' ' + post.lastName}}</h4>
-							<small>{{ post.date }}</small>
+							<small>{{ post.date | date }}</small>
 						</div>
 					</div>
-
 					<button class="list-articles__card__header__btn-interacction-btn"><span class="material-icons">more_vert</span></button>
 
 				</div>
+				<!-- <hr class="line"> -->
 
 				<div class="list-articles__card__body">
 					<h4>{{ post.title }}</h4>

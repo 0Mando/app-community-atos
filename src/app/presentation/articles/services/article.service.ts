@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 import { IPost } from '../model/ipost';
 
 @Injectable({
@@ -29,4 +30,7 @@ export class ArticleService {
 	}
 
 	// TODO: Recuperar artículo por ID
+	getArticleById<IPost>(articleId : string) {
+		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
+	}
 }

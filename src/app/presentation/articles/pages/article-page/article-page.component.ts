@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
+import { IPost } from '../../model/ipost';
 import { ArticleService } from '../../services/article.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { ArticleService } from '../../services/article.service';
 export class ArticlePageComponent implements OnInit {
 
 	articleId : string = '';
+	currentPost : any;
 
 	constructor(
 		private route : ActivatedRoute,
@@ -22,6 +25,29 @@ export class ArticlePageComponent implements OnInit {
 				this.articleId = params['id']
 			}
 		)
+		this.getArticleById(this.articleId).catch(
+			error => {
+				console.log('Something went wrong ' + error);
+			}
+		);
+	}
+
+	async getArticleById(id : string) :Promise<void> {
+		this.articleService.getArticleById(id).subscribe(
+			post => {
+				console.table(post);
+				this.currentPost = post;
+			}
+		)
+	}
+
+	easterEgg() : void {
+		console.log('Hey yoy found my easter egg');
+	}
+
+	convertTiemstampToDate(timestamp : number){
+		let publishDate = new Date(timestamp);
+		return publishDate.getDate() + "/" + (publishDate.getMonth() + 1) + "/" + publishDate.getFullYear();
 	}
 
 }

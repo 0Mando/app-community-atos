@@ -30,7 +30,7 @@ export class CreatePostComponent implements OnInit {
 	) {
 		this.markdownForm = new FormGroup({
 			'titlePostForm' : new FormControl(null, Validators.required),
-			'currentDateForm' : new FormControl(this.currentDate),
+			'currentDateForm' : new FormControl(this.currentDate.getTime()),
 			'mdeInput': new FormControl(null, Validators.required)
 		})
 	}
