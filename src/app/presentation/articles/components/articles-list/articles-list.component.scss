@@ -1,6 +1,13 @@
 @import '../../../../../sass/variables';
 @import '../../../../../sass/pagination';
 
+.content {
+	width: 100%;
+}
+
+.container-btns {
+	display: none;
+}
 
 .card {
 	border-radius: 5px;
@@ -9,6 +16,7 @@
 	box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
 	-webkit-box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
 	-moz-box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
+	display: flex;
 
 	button {
 		background: none;
@@ -87,8 +95,34 @@
 		// 	rgba(255,255,255,1) 88%,
 		// 	rgba(230,230,230,1) 100%
 		// );
+		p {
+			color: $description-text;
+			line-height: 1.4rem;
+		}
 	}
 
+	&__footer {
+		margin-top: 1rem;
+		a {
+			color: #707070;
+		}
+	}
+}
+
+@include media-md {
+	.content {
+		width: 92%;
+		// background-color: red;
+	}
+
+	.container-btns {
+		display: block;
+		width: 8%;
+
+        ul {
+            margin-top: 3.2rem;
+        }
+	}
 }
 
 .list-articles{
