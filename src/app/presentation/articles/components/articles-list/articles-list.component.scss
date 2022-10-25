@@ -1,6 +1,74 @@
 @import '../../../../../sass/variables';
 @import '../../../../../sass/pagination';
 
+
+.card {
+	border-radius: 5px;
+	padding: 1rem;
+	width: 100%;
+	box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
+	-webkit-box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
+	-moz-box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
+
+	button {
+		background: none;
+		border: none;
+		color: $description-text;
+	}
+
+	&__header {
+		display: flex;
+
+		&__interactions {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 0 1rem;
+
+			li {
+				list-style-type: none;
+			}
+
+			&__arrow {
+
+				&__up :hover {
+					color: blue;
+				}
+
+				&__down :hover {
+					color: red;
+				}
+			}
+		}
+
+		&__user {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&__profile {
+				border-radius: 50%;
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+
+			&__data {
+				margin-left: 1rem;
+
+				small {
+					color: $description-text;
+				}
+			}
+		}
+
+		&__options {
+			margin-left: auto;
+		}
+	}
+
+}
+
 .list-articles{
 
     &__card{
@@ -158,7 +226,6 @@
         }
     }
 }
-
 
 .line {
 	display: block;
