@@ -15,6 +15,7 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
+import { LikesComponent } from './components/likes/likes.component';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,7 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
 		TabComponent,
 		CreatePostComponent,
 		ArticlePageComponent,
+  LikesComponent,
 	],
 	imports: [
 		CommonModule,

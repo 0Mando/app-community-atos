@@ -11,7 +11,7 @@
 
 .articles {
 	width: 100%;
-    max-width: 50rem;
+    // max-width: 50rem;
 
 	&__header {
 		display: flex;
@@ -99,12 +99,13 @@
 
 @include media-lg {
 	.articles {
-		width: min(100% - 2rem, 1000px);
+		width: min(75% - 2rem, 1000px);
+		max-width: 50rem;
 	}
 
 	.speakers {
 		margin-left: 2.4rem;
 		display: block;
-		width: min(100% - 2rem, 300px);
+		width: min(25% - 2rem, 300px);
 	}
 }

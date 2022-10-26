@@ -1,44 +1,19 @@
 <ng-container *ngIf="articlesLength > 1; else noDataAvailable">
-	<article class="card">
-		<div class="container-btns">
-			<ul class="card__header__interactions">
-				<li>
-					<button class="card__header__interactions__arrow__up">
-						<span class="material-icons">arrow_upward</span>
-					</button>
-				</li>
-				<li>
-					<label>17</label>
-				</li>
-				<li>
-					<button class="card__header__interactions__arrow__down">
-						<span class="material-icons">arrow_downward</span>
-					</button>
-				</li>
-			</ul>
+	<article class="card" *ngFor="let post of posts |
+	paginate : { itemsPerPage: 5, currentPage: page, totalItems: articlesLength }">
+		<div class="desktop-version">
+			<app-likes></app-likes>
 		</div>
 		<div class="content">
 			<header class="card__header">
-				<ul class="card__header__interactions">
-					<li>
-						<button class="card__header__interactions__arrow__up">
-							<span class="material-icons">arrow_upward</span>
-						</button>
-					</li>
-					<li>
-						<label>17</label>
-					</li>
-					<li>
-						<button class="card__header__interactions__arrow__down">
-							<span class="material-icons">arrow_downward</span>
-						</button>
-					</li>
-				</ul>
+				<div class="mobile-version">
+					<app-likes></app-likes>
+				</div>
 				<section class="card__header__user">
 					<img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card__header__user__profile" alt="">
 					<div class="card__header__user__data">
-						<h5>Firstname Lastname</h5>
-						<small>6 days ago</small>
+						<h5>{{ post.firstName +' ' + post.lastName}}</h5>
+						<small>{{ post.date | date }}</small>
 					</div>
 				</section>
 				<button class="card__header__options">
@@ -47,64 +22,14 @@
 			</header>
 			<hr>
 			<section class="card__content">
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque a reprehenderit, aliquid, molestias minus necessitatibus, corporis officia amet accusantium voluptatem quia repellat voluptatum id facilis nisi. Maiores, quia quibusdam quis veritatis eveniet illum excepturi quidem dicta itaque quos, nulla magnam unde iure id totam laudantium veniam, earum corporis asperiores. Cupiditate illo harum magni unde vel, ullam eos libero cum, maxime reprehenderit sed voluptatem, nulla non hic eveniet accusantium sapiente nam. Expedita eveniet cum quia saepe suscipit reprehenderit hic magni repellat.</p>
-				<pre class="ql-syntax">&lt;section class="list-articles" *ngFor="let post of posts |
-					&nbsp; &nbsp; &nbsp; &nbsp; paginate :  itemsPerPage: 4, currentPage: page, totalItems: articlesLength "&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &lt;article class="list-articles__card"&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="list-articles__card__btn-interacction"&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class="list-articles__card__btn-interacction__btn-arrow-up"&gt;&lt;span class="material-icons"&gt;arrow_upward&lt;/span&gt;&lt;/button&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;label class="list-articles__card__btn-interacction__counter"&gt;17&lt;/label&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class="list-articles__card__btn-interacction__btn-arrow-down"&gt;&lt;span class="material-icons"&gt;arrow_downward&lt;/span&gt;&lt;/button&gt;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;
-				</pre>
+				<h4>{{ post.title }}</h4>
+				<p [innerHTML]="post.content"></p>
 			</section>
 			<footer class="card__footer">
-				<a href="">Show more</a>
+				<a routerLink="/articles/post/{{ post.id }}">Show more</a>
 			</footer>
 		</div>
 	</article>
-	<br><br><br><br><br>
-	<section class="list-articles" *ngFor="let post of posts |
-		paginate : { itemsPerPage: 4, currentPage: page, totalItems: articlesLength }">
-		<article class="list-articles__card">
-			<div class="list-articles__card__btn-interacction">
-				<button class="list-articles__card__btn-interacction__btn-arrow-up"><span class="material-icons">arrow_upward</span></button>
-				<label class="list-articles__card__btn-interacction__counter">17</label>
-				<button class="list-articles__card__btn-interacction__btn-arrow-down"><span class="material-icons">arrow_downward</span></button>
-			</div>
-
-			<div class="list-articles__card__content">
-
-				<div class="list-articles__card__header">
-
-					<div class="list-articles__card__header__btn-interacction">
-						<button class="list-articles__card__header__btn-interacction__btn-arrow-up__positive"><span class="material-icons">arrow_upward</span></button>
-						<label class="list-articles__card__header__btn-interacction__counter">17</label>
-						<button class="list-articles__card__header__btn-interacction__btn-arrow-down__negative"><span class="material-icons">arrow_downward</span></button>
-					</div>
-
-					<div class="list-articles__card__header__user">
-						<img class="list-articles__card__header__user-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile">
-
-						<div class="list-articles__card__header__user-post-information">
-							<h4>{{ post.firstName +' ' + post.lastName}}</h4>
-							<small>{{ post.date | date }}</small>
-						</div>
-					</div>
-					<button class="list-articles__card__header__btn-interacction-btn"><span class="material-icons">more_vert</span></button>
-
-				</div>
-				<!-- <hr class="line"> -->
-
-				<div class="list-articles__card__body">
-					<h4>{{ post.title }}</h4>
-					<p [innerHTML]="post.content"></p>
-					<a routerLink="/articles/post/{{ post.id }}">Show more</a>
-					<!-- <a>Show more {{ post.id }} </a> -->
-				</div>
-			</div>
-		</article>
-	</section>
 	<section class="controls">
 		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
 	</section>
