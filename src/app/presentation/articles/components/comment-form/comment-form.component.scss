@@ -13,13 +13,13 @@
 
 	&__container-form {
 		width: 100%;
-		z-index: -1;
 	}
 
 	&__quill-editor {
 		display: block;
 		width: 100%;
-		z-index: -1;
+		background-color: $--main--50;
+		border-radius: 10px;
 	}
 
 	&__submit {

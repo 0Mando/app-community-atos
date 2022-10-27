@@ -16,8 +16,8 @@ export class CommentFormComponent implements OnInit {
 	editorModules = {
 		toolbar : [
 			[
-				'bold',
-				'italic',
+				// 'bold',
+				// 'italic',
 				// 'underline',
 				// 'strike'
 			],
@@ -37,18 +37,18 @@ export class CommentFormComponent implements OnInit {
 
 			//* Toolbar font stuff
 			[
-				{ 'color' : [] },
+				// { 'color' : [] },
 				// { 'background' : [] }
 			],
-			[{ 'font' : [] }],
-			[{ 'align' : ['', 'center', 'right', 'justify'] }],
+			// [{ 'font' : [] }],
+			// [{ 'align' : ['', 'center', 'right', 'justify'] }],
 
 			// ['clean'],
 
 			//* Toolbar multimedia
 			[
 				// 'link',
-				'image',
+				// 'image',
 				// 'video'
 			]
 		]
