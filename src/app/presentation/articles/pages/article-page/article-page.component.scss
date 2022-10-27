@@ -40,7 +40,7 @@
 
 	&__bar {
 		border: 1px solid $text-secondary;
-		margin: 1rem 0;
+		margin-top: 3rem;
 	}
 
 	&__author {
@@ -69,8 +69,12 @@
 		margin-top: 1rem;
 	}
 
+	&__comment-form {
+		margin-top: 4rem;
+	}
+
 	&__comments-list {
-		margin-top: 2rem;
+		margin-top: 4rem;
 	}
 }
 
