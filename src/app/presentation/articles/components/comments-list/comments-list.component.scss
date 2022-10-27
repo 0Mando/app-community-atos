@@ -1,0 +1,49 @@
+@import '../../../../../sass/variables';
+
+.comment-card {
+	padding: 0 2rem;
+
+	&__header {
+		display: flex;
+		margin-bottom: 1rem;
+
+		&__author-profile {
+			border-radius: 50%;
+			width: 3.5rem;
+			height: 3.5rem;
+			margin-right: 1.5rem;
+		}
+
+		&__author-data {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		&__options {
+			background: none;
+			border: none;
+			margin-left: auto;
+		}
+	}
+
+	&__content {
+		display: block;
+		width: 100%;
+	}
+}
+
+hr {
+	margin: 1rem 0;
+	color: #ccc;
+	border: 0;
+	border-top: 2px solid;
+	opacity: .25;
+	margin-bottom: 1.5rem;
+}
+
+@include media-md {
+	.comment-card {
+		padding: 0 5rem;
+	}
+}

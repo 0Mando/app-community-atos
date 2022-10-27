@@ -35,14 +35,13 @@ export class ArticlePageComponent implements OnInit {
 	async getArticleById(id : string) :Promise<void> {
 		this.articleService.getArticleById(id).subscribe(
 			post => {
-				console.table(post);
 				this.currentPost = post;
 			}
 		)
 	}
 
 	easterEgg() : void {
-		console.log('Hey yoy found my easter egg');
+		console.log('%cHey you found my easter egg🐣', 'color:yellow; font-size: 8rem;');
 	}
 
 	convertTiemstampToDate(timestamp : number){

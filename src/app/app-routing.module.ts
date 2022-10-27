@@ -10,6 +10,7 @@ import { ArticlesComponent } from './presentation/components/articles/articles.c
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
+import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
 	{
 		path: 'channels/:boardName',
 		component: ChannelsComponent
+	},
+	{
+		path : 'not-available-articles',
+		component: ChannelsEmptyComponent
 	},
 	{
 		path: 'profile',

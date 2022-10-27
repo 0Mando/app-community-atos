@@ -16,6 +16,8 @@ import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
 import { LikesComponent } from './components/likes/likes.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { CommentsListComponent } from './components/comments-list/comments-list.component';
 
 @NgModule({
 	declarations: [
@@ -27,6 +29,8 @@ import { LikesComponent } from './components/likes/likes.component';
 		CreatePostComponent,
 		ArticlePageComponent,
   LikesComponent,
+  CommentFormComponent,
+  CommentsListComponent,
 	],
 	imports: [
 		CommonModule,

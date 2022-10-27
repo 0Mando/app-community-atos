@@ -29,4 +29,12 @@ export class ChannelService {
 		)
 		return collection.valueChanges();
 	}
+
+	// channelExists(parentBoard : string) {
+	// 	const collection = this.afs.collection<Channel>(
+	// 		'channels',
+	// 		ref => ref.where('parentBoard', '==', parentBoard)
+	// 	)
+	// 	console.log(collection.valueChanges());
+	// }
 }
