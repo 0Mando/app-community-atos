@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { User } from 'src/app/domain/models/user.model';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { IComment } from '../../model/icomment';
+import { CommentsService } from '../../services/comments.service';
 
 @Component({
 	selector: 'app-comment-form',
@@ -7,11 +13,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentFormComponent implements OnInit {
 
-	constructor() { }
-
-	ngOnInit(): void {
-	}
-
+	commentForm : FormGroup;
+	currentDate : Date = new Date();
+	commentI : IComment;
+	idPost : string;
 	//* Toolbar settings input text for create a post
 	editorModules = {
 		toolbar : [
@@ -52,5 +57,48 @@ export class CommentFormComponent implements OnInit {
 				// 'video'
 			]
 		]
+	}
+
+	constructor(
+		private commentsService : CommentsService,
+		private authenticationService : AuthService,
+		private route : ActivatedRoute
+	) {
+		this.commentForm = new FormGroup({
+			'CommentBody' : new FormControl(null, Validators.required)
+		})
+	}
+
+	ngOnInit(): void {
+		this.route.params.subscribe(
+			(params : Params) => {
+				this.idPost = params['id']
+			}
+		)
+	}
+
+	onCreateComment() : void {
+		this.authenticationService.getUserById<User>().subscribe(
+			(user : User) => {
+				console.log(user.id);
+				console.log(this.commentForm.get('CommentBody').value);
+
+				this.commentI = {
+					idUserAuthor : user.id,
+					idPost : this.idPost,
+					commentBody : this.commentForm.get('CommentBody').value,
+					createdAt : this.currentDate.getTime()
+				}
+				console.table(this.commentI);
+				this.commentsService.createComment(this.commentI)
+				.catch(
+					error => {
+						console.log('Something went wrong');
+						console.log(error);
+					}
+				);
+				this.commentForm.reset();
+			}
+		)
 	}
 }
