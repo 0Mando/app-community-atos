@@ -12,6 +12,9 @@ export class CommentsListComponent implements OnInit {
 
 	idPost : string;
 	comments : IComment[] = [];
+	commentsLength : number = 0;
+	// displayMenuActions : boolean = true;
+	otherPlace : boolean = true;
 
 	constructor(
 		private commentService : CommentsService,
@@ -34,6 +37,7 @@ export class CommentsListComponent implements OnInit {
 		this.commentService.displayComments<IComment>(idPost).subscribe(
 			(comments) => {
 				this.comments = comments;
+				this.commentsLength = this.comments.length;
 			}
 		)
 	}

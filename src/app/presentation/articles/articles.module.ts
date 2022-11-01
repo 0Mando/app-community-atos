@@ -18,6 +18,7 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
 import { LikesComponent } from './components/likes/likes.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
+import { ButtonActionsComponent } from './components/button-actions/button-actions.component';
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { CommentsListComponent } from './components/comments-list/comments-list.
   LikesComponent,
   CommentFormComponent,
   CommentsListComponent,
+  ButtonActionsComponent,
 	],
 	imports: [
 		CommonModule,
