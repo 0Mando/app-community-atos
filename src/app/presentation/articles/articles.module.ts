@@ -19,6 +19,7 @@ import { LikesComponent } from './components/likes/likes.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { ButtonActionsComponent } from './components/button-actions/button-actions.component';
+import { CommentCardComponent } from './components/comment-card/comment-card.component';
 
 @NgModule({
 	declarations: [
@@ -33,6 +34,7 @@ import { ButtonActionsComponent } from './components/button-actions/button-actio
   CommentFormComponent,
   CommentsListComponent,
   ButtonActionsComponent,
+  CommentCardComponent,
 	],
 	imports: [
 		CommonModule,

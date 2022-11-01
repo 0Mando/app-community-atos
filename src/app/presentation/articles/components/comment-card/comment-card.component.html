@@ -1,0 +1,16 @@
+<article class="comment-card">
+	<header class="comment-card__header">
+		<img class="comment-card__header__author-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+		<div class="comment-card__header__author-data">
+			<span class="comment-card__header__author-name">Firstname Lastname</span>
+			<small class="comment-card__header__days-ago">{{ publishDate | date }}</small>
+		</div>
+		<div class="comment-card__header__options">
+			<app-button-actions></app-button-actions>
+		</div>
+	</header>
+	<section class="comment-card__content">
+		<p [innerHTML]="commentBody"></p>
+	</section>
+</article>
+<hr>
