@@ -50,4 +50,9 @@ export class HeaderComponent implements OnInit, DoCheck {
 		this.loggedIn = this.authenticationService.isLoggedIn;
 		this.router.navigate(['sign-in']);
 	}
+
+	// TODO: Remove this method
+	displayUserId() {
+		return this.authenticationService.currentSessionUserId();
+	}
 }

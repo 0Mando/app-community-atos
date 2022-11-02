@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { User } from 'src/app/domain/models/user.model';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { IComment } from '../../model/icomment';
 import { CommentsService } from '../../services/comments.service';
 
@@ -16,7 +18,8 @@ export class CommentsListComponent implements OnInit {
 
 	constructor(
 		private commentService : CommentsService,
-		private route : ActivatedRoute
+		private route : ActivatedRoute,
+		private authenticationService : AuthService
 	) {
 
 	}
@@ -31,6 +34,10 @@ export class CommentsListComponent implements OnInit {
 		this.displayListOfComments(this.idPost);
 	}
 
+	/**
+	 * Display all the comment of a single post.
+	 * @param idPost Reference of the post to display comments.
+	 */
 	displayListOfComments(idPost : string) : void {
 		this.commentService.displayComments<IComment>(idPost).subscribe(
 			(comments) => {
@@ -38,5 +45,25 @@ export class CommentsListComponent implements OnInit {
 				this.commentsLength = this.comments.length;
 			}
 		)
+	}
+
+	/**
+	 * Hide button of options if user isn´t register.
+	 * @returns If user is register or not.
+	 */
+	userNoRegister() : boolean {
+		return this.authenticationService.isLoggedIn;
+	}
+
+	editComment(idAuthorComment) : boolean {
+		return this.authenticationService.currentSessionUserId() === idAuthorComment;
+	}
+
+	deleteComment(idAuthorComment) : boolean {
+		return this.authenticationService.currentSessionUserId() === idAuthorComment;
+	}
+
+	reportComment(idAuthorComment) : boolean {
+		return this.authenticationService.currentSessionUserId() !== idAuthorComment;
 	}
 }

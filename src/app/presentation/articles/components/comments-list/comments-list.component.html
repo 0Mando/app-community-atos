@@ -4,17 +4,21 @@
 			<img class="comment-card__header__author-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
 			<div class="comment-card__header__author-data">
 				<span class="comment-card__header__author-name">Firstname Lastname</span>
+				<small (click)="editComment(comment.idUserAuthor)">{{ comment.idUserAuthor }}</small>
 				<small class="comment-card__header__days-ago">{{ comment.createdAt | date }}</small>
 			</div>
-			<div class="comment-card__header__options">
-				<app-button-actions></app-button-actions>
+			<div class="comment-card__header__options" *ngIf="userNoRegister()">
+				<app-button-actions
+				[canEdit]="editComment(comment.idUserAuthor)" [canDelete]="deleteComment(comment.idUserAuthor)"
+				[canReport]="reportComment(comment.idUserAuthor)"
+				></app-button-actions>
 			</div>
 		</header>
 		<section class="comment-card__content">
 			<p [innerHTML]="comment.commentBody"></p>
 		</section>
+		<hr>
 	</article>
-	<hr>
 </ng-container>
 <ng-template #noComments>
 	<section class="no-comments">

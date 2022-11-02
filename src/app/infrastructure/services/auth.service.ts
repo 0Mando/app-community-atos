@@ -54,4 +54,8 @@ export class AuthService {
 		const userDocument = this.afs.collection<User>('Users').doc(this.userData.uid);
 		return userDocument.valueChanges({ idField : 'id' });
 	}
+
+	currentSessionUserId() {
+		return this.userData.uid;
+	}
 }

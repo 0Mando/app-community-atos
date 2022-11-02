@@ -1,4 +1,4 @@
-<ng-container *ngIf="articlesLength > 1; else noDataAvailable">
+<ng-container *ngIf="articlesLength > 0; else noDataAvailable">
 	<article class="card" *ngFor="let post of posts |
 	paginate : { itemsPerPage: 5, currentPage: page, totalItems: articlesLength }">
 		<div class="desktop-version">
@@ -16,14 +16,6 @@
 						<small>{{ post.date | date }}</small>
 					</div>
 				</section>
-				<!-- <button class="card__header__options" *ngIf="displayModeratorOptions()">
-					<ul>
-						<li>Edit</li>
-						<li>Report</li>
-						<li>Delete</li>
-					</ul>
-					<span class="material-icons">more_vert</span>
-				</button> -->
 			</header>
 			<hr>
 			<section class="card__content">

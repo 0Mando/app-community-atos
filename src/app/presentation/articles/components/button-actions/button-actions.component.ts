@@ -1,4 +1,5 @@
-import { Component, DoCheck, HostListener, OnChanges, OnInit } from '@angular/core';
+import { Component, DoCheck, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
 	selector: 'app-button-actions',
@@ -8,18 +9,33 @@ import { Component, DoCheck, HostListener, OnChanges, OnInit } from '@angular/co
 export class ButtonActionsComponent implements OnInit {
 
 	showOptionsList : boolean = false;
+	commentAuthorId : string = '';
+	@Input() canEdit : boolean;
+	@Input() canDelete : boolean;
+	@Input() canReport : boolean;
 
-	constructor() { }
+	constructor(private authenticationService : AuthService) { }
 
 	ngOnInit(): void {
 	}
 
 	onPressedOptions() : void {
 		this.showOptionsList = !this.showOptionsList;
-		console.log('Pressed');
 	}
 
 	onPressedCover () : void {
 		this.showOptionsList = !this.showOptionsList;
+	}
+
+	onEdit() : void {
+		alert('Editing');
+	}
+
+	onDelete() : void {
+		alert('Deleting');
+	}
+
+	onReport() : void {
+		alert('Reporting');
 	}
 }
