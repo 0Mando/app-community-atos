@@ -13,8 +13,6 @@ export class CommentsListComponent implements OnInit {
 	idPost : string;
 	comments : IComment[] = [];
 	commentsLength : number = 0;
-	// displayMenuActions : boolean = true;
-	otherPlace : boolean = true;
 
 	constructor(
 		private commentService : CommentsService,

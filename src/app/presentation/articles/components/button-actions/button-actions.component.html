@@ -1,5 +1,5 @@
-<button class="options" (click)="displayMenuAction()">
-	<ul class="options__list" *ngIf="!displayMenuActions">
+<button class="btn-options" (click)="onPressedOptions()">
+	<ul class="btn-options__list" *ngIf="showOptionsList">
 		<li id="edit">
 			<span class="material-symbols-outlined">
 				edit
@@ -19,5 +19,8 @@
 			<span class="options__list__actions">Report</span>
 		</li>
 	</ul>
-	<span class="material-icons">more_vert</span>
+	<span class="material-symbols-outlined">
+		more_vert
+	</span>
 </button>
+<div [ngClass]="{ 'active' : showOptionsList }" id="cover" (click)="onPressedCover()"></div>

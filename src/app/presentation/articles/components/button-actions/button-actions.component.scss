@@ -1,15 +1,17 @@
 @import '../../../../../sass/variables';
 
-.options {
+.btn-options {
 	background: none;
 	border: none;
 	position: relative;
 
 	&__list {
+		z-index: 10;
+		background-color: white;
 		position: absolute;
-		top: -60px;
-		left: 40px;
-		padding: 1rem;
+		top: -38px;
+		left: 20px;
+		padding: .5rem;
 		border-radius: 5px;
 		box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
 		-webkit-box-shadow: 0px 6px 5px 3px rgba(136,136,136,0.5);
@@ -20,11 +22,24 @@
 			display: flex;
 			align-items: center;
 		}
-
-		&__actions {
-			display: none;
-		}
 	}
+}
+
+#cover {
+	z-index: 9;
+	position: fixed;
+	opacity: 0;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	// background-color: rgba(0,0,0,.5);
+	pointer-events: none;
+}
+
+#cover.active {
+	opacity: 1;
+	pointer-events: all;
 }
 
 #edit {

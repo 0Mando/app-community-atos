@@ -5,27 +5,21 @@ import { Component, DoCheck, HostListener, OnChanges, OnInit } from '@angular/co
 	templateUrl: './button-actions.component.html',
 	styleUrls: ['./button-actions.component.scss']
 })
-export class ButtonActionsComponent implements OnInit, OnChanges {
+export class ButtonActionsComponent implements OnInit {
 
-
-	displayMenuActions: boolean = true;
+	showOptionsList : boolean = false;
 
 	constructor() { }
 
 	ngOnInit(): void {
 	}
 
-	ngOnChanges(): void {
-		console.log('On Changes');
-		console.log(this.displayMenuActions);
+	onPressedOptions() : void {
+		this.showOptionsList = !this.showOptionsList;
+		console.log('Pressed');
 	}
 
-	displayMenuAction(): void {
-		console.log('Button pressed  - >' + this.displayMenuActions);
-		this.displayMenuActions = !this.displayMenuActions;
-	}
-
-	@HostListener('document:click', ['$event']) onDocumentClick(event) {
-		// this.displayMenuActions = true;
+	onPressedCover () : void {
+		this.showOptionsList = !this.showOptionsList;
 	}
 }
