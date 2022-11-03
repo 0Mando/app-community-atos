@@ -7,3 +7,27 @@ body{
 .channels {
     margin: 16px 5%;
 }
+
+.my-pagination {
+	margin-left: auto;
+	padding-right: 2rem;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+	background: $--main--100;
+	border-radius: 50%;
+	padding: 5px 10px;
+	color: black;
+}
+
+.my-pagination ::ng-deep .ngx-pagination li :hover{
+    background: none;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .pagination-next a::after {
+    color: $description-text;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .pagination-previous a::before {
+    color: $description-text;
+}

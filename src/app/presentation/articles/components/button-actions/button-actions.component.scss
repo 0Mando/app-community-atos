@@ -6,7 +6,7 @@
 	position: relative;
 
 	&__list {
-		z-index: 10;
+		z-index: 2;
 		background-color: white;
 		position: absolute;
 		top: -38px;
@@ -26,7 +26,7 @@
 }
 
 #cover {
-	z-index: 9;
+	z-index: 1;
 	position: fixed;
 	opacity: 0;
 	top: 0;

@@ -33,4 +33,9 @@ export class ArticleService {
 	getArticleById<IPost>(articleId : string) {
 		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
 	}
+
+	getAllPosts<IPost>() {
+		const postsCollection = this.afs.collection<IPost>('posts');
+		return postsCollection.valueChanges();
+	}
 }
