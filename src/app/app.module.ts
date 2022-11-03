@@ -33,6 +33,8 @@ import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/a
 import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
 import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
+import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
 
 @NgModule({
 	declarations: [
@@ -54,6 +56,8 @@ import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/cha
 		AdminChannelFormComponent,
 		SearchFilterPipe,
 		ChannelsEmptyComponent,
+  ChannelsListComponent,
+  ArticlesListComponent,
 	],
 	imports: [
 		BrowserModule,

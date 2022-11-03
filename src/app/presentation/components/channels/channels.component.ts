@@ -13,54 +13,19 @@ import { ArticleService } from '../../articles/services/article.service';
 })
 export class ChannelsComponent implements OnInit {
 
+	boardName: string
+
 	constructor(
 		private route: ActivatedRoute,
-		private channelService : ChannelService,
-		private router : Router,
-		private articlesService : ArticleService
 	) { }
 
-	channels: Channel[];
-	posts : IPost[];
-
-	//* Pagination stuff
-	channelsLength : number;
-	postsLength: number;
-	pageChannel : number = 1;
-	pagePost : number = 1;
-
-	channel : {
-		boardName: string
-	}
-
 	ngOnInit(): void {
-		this.channel = {
-			boardName : this.route.snapshot.params['boardName']
-		}
+
+		this.boardName = this.route.snapshot.params['boardName']
 
 		this.route.params.subscribe(
 			(params: Params)=>{
-				this.channel.boardName = params['boardName'];
-			}
-		)
-
-		const boardName : string = this.channel.boardName;
-
-		this.channelService.displayChannelsOfParenBoard<Channel>(boardName).subscribe(
-			channels =>{
-				this.channels = channels;
-				this.channelsLength = this.channels.length;
-				console.log(this.channels);
-				if(this.channels.length === 0) {
-					this.router.navigate(['not-available-articles']);
-				}
-			}
-		)
-
-		this.articlesService.getAllPosts<IPost>().subscribe(
-			(posts)  => {
-				this.posts = posts;
-				this.postsLength = this.posts.length;
+				this.boardName = params['boardName'];
 			}
 		)
 	}
