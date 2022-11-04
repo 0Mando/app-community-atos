@@ -6,4 +6,5 @@ export interface IPost {
 	firstName : string;
 	lastName : string;
 	channelParent : string;
+	boardParent : string;
 }

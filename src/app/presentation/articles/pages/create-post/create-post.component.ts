@@ -21,6 +21,7 @@ export class CreatePostComponent implements OnInit {
 	post : IPost;
 	currentUser = { firtsName : '', lastName : '' }
 	channelParentParam : string = '';
+	boardParam : string = '';
 
 	constructor(
 		private authenticationService : AuthService,
@@ -39,6 +40,7 @@ export class CreatePostComponent implements OnInit {
 		this.route.queryParams.subscribe(
 			(params : Params) => {
 				this.channelParentParam = params['channel']
+				this.boardParam = params['board']
 			}
 		)
 	}
@@ -53,7 +55,8 @@ export class CreatePostComponent implements OnInit {
 					'content' : this.markdownForm.get('mdeInput').value,
 					'firstName' : this.currentUser.firtsName = user.firstName,
 					'lastName' : this.currentUser.lastName = user.lastName,
-					'channelParent' : this.channelParentParam
+					'channelParent' : this.channelParentParam,
+					'boardParent' : this.boardParam
 				}
 
 				//* Submit the content of the post
@@ -63,7 +66,7 @@ export class CreatePostComponent implements OnInit {
 					}
 				)
 
-				this.router.navigate(['/articles/'+ this.channelParentParam +'/posts']);
+				this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
 				this.markdownForm.reset();
 			}
 		)

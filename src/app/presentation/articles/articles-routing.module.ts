@@ -9,7 +9,7 @@ const routes: Routes = [
 		path : '',
 		children : [
 			{
-				path : ':channelName/posts',
+				path : ':parentBoard/:channelName/posts',
 				component : ArticlesComponent
 			},
 			{

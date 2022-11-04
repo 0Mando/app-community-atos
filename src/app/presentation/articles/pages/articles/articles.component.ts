@@ -11,6 +11,7 @@ export class ArticlesComponent implements OnInit {
 
 	articleName : string = '';
 	userIsLoggedIn : boolean;
+	boardName : string = '';
 
 	constructor(
 		private route: ActivatedRoute,
@@ -22,13 +23,17 @@ export class ArticlesComponent implements OnInit {
 		this.route.params.subscribe(
 			(params : Params)=>{
 				this.articleName = params['channelName']
+				this.boardName = params['parentBoard']
 			}
 		)
 	}
 
 	onCreatePost() {
 		if(this.userIsLogged() && this.isVerified()){
-			this.router.navigate(['articles/create-post'], { queryParams : { channel : this.articleName } });
+			this.router.navigate(['articles/create-post'], { queryParams : {
+				channel : this.articleName,
+				board : this.boardName
+			} });
 		} else if(this.userIsLogged() && !this.isVerified()) {
 			alert('Please verified your accout');
 		} else {

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Channel } from 'src/app/domain/models/channel.model';
-import { ChannelService } from 'src/app/infrastructure/services/channel.service';
-import { IPost } from '../../articles/model/ipost';
-import { ArticleService } from '../../articles/services/article.service';
 
 
 @Component({

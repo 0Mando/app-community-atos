@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IPost } from 'src/app/presentation/articles/model/ipost';
 import { ArticleService } from 'src/app/presentation/articles/services/article.service';
 
@@ -10,6 +10,7 @@ import { ArticleService } from 'src/app/presentation/articles/services/article.s
 export class ArticlesListComponent implements OnInit {
 
 	posts : IPost[];
+	@Input() boardNameArticles : string;
 
 	//* Pagination stuff
 	postsLength: number;
@@ -20,11 +21,11 @@ export class ArticlesListComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		this.fetchArticles();
+		this.fetchArticles(this.boardNameArticles);
 	}
 
-	private fetchArticles() {
-		this.articlesService.getAllPosts<IPost>().subscribe(
+	private fetchArticles(boardName : string) {
+		this.articlesService.fetchPostFromParentBoard<IPost>(boardName).subscribe(
 			(posts)  => {
 				this.posts = posts;
 				this.postsLength = this.posts.length;

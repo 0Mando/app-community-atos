@@ -35,6 +35,7 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
 import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
+import { ShortTitleArticlePipe } from './presentation/articles/pipes/short-title-article.pipe';
 
 @NgModule({
 	declarations: [
@@ -58,6 +59,7 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		ChannelsEmptyComponent,
   ChannelsListComponent,
   ArticlesListComponent,
+  ShortTitleArticlePipe
 	],
 	imports: [
 		BrowserModule,
@@ -70,7 +72,7 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 		//* NGX Pagination
-		NgxPaginationModule
+		NgxPaginationModule,
 	],
 	providers: [AngularFirestore],
 	bootstrap: [AppComponent]

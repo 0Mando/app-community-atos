@@ -2,7 +2,7 @@
 	<div class="list-item" *ngFor="let channel of channels | paginate : { itemsPerPage: 4, currentPage: pageChannel, totalItems: channelsLength, id : 'channels' }">
 		<img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}" class="channel__image">
 		<h3 class="channel-title">{{ channel.channelName }}</h3>
-		<a routerLink="/articles/{{ channel.channelName }}/posts">Show More<i class="fa-solid fa-chevron-right"></i></a>
+		<a routerLink="/articles/{{ boardName }}/{{ channel.channelName }}/posts">Show More<i class="fa-solid fa-chevron-right"></i></a>
 	</div>
 	<pagination-controls class="my-pagination-channels" id="channels" (pageChange)="pageChannel = $event" previousLabel="" nextLabel=""></pagination-controls>
 </article>

@@ -19,6 +19,7 @@ import { LikesComponent } from './components/likes/likes.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { ButtonActionsComponent } from './components/button-actions/button-actions.component';
+import { ShortTitleArticlePipe } from './pipes/short-title-article.pipe';
 
 @NgModule({
 	declarations: [
@@ -29,10 +30,11 @@ import { ButtonActionsComponent } from './components/button-actions/button-actio
 		TabComponent,
 		CreatePostComponent,
 		ArticlePageComponent,
-  LikesComponent,
-  CommentFormComponent,
-  CommentsListComponent,
-  ButtonActionsComponent,
+		LikesComponent,
+		CommentFormComponent,
+		CommentsListComponent,
+		ButtonActionsComponent,
+		ShortTitleArticlePipe,
 	],
 	imports: [
 		CommonModule,
@@ -41,6 +43,9 @@ import { ButtonActionsComponent } from './components/button-actions/button-actio
 		NgxPaginationModule,
 		QuillModule,
 		ReactiveFormsModule
+	],
+	exports: [
+		ShortTitleArticlePipe
 	]
 })
 export class ArticlesModule { }

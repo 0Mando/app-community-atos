@@ -34,8 +34,12 @@ export class ArticleService {
 		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
 	}
 
-	getAllPosts<IPost>() {
-		const postsCollection = this.afs.collection<IPost>('posts');
+	fetchPostFromParentBoard<IPost>(boardParent : string) {
+		const postsCollection = this.afs.collection<IPost>(
+			'posts',
+			ref => ref
+				.where('boardParent','==', boardParent)
+		);
 		return postsCollection.valueChanges();
 	}
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
@@ -11,7 +11,7 @@ import { ChannelService } from 'src/app/infrastructure/services/channel.service'
 export class ChannelsListComponent implements OnInit {
 
 	channels: Channel[];
-
+	parentBoard : string;
 	//* Pagination stuff
 	channelsLength : number;
 	pageChannel : number = 1;

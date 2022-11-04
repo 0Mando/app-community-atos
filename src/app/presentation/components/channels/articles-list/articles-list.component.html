@@ -2,7 +2,7 @@
 	<div class="list-item" *ngFor="let post of posts | paginate : { itemsPerPage: 4, currentPage: pagePost, totalItems: postsLength, id : 'posts' }">
 		<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image">
 		<div class="list-item__text">
-			<h3>{{ post.title }}</h3>
+			<h4>{{ post.title | shortTitleArticle:30 }}</h4>
 			<p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
 		</div>
 		<div class="pfp__image-group">
