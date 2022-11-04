@@ -40,6 +40,6 @@ export class ArticleService {
 			ref => ref
 				.where('boardParent','==', boardParent)
 		);
-		return postsCollection.valueChanges();
+		return postsCollection.valueChanges({ idField : 'id' });
 	}
 }

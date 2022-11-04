@@ -1,5 +1,4 @@
-import { Component, DoCheck, HostListener, Input, OnChanges, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { Component, DoCheck, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'app-button-actions',
@@ -14,7 +13,11 @@ export class ButtonActionsComponent implements OnInit {
 	@Input() canDelete : boolean;
 	@Input() canReport : boolean;
 
-	constructor(private authenticationService : AuthService) { }
+	@Output() editComment = new EventEmitter<boolean>();
+	@Output() deleteComment = new EventEmitter<boolean>();
+	@Output() reportComment = new EventEmitter<boolean>();
+
+	constructor() { }
 
 	ngOnInit(): void {
 	}
@@ -28,7 +31,7 @@ export class ButtonActionsComponent implements OnInit {
 	}
 
 	onEdit() : void {
-		alert('Editing');
+		this.editComment.emit(true);
 	}
 
 	onDelete() : void {

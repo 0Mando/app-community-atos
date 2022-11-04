@@ -9,13 +9,16 @@
 			</div>
 			<div class="comment-card__header__options" *ngIf="userNoRegister()">
 				<app-button-actions
-				[canEdit]="editComment(comment.idUserAuthor)" [canDelete]="deleteComment(comment.idUserAuthor)"
+				[canEdit]="editComment(comment.idUserAuthor)"
+				[canDelete]="deleteComment(comment.idUserAuthor)"
 				[canReport]="reportComment(comment.idUserAuthor)"
+				(editComment)="canEditComment = $event"
 				></app-button-actions>
 			</div>
 		</header>
 		<section class="comment-card__content">
 			<p [innerHTML]="comment.commentBody"></p>
+			<p *ngIf="canEditComment">You can see this</p>
 		</section>
 		<hr>
 	</article>

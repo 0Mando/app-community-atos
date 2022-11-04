@@ -16,6 +16,10 @@ export class CommentsListComponent implements OnInit {
 	comments : IComment[] = [];
 	commentsLength : number = 0;
 
+	canEditComment : boolean;
+	canDeleteComment : boolean;
+	canReportComment : boolean;
+
 	constructor(
 		private commentService : CommentsService,
 		private route : ActivatedRoute,

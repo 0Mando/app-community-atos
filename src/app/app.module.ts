@@ -35,7 +35,7 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
 import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
-import { ShortTitleArticlePipe } from './presentation/articles/pipes/short-title-article.pipe';
+import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 
 @NgModule({
 	declarations: [
@@ -59,7 +59,7 @@ import { ShortTitleArticlePipe } from './presentation/articles/pipes/short-title
 		ChannelsEmptyComponent,
   ChannelsListComponent,
   ArticlesListComponent,
-  ShortTitleArticlePipe
+  ShortStringPipe,
 	],
 	imports: [
 		BrowserModule,

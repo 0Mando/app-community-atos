@@ -19,7 +19,6 @@ import { LikesComponent } from './components/likes/likes.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { ButtonActionsComponent } from './components/button-actions/button-actions.component';
-import { ShortTitleArticlePipe } from './pipes/short-title-article.pipe';
 
 @NgModule({
 	declarations: [
@@ -34,7 +33,6 @@ import { ShortTitleArticlePipe } from './pipes/short-title-article.pipe';
 		CommentFormComponent,
 		CommentsListComponent,
 		ButtonActionsComponent,
-		ShortTitleArticlePipe,
 	],
 	imports: [
 		CommonModule,
@@ -43,9 +41,6 @@ import { ShortTitleArticlePipe } from './pipes/short-title-article.pipe';
 		NgxPaginationModule,
 		QuillModule,
 		ReactiveFormsModule
-	],
-	exports: [
-		ShortTitleArticlePipe
 	]
 })
 export class ArticlesModule { }
