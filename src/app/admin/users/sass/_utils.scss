@@ -1,0 +1,48 @@
+.fa{
+    &-plus{
+        font-size: 1rem;
+    }
+
+    &-gear{
+        align-self: center;
+        color: lightgray;
+        margin: 0 20px;
+        cursor: pointer;
+    }
+}
+
+.add__user{
+    width: 110px;
+    height: 30px;
+    align-self: center;
+    border-radius: 5px;
+    margin-left: auto;
+    border: 1px solid darkblue;
+    color: darkblue;
+    background: none;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    left: 35%;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    padding: 0 !important;
+    border-radius: 2px;
+    border: 1px solid #a5c9ff;
+    cursor: pointer;
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
+
+.disable__title{
+    color: darkblue;
+    margin-left: 1.5rem;
+    margin-bottom: 15px;
+}

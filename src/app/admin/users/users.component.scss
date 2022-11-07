@@ -1,0 +1,12 @@
+@import './sass/container', './sass/users', './sass/utils';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    overflow-y: hidden;
+    background: #fafbfe;
+}

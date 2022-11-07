@@ -1,0 +1,27 @@
+<main class="navbar">
+    <section class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Atos.svg/1280px-Atos.svg.png" alt="">
+    </section>
+    <section class="nav">
+        <article class="nav__item" [routerLink]="['/admin/home']" routerLinkActive="active">
+            <i class="fa-solid fa-house"></i>
+            <div class="nav__item-title">Home</div>
+        </article>
+        <article class="nav__item" [routerLink]="['/admin/topics']" routerLinkActive="active">
+            <i class="fa-solid fa-folder-open"></i>
+            <div class="nav__item-title">Topics</div> 
+        </article>
+        <article class="nav__item" [routerLink]="['/admin/users']" routerLinkActive="active">
+            <i class="fa-solid fa-user"></i>
+            <div class="nav__item-title">Users</div> 
+        </article>
+        <article class="nav__item" routerLinkActive="active">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <div class="nav__item-title">Reports</div> 
+        </article>
+    </section>
+    <span class="separator"></span>
+    <section class="disclaimer">
+        If you have a problem, report with Jonathan Oliva or Luis Angel
+    </section>
+</main>

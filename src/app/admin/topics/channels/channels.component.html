@@ -1,0 +1,39 @@
+<main class="boards">
+    <section class="boards__list">
+        <article class="list">
+            <div class="list__header">
+                <div class="list__header-title">Channels</div>
+                <button class="list__header-new">New Channel</button>
+            </div>
+            <form class="list__query">
+                <input 
+                    type="text" 
+                    class="searchbox"
+                    placeholder=" &#xF002;  Search"
+                    style="font-family:Arial, FontAwesome">
+            </form>
+            <div class="list__current">
+                <div class="list__current-title">On edition</div>
+                
+            </div>
+            <div class="list__all">
+                <div class="list__all-title">Channels</div>
+                <div *ngFor="let card of cards">
+                    
+                </div>
+            </div>
+        </article>
+    </section>
+    <section class="boards__screen">
+        <app-formulary [type]="currentType" *ngIf="isIt; else placeHolder"></app-formulary>
+        <ng-template #placeHolder>
+            <article class="placeholder">
+                <img 
+                    src="https://cdn.dribbble.com/users/576099/screenshots/8611828/media/488ed1f6b6ab0a20c3b72bee3e593ace.jpg" 
+                    alt="Nothing to view here"
+                    class="placeholder__image">
+            </article>
+        </ng-template>
+    </section>
+</main>
+

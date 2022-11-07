@@ -1,0 +1,20 @@
+@import 
+    '../shared/sass/boards', 
+    '../shared/sass/card', 
+    '../shared/sass/field', 
+    '../shared/sass/list', 
+    '../shared/sass/menu', 
+    '../shared/sass/mod', 
+    '../shared/sass/utils',
+    '../shared/sass/placeholder';
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+i{
+    font-family: "Font Awesome 5 Free";
+}

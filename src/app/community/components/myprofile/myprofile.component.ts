@@ -1,7 +1,6 @@
-import { MyprofileService } from './../../services/myprofile.service';
+import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-myprofile',

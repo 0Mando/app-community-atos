@@ -1,0 +1,135 @@
+<article class="menu">
+    <section class="edit" *ngIf="!loading; else loader">
+        <div class="menu__header">
+            <div class="menu__header-info">
+                <div class="info__title">
+                   {{ board }}
+                </div>
+                <div class="info__users">
+                    <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                    <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                    <img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="info__users-user">
+                    <div class="info__users-add"><i class="fa-solid fa-plus"></i></div>
+                </div>
+            </div>
+            <div class="menu__header-options">
+                <i class="fa fa-solid fa-ellipsis"></i>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div class="menu__edit">
+            <div class="edit__header">
+                <span class="edit__spacing"></span>
+                <div class="edit__header-title">{{ title | uppercase}} {{ type | uppercase }}</div>
+                <button class="edit__header-close close-button" (click)="closeForm()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form class="edit__form" [formGroup]="newForm" autocomplete="off" (ngSubmit)="generate()">
+                <div class="left">
+                    <div class="field">
+                        <label for="boardName"class="board-label">{{ type | uppercase }} NAME</label>
+                        <input 
+                            type="text" 
+                            class="board-input" 
+                            name="boardName" 
+                            id="boardName" 
+                            placeholder="Your amazing new {{type}} name"
+                            formControlName="name">
+                    </div>
+                    <div class="field">
+                        <label for="boardDescription" class="board-label">{{ type | uppercase }} DESCRIPTION</label>
+                        <textarea 
+                            name="boardDescription" 
+                            id="boardDescription" 
+                            cols="30" 
+                            rows="10" 
+                            class="board-input" 
+                            placeholder="Your amazing {{type}} description"
+                            formControlName="description"></textarea>
+                    </div>
+                    <div class="field">
+                        <div class="field-image"></div>
+                        <label class="custom-file">
+                            <input 
+                                type="file" 
+                                name="boardImage" 
+                                id="boardImage"
+                                accept="image/jpeg, image/png, image/jpg"
+                                formControlName="image"
+                                (change)="onChange($event)">
+                            SELECT PICTURE FOR {{ type | uppercase }}
+                        </label>
+                    </div>
+                    <button type="button" (click)="uploadImage()">UPLOAD</button>
+                </div>
+                <div class="right">
+                    <div class="field">
+                        <label for="boardVisibility" class="board-label">VISIBILITY</label>
+                        <select 
+                            name="boardVisibility" 
+                            id="boardVisibility" 
+                            class="board-input"
+                            formControlName="visibility">
+                            <option value="" hidden disabled selected>Pick a visibility for your {{type}}</option>
+                            <option value="visible">Visible</option>
+                            <option value="hidden">Hidden</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="moderators" class="board-label">MODERATORS</label>
+                        <input 
+                            list="mods"
+                            id="mod-search" 
+                            class="board-input" 
+                            name="moderators" 
+                            placeholder=" &#xF002;  Search Moderator by Name or ID"
+                            style="font-family:Arial, FontAwesome">
+                        <datalist id="mods">
+                            <div *ngFor="let mod of modList; ">
+                                <option [value]="mod.name + ' | ' + mod.id"></option>
+                            </div>
+                        </datalist>  
+                    </div>
+                    <div class="field last">
+                        <div class="field__mods">
+                            <label for="modsList" class="board-label">MODERATOR TEAM FOR NEW {{ type | uppercase }}</label>
+                            <div class="field__mods-list">
+                                <div *ngIf="printMods.length > 0; else modsList">
+                                    <div *ngFor="let mods of printMods">
+                                        <div class="mod">
+                                            <div class="mod-image">
+                                                <img 
+                                                    src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                                                    class="mod-image" 
+                                                    alt="">
+                                            </div>
+                                            <div class="mod-name">{{ mods | shortenMod }}</div>
+                                            <div class="mod__buttons">
+                                                <button type="button" class="mod__buttons-details close-button">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="mod__buttons-close close-button">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-template #modsList>
+                                    <div class="empty">
+                                        <span>No mods to display</span>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="newForm.invalid" class="create-board">
+                        {{ action | uppercase }} BOARD
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <ng-template #loader>
+        <section class="loader">aaa</section>
+    </ng-template>
+</article>

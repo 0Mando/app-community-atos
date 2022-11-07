@@ -1,0 +1,71 @@
+<main class="boards">
+    <section class="boards__list">
+        <article class="list">
+            <div class="list__header">
+                <div class="list__header-title">Boards</div>
+                <button class="list__header-new" (click)="newBoard()">New Board</button>
+            </div>
+            <form class="list__query">
+                <input 
+                    type="text" 
+                    class="searchbox"
+                    placeholder=" &#xF002;  Search"
+                    style="font-family:Arial, FontAwesome">
+            </form>
+            <!-- <div class="list__current" *ngIf="onEdition">
+                <div class="list__current-title">On edition</div>
+                <div class="card">
+                    <div class="card__header">
+                        <div class="card__header-tag">#QA</div>
+                        <div class="card__header-users">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                            <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">                                
+                        </div>
+                        <div class="card__header-timer">20 min ago</div>
+                    </div>
+                    <div class="card__content">QA Automation</div>
+                </div>
+            </div> -->
+            <div class="list__all">
+                <!-- <div class="list__all-title" *ngIf="onEdition">Boards</div> -->
+                <div *ngIf="printBoards.length > 0; else boardList">
+                    <div *ngFor="let card of printBoards">
+                        <div class="card" (click)="updateBoard(card)">
+                            <div class="card__header">
+                                <div class="card__header-status"></div>
+                                <div class="card__header-users">
+                                    <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                    <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                                    <img class="card__header-user" src="https://images.unsplash.com/photo-1475403614135-5f1aa0eb5015?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">                                
+                                </div>
+                                <div class="card__header-timer">{{card.boardCreation | timeAgo}}</div>
+                            </div>
+                            <div class="card__content">{{card.boardName | uppercase }}</div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #boardList>
+                    <div class="empty">No Boards To Display</div>
+                </ng-template>
+            </div>
+        </article>
+    </section>
+    <section class="boards__screen">
+        <app-formulary
+            [type]="currentType"
+            [board]="currentName" 
+            [resetFormSubject]="resetFormSubject"
+            (visible)="changeState($event)" 
+            *ngIf="onEdition; else placeHolder"
+            ></app-formulary>
+        <ng-template #placeHolder>
+            <article class="placeholder">
+                <img 
+                    src="https://cdn.dribbble.com/users/576099/screenshots/8611828/media/488ed1f6b6ab0a20c3b72bee3e593ace.jpg" 
+                    alt="Nothing to view here"
+                    class="placeholder__image">
+            </article>
+        </ng-template>
+    </section>
+</main>
