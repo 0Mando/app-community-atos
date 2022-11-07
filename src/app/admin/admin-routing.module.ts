@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { TopicsComponent } from './topics/topics.component';
 import { BoardsComponent } from './topics/boards/boards.component';
+import { ChannelsComponent } from './topics/channels/channels.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
           {
             path: 'boards',
             component: BoardsComponent
+          },
+          {
+            path: 'channels',
+            component: ChannelsComponent
           }
         ]
       }

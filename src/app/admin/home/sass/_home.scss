@@ -21,6 +21,7 @@
 
     &__right{
         overflow-y: scroll;
+        height: 100%;
 
         &::-webkit-scrollbar {
             width: 4px;

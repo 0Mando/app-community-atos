@@ -1,0 +1,8 @@
+@import '../shared/sass/menu', '../shared/sass/utils', '../shared/sass/mod', '../shared/sass/field', '../shared/sass/boards';
+
+.empty{
+    width: 100%;
+    height: 70%;
+    display: grid;
+    place-items: center;
+}

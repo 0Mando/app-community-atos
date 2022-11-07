@@ -10,9 +10,12 @@ import { AdminModule } from './admin/admin.module';
 
 
 //* Angular Firebase Set up
-import { AngularFireModule } from '@angular/fire/compat';
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+// import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 //* NGX Pagination
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -36,6 +39,9 @@ import { CardArticleItemComponent } from './community/components/articles/card-a
 import { LoadingSpinnerComponent } from './community/shared/loading-spinner/loading-spinner.component';
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
+import { ErrorComponent } from './community/components/error/error.component';
+// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
+// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
 
 @NgModule({
 	declarations: [
@@ -56,26 +62,38 @@ import { AdminChannelFormComponent } from './community/admin/admin-channel-form/
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
     	SearchFilterPipe,
+		ErrorComponent,
+  		// ShortenModPipe,
+		// TimeAgoPipe,
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-
+		
 		//* Angular Firebase Set up
-		AngularFireModule.initializeApp(environment.firebaseConfig),
+		// AngularFireModule.initializeApp(environment.firebase),
+		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		AngularFireAuthModule,
 		AngularFirestoreModule,
-
+		provideStorage(() => getStorage()),
+		
 		//* NGX Pagination
 		NgxPaginationModule,
-
+		
 		//* Admin
-		AdminModule
+		AdminModule,
+
+		//* Routing
+		AppRoutingModule,
+
+		
 	],
-	providers: [AngularFirestore],
+	providers: [
+		AngularFirestore,
+		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

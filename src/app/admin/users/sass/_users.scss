@@ -78,7 +78,11 @@
 
         &-options{
             width: 7%;
-            cursor: pointer;
+            cursor: grab;
+
+            &:active{
+                cursor: grabbing;
+            }
         }
         
         &-menu{

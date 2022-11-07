@@ -10,6 +10,7 @@ import { ArticlesComponent } from './community/components/articles/articles.comp
 import { RegisterComponent } from './community/components/register/register.component';
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
+import { ErrorComponent } from './community/components/error/error.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,15 @@ const routes: Routes = [
 	{
 		path: 'admin/channels',
 		component : AdminChannelFormComponent
+	},
+	{
+		path: 'page-not-found',
+		component: ErrorComponent
+	},
+	{
+		path: '**',
+		pathMatch: 'full',
+		redirectTo: '/page-not-found'
 	}
 ];
 

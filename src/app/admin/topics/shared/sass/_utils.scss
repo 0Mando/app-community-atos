@@ -109,3 +109,25 @@ select{
     border-radius: 3px;
     margin-top: 5px;
 }
+
+.empty{
+    width: 100%;
+    text-align: center;
+    margin-block: 20px;
+    color: #ccc;
+}
+
+select {
+    appearance: none;
+    outline: none;
+    display: grid;
+}
+
+select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: #777;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  }
+
