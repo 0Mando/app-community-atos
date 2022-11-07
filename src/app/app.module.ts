@@ -20,9 +20,9 @@ import { ProfileComponent } from './presentation/components/profile/profile.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyprofileComponent } from './presentation/components/myprofile/myprofile.component';
 import { FirstwordPipe } from './presentation/pipes/firstword.pipe';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './presentation/components/register/register.component';
 import { ArticlesComponent } from './presentation/components/articles/articles.component';
@@ -32,6 +32,10 @@ import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 import { AdminBoardFormComponent } from './presentation/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './presentation/admin/admin-channel-form/admin-channel-form.component';
 import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
+import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
+import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 
 @NgModule({
 	declarations: [
@@ -51,7 +55,11 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-    	SearchFilterPipe,
+		SearchFilterPipe,
+		ChannelsEmptyComponent,
+  ChannelsListComponent,
+  ArticlesListComponent,
+  ShortStringPipe,
 	],
 	imports: [
 		BrowserModule,
@@ -64,7 +72,7 @@ import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 		//* NGX Pagination
-		NgxPaginationModule
+		NgxPaginationModule,
 	],
 	providers: [AngularFirestore],
 	bootstrap: [AppComponent]

@@ -13,6 +13,7 @@
         align-items: center;
         background: white;
         transition: height 0.5s, box-shadow 1s;
+		z-index: 99;
     }
 
     &__mobile{
@@ -105,7 +106,7 @@
             box-shadow: 0 10px black;
             transition: all 0.5s;
         }
-        
+
         &:after{
             content: '';
             position: absolute;

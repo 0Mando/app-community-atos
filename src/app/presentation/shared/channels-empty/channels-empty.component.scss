@@ -1,0 +1,27 @@
+@import '../../../../sass/variables';
+
+article {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+img {
+	margin-top: 2rem;
+	height: 20rem;
+}
+
+a {
+	margin-top: 3rem;
+	background-color:  $main;
+	color: white;
+	padding: .5rem 1rem;
+	border-radius: 5px;
+	text-decoration: none;
+}

@@ -30,17 +30,4 @@ export class BoardService {
 		const boardList = this.afs.collection<Board>('boards');
 		return boardList.valueChanges();
 	}
-
-	/**
-	 * Search a specific board
-	 * @param boardName Wanted board 🤐
-	 */
-	searchBoard<Board>(boardName: string){
-		//TODO: Cambiar sentencia de busqueda
-		const collection = this.afs.collection<Board>(
-			'boards',
-			ref => ref.where('boardName', '==', boardName)
-		)
-		return collection.valueChanges();
-	}
 }

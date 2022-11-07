@@ -1,100 +1,32 @@
-<main class="channels">
-    <h1>Channels</h1>
-    <section class="channels__popular">
-        <h3>Most popular</h3>
-        <div class="channels__popular-items">
-            <div class="channels__popular-item">
-                <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="channels__popular-item">
-                <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="channels__popular-item">
-                <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="channels__popular-item">
-                <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-        </div>
-    </section>
-    <section class="channels__lists">
-        <div class="channels__lists-item">
-            <h3 class="title">All channels</h3>
-            <article class="channels__items-list">
-                <div class="list-item" *ngFor="let channel of channels">
-                    <img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}" class="channel__image">
-                    <h3 class="channel-title">{{ channel.channelName }}</h3>
-                    <a>Show More<i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <!-- <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="channel__image">
-                    <h3 class="channel-title">Kuatro Peso</h3>
-                    <a>Show More<i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="channel__image">
-                    <h3 class="channel-title">Ciete Baros</h3>
-                    <a>Show More<i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="channel__image">
-                    <h3 class="channel-title">Angyy</h3>
-                    <a>Show More<i class="fa-solid fa-chevron-right"></i></a>
-                </div> -->
-            </article>
-        </div>
-        <div class="channels__lists-item">
-            <h3 class="title">Discussions & Articles</h3>
-            <article class="channels__items-list">
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image">
-                    <div class="list-item__text">
-                        <h3>Lorem</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                    </div>
-                    <div class="pfp__image-group">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                    </div>
-                </div>
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image">
-                    <div class="list-item__text">
-                        <h3>Lorem</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                    </div>
-                    <div class="pfp__image-group">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                    </div>
-                </div>
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image">
-                    <div class="list-item__text">
-                        <h3>Lorem</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                    </div>
-                    <div class="pfp__image-group">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                    </div>
-                </div>
-                <div class="list-item">
-                    <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image">
-                    <div class="list-item__text">
-                        <h3>Lorem</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                    </div>
-                    <div class="pfp__image-group">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                        <img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="pfp__image-group-image">
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
+<main class="container">
+	<div class="channels">
+		<h1>Channels</h1>
+		<section class="channels__popular">
+			<h3>Most popular</h3>
+			<div class="channels__popular-items">
+				<div class="channels__popular-item">
+					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+				</div>
+				<div class="channels__popular-item">
+					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+				</div>
+				<div class="channels__popular-item">
+					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+				</div>
+				<div class="channels__popular-item">
+					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+				</div>
+			</div>
+		</section>
+		<section class="channels__lists">
+			<div class="channels__lists-item">
+				<h3 class="title">All channels</h3>
+				<app-channels-list [boardName]="boardName"></app-channels-list>
+			</div>
+			<div class="channels__lists-item">
+				<h3 class="title">Discussions & Articles</h3>
+				<app-articles-list [boardNameArticles]="boardName"></app-articles-list>
+			</div>
+		</section>
+	</div>
 </main>
