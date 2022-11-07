@@ -23,7 +23,6 @@ export class CommentsListComponent implements OnInit {
 	constructor(
 		private commentService : CommentsService,
 		private route : ActivatedRoute,
-		private authenticationService : AuthService
 	) {
 
 	}
@@ -49,25 +48,5 @@ export class CommentsListComponent implements OnInit {
 				this.commentsLength = this.comments.length;
 			}
 		)
-	}
-
-	/**
-	 * Hide button of options if user isn´t register.
-	 * @returns If user is register or not.
-	 */
-	userNoRegister() : boolean {
-		return this.authenticationService.isLoggedIn;
-	}
-
-	editComment(idAuthorComment) : boolean {
-		return this.authenticationService.currentSessionUserId() === idAuthorComment;
-	}
-
-	deleteComment(idAuthorComment) : boolean {
-		return this.authenticationService.currentSessionUserId() === idAuthorComment;
-	}
-
-	reportComment(idAuthorComment) : boolean {
-		return this.authenticationService.currentSessionUserId() !== idAuthorComment;
 	}
 }
