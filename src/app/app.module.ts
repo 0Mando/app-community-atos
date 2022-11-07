@@ -23,7 +23,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
 import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
+// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
+// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
 
 //* Components
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
@@ -40,8 +43,9 @@ import { LoadingSpinnerComponent } from './community/shared/loading-spinner/load
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
-// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
-// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
+import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
+import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
 
 @NgModule({
 	declarations: [
@@ -61,7 +65,11 @@ import { ErrorComponent } from './community/components/error/error.component';
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-    	SearchFilterPipe,
+		SearchFilterPipe,
+		ChannelsEmptyComponent,
+		ChannelsListComponent,
+		ArticlesListComponent,
+		ShortStringPipe,
 		ErrorComponent,
   		// ShortenModPipe,
 		// TimeAgoPipe,

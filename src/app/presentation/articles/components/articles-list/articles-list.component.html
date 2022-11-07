@@ -1,0 +1,39 @@
+<ng-container *ngIf="articlesLength > 0; else noDataAvailable">
+	<article class="card" *ngFor="let post of posts |
+	paginate : { itemsPerPage: 5, currentPage: page, totalItems: articlesLength }">
+		<div class="desktop-version">
+			<app-likes></app-likes>
+		</div>
+		<div class="content">
+			<header class="card__header">
+				<div class="mobile-version">
+					<app-likes></app-likes>
+				</div>
+				<section class="card__header__user">
+					<img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card__header__user__profile" alt="">
+					<div class="card__header__user__data">
+						<h5>{{ post.firstName +' ' + post.lastName}}</h5>
+						<small>{{ post.date | date }}</small>
+					</div>
+				</section>
+			</header>
+			<hr>
+			<section class="card__content">
+				<h4>{{ post.title }}</h4>
+				<p [innerHTML]="post.content"></p>
+			</section>
+			<footer class="card__footer">
+				<a routerLink="/articles/post/{{ post.id }}">Show more</a>
+			</footer>
+		</div>
+	</article>
+	<section class="controls">
+		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+	</section>
+</ng-container>
+<ng-template #noDataAvailable>
+	<h3>
+		Aún no hay artículos disponibles.
+	</h3>
+	<p>Crea el primer artículo</p>
+</ng-template>

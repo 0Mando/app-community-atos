@@ -13,7 +13,11 @@
         align-items: center;
         background: white;
         transition: height 0.5s, box-shadow 1s;
+<<<<<<< HEAD:src/app/community/components/header/sass/_header.scss
         z-index: 10;
+=======
+		z-index: 99;
+>>>>>>> development-v2.0:src/app/presentation/components/header/sass/_header.scss
     }
 
     &__mobile{
@@ -106,7 +110,7 @@
             box-shadow: 0 10px black;
             transition: all 0.5s;
         }
-        
+
         &:after{
             content: '';
             position: absolute;

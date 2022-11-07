@@ -11,6 +11,7 @@ import { RegisterComponent } from './community/components/register/register.comp
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
+import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 
 
 const routes: Routes = [
@@ -31,16 +32,20 @@ const routes: Routes = [
 		component: ChannelsComponent
 	},
 	{
+		path : 'not-available-articles',
+		component: ChannelsEmptyComponent
+	},
+	{
 		path: 'profile',
 		component: ProfileComponent
 	},
 	{
 		path: 'myprofile',
 		component: MyprofileComponent
-  },
+  	},
 	{
 		path: 'articles',
-		component: ArticlesComponent
+		loadChildren : () => import('./presentation/articles/articles.module').then(m => m.ArticlesModule)
 	},
 	{
 		path: 'sign-up',

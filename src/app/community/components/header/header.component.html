@@ -9,11 +9,11 @@
             <li class="profile__dropdown" *ngIf="loggedIn; else elseProfile">
                 <a class="profile__dropdown-btn">
                     <img src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="profile__dropdown-image">
-                    <p class="profile__dropdown-name">My Profile</p>
+                    <p class="profile__dropdown-name">{{ displayUserId() }}</p>
                 </a>
                 <div class="profile__dropdown-content">
                     <a [routerLink]="['/myprofile']">My Profile</a>
-                    <a>Logout</a>
+                    <a (click)="onLogout()">Logout</a>
                 </div>
             </li>
             <ng-template #elseProfile>
@@ -22,7 +22,7 @@
                     <button class="profile__sign-up" [routerLink]="['/sign-up']">Sign up</button>
                 </div>
             </ng-template>
-        </ul> 
+        </ul>
     </section>
     <section class="header__mobile" (click)="toggleMenu()">
         <div class="profile__mobile" [routerLink]="['/profile']">
@@ -41,7 +41,7 @@
     </section>
     <section class="header__none" (click)="toggleMenu()"></section>
     <!-- <section class="header__mobile" (click)="toggleMenu()">
-        <div class="header__mobile-menu"> 
+        <div class="header__mobile-menu">
             <a>Home</a>
             <a>Categories</a>
             <a>QA</a>
