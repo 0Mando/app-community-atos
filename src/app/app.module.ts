@@ -10,7 +10,7 @@ import { AdminModule } from './admin/admin.module';
 
 
 //* Angular Firebase Set up
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 // import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -45,10 +45,11 @@ import { AdminChannelFormComponent } from './community/admin/admin-channel-form/
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
-import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
+import { ArticlesListComponentChannel } from './presentation/components/channels/articles-list/articles-list.component';
 import { ArticlePageComponent } from './community/articles/pages/article-page/article-page.component';
 import { CreateArticleComponent } from './community/articles/pages/create-article/create-article.component';
-import { ArticleComponent } from './community/articles/components/article/article.component';
+import { ArticleCardComponent } from './community/articles/components/article-card/article-card.component';
+import { ArticlesListComponent } from './community/articles/pages/articles-list/articles-list.component';
 
 @NgModule({
 	declarations: [
@@ -71,13 +72,14 @@ import { ArticleComponent } from './community/articles/components/article/articl
 		SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
-		ArticlesListComponent,
+		ArticlesListComponentChannel,
 		ShortStringPipe,
 		ErrorComponent,
-  ArticlePageComponent,
-  CreateArticleComponent,
-  ArticleComponent,
-  		// ShortenModPipe,
+		ArticlesListComponent,
+		ArticlePageComponent,
+		CreateArticleComponent,
+  		ArticleCardComponent,
+		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
 	imports: [
@@ -85,24 +87,24 @@ import { ArticleComponent } from './community/articles/components/article/articl
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-		
+
 		//* Angular Firebase Set up
 		// AngularFireModule.initializeApp(environment.firebase),
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 		provideStorage(() => getStorage()),
-		
+
 		//* NGX Pagination
 		NgxPaginationModule,
-		
+
 		//* Admin
 		AdminModule,
 
 		//* Routing
 		AppRoutingModule,
 
-		
+
 	],
 	providers: [
 		AngularFirestore,

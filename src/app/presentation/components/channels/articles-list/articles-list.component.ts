@@ -7,7 +7,7 @@ import { ArticleService } from 'src/app/presentation/articles/services/article.s
 	templateUrl: './articles-list.component.html',
 	styleUrls: ['./articles-list.component.scss']
 })
-export class ArticlesListComponent implements OnInit {
+export class ArticlesListComponentChannel implements OnInit {
 
 	posts : IPost[];
 	@Input() boardNameArticles : string;
