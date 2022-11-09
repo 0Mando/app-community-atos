@@ -1,18 +1,20 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { IPost } from '../../model/ipost';
 import { ArticleService } from '../../services/article.service';
 import { User } from '../../../../domain/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-articles-list',
 	templateUrl: './articles-list.component.html',
 	styleUrls: ['./articles-list.component.scss']
 })
-export class ArticlesListComponent implements OnInit, AfterViewInit {
+export class ArticlesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	posts: IPost[];
 	@Input() category: string;
+	articles$ : Subscription;
 
 	//* Pagination stuff
 	articlesLength: number;
@@ -27,12 +29,13 @@ export class ArticlesListComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 		console.log('Category : ' + this.category);
 		console.log('-------------------------------');
-		this.authenticationService.getUserById<User>().subscribe(
+		this.articles$ = this.authenticationService.getUserById<User>().subscribe(
 			(user: User) => {
 				console.table(user);
 				this.currentUser = user;
 			}
 		)
+		this.displayArticles(this.category);
 	}
 
 	ngAfterViewInit() {
@@ -51,5 +54,10 @@ export class ArticlesListComponent implements OnInit, AfterViewInit {
 	displayModeratorOptions(): boolean {
 		console.log('--------------Permisos---------------');
 		return this.currentUser.userType === 'moderator';
+	}
+
+	ngOnDestroy(): void {
+		console.log('Destory');
+		this.articles$.unsubscribe()
 	}
 }
