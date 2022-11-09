@@ -17,6 +17,8 @@ export class CommentFormComponent implements OnInit {
 	currentDate : Date = new Date();
 	commentI : IComment;
 	idPost : string;
+	canComment : boolean;
+
 	//* Toolbar settings input text for create a post
 	editorModules = {
 		toolbar : [
@@ -67,6 +69,8 @@ export class CommentFormComponent implements OnInit {
 		this.commentForm = new FormGroup({
 			'CommentBody' : new FormControl(null, Validators.required)
 		})
+		// Hide form if user is not logged in
+		this.canComment = this.authenticationService.isLoggedIn;
 	}
 
 	ngOnInit(): void {

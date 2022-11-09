@@ -1,8 +1,23 @@
 <section class="comment-form">
-	<img class="comment-form__author-profile-image" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-	<form [formGroup]="commentForm" (ngSubmit)="onCreateComment()" class="comment-form__container-form">
-		<quill-editor class="comment-form__quill-editor" [modules]="editorModules" formControlName="CommentBody" [styles]="{height: '200px'}" [placeholder]="'Type here to reply to $name_user'">
-		</quill-editor>
-		<button class="comment-form__submit">Post comment</button>
-	</form>
+	<ng-container *ngIf="canComment; else userNotLoggedIn">
+		<img class="comment-form__author-profile-image" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+		<form [formGroup]="commentForm" (ngSubmit)="onCreateComment()" class="comment-form__container-form">
+			<quill-editor class="comment-form__quill-editor" [modules]="editorModules" formControlName="CommentBody" [styles]="{height: '200px'}" [placeholder]="'Type here to reply to $name_user'">
+			</quill-editor>
+			<button class="comment-form__submit">Post comment</button>
+		</form>
+	</ng-container>
+	<ng-template #userNotLoggedIn>
+		<section class="locked-content">
+			<article class="locked-content__locked">
+				<h3>Register or log in to comment</h3>
+			</article>
+			<button class="locked-content__btn-locked">
+				Post comment
+				<span class="material-symbols-outlined">
+					lock
+				</span>
+			</button>
+		</section>
+	</ng-template>
 </section>

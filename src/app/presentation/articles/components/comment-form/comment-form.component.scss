@@ -33,6 +33,40 @@
 	}
 }
 
+.locked-content {
+
+	width: 100%;
+
+	&__locked {
+		width: 100%;
+		background-color: $text-secondary;
+		height: 200px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+
+		h3 {
+			color: $description-text;
+			text-align: center;
+		}
+	}
+
+	&__btn-locked {
+		width: 100%;
+		margin-top: 1rem;
+		border: none;
+		border-radius: 5px;
+		background-color: $description-text;
+		color: white;
+		padding: .7rem 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+	}
+}
+
 @include media-md {
 	.comment-form {
 
@@ -59,6 +93,12 @@
 		}
 
 		&__submit {
+			width: auto;
+		}
+	}
+
+	.locked-content {
+		&__btn-locked {
 			width: auto;
 		}
 	}
