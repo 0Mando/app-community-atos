@@ -19,8 +19,7 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
-
-
+import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 
 
 @NgModule({
@@ -35,7 +34,8 @@ import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
     ChannelsComponent,
     FormularyComponent,
     TimeAgoPipe,
-    ShortenModPipe
+    ShortenModPipe,
+    UserTypePipe
   ],
   imports: [
     CommonModule,
