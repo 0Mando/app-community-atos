@@ -12,6 +12,9 @@ import { AdminBoardFormComponent } from './community/admin/admin-board-form/admi
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ArticlesListComponent } from './community/articles/pages/articles-list/articles-list.component';
+import { CreateArticleComponent } from './community/articles/pages/create-article/create-article.component';
+import { ArticlePageComponent } from './community/articles/pages/article-page/article-page.component';
 
 
 const routes: Routes = [
@@ -44,8 +47,16 @@ const routes: Routes = [
 		component: MyprofileComponent
   	},
 	{
-		path: 'articles',
-		loadChildren : () => import('./presentation/articles/articles.module').then(m => m.ArticlesModule)
+		path: 'articles/:parentBoard/:channelName/posts',
+		component : ArticlesListComponent,
+	},
+	{
+		path : 'create-article',
+		component : CreateArticleComponent
+	},
+	{
+		path : 'article/:id',
+		component : ArticlePageComponent
 	},
 	{
 		path: 'sign-up',

@@ -46,6 +46,9 @@ import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
 import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
+import { ArticlePageComponent } from './community/articles/pages/article-page/article-page.component';
+import { CreateArticleComponent } from './community/articles/pages/create-article/create-article.component';
+import { ArticleComponent } from './community/articles/components/article/article.component';
 
 @NgModule({
 	declarations: [
@@ -71,6 +74,9 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		ArticlesListComponent,
 		ShortStringPipe,
 		ErrorComponent,
+  ArticlePageComponent,
+  CreateArticleComponent,
+  ArticleComponent,
   		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
