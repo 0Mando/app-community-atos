@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-top-speakers',
-  templateUrl: './top-speakers.component.html',
-  styleUrls: ['./top-speakers.component.scss']
+	selector: 'app-top-speakers',
+	templateUrl: './top-speakers.component.html',
+	styleUrls: ['./top-speakers.component.scss']
 })
 export class TopSpeakersComponent implements OnInit {
 
-  constructor() { }
+	articles = [1,2,3,4,5,6]
 
-  ngOnInit(): void {
-  }
+	constructor() { }
+
+	ngOnInit(): void {
+	}
 
 }
