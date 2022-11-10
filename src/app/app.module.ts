@@ -10,7 +10,7 @@ import { AdminModule } from './admin/admin.module';
 
 
 //* Angular Firebase Set up
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 // import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -44,6 +44,8 @@ import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './community/components/channels/channels-list/channels-list.component';
 import { ChannelArticlesListComponent } from './community/components/channels/articles-list/articles-list.component';
+
+//* Articles
 import { ListArticlesComponent } from './community/components/article/pages/list-articles/list-articles.component';
 import { CreateArticleComponent } from './community/components/article/pages/create-article/create-article.component';
 import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
@@ -52,6 +54,7 @@ import { TopSpeakersComponent } from './community/components/article/components/
 import { LikesComponent } from './community/components/article/components/likes/likes.component';
 import { TabComponent } from './community/components/article/components/tab/tab.component';
 import { TabsComponent } from './community/components/article/components/tabs/tabs.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
 	declarations: [
@@ -75,15 +78,15 @@ import { TabsComponent } from './community/components/article/components/tabs/ta
 		ChannelArticlesListComponent,
 		ShortStringPipe,
 		ErrorComponent,
-  ListArticlesComponent,
-  CreateArticleComponent,
-  ArticlePageComponent,
-  ArticleCardComponent,
-  TopSpeakersComponent,
-  LikesComponent,
-  TabComponent,
-  TabsComponent,
-  		// ShortenModPipe,
+		ListArticlesComponent,
+		CreateArticleComponent,
+		ArticlePageComponent,
+		ArticleCardComponent,
+		TopSpeakersComponent,
+		LikesComponent,
+		TabComponent,
+		TabsComponent,
+		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
 	imports: [
@@ -108,7 +111,8 @@ import { TabsComponent } from './community/components/article/components/tabs/ta
 		//* Routing
 		AppRoutingModule,
 
-
+		//* Quill Editor
+		QuillModule.forRoot()
 	],
 	providers: [
 		AngularFirestore,
