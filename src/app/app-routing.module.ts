@@ -6,12 +6,14 @@ import { ChannelsComponent } from './community/components/channels/channels.comp
 import { BoardsComponent } from './community/components/boards/boards.component';
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
 import { LoginComponent } from './community/components/login/login.component';
-import { ArticlesComponent } from './community/components/articles/articles.component';
 import { RegisterComponent } from './community/components/register/register.component';
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
-import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
+import { ListArticlesComponent } from './community/components/article/pages/list-articles/list-articles.component';
+import { CreateArticleComponent } from './community/components/article/pages/create-article/create-article.component';
+import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
 
 
 const routes: Routes = [
@@ -44,8 +46,16 @@ const routes: Routes = [
 		component: MyprofileComponent
   	},
 	{
-		path: 'articles',
-		loadChildren : () => import('./presentation/articles/articles.module').then(m => m.ArticlesModule)
+		path : 'articles/:parentBoard/:channelName/posts',
+		component : ListArticlesComponent
+	},
+	{
+		path : 'create-article',
+		component : CreateArticleComponent
+	},
+	{
+		path : 'article/:id',
+		component : ArticlePageComponent
 	},
 	{
 		path: 'sign-up',

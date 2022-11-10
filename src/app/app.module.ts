@@ -37,15 +37,21 @@ import { ChannelsComponent } from './community/components/channels/channels.comp
 import { ProfileComponent } from './community/components/profile/profile.component';
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { RegisterComponent } from './community/components/register/register.component';
-import { ArticlesComponent } from './community/components/articles/articles.component';
-import { CardArticleItemComponent } from './community/components/articles/card-article-item/card-article-item.component';
 import { LoadingSpinnerComponent } from './community/shared/loading-spinner/loading-spinner.component';
 import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
-import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
-import { ChannelsListComponent } from './presentation/components/channels/channels-list/channels-list.component';
-import { ArticlesListComponent } from './presentation/components/channels/articles-list/articles-list.component';
+import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
+import { ChannelsListComponent } from './community/components/channels/channels-list/channels-list.component';
+import { ChannelArticlesListComponent } from './community/components/channels/articles-list/articles-list.component';
+import { ListArticlesComponent } from './community/components/article/pages/list-articles/list-articles.component';
+import { CreateArticleComponent } from './community/components/article/pages/create-article/create-article.component';
+import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
+import { ArticleCardComponent } from './community/components/article/components/article-card/article-card.component';
+import { TopSpeakersComponent } from './community/components/article/components/top-speakers/top-speakers.component';
+import { LikesComponent } from './community/components/article/components/likes/likes.component';
+import { TabComponent } from './community/components/article/components/tab/tab.component';
+import { TabsComponent } from './community/components/article/components/tabs/tabs.component';
 
 @NgModule({
 	declarations: [
@@ -59,8 +65,6 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		MyprofileComponent,
 		FirstwordPipe,
 		RegisterComponent,
-		ArticlesComponent,
-		CardArticleItemComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
 		AdminBoardFormComponent,
@@ -68,9 +72,17 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
-		ArticlesListComponent,
+		ChannelArticlesListComponent,
 		ShortStringPipe,
 		ErrorComponent,
+  ListArticlesComponent,
+  CreateArticleComponent,
+  ArticlePageComponent,
+  ArticleCardComponent,
+  TopSpeakersComponent,
+  LikesComponent,
+  TabComponent,
+  TabsComponent,
   		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
@@ -79,24 +91,24 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-		
+
 		//* Angular Firebase Set up
 		// AngularFireModule.initializeApp(environment.firebase),
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 		provideStorage(() => getStorage()),
-		
+
 		//* NGX Pagination
 		NgxPaginationModule,
-		
+
 		//* Admin
 		AdminModule,
 
 		//* Routing
 		AppRoutingModule,
 
-		
+
 	],
 	providers: [
 		AngularFirestore,

@@ -1,0 +1,28 @@
+<main class="container wrapper-content">
+	<section class="articles">
+		<section class="articles__header">
+			<h2 class="articles__title">
+				{{ channelName }}
+			</h2>
+			<div class="articles__action">
+				<!-- <small class="articles__not-verified" *ngIf="userIsLogged() && !isVerified()">Your account is not verified</small>
+				<button
+					[ngClass]="
+					{
+						'articles__create-post' : userIsLogged() && isVerified(),
+						'articles__btn-create-post-none' : !userIsLogged(),
+						'articles__verify-account' : userIsLogged() && !isVerified()
+					}"
+					(click)="onCreatePost()">
+					Create Post
+				</button> -->
+			</div>
+		</section>
+		<section class="list-articles">
+			<app-article-card></app-article-card>
+		</section>
+	</section>
+	<section class="speakers">
+		<app-top-speakers></app-top-speakers>
+	</section>
+</main>

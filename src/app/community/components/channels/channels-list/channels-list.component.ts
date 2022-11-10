@@ -32,7 +32,6 @@ export class ChannelsListComponent implements OnInit {
 			channels =>{
 				this.channels = channels;
 				this.channelsLength = this.channels.length;
-				console.log(this.channels);
 				if(this.channels.length === 0) {
 					this.router.navigate(['not-available-articles']);
 				}
