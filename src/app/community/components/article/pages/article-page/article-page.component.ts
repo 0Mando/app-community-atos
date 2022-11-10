@@ -25,6 +25,27 @@ export class ArticlePageComponent implements OnInit {
 				this.idArticle = params['id']
 			}
 		)
+		this.onFetchArticle(this.idArticle);
+	}
+
+	/**
+	 * Get the information of the article
+	 * @param idArticle Reference of the article
+	 */
+	onFetchArticle(idArticle : string) {
+		this.article.getArticleById(idArticle).subscribe(
+			(article : IArticle) =>{
+				this.currentArticle = {
+					'title' : article.title,
+					'date' : article.date,
+					'content' : article.content,
+					'firstName' : article.firstName,
+					'lastName' : article.lastName,
+					'channelParent' : article.channelParent,
+					'boardParent' : article.boardParent
+				}
+			}
+		)
 	}
 
 	easterEgg() : void {

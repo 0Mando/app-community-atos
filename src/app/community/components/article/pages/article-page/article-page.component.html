@@ -3,12 +3,12 @@
 <main class="container">
 	<section class="post">
 		<h1 class="post__title">Title</h1>
-		<!-- <h1 class="post__title">{{ currentPost.title }}</h1> -->
+		<h1 class="post__title">{{ currentArticle.title }}</h1>
 		<!-- <app-button-actions></app-button-actions> -->
 		<ul class="post__bar-about">
 			<li>
 				React
-				<!-- {{ currentPost.channelParent }} -->
+				{{ currentArticle.channelParent }}
 				<span class="material-symbols-outlined" id="code" (click)="easterEgg()">
 					code
 				</span>
@@ -28,20 +28,14 @@
 		</ul>
 		<hr class="post__bar">
 		<section class="post__author">
-			<img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-			<!-- <img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="{{ currentPost.firstName + ' ' + currentPost.lastName }}"> -->
+			<img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="{{ currentArticle.firstName + ' ' + currentArticle.lastName }}">
 			<div>
-				<span class="post__author__name">
-					Firstname Lastname
-				</span>
-				<!-- <span class="post__author__name">{{ currentPost.firstName + ' ' + currentPost.lastName }}</span> -->
-				<small class="post__days">Date</small>
-				<!-- <small class="post__days">{{ currentPost.date | date }}</small> -->
+				<span class="post__author__name">{{ currentArticle.firstName + ' ' + currentArticle.lastName }}</span>
+				<small class="post__days">{{ currentArticle.date | date }}</small>
 			</div>
 		</section>
 		<article class="post__content">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis ex, exercitationem, asperiores officiis rem, eveniet necessitatibus harum consequuntur fugiat dolor at voluptate voluptatem quas. Sed rem animi incidunt natus quam et labore, architecto nisi odio quia facere dolor similique. Odio perspiciatis beatae nobis ratione labore placeat ab cumque vel repudiandae voluptate temporibus rerum quos rem odit itaque dolor aliquid corrupti quidem, maxime aspernatur doloremque illo eaque. Beatae dolorem odio quod provident sed ipsum, quidem sapiente voluptates ipsam inventore voluptatibus pariatur minus accusantium repellat fugit qui, delectus voluptate rem magni error ex eius. Officia sint magnam tempore ipsam, rerum dignissimos eligendi facilis est expedita placeat repudiandae dolorum distinctio harum libero adipisci laboriosam? Magnam incidunt nobis aliquid ab molestias architecto nostrum mollitia?</p>
-			<!-- <p [innerHTML]="currentPost.content"></p> -->
+			<p [innerHTML]="currentArticle.content"></p>
 		</article>
 	</section>
 	<hr class="post__bar">
