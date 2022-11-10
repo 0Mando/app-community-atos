@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs';
-import { IPost } from '../model/ipost';
+import { IArticle } from '../model/ipost';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +15,7 @@ export class ArticleService {
 	 * @param postData Information of the post
 	 * @returns A new document on Firebase.
 	 */
-	createPost(postData : IPost) {
+	createPost(postData : IArticle) {
 		console.log('Creating post');
 		const newPost = this.afs.collection('posts');
 		return newPost.doc(this.afs.createId()).set(postData);

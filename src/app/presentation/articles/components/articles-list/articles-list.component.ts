@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
-import { IPost } from '../../model/ipost';
+import { IArticle } from '../../model/ipost';
 import { ArticleService } from '../../services/article.service';
 import { User } from '../../../../domain/models/user.model';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class ArticlesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-	posts: IPost[];
+	posts: IArticle[];
 	@Input() category: string;
 	articles$ : Subscription;
 
@@ -43,7 +43,7 @@ export class ArticlesListComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	displayArticles(category: string) {
-		this.articleService.displayPost<IPost>(category).subscribe(
+		this.articleService.displayPost<IArticle>(category).subscribe(
 			posts => {
 				this.posts = posts;
 				this.articlesLength = this.posts.length;

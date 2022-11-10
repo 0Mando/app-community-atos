@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IPost } from '../../model/ipost';
+import { IArticle } from '../../model/ipost';
 import { ArticleService } from '../../services/article.service';
 
 @Component({

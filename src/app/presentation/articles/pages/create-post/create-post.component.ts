@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
-import { IPost } from '../../model/ipost';
+import { IArticle } from '../../model/ipost';
 import { ArticleService } from '../../services/article.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class CreatePostComponent implements OnInit {
 	quilleditorContent : string;
 	currentDate : Date = new Date();
 	previewArticle = { title : '' }
-	post : IPost;
+	post : IArticle;
 	currentUser = { firtsName : '', lastName : '' }
 	channelParentParam : string = '';
 	boardParam : string = '';

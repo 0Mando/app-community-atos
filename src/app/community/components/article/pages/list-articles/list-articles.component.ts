@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
-import { IPost } from 'src/app/presentation/articles/model/ipost';
+import { IArticle } from 'src/app/presentation/articles/model/ipost';
 import { ArticleService } from 'src/app/presentation/articles/services/article.service';
 import { ArticleCardComponent } from '../../components/article-card/article-card.component';
 
@@ -18,7 +18,7 @@ export class ListArticlesComponent implements OnInit {
 	boardName : string = '';
 
 	//* List of articles
-	articles: IPost[];
+	articles: IArticle[];
 
 	//* Pagination stuff
 	lengthListArticles : number = 0;
@@ -79,7 +79,7 @@ export class ListArticlesComponent implements OnInit {
 	 * Fetch the articles from the channel.
 	 */
 	onFetchArticles() {
-		this.article.displayPost<IPost>(this.channelName).subscribe(
+		this.article.displayPost<IArticle>(this.channelName).subscribe(
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;
