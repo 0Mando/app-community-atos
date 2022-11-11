@@ -25,12 +25,11 @@
 		<div class="users__list-menu">
 			<p *ngIf="filterInputText.length > 0" class="users__quantity">Users ({{ (users| filterUsers: filterType:filterInputText).length }}/{{users.length}})</p>
 			<p *ngIf="filterInputText.length == 0" class="users__quantity">Users: {{users.length}}</p>
-			<button class="add__user">
-				Add New <i class="fa-thin fa-plus"></i>
+			<button class="disable__user" (click)="handleDisableUser()">
+				Disable
 			</button>
 			<i class="fa-solid fa-gear"></i>
 		</div>
-		<span class="disable__title">Disable</span>
 
 		<div class="users__list-header">
 			<div class="users__list-check">

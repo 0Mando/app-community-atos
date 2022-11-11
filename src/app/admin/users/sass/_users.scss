@@ -66,6 +66,11 @@
             .auth-user{
                 background: rgb(249, 157, 157);
             }
+            
+            .disabled{
+                background: rgb(242, 67, 67);
+                color: white;
+            }
         }
 
         &-date{

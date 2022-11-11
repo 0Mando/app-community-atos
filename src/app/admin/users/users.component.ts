@@ -11,9 +11,9 @@ export class UsersComponent implements OnInit {
 	users: User[] = [];
 	usersParentCheckbox: boolean = false;
 	filterType: 'Name' | 'Email' | 'Title' | 'None' = 'None';
-  filterInputText:string = "";
-  sortOrder:"ASC"|"DESC" = "ASC";
-  sortColumn:"Name"|"Email"|"Title"|undefined = "Name";
+	filterInputText: string = '';
+	sortOrder: 'ASC' | 'DESC' = 'ASC';
+	sortColumn: 'Name' | 'Email' | 'Title' | undefined = 'Name';
 
 	constructor(private authenticationService: AuthService) {}
 
@@ -56,8 +56,18 @@ export class UsersComponent implements OnInit {
 		return true;
 	}
 
-  sortHandler(sortBy:"Name"|"Email"|"Title"):void {
-    this.sortOrder = this.sortOrder === "ASC" ? "DESC" : "ASC";
-    this.sortColumn = sortBy;
-  }
+	sortHandler(sortBy: 'Name' | 'Email' | 'Title'): void {
+		this.sortOrder = this.sortOrder === 'ASC' ? 'DESC' : 'ASC';
+		this.sortColumn = sortBy;
+	}
+
+	handleDisableUser(): void {
+		console.log('users to be disabled');
+		this.users.map((user) => {
+			if (user.checked && user.userType != 'disabled') {
+				console.log(user.firstName, user.lastName);
+				user.userType = 'disabled';
+			}
+		});
+	}
 }

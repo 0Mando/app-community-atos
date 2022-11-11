@@ -54,7 +54,7 @@ export class FilterUsersPipe implements PipeTransform {
 
 function validateSecondTitleName(
 	input: string,
-	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin'
+	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin'|'disabled'
 ): boolean {
 	switch (userType) {
 		case 'normal-user':
@@ -67,6 +67,8 @@ function validateSecondTitleName(
 			return 'Moderator'.toLowerCase().includes(input.toLowerCase());
 		case 'admin':
 			return 'Administrator'.toLowerCase().includes(input.toLowerCase());
+		case 'disabled':
+			return 'Disabled'.toLowerCase().includes(input.toLowerCase());
 		default:
 			const exhaustiveCheck: never = userType;
 			throw new Error(exhaustiveCheck);
