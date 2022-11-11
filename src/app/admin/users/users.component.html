@@ -23,7 +23,8 @@
 	</section>
 	<section class="users__list">
 		<div class="users__list-menu">
-			<p class="users__quantity">Users ({{ (users| filterUsers: filterType:filterInputText).length }}/{{users.length}})</p>
+			<p *ngIf="filterInputText.length > 0" class="users__quantity">Users ({{ (users| filterUsers: filterType:filterInputText).length }}/{{users.length}})</p>
+			<p *ngIf="filterInputText.length == 0" class="users__quantity">Users: {{users.length}}</p>
 			<button class="add__user">
 				Add New <i class="fa-thin fa-plus"></i>
 			</button>
