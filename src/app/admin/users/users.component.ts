@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 export class UsersComponent implements OnInit {
 	users: User[] = [];
 	usersParentCheckbox: boolean = false;
+	filterType: 'Name' | 'Email' | 'Title' | 'None' = 'None';
+  filterInputText:string = "";
 
 	constructor(private authenticationService: AuthService) {}
 
@@ -44,11 +46,11 @@ export class UsersComponent implements OnInit {
 	}
 
 	validateAllChecked(): boolean {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].checked == false) {
+		for (let i = 0; i < this.users.length; i++) {
+			if (this.users[i].checked == false) {
 				return false;
 			}
-    }
+		}
 		return true;
 	}
 }

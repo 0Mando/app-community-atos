@@ -7,12 +7,18 @@
 			id="filter"
 			style="font-family: Arial, FontAwesome"
 			class="users__filter-filter"
+			[(ngModel)]="filterInputText"
 		/>
-		<select name="selection" id="selection" class="users__filter-select">
-			<option value="none" selected disabled hidden>Select Filter</option>
-			<option value="name">Name</option>
-			<option value="email">Email</option>
-			<option value="title">Title</option>
+		<select
+			name="selection"
+			id="selection"
+			class="users__filter-select"
+			[(ngModel)]="filterType"
+		>
+			<option value="None" selected>No filter</option>
+			<option value="Name">Name</option>
+			<option value="Email">Email</option>
+			<option value="Title">Title</option>
 		</select>
 	</section>
 	<section class="users__list">
@@ -45,7 +51,10 @@
 			<div class="users__list-options"></div>
 		</div>
 
-		<div class="users__list-table" *ngFor="let user of users">
+		<div
+			class="users__list-table"
+			*ngFor="let user of users | filterUsers: filterType:filterInputText"
+		>
 			<div class="users__list-user">
 				<div class="users__list-check">
 					<label class="container">
