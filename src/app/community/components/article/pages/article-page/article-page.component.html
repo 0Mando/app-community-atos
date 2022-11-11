@@ -1,46 +1,51 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 <main class="container">
-	<section class="post">
-		<h1 class="post__title">{{ currentArticle.title }}</h1>
-		<ul class="post__bar-about">
-			<li>
-				React
-				{{ currentArticle.channelParent }}
-				<span class="material-symbols-outlined" id="code" (click)="easterEgg()">
-					code
-				</span>
-			</li>
-			<li>
-				<span class="material-symbols-outlined">
-					schedule
-				</span>
-				10 minutes
-			</li>
-			<li>
-				<span class="material-symbols-outlined">
-					chat_bubble
-				</span>
-				4 Comments
-			</li>
-		</ul>
-		<hr class="post__bar">
-		<section class="post__author">
-			<img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="{{ currentArticle.firstName + ' ' + currentArticle.lastName }}">
-			<div>
-				<span class="post__author__name">{{ currentArticle.firstName + ' ' + currentArticle.lastName }}</span>
-				<small class="post__days">{{ currentArticle.date | date }}</small>
-			</div>
+	<ng-container *ngIf="displayArticle; else loading">
+		<section class="post">
+			<h1 class="post__title">{{ currentArticle.title }}</h1>
+			<ul class="post__bar-about">
+				<li>
+					React
+					{{ currentArticle.channelParent }}
+					<span class="material-symbols-outlined" id="code" (click)="easterEgg()">
+						code
+					</span>
+				</li>
+				<li>
+					<span class="material-symbols-outlined">
+						schedule
+					</span>
+					10 minutes
+				</li>
+				<li>
+					<span class="material-symbols-outlined">
+						chat_bubble
+					</span>
+					4 Comments
+				</li>
+			</ul>
+			<hr class="post__bar">
+			<section class="post__author">
+				<img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="{{ currentArticle.firstName + ' ' + currentArticle.lastName }}">
+				<div>
+					<span class="post__author__name">{{ currentArticle.firstName + ' ' + currentArticle.lastName }}</span>
+					<small class="post__days">{{ currentArticle.date | date }}</small>
+				</div>
+			</section>
+			<article class="post__content">
+				<p [innerHTML]="currentArticle.content"></p>
+			</article>
 		</section>
-		<article class="post__content">
-			<p [innerHTML]="currentArticle.content"></p>
-		</article>
-	</section>
-	<hr class="post__bar">
-	<section class="post__comment-form">
-		<app-comment-form></app-comment-form>
-	</section>
-	<section class="post__comments-list">
-		<app-list-comments></app-list-comments>
-	</section>
+		<hr class="post__bar">
+		<section class="post__comment-form">
+			<app-comment-form></app-comment-form>
+		</section>
+		<section class="post__comments-list">
+			<app-list-comments></app-list-comments>
+		</section>
+	</ng-container>
+	<ng-template #loading>
+		<app-loading-spinner></app-loading-spinner>
+	</ng-template>
 </main>

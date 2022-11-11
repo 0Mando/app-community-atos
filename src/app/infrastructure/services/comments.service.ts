@@ -33,4 +33,8 @@ export class CommentsService {
 		);
 		return comments.valueChanges({ idField : 'id' });
 	}
+
+	deleteComment(idComment : string){
+		return this.afs.collection('comments').doc(idComment).delete();
+	}
 }

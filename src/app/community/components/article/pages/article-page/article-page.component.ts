@@ -11,17 +11,28 @@ import { ArticleService } from 'src/app/infrastructure/services/article.service'
 export class ArticlePageComponent implements OnInit {
 
 	//* Article reference
-	idArticle : string = '';
-	currentArticle : IArticle;
+	idArticle: string = '';
+	// currentArticle: IArticle = {
+	// 	title : '',
+	// 	date : new Date(),
+	// 	content : '',
+	// 	firstName : '',
+	// 	lastName : '',
+	// 	channelParent : '',
+	// 	boardParent : ''
+	// };
+
+	currentArticle: IArticle;
+	displayArticle : boolean = false;
 
 	constructor(
-		private route : ActivatedRoute,
-		private article : ArticleService
+		private route: ActivatedRoute,
+		private article: ArticleService
 	) { }
 
 	ngOnInit(): void {
 		this.route.params.subscribe(
-			(params : Params) => {
+			(params: Params) => {
 				this.idArticle = params['id']
 			}
 		)
@@ -32,23 +43,25 @@ export class ArticlePageComponent implements OnInit {
 	 * Get the information of the article
 	 * @param idArticle Reference of the article
 	 */
-	onFetchArticle(idArticle : string) {
+	onFetchArticle(idArticle: string) {
 		this.article.getArticleById(idArticle).subscribe(
-			(article : IArticle) =>{
+			(article: IArticle) => {
 				this.currentArticle = {
-					'title' : article.title,
-					'date' : article.date,
-					'content' : article.content,
-					'firstName' : article.firstName,
-					'lastName' : article.lastName,
-					'channelParent' : article.channelParent,
-					'boardParent' : article.boardParent
+					'title': article.title,
+					'date': article.date,
+					'content': article.content,
+					'firstName': article.firstName,
+					'lastName': article.lastName,
+					'channelParent': article.channelParent,
+					'boardParent': article.boardParent
 				}
+				this.displayArticle = true;
 			}
 		)
 	}
 
-	easterEgg() : void {
-		console.log('%cHey you found my easter egg🐣', 'color:yellow; font-size: 8rem;');
+	easterEgg(): void {
+		console.log('%cHey you found my easter egg🐣',
+		'color:yellow; font-size: 8rem;');
 	}
 }

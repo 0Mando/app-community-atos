@@ -18,7 +18,15 @@ export class CommentCardComponent implements OnInit {
 	@Input() createdAt: number;
 	@Input() commentBody: string;
 
-	userAuthorData: User;
+	userAuthorData: User = {
+		firstName: '',
+		lastName: '',
+		birthday: '',
+		email: '',
+		password: '',
+		userType: 'normal-user',
+		profilePicture: ''
+	};
 
 	commentEditForm: FormGroup;
 
@@ -109,8 +117,8 @@ export class CommentCardComponent implements OnInit {
 					birthday: user.birthday,
 					email: user.email,
 					password: '************',
-					userType : user.userType,
-					profilePicture : user.profilePicture
+					userType: user.userType,
+					profilePicture: user.profilePicture
 				}
 			}
 		)
