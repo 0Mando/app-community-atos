@@ -6,6 +6,7 @@ export interface User{
 	email: string;
 	password: string;
 	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin';
+	checked?: boolean;
 }
 
 /**

@@ -1,64 +1,87 @@
 <main class="users">
-    <section class="users__filter">
-        <input 
-            type="text" 
-            placeholder=" &#xF002; Name or id" 
-            name="filter" 
-            id="filter" 
-            style="font-family:Arial, FontAwesome" 
-            class="users__filter-filter"/>
-        <select name="selection" id="selection" class="users__filter-select">
-            <option value="none" selected disabled hidden>Select Filter</option>
-            <option value="name">Name</option>
-            <option value="email">Email</option>
-            <option value="title">Title</option>
-        </select>
-    </section>
-    <section class="users__list">
-        <div class="users__list-menu">
-            <p class="users__quantity">Users (100)</p>
-            <button class="add__user">Add New <i class="fa-thin fa-plus"></i></button>
-            <i class="fa-solid fa-gear"></i>
-        </div>
-        <span class="disable__title">Disable</span>
+	<section class="users__filter">
+		<input
+			type="text"
+			placeholder=" &#xF002; Name or id"
+			name="filter"
+			id="filter"
+			style="font-family: Arial, FontAwesome"
+			class="users__filter-filter"
+		/>
+		<select name="selection" id="selection" class="users__filter-select">
+			<option value="none" selected disabled hidden>Select Filter</option>
+			<option value="name">Name</option>
+			<option value="email">Email</option>
+			<option value="title">Title</option>
+		</select>
+	</section>
+	<section class="users__list">
+		<div class="users__list-menu">
+			<p class="users__quantity">Users ({{users.length}})</p>
+			<button class="add__user">
+				Add New <i class="fa-thin fa-plus"></i>
+			</button>
+			<i class="fa-solid fa-gear"></i>
+		</div>
+		<span class="disable__title">Disable</span>
 
-        <div class="users__list-header">
-            <div class="users__list-check">
-                <label class="container">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="users__list-name">Name</div>
-            <div class="users__list-email">Email</div>
-            <div class="users__list-title">Title</div>
-            <div class="users__list-date">Date Modified</div>
-            <div class="users__list-karma">Karma</div>
-            <div class="users__list-options"></div>
-        </div>
+		<div class="users__list-header">
+			<div class="users__list-check">
+				<label class="container">
+					<input
+						type="checkbox"
+						[(ngModel)]="usersParentCheckbox"
+						[value]="-1"
+						(change)="onChangeUsers($event)"
+					/>
+					<span class="checkmark"></span>
+				</label>
+			</div>
+			<div class="users__list-name">Name</div>
+			<div class="users__list-email">Email</div>
+			<div class="users__list-title">Title</div>
+			<div class="users__list-date">Date Modified</div>
+			<div class="users__list-karma">Karma</div>
+			<div class="users__list-options"></div>
+		</div>
 
-        <div class="users__list-table" *ngFor="let user of users">
-            <div class="users__list-user">
-                <div class="users__list-check">
-                    <label class="container">
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div class="users__list-name"><img class="users-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">
-                    {{user.firstName + " " + user.lastName}}
-                </div>
-                <div class="users__list-email">{{user.email}}</div>
-                <div class="users__list-title"><div class="users__title {{user.userType}}">{{user.userType | userType}}</div></div>
-                <div class="users__list-date">07/04/1927</div>
-                <div class="users__list-karma">16</div>
-                <div class="users__list-options">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-            </div>
-            
-            <!-- <div class="users__list-user">
+		<div class="users__list-table" *ngFor="let user of users; index as i">
+			<div class="users__list-user">
+				<div class="users__list-check">
+					<label class="container">
+						<input
+							type="checkbox"
+							class="users-checkbox-child"
+							[value]="user.email"
+							[checked]="user.checked"
+							(change)="onChangeUsers($event)"
+						/>
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				<div class="users__list-name">
+					<img
+						class="users-pfp"
+						src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+						alt=""
+					/>
+					{{ user.firstName + " " + user.lastName }}
+				</div>
+				<div class="users__list-email">{{ user.email }}</div>
+				<div class="users__list-title">
+					<div class="users__title {{ user.userType }}">
+						{{ user.userType | userType }}
+					</div>
+				</div>
+				<div class="users__list-date">07/04/1927</div>
+				<div class="users__list-karma">16</div>
+				<div class="users__list-options">
+					<i class="fa-solid fa-ellipsis-vertical"></i>
+					<i class="fa-solid fa-ellipsis-vertical"></i>
+				</div>
+			</div>
+
+			<!-- <div class="users__list-user">
                 <div class="users__list-check">
                     <label class="container">
                         <input type="checkbox">
@@ -156,7 +179,6 @@
                 <div class="users__list-karma">11</div>
                 <div class="users__list-options"></div>
             </div> -->
-            
-        </div>
-    </section>
+		</div>
+	</section>
 </main>
