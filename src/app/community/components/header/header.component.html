@@ -8,8 +8,8 @@
             <li><a>QA</a></li>
             <li class="profile__dropdown" *ngIf="loggedIn; else elseProfile">
                 <a class="profile__dropdown-btn">
-                    <img src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class="profile__dropdown-image">
-                    <p class="profile__dropdown-name">{{ displayUserId() }}</p>
+                    <img src="{{ currentUser.profilePicture }}" alt="" class="profile__dropdown-image">
+                    <p class="profile__dropdown-name">{{ currentUser.firstName + ' ' + currentUser.lastName}}</p>
                 </a>
                 <div class="profile__dropdown-content">
                     <a [routerLink]="['/myprofile']">My Profile</a>
