@@ -1,0 +1,36 @@
+<article class="comment-card">
+	<header class="comment-card__header">
+		<img class="comment-card__header__author-profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+		<div class="comment-card__header__author-data">
+			<span class="comment-card__header__author-name">Firstname Lastname</span>
+			<!-- <small>{{ idAuthorComment }}</small> -->
+			<small class="comment-card__header__days-ago">Date</small>
+			<!-- <small class="comment-card__header__days-ago">{{ createdAt | date }}</small> -->
+		</div>
+		<!-- <div class="comment-card__header__options" *ngIf="userNoRegister()">
+			<app-button-actions
+			[canEdit]="editComment(idAuthorComment)"
+			[canDelete]="deleteComment(idAuthorComment)"
+			[canReport]="reportComment(idAuthorComment)"
+			(editComment)="canEditComment = $event"
+			></app-button-actions>
+		</div> -->
+	</header>
+	<section class="comment-card__content">
+		<!-- <p [innerHTML]="commentBody" *ngIf="!canEditComment"></p> -->
+		<!-- <article *ngIf="canEditComment">
+			TODO : Inyectar texto de MD al input de quill editor
+			<form [formGroup]="commentEditForm">
+				<quill-editor
+					[textContent] = onEditComment()
+					class="comment-card__quill-editor"
+					formControlName="CommentBody"
+					[modules]="editorModules"
+					[defaultEmptyValue]="commentBody"
+					[styles]="{height: '200px'}">
+				</quill-editor>
+			</form>
+		</article> -->
+	</section>
+	<hr>
+</article>

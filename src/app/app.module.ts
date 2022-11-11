@@ -55,6 +55,10 @@ import { LikesComponent } from './community/components/article/components/likes/
 import { TabComponent } from './community/components/article/components/tab/tab.component';
 import { TabsComponent } from './community/components/article/components/tabs/tabs.component';
 import { QuillModule } from 'ngx-quill';
+import { CommentCardComponent } from './community/components/comments/comment-card/comment-card.component';
+import { CommentFormComponent } from './community/components/comments/comment-form/comment-form.component';
+import { ListCommentsComponent } from './community/components/comments/list-comments/list-comments.component';
+import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
 
 @NgModule({
 	declarations: [
@@ -86,6 +90,10 @@ import { QuillModule } from 'ngx-quill';
 		LikesComponent,
 		TabComponent,
 		TabsComponent,
+		CommentCardComponent,
+		CommentFormComponent,
+		ListCommentsComponent,
+		ButtonActionsComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],

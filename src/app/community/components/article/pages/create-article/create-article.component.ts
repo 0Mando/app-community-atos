@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { IArticle } from 'src/app/domain/models/ipost';
 import { User } from 'src/app/domain/models/user.model';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
-import { IArticle } from 'src/app/presentation/articles/model/ipost';
-import { ArticleService } from 'src/app/presentation/articles/services/article.service';
+
 
 @Component({
 	selector: 'app-create-article',

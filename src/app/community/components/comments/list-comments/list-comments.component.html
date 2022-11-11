@@ -1,0 +1,16 @@
+<ng-container *ngIf="commentsLength > 0; else noComments">
+	<article class="comment-card" *ngFor="let comment of comments">
+		<!-- <app-comment-card
+		[idAuthorComment]="comment.idUserAuthor"
+		[createdAt]="comment.createdAt"
+		[commentBody]="comment.commentBody"
+		></app-comment-card> -->
+		<app-comment-card *ngFor="let comment of comments"></app-comment-card>
+	</article>
+</ng-container>
+<ng-template #noComments>
+	<section class="no-comments">
+		<p>There are no comments on this post yet</p>
+		<h3>Be the first to comment</h3>
+	</section>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IArticle } from 'src/app/presentation/articles/model/ipost';
-import { ArticleService } from 'src/app/presentation/articles/services/article.service';
+import { IArticle } from 'src/app/domain/models/ipost';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 
 @Component({
 	selector: 'app-article-page',
