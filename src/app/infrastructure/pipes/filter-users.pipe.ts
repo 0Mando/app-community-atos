@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { User } from 'src/app/domain/models/user.model';
-import { UserTypePipe } from './user-type.pipe';
 
 @Pipe({
 	name: 'filterUsers',
@@ -53,27 +52,23 @@ export class FilterUsersPipe implements PipeTransform {
 	}
 }
 
-function validateSecondTitleName(input:string, userType:'normal-user' | 'auth-user' | 'moderator' | 'admin'): boolean {
-	if (
-		userType == 'normal-user' &&
-		'Regular user'.toLowerCase().includes(input.toLowerCase())
-	) {
-		return true;
-	} else if (
-		userType == 'auth-user' &&
-		'Authenticated user'.toLowerCase().includes(input.toLowerCase())
-	) {
-		return true;
-	} else if (
-		userType == 'moderator' &&
-		'Moderator'.toLowerCase().includes(input.toLowerCase())
-	) {
-		return true;
-	} else if (
-		userType == 'admin' &&
-		'Administrator'.toLowerCase().includes(input.toLowerCase())
-	) {
-		return true;
+function validateSecondTitleName(
+	input: string,
+	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin'
+): boolean {
+	switch (userType) {
+		case 'normal-user':
+			return 'Regular user'.toLowerCase().includes(input.toLowerCase());
+		case 'auth-user':
+			return 'Authenticated user'
+				.toLowerCase()
+				.includes(input.toLowerCase());
+		case 'moderator':
+			return 'Moderator'.toLowerCase().includes(input.toLowerCase());
+		case 'admin':
+			return 'Administrator'.toLowerCase().includes(input.toLowerCase());
+		default:
+			const exhaustiveCheck: never = userType;
+			throw new Error(exhaustiveCheck);
 	}
-	return false;
 }
