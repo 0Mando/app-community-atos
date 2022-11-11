@@ -58,4 +58,8 @@ export class AuthService {
 	currentSessionUserId() {
 		return this.userData.uid;
 	}
+
+	onFetchUserInformation(idUser : string) {
+		return this.afs.collection('Users').doc(idUser).valueChanges()
+	}
 }

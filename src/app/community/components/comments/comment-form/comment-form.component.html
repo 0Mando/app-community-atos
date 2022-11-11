@@ -1,1 +1,8 @@
-<p>comment-form works!</p>
+<section class="comment-form">
+	<img class="comment-form__author-profile-image" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+	<form [formGroup]="commentForm" (ngSubmit)="onCreateComment()" class="comment-form__container-form">
+		<quill-editor class="comment-form__quill-editor" [modules]="editorModules" formControlName="CommentBody" [styles]="{height: '200px'}" [placeholder]="'Type here to reply to $name_user'">
+		</quill-editor>
+		<button class="comment-form__submit">Post comment</button>
+	</form>
+</section>

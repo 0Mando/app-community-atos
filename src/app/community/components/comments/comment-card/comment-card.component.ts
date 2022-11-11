@@ -1,27 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
-  selector: 'app-comment-card',
-  templateUrl: './comment-card.component.html',
-  styleUrls: ['./comment-card.component.scss']
+	selector: 'app-comment-card',
+	templateUrl: './comment-card.component.html',
+	styleUrls: ['./comment-card.component.scss']
 })
 export class CommentCardComponent implements OnInit {
 
-	canEditComment : boolean;
-	canDeleteComment : boolean;
-	canReportComment : boolean;
+	canEditComment: boolean;
+	canDeleteComment: boolean;
+	canReportComment: boolean;
 
-	@Input() idAuthorComment : string;
-	@Input() createdAt : number;
-	@Input() commentBody : string;
+	@Input() idAuthorComment: string;
+	@Input() createdAt: number;
+	@Input() commentBody: string;
 
-	commentEditForm : FormGroup;
+	userAuthorData: User;
+
+	commentEditForm: FormGroup;
 
 	//* Toolbar settings input text for create a post
 	editorModules = {
-		toolbar : [
+		toolbar: [
 			[
 				// 'bold',
 				// 'italic',
@@ -62,38 +65,55 @@ export class CommentCardComponent implements OnInit {
 	}
 
 	constructor(
-		private authenticationService : AuthService
+		private authenticationService: AuthService
 	) {
 		this.commentEditForm = new FormGroup({
-			'CommentBody' : new FormControl(this.commentBody)
+			'CommentBody': new FormControl(this.commentBody)
 		})
 	}
 
 	ngOnInit(): void {
+		this.onFetchDataUser(this.idAuthorComment);
 	}
 
 	/**
 	 * Hide button of options if user isn´t register.
 	 * @returns If user is register or not.
 	 */
-	userNoRegister() : boolean {
+	userNoRegister(): boolean {
 		return this.authenticationService.isLoggedIn;
 	}
 
-	editComment( idAuthorComment : string ) : boolean {
+	editComment(idAuthorComment: string): boolean {
 		return this.authenticationService.currentSessionUserId() === idAuthorComment;
 	}
 
-	deleteComment( idAuthorComment : string ) : boolean {
+	deleteComment(idAuthorComment: string): boolean {
 		return this.authenticationService.currentSessionUserId() === idAuthorComment;
 	}
 
-	reportComment( idAuthorComment : string ) : boolean {
+	reportComment(idAuthorComment: string): boolean {
 		return this.authenticationService.currentSessionUserId() !== idAuthorComment;
 	}
 
 	onEditComment() {
 		return this.commentEditForm.get('CommentBody').value;
+	}
+
+	onFetchDataUser(idUser: string) {
+		this.authenticationService.onFetchUserInformation(idUser).subscribe(
+			(user: User) => {
+				this.userAuthorData = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					birthday: user.birthday,
+					email: user.email,
+					password: '************',
+					userType : user.userType,
+					profilePicture : user.profilePicture
+				}
+			}
+		)
 	}
 
 }
