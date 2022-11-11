@@ -44,9 +44,9 @@
 					<span class="checkmark"></span>
 				</label>
 			</div>
-			<div class="users__list-name">Name</div>
-			<div class="users__list-email">Email</div>
-			<div class="users__list-title">Title</div>
+			<div class="users__list-name" (click)="sortHandler('Name')">Name</div>
+			<div class="users__list-email" (click)="sortHandler('Email')">Email</div>
+			<div class="users__list-title" (click)="sortHandler('Title')">Title</div>
 			<div class="users__list-date">Date Modified</div>
 			<div class="users__list-karma">Karma</div>
 			<div class="users__list-options"></div>
@@ -54,7 +54,7 @@
 
 		<div
 			class="users__list-table"
-			*ngFor="let user of users | filterUsers: filterType:filterInputText"
+			*ngFor="let user of users | filterUsers: filterType:filterInputText | sortUsers:sortOrder:sortColumn"
 		>
 			<div class="users__list-user">
 				<div class="users__list-check">

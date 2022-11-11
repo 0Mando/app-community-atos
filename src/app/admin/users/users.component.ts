@@ -12,6 +12,8 @@ export class UsersComponent implements OnInit {
 	usersParentCheckbox: boolean = false;
 	filterType: 'Name' | 'Email' | 'Title' | 'None' = 'None';
   filterInputText:string = "";
+  sortOrder:"ASC"|"DESC" = "ASC";
+  sortColumn:"Name"|"Email"|"Title"|undefined = "Name";
 
 	constructor(private authenticationService: AuthService) {}
 
@@ -53,4 +55,9 @@ export class UsersComponent implements OnInit {
 		}
 		return true;
 	}
+
+  sortHandler(sortBy:"Name"|"Email"|"Title"):void {
+    this.sortOrder = this.sortOrder === "ASC" ? "DESC" : "ASC";
+    this.sortColumn = sortBy;
+  }
 }
