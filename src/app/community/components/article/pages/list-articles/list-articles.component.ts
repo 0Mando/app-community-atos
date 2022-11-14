@@ -84,7 +84,6 @@ export class ListArticlesComponent implements OnInit {
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;
-				console.log(this.articles);
 			}
 		)
 	}
