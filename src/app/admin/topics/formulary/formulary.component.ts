@@ -1,13 +1,14 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import { Storage, ref, getDownloadURL, uploadBytes,  } from '@angular/fire/storage';
 
 //* Services
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 
 //* Models
 import { Board } from './../../../domain/models/board.model';
+import { async } from '@firebase/util';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   ]
 
   loading: boolean = false;
-  file: any = {};
+  file?: File;
+  imageUrl = "";
   
   @Input() type = '';
   @Input() board = '';
@@ -69,14 +71,17 @@ export class FormularyComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._boardService.getBoardEdit().subscribe(data => {
+      console.log(data.boardImage)
       this.newForm.patchValue({
         name: data.boardName,
         description: data.boardDescription,
-        visibility: data.boardVisibility
+        visibility: data.boardVisibility,
+        image: data.boardImage
       })
       this.id = data.id;
       this.title = 'editing';
       this.action = 'edit';
+      
     })
 
     this.resetFormSubject.subscribe( response => {
@@ -117,18 +122,18 @@ export class FormularyComponent implements OnInit, AfterViewInit {
     
   }
 
-  uploadImage(){
-    const storageRef = ref(this.storage, this.file.name);
-    // const uploadTask = uploadBytesResumable(storageRef, this.file);
-    
-    // uploadTask.on('state_changed', (snapshot) => {
-    //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
-    //   console.log('Upload is ' + progress + '% done');
-    // }, () => {
-    //   getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-    //     console.log('File availabl at ', downloadUrl);
-    //   })
-    // })
+
+  async uploadImage(file : File){
+    const imgRef = ref(this.storage, `board-images/${file.lastModified}`)
+
+    try {
+      const res = await uploadBytes(imgRef, file);
+      const downloadUrl = await getDownloadURL(imgRef)
+      this.imageUrl = downloadUrl;
+    } catch (error) {
+      console.error(error);
+    }
+
   }
 
   generate(){
@@ -139,16 +144,18 @@ export class FormularyComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addBoard(){
-    const TYPE: Board = {
+  async addBoard(){
+    await this.uploadImage(this.file);
+    const board: Board = {
       boardName: this.newForm.value.name,
       boardDescription: this.newForm.value.description,
-      boardImage: this.newForm.value.image,
+      boardImage: this.imageUrl,
       boardVisibility: this.newForm.value.visibility,
       boardCreation: Date.now()
+
     }
 
-    this._boardService.createBoard(TYPE).then(() => {
+    this._boardService.createBoard(board).then(() => {
       this.newForm.reset();
       this.closeForm();
       
