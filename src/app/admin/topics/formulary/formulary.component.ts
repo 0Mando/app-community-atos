@@ -1,13 +1,15 @@
+import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import * as Notiflix from 'notiflix'
 
 //* Services
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 
 //* Models
 import { Board } from './../../../domain/models/board.model';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -21,28 +23,7 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   action = 'create new';
   id: string | undefined = undefined;
   printMods: any[] = [];
-  modList = [
-    {
-      name: 'Jonathan',
-      id: 12345
-    },
-    {
-      name: 'Luis Angel',
-      id: 34567
-    },
-    {
-      name: 'Luis Perez',
-      id: 78901
-    },
-    {
-      name: 'Alan',
-      id: 62473
-    },
-    {
-      name: 'Cristian',
-      id: 158487
-    }
-  ]
+  modList: any[] = []
 
   loading: boolean = false;
   file: any = {};
@@ -58,16 +39,18 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   constructor(
       private fb: FormBuilder,
       private _boardService: BoardCRUDService,
-      private storage: Storage) {
+      private _modService: ModeratorsService) {
     this.newForm = this.fb.group({
       name: [null, Validators.required],
       description: [null, Validators.required],
-      visibility: ["", Validators.required],
+      visibility: ['', Validators.required],
       image: [null, Validators.required],
     })
    }
 
   ngOnInit(): void {
+    this.getMods();
+
     this._boardService.getBoardEdit().subscribe(data => {
       this.newForm.patchValue({
         name: data.boardName,
@@ -90,45 +73,57 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      const datalist = document.querySelector('#mod-search')! as HTMLInputElement;
-      const addMod = fromEvent(datalist, 'keyup');
-      addMod.subscribe((x: KeyboardEvent) => {
-        if(x.key === "Enter"){
-          this.printMods.push(datalist.value);
-          datalist.value = '';
-        }
-      })
-      
+    const datalist = document.querySelector('#mod-search')! as HTMLInputElement;
+    const addMod = fromEvent(datalist, 'keyup');
+    addMod.subscribe((x: KeyboardEvent) => {
+      if(x.key === "Enter"){
+        this.modList.forEach(y => {
+          let curr = y.name + " | " + y.id;
+          if(datalist.value === curr || datalist.value === y.id) {
+            if (!this.printMods.includes(y)){
+              this.printMods.push(y);
+              datalist.value = '';
+            } else{
+              alert('That mod already exist in the list');
+              datalist.value = '';
+            }
+          }
+        });
+      }
+    });
+  }
+
+  getMods(){
+    this._modService.readMods().subscribe(doc => {
+      if (this.modList){
+        this.modList = [];
+      }
+      doc.forEach(element => {
+        this.modList.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    });
+  }
+
+  removeMod(i: number){
+    this.printMods.splice(i, 1);
+  }
+
+  goToMod(){
+    alert('Feaure not available')
   }
 
   onChange(event){
     this.file = event.target.files[0];
     const reader = new FileReader();
-    const change = fromEvent(reader, 'load').subscribe(() => {
+    fromEvent(reader, 'load').subscribe(() => {
       const img = reader.result;
       let image = document.querySelector('.field-image')! as HTMLElement;
       image.style.backgroundImage = `url(${img})`;
     });
     reader.readAsDataURL(this.file);
-  }
-
-  addMod(){
-    console.log('working on it');
-    
-  }
-
-  uploadImage(){
-    const storageRef = ref(this.storage, this.file.name);
-    // const uploadTask = uploadBytesResumable(storageRef, this.file);
-    
-    // uploadTask.on('state_changed', (snapshot) => {
-    //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
-    //   console.log('Upload is ' + progress + '% done');
-    // }, () => {
-    //   getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-    //     console.log('File availabl at ', downloadUrl);
-    //   })
-    // })
   }
 
   generate(){
@@ -167,9 +162,46 @@ export class FormularyComponent implements OnInit, AfterViewInit {
 
     this._boardService.updateBoard(id, TYPE).then(() => {
       this.resForm();
-      this.id = undefined;
       this.closeForm();
+      this.id = undefined;
+    }, error => {
+      console.log(error);
     })
+  }
+
+  deleteBoard(){
+    let tempID = this.id;
+    Notiflix.Confirm.show(
+      'Delete Board',
+      'Are you sure you want to delete this board?',
+      'Yes',
+      'No',
+      () => {
+        this._boardService.deleteBoard(tempID).then(() => {
+          Notiflix.Notify.success(
+            'Board Eliminated Correctly',
+            {
+              timeout: 1000,
+            },
+          );
+          this.closeForm();
+        }, error => {
+          console.log(error);
+        });
+      },
+      function cancelCb() {
+        Notiflix.Notify.warning('Action Cancelled',
+        {
+          timeout: 1000,
+        });
+      },
+      {
+        width: '320px',
+        borderRadius: '8px',
+        titleColor: '#0195ff',
+        okButtonBackground: '#0195ff',
+      },
+    );
   }
 
   closeForm(){

@@ -24,6 +24,7 @@
     "javascript-time-ago": "^2.5.9",
     "ngx-pagination": "^6.0.2",
     "ngx-quill": "^19.0.1",
+    "notiflix": "^3.2.5",
     "quill": "^1.3.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

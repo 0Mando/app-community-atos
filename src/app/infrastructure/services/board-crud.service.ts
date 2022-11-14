@@ -31,4 +31,8 @@ export class BoardCRUDService {
   getBoardEdit(): Observable<Board>{
     return this.board$.asObservable();
   }
+
+  deleteBoard(id: string): Promise<any> {
+    return this.firebase.collection('boards').doc(id).delete();
+  }
 }

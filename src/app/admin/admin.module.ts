@@ -1,4 +1,3 @@
-import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,6 +18,8 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
+import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+// import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
 
 
 
@@ -35,7 +36,8 @@ import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
     ChannelsComponent,
     FormularyComponent,
     TimeAgoPipe,
-    ShortenModPipe
+    ShortenModPipe,
+    // FirstwordPipe
   ],
   imports: [
     CommonModule,
