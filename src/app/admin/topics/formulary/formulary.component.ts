@@ -51,15 +51,16 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
 
-    const getMods = async () => {
-      try {
-        let mods = await this.doSome();
-        console.log(mods);
-      } catch (error) {
+    // const getMods = async () => {
+    //   try {
+    //     let mods = await this.obtainMODS();        
+    //     this.displayMods(this.modsID, mods); 
+    //   } catch (error) {
         
-      }
-    }
+    //   }
+    // }
 
+    this.obtainMODS();
     
     this._boardService.getBoardEdit().subscribe(data => {
       this.newForm.patchValue({
@@ -67,27 +68,30 @@ export class FormularyComponent implements OnInit, AfterViewInit{
         description: data.boardDescription,
         visibility: data.boardVisibility
       })
+      // this.modsID = [];
       this.id = data.id;
-      // this.printMods = [];
-      // this.modsID = data.boardMods;
       
+      // this.modsID = data.boardMods;
+      // getMods();
+
       this.title = 'editing';
       this.action = 'edit';
     })
 
     this.resetFormSubject.subscribe( response => {
+      // getMods();
       if (response){
         this.resForm();
         this.title = 'creating';
         this.action = 'create new';
         this.id = undefined;
-      } 
+      }
     });
-
-    getMods();
+    
+    
   }
 
-  doSome(){
+  obtainMODS(){
     let mods = [];
     this._modService.readMods().subscribe(doc => {
       if (this.modList){
@@ -98,13 +102,29 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         });
-        this.modsID.push({
+        mods.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
       });
     });
     return mods;
+  }
+
+  displayMods(mods?: string[], list?: any[]){
+    this.printMods = [];
+    
+    console.log(list);
+    console.log(list.length);
+    // mods.forEach(mod => {
+    //   list.forEach(x => {
+    //     console.log(x);
+        
+    //     if(x.id === mod){
+    //       this.printMods.push(x);
+    //     }
+    //   })
+    // })
   }
 
   ngAfterViewInit(): void {        
@@ -128,11 +148,6 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       }
     });
   }
-
-  // getMods(){
-    
-  //   return this.modList;
-  // }
 
   removeMod(i: number){
     this.printMods.splice(i, 1);
