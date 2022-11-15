@@ -37,11 +37,13 @@
 			</article>
 		</section>
 		<hr class="post__bar">
-		<section class="post__comment-form">
-			<app-comment-form></app-comment-form>
-		</section>
-		<section class="post__comments-list">
-			<app-list-comments></app-list-comments>
+		<section *ngIf="currentArticle.disableComments">
+			<section class="post__comment-form">
+				<app-comment-form></app-comment-form>
+			</section>
+			<section class="post__comments-list">
+				<app-list-comments></app-list-comments>
+			</section>
 		</section>
 	</ng-container>
 	<ng-template #loading>
