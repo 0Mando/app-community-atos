@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 })
 export class CreateArticleComponent implements OnInit {
 
+	// TODO : Refactorizar campos para crear un artículo
+
 	markdownForm: FormGroup;
 	quilleditorContent : string;
 	currentDate : Date = new Date();
@@ -25,7 +27,9 @@ export class CreateArticleComponent implements OnInit {
 	boardParam : string = '';
 
 	//* Toolbar settings input text for create a post
+	//* If more properties are needed in the editor, just uncomment them.
 	editorModules = {
+		syntax : true,
 		toolbar : [
 			['bold','italic','underline','strike'],
 			[
@@ -119,7 +123,4 @@ export class CreateArticleComponent implements OnInit {
 		this.previewArticle.title = this.markdownForm.get('titlePostForm').value;
 		// this.article.date = this.markdownForm.get('currentDateForm').value;
 	}
-
-
-
 }
