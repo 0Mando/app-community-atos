@@ -1,23 +1,45 @@
 @import '../../../../../../sass/variables';
 
-.post{
-	&__title{
+.post {
+	&__title {
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 		font-size: 2rem;
 	}
 
-	&__submit{
+	&__actions {
+		display: flex;
 		margin-top: 2rem;
+	}
+
+	&__submit {
 		display: block;
 		background-color: $main;
 		color: white;
 		border: none;
 		border-radius: 5px;
 		padding: .5rem 1rem;
+		margin-right: 1rem;
 	}
 
-	&__title-post{
+	&__draft {
+		display: block;
+		background-color: white;
+		border: 1px solid $main;
+		color: $main;
+		border-radius: 5px;
+		padding: .5rem 1rem;
+	}
+
+	&__cancel {
+		margin-top: 1rem;
+		padding: .5rem 1rem;
+		color: $main;
+		border: none;
+		background: none;
+	}
+
+	&__title-post {
 		display: block;
 		border: none;
 		background: none;
@@ -25,11 +47,11 @@
 		font-size: 1.4rem;
 		font-weight: bold;
 		width: 100%;
-		border-bottom: 1px solid #ccc;
+		// border-bottom: 1px solid #ccc;
 		margin-bottom: 1rem;
 	}
 
-	&__description-post{
+	&__description-post {
 		display: block;
 		border: none;
 		background: none;
@@ -37,11 +59,11 @@
 		font-size: 1rem;
 		font-weight: bold;
 		width: 100%;
-		border-bottom: 1px solid #ccc;
+		// border-bottom: 1px solid #ccc;
 		margin-bottom: 1rem;
 	}
 
-	&__date-post{
+	&__date-post {
 		background: none;
 		border: none;
 		height: 1rem;
@@ -50,12 +72,82 @@
 		visibility: hidden;
 	}
 
-	&__quill-editor{
+	&__quill-editor {
 		display: block;
 		margin-top: 1.2rem;
 	}
+
+	&__comments {
+		margin-top: 1rem;
+
+		&__label {
+			margin-right: 1rem;
+		}
+	}
 }
 
-input:focus{
+input:focus {
 	outline: none;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 3rem;
+	height: 1.4rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: .9rem;
+	width: .9rem;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+input:checked+.slider {
+	background-color: $main;
+}
+
+input:focus+.slider {
+	box-shadow: 0 0 1px $main;
+}
+
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
 }

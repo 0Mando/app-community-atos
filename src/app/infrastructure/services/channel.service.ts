@@ -30,6 +30,10 @@ export class ChannelService {
 		return collection.valueChanges();
 	}
 
+	getChannelById(idChannel : string) {
+		return this.afs.collection('channels').doc(idChannel).valueChanges();
+	}
+
 	// channelExists(parentBoard : string) {
 	// 	const collection = this.afs.collection<Channel>(
 	// 		'channels',

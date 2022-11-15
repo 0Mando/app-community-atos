@@ -4,32 +4,57 @@
 		<tab tabTitle="Editor" class="tab">
 			<form [formGroup]="markdownForm" (ngSubmit)="submitPost()">
 
-				<input type="text" class="post__title-post" placeholder="Post title..." formControlName="titlePostForm" [(ngModel)]="previewArticle.title">
-				<span class="alert-danger" *ngIf="!markdownForm.get('titlePostForm').valid && markdownForm.get('titlePostForm').touched">
+				<input type="text" class="post__title-post" placeholder="Post title..." formControlName="titlePostForm"
+					[(ngModel)]="titlePost">
+				<span class="alert-danger"
+					*ngIf="!markdownForm.get('titlePostForm').valid && markdownForm.get('titlePostForm').touched">
 					Please enter a title for the post
 				</span>
 
 				<span>{{currentDate | date : 'longDate' }}</span>
-				<input type="text" class="post__date-post" value="{{currentDate | date : 'longDate' }}" formControlName="currentDateForm">
 
-				<input type="text" class="post__description-post" placeholder="Add a description of the post">
+				<input type="text" class="post__description-post" placeholder="Add a description of the post"
+					formControlName="descriptionContentForm" [(ngModel)]="descriptionContent">
 
-				<input type="text" class="post__description-post" placeholder="Time to read">
+				<input type="number" class="post__description-post" placeholder="Time to read"
+					formControlName="readingTimeForm" [(ngModel)]="readingTime">
 
-				<quill-editor class="post__quill-editor" [modules]="editorModules" formControlName="mdeInput" [sanitize]="true" (onEditorChanged)="changeEditor($event)" [styles]="{height: '300px'}">
+				<quill-editor class="post__quill-editor" [modules]="editorModules" formControlName="contentForm"
+					[sanitize]="true" (onEditorChanged)="changeEditor($event)" [styles]="{height: '300px'}">
 				</quill-editor>
-				<span class="alert-danger" *ngIf="!markdownForm.get('mdeInput').valid && markdownForm.get('mdeInput').touched">
+				<span class="alert-danger"
+					*ngIf="!markdownForm.get('contentForm').valid && markdownForm.get('contentForm').touched">
 					Please write a content
 				</span>
+
+				<section class="post__comments">
+					<label class="post__comments__label">Comments</label>
+					<!-- <select name="" id="" formControlName="comments">
+						<option value="{{ enableComments() }}">Enable</option>
+						<option value="{{ disableComments() }}">Disable</option>
+					</select> -->
+					<label class="switch">
+						<input type="checkbox">
+						<span class="slider round"></span>
+					</label>
+				</section>
 				<br>
-				<button class="post__submit">Publish</button>
+				<section class="post__actions">
+					<button class="post__submit">Publish</button>
+					<button class="post__draft">Save draft</button>
+				</section>
+				<button class="post__cancel">Cancel</button>
 			</form>
 		</tab>
 		<tab tabTitle="Preview">
-			<h1>{{ previewArticle.title }}</h1>
+			<h1>{{ titlePost }}</h1>
 			<br>
-			<span>{{ currentDate | date : 'longDate' }}</span>
+			<span>{{ currentDate | date : 'longDate' }}</span> |
+			<span>{{ readingTime }} min</span>
 			<br><br>
+			<p>{{ descriptionContent}}</p>
+			<br>
+			<hr><br>
 			<p [innerHTML]="quilleditorContent"></p>
 		</tab>
 	</tabs>

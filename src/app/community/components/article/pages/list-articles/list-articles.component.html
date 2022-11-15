@@ -21,13 +21,12 @@
 		<section class="list-articles">
 			<ng-container *ngIf="lengthListArticles > 0; else noArticles">
 				<app-article-card *ngFor="let article of articles |
-				paginate : { itemsPerPage: 5, currentPage: page, totalItems: lengthListArticles }"
-				[firstName]="article.firstName"
-				[lastName]="article.lastName"
-				[date]="article.date"
+				paginate : { itemsPerPage: 5, currentPage: page }"
 				[idArticle]="article.id"
-				[title]="article.title"
-				[content]="article.content"
+				[userCreatedId]="article.userCreatedId"
+				[date]="article.date"
+				[title]="article.titlePost"
+				[descriptionContent]="article.descriptionContent"
 				>
 				</app-article-card>
 				<section class="controls">

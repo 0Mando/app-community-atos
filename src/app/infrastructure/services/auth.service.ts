@@ -55,7 +55,7 @@ export class AuthService {
 		return userDocument.valueChanges({ idField : 'id' });
 	}
 
-	currentSessionUserId() {
+	currentSessionUserId() : string {
 		return this.userData.uid;
 	}
 

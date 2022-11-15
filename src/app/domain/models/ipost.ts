@@ -1,10 +1,13 @@
 export interface IArticle {
 	id? : string;
-	title : string;
-	date : Date;
+	userCreatedId : string;
+	date : number;
+	channelId : string;
+	titlePost : string;
+	descriptionContent : string;
 	content : string;
-	firstName : string;
-	lastName : string;
-	channelParent : string;
+	disableComments : boolean;
+	archive : boolean;
+	readingTime : number;
 	boardParent : string;
 }

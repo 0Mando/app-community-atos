@@ -3,11 +3,10 @@
 <main class="container">
 	<ng-container *ngIf="displayArticle; else loading">
 		<section class="post">
-			<h1 class="post__title">{{ currentArticle.title }}</h1>
+			<h1 class="post__title">{{ currentArticle.titlePost }}</h1>
 			<ul class="post__bar-about">
 				<li>
-					React
-					{{ currentArticle.channelParent }}
+					{{ channelData.channelName }}
 					<span class="material-symbols-outlined" id="code" (click)="easterEgg()">
 						code
 					</span>
@@ -16,7 +15,7 @@
 					<span class="material-symbols-outlined">
 						schedule
 					</span>
-					10 minutes
+					{{ currentArticle.readingTime }} minutes
 				</li>
 				<li>
 					<span class="material-symbols-outlined">
@@ -27,9 +26,9 @@
 			</ul>
 			<hr class="post__bar">
 			<section class="post__author">
-				<img class="post__author__profile" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="{{ currentArticle.firstName + ' ' + currentArticle.lastName }}">
+				<img class="post__author__profile" src="{{ userAuthorData.profilePicture }}" alt="{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}">
 				<div>
-					<span class="post__author__name">{{ currentArticle.firstName + ' ' + currentArticle.lastName }}</span>
+					<span class="post__author__name">{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}</span>
 					<small class="post__days">{{ currentArticle.date | date }}</small>
 				</div>
 			</section>

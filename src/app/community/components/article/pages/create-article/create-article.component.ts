@@ -16,13 +16,18 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 export class CreateArticleComponent implements OnInit {
 
 	// TODO : Refactorizar campos para crear un artículo
-
-	markdownForm: FormGroup;
-	quilleditorContent : string;
-	currentDate : Date = new Date();
-	previewArticle = { title : '' }
 	post : IArticle;
-	currentUser = { firtsName : '', lastName : '' }
+
+	//* Create an article form
+	markdownForm: FormGroup;
+	titlePost : string;
+	currentDate : Date = new Date();
+	descriptionContent : string;
+	readingTime : number;
+	quilleditorContent : string;
+	comments : boolean;
+
+	//* Parameters
 	channelParentParam : string = '';
 	boardParam : string = '';
 
@@ -73,8 +78,10 @@ export class CreateArticleComponent implements OnInit {
 	) {
 		this.markdownForm = new FormGroup({
 			'titlePostForm' : new FormControl(null, Validators.required),
-			'currentDateForm' : new FormControl(this.currentDate.getTime()),
-			'mdeInput': new FormControl(null, Validators.required)
+			'descriptionContentForm' : new FormControl(null, Validators.required),
+			'readingTimeForm': new FormControl(null, Validators.required),
+			'contentForm': new FormControl(null, Validators.required),
+			'comments' : new FormControl(null, Validators.required)
 		})
 	}
 
@@ -87,31 +94,35 @@ export class CreateArticleComponent implements OnInit {
 		)
 	}
 
+	disableComments() : boolean {
+		return this.comments = false;
+	}
+
+	enableComments() : boolean {
+		return this.comments = true;
+	}
+
 	submitPost() : void {
-		// *Get the user's first and last name
-		this.authenticationService.getUserById<User>().subscribe(
-			user => {
-				this.post = {
-					'title' : this.markdownForm.get('titlePostForm').value,
-					'date' : this.markdownForm.get('currentDateForm').value,
-					'content' : this.markdownForm.get('mdeInput').value,
-					'firstName' : this.currentUser.firtsName = user.firstName,
-					'lastName' : this.currentUser.lastName = user.lastName,
-					'channelParent' : this.channelParentParam,
-					'boardParent' : this.boardParam
-				}
+		this.post = {
+			userCreatedId : this.authenticationService.currentSessionUserId(),
+			date : this.currentDate.getTime(),
+			channelId : '',
+			titlePost : this.markdownForm.get('titlePostForm').value,
+			descriptionContent : this.markdownForm.get('descriptionContentForm').value,
+			content : this.markdownForm.get('contentForm').value,
+			disableComments : false,
+			archive : false,
+			readingTime : this.markdownForm.get('readingTimeForm').value,
+			boardParent : this.boardParam
+		}
+		console.table(this.post);
 
-				//* Submit the content of the post
-				this.articleService.createPost(this.post).catch(
-					error => {
-						console.log('An error ocurred -> '+error);
-					}
-				)
+		// this.articleService.createPost(this.post).catch(
+		// 	error => console.log('An error ocurred : ' + error)
+		// )
 
-				this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
-				this.markdownForm.reset();
-			}
-		)
+		// this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
+		// this.markdownForm.reset();
 	}
 
 	/**
@@ -120,7 +131,7 @@ export class CreateArticleComponent implements OnInit {
 	 */
 	 changeEditor(event: EditorChangeContent | EditorChangeSelection){
 		this.quilleditorContent = event['editor']['root']['innerHTML'];
-		this.previewArticle.title = this.markdownForm.get('titlePostForm').value;
+		this.titlePost = this.markdownForm.get('titlePostForm').value;
 		// this.article.date = this.markdownForm.get('currentDateForm').value;
 	}
 }

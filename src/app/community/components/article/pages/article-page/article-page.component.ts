@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Channel } from 'src/app/domain/models/channel.model';
 import { IArticle } from 'src/app/domain/models/ipost';
+import { User } from 'src/app/domain/models/user.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
 @Component({
 	selector: 'app-article-page',
@@ -12,22 +16,31 @@ export class ArticlePageComponent implements OnInit {
 
 	//* Article reference
 	idArticle: string = '';
-	// currentArticle: IArticle = {
-	// 	title : '',
-	// 	date : new Date(),
-	// 	content : '',
-	// 	firstName : '',
-	// 	lastName : '',
-	// 	channelParent : '',
-	// 	boardParent : ''
-	// };
+	userAuthorData: User = {
+		firstName: '',
+		lastName: '',
+		birthday: '',
+		email: '',
+		password: '',
+		userType: 'normal-user',
+		profilePicture: ''
+	};
+
+	channelData: Channel = {
+		channelName: '',
+		channelDescription: '',
+		channelImage: '',
+		parentBoard: '',
+	}
 
 	currentArticle: IArticle;
-	displayArticle : boolean = false;
+	displayArticle: boolean = false;
 
 	constructor(
 		private route: ActivatedRoute,
-		private article: ArticleService
+		private article: ArticleService,
+		private auth: AuthService,
+		private channel: ChannelService
 	) { }
 
 	ngOnInit(): void {
@@ -47,21 +60,66 @@ export class ArticlePageComponent implements OnInit {
 		this.article.getArticleById(idArticle).subscribe(
 			(article: IArticle) => {
 				this.currentArticle = {
-					'title': article.title,
-					'date': article.date,
-					'content': article.content,
-					'firstName': article.firstName,
-					'lastName': article.lastName,
-					'channelParent': article.channelParent,
-					'boardParent': article.boardParent
+					userCreatedId: article.userCreatedId,
+					date: article.date,
+					channelId: article.channelId,
+					titlePost: article.titlePost,
+					descriptionContent: article.descriptionContent,
+					content: article.content,
+					disableComments: article.disableComments,
+					archive: article.archive,
+					readingTime: article.readingTime,
+					boardParent: article.boardParent,
 				}
+				this.onFetchChannelData(this.currentArticle.channelId)
+				this.onFetchAuthorData(this.currentArticle.userCreatedId)
 				this.displayArticle = true;
 			}
 		)
 	}
 
+	/**
+	 * Get the user author information to display on article page.
+	 * @param idUser Id reference to display user data.
+	 */
+	onFetchAuthorData(idUser: string): void {
+		this.auth.onFetchUserInformation(idUser).subscribe(
+			(user: User) => {
+				this.userAuthorData = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					birthday: user.birthday,
+					email: user.email,
+					password: '************',
+					userType: user.userType,
+					profilePicture: user.profilePicture
+				}
+			}
+		)
+	}
+
+	/**
+	 * Get the channel informationto display channel name origin of the article.
+	 * @param idChannel Id reference to display channel name.
+	 */
+	onFetchChannelData(idChannel: string): void {
+		this.channel.getChannelById(idChannel).subscribe(
+			(channel: Channel) => {
+				this.channelData = {
+					channelName: channel.channelName,
+					channelDescription: channel.channelDescription,
+					channelImage: channel.channelImage,
+					parentBoard: '',
+				}
+			}
+		)
+	}
+
+	/**
+	 * Let me here 😳
+	 */
 	easterEgg(): void {
 		console.log('%cHey you found my easter egg🐣',
-		'color:yellow; font-size: 8rem;');
+			'color:yellow; font-size: 8rem;');
 	}
 }

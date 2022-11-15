@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/domain/models/user.model';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
 	selector: 'app-article-card',
@@ -7,16 +9,45 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ArticleCardComponent implements OnInit {
 
-	@Input() firstName : string;
-	@Input() lastName : string;
-	@Input() date : Date;
 	@Input() idArticle : string;
+	@Input() userCreatedId : string;
+	@Input() date : number;
 	@Input() title : string;
-	@Input() content : string;
+	@Input() descriptionContent : string;
 
-	constructor() { }
+	userAuthorData: User = {
+		firstName: '',
+		lastName: '',
+		birthday: '',
+		email: '',
+		password: '',
+		userType: 'normal-user',
+		profilePicture: ''
+	};
+
+	constructor(private auth : AuthService) { }
 
 	ngOnInit(): void {
+		this.onFetchAuthorData(this.userCreatedId);
+	}
+
+	/**
+	 * Get the information of the author of the article
+	 */
+	onFetchAuthorData (idUser : string) : void {
+		this.auth.onFetchUserInformation(idUser).subscribe(
+			(user : User) => {
+				this.userAuthorData = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					birthday: user.birthday,
+					email: user.email,
+					password: '************',
+					userType: user.userType,
+					profilePicture: user.profilePicture
+				}
+			}
+		)
 	}
 
 }
