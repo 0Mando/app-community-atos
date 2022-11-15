@@ -1,14 +1,14 @@
 import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
+import { async, fromEvent, Subject } from 'rxjs';
 import * as Notiflix from 'notiflix'
 
 //* Services
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 
 //* Models
-import { Board } from './../../../domain/models/board.model';
+import { Board } from 'src/app/domain/models/board.model';
 import { ThisReceiver } from '@angular/compiler';
 
 
@@ -17,13 +17,14 @@ import { ThisReceiver } from '@angular/compiler';
   templateUrl: './formulary.component.html',
   styleUrls: ['./formulary.component.scss']
 })
-export class FormularyComponent implements OnInit, AfterViewInit {
+export class FormularyComponent implements OnInit, AfterViewInit{
 
   title = 'creating';
   action = 'create new';
   id: string | undefined = undefined;
   printMods: any[] = [];
-  modList: any[] = []
+  modList: any[] = [];
+  modsID: string[] = [];
 
   loading: boolean = false;
   file: any = {};
@@ -45,12 +46,21 @@ export class FormularyComponent implements OnInit, AfterViewInit {
       description: [null, Validators.required],
       visibility: ['', Validators.required],
       image: [null, Validators.required],
-    })
+    });
    }
 
   ngOnInit(): void {
-    this.getMods();
 
+    const getMods = async () => {
+      try {
+        let mods = await this.doSome();
+        console.log(mods);
+      } catch (error) {
+        
+      }
+    }
+
+    
     this._boardService.getBoardEdit().subscribe(data => {
       this.newForm.patchValue({
         name: data.boardName,
@@ -58,6 +68,9 @@ export class FormularyComponent implements OnInit, AfterViewInit {
         visibility: data.boardVisibility
       })
       this.id = data.id;
+      // this.printMods = [];
+      // this.modsID = data.boardMods;
+      
       this.title = 'editing';
       this.action = 'edit';
     })
@@ -70,30 +83,12 @@ export class FormularyComponent implements OnInit, AfterViewInit {
         this.id = undefined;
       } 
     });
+
+    getMods();
   }
 
-  ngAfterViewInit(): void {
-    const datalist = document.querySelector('#mod-search')! as HTMLInputElement;
-    const addMod = fromEvent(datalist, 'keyup');
-    addMod.subscribe((x: KeyboardEvent) => {
-      if(x.key === "Enter"){
-        this.modList.forEach(y => {
-          let curr = y.name + " | " + y.id;
-          if(datalist.value === curr || datalist.value === y.id) {
-            if (!this.printMods.includes(y)){
-              this.printMods.push(y);
-              datalist.value = '';
-            } else{
-              alert('That mod already exist in the list');
-              datalist.value = '';
-            }
-          }
-        });
-      }
-    });
-  }
-
-  getMods(){
+  doSome(){
+    let mods = [];
     this._modService.readMods().subscribe(doc => {
       if (this.modList){
         this.modList = [];
@@ -102,17 +97,50 @@ export class FormularyComponent implements OnInit, AfterViewInit {
         this.modList.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
+        });
+        this.modsID.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
         })
       });
     });
+    return mods;
   }
+
+  ngAfterViewInit(): void {        
+    const datalist = document.querySelector('#mod-search')! as HTMLInputElement;
+    const addMod = fromEvent(datalist, 'keyup');
+    addMod.subscribe((x: KeyboardEvent) => {
+      if(x.key === "Enter"){
+        this.modList.forEach(y => {
+          let curr = y.name + " | " + y.id;
+          if(datalist.value === curr || datalist.value === y.id) {
+            if (!this.printMods.includes(y)){
+              this.modsID.push(y.id)
+              this.printMods.push(y);
+              datalist.value = '';
+            } else{
+              Notiflix.Report.failure('That mod already exist in the list', '', 'Ok');
+              datalist.value = '';
+            }
+          }
+        });
+      }
+    });
+  }
+
+  // getMods(){
+    
+  //   return this.modList;
+  // }
 
   removeMod(i: number){
     this.printMods.splice(i, 1);
+    this.modsID.splice(i, 1);
   }
 
   goToMod(){
-    alert('Feaure not available')
+    Notiflix.Report.warning('Feature not available', '', 'Ok');
   }
 
   onChange(event){
@@ -140,7 +168,8 @@ export class FormularyComponent implements OnInit, AfterViewInit {
       boardDescription: this.newForm.value.description,
       boardImage: this.newForm.value.image,
       boardVisibility: this.newForm.value.visibility,
-      boardCreation: Date.now()
+      boardCreation: Date.now(),
+      boardMods: this.modsID
     }
 
     this._boardService.createBoard(TYPE).then(() => {
@@ -157,7 +186,8 @@ export class FormularyComponent implements OnInit, AfterViewInit {
       boardName: this.newForm.value.name,
       boardDescription: this.newForm.value.description,
       boardImage: this.newForm.value.image,
-      boardVisibility: this.newForm.value.visibility
+      boardVisibility: this.newForm.value.visibility,
+      boardMods: this.modsID
     }
 
     this._boardService.updateBoard(id, TYPE).then(() => {
@@ -181,7 +211,7 @@ export class FormularyComponent implements OnInit, AfterViewInit {
           Notiflix.Notify.success(
             'Board Eliminated Correctly',
             {
-              timeout: 1000,
+              timeout: 2000,
             },
           );
           this.closeForm();
@@ -192,7 +222,7 @@ export class FormularyComponent implements OnInit, AfterViewInit {
       function cancelCb() {
         Notiflix.Notify.warning('Action Cancelled',
         {
-          timeout: 1000,
+          timeout: 2000,
         });
       },
       {

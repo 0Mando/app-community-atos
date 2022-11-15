@@ -5,4 +5,5 @@ export interface Board{
 	boardImage?: string;
 	boardVisibility?: string;
 	boardCreation?: number;
+	boardMods?: string[];
 }
