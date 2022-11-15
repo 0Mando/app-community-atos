@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges} from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { Storage, ref, getDownloadURL, uploadBytes,  } from '@angular/fire/storage';
 
@@ -9,6 +9,7 @@ import { BoardCRUDService } from './../../../infrastructure/services/board-crud.
 //* Models
 import { Board } from './../../../domain/models/board.model';
 import { async } from '@firebase/util';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   loading: boolean = false;
   file?: File;
   imageUrl = "";
+  imageUrlStyle : SafeStyle;
   
   @Input() type = '';
   @Input() board = '';
@@ -60,7 +62,8 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   constructor(
       private fb: FormBuilder,
       private _boardService: BoardCRUDService,
-      private storage: Storage) {
+      private storage: Storage,
+      private sanitizer: DomSanitizer) {
     this.newForm = this.fb.group({
       name: [null, Validators.required],
       description: [null, Validators.required],
@@ -71,17 +74,16 @@ export class FormularyComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._boardService.getBoardEdit().subscribe(data => {
-      console.log(data.boardImage)
+      this.id = data.id;
+      this.title = 'editing';
+      this.action = 'edit';
+      this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.boardImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
       this.newForm.patchValue({
         name: data.boardName,
         description: data.boardDescription,
         visibility: data.boardVisibility,
         image: data.boardImage
       })
-      this.id = data.id;
-      this.title = 'editing';
-      this.action = 'edit';
-      
     })
 
     this.resetFormSubject.subscribe( response => {
@@ -147,6 +149,7 @@ export class FormularyComponent implements OnInit, AfterViewInit {
   async addBoard(){
     await this.uploadImage(this.file);
     const board: Board = {
+      
       boardName: this.newForm.value.name,
       boardDescription: this.newForm.value.description,
       boardImage: this.imageUrl,
