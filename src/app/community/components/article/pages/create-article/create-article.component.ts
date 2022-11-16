@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
@@ -6,6 +6,7 @@ import { IArticle } from 'src/app/domain/models/ipost';
 import { User } from 'src/app/domain/models/user.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -75,7 +76,8 @@ export class CreateArticleComponent implements OnInit {
 		private authenticationService : AuthService,
 		private articleService : ArticleService,
 		private route : ActivatedRoute,
-		private router : Router
+		private router : Router,
+		private location : Location
 	) {
 		this.markdownForm = new FormGroup({
 			'titlePostForm' : new FormControl(null, Validators.required),
@@ -118,16 +120,18 @@ export class CreateArticleComponent implements OnInit {
 		// this.markdownForm.reset();
 	}
 
-	onPublishArticle() : boolean {
-		return this.archiveArticle = false;
-	}
-
+	/**
+	 * Archive the current article.
+	 */
 	onSaveDraft() : boolean{
 		return this.archiveArticle = true;
 	}
 
+	/**
+	 * Go back to list articles page
+	 */
 	onCancelArticle() : void {
-		console.log('Go abck');
+		this.location.back();
 	}
 
 	/**

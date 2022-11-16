@@ -6,20 +6,32 @@
 		<tab tabTitle="Editor" class="tab">
 			<form [formGroup]="markdownForm" (ngSubmit)="submitPost()">
 
-				<input type="text" class="post__title-post" placeholder="Post title..." formControlName="titlePostForm"
+				<input type="text" class="post__title-post"
+					placeholder="Post title..." formControlName="titlePostForm"
 					[(ngModel)]="titlePost">
 				<span class="alert-danger"
-					*ngIf="!markdownForm.get('titlePostForm').valid && markdownForm.get('titlePostForm').touched">
+					*ngIf="!markdownForm.get('titlePostForm').valid &&
+					markdownForm.get('titlePostForm').touched">
 					Please enter a title for the post
 				</span>
 
-				<!-- <span>{{currentDate | date : 'longDate' }}</span> -->
-
-				<input type="text" class="post__description-post" placeholder="Add a description of the post"
-					formControlName="descriptionContentForm" [(ngModel)]="descriptionContent">
+				<input type="text" class="post__description-post"
+					placeholder="Add a description of the post"
+					formControlName="descriptionContentForm"
+					[(ngModel)]="descriptionContent">
+				<span class="alert-danger"
+					*ngIf="!markdownForm.get('descriptionContentForm').valid &&
+					markdownForm.get('descriptionContentForm').touched">
+					Please enter a description of your post
+				</span>
 
 				<input type="number" class="post__description-post" placeholder="Time to read"
 					formControlName="readingTimeForm" [(ngModel)]="readingTime">
+				<span class="alert-danger"
+					*ngIf="!markdownForm.get('readingTimeForm').valid &&
+					markdownForm.get('readingTimeForm').touched">
+					Please enter a reading time
+				</span>
 
 				<quill-editor class="post__quill-editor" [modules]="editorModules" formControlName="contentForm"
 					[sanitize]="true" (onEditorChanged)="changeEditor($event)" [styles]="{height: '300px'}">
