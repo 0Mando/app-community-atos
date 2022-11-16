@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 <main class="container">
 	<h2 class="post__title">New Post</h2>
 	<tabs>
@@ -11,7 +13,7 @@
 					Please enter a title for the post
 				</span>
 
-				<span>{{currentDate | date : 'longDate' }}</span>
+				<!-- <span>{{currentDate | date : 'longDate' }}</span> -->
 
 				<input type="text" class="post__description-post" placeholder="Add a description of the post"
 					formControlName="descriptionContentForm" [(ngModel)]="descriptionContent">
@@ -34,7 +36,7 @@
 						<option value="{{ disableComments() }}">Disable</option>
 					</select> -->
 					<label class="switch">
-						<input type="checkbox">
+						<input type="checkbox" checked>
 						<span class="slider round"></span>
 					</label>
 				</section>
@@ -42,20 +44,23 @@
 				<section class="post__actions">
 					<button class="post__submit">Publish</button>
 					<button class="post__draft">Save draft</button>
+					<button class="post__cancel">Cancel</button>
 				</section>
-				<button class="post__cancel">Cancel</button>
 			</form>
 		</tab>
 		<tab tabTitle="Preview">
-			<h1>{{ titlePost }}</h1>
-			<br>
-			<span>{{ currentDate | date : 'longDate' }}</span> |
-			<span>{{ readingTime }} min</span>
-			<br><br>
-			<p>{{ descriptionContent}}</p>
-			<br>
-			<hr><br>
-			<p [innerHTML]="quilleditorContent"></p>
+			<h1 class="preview__title">{{ titlePost }}</h1>
+			<section class="preview__data">
+				<span class="preview__data__date">{{ currentDate |  date : 'longDate' }}</span>
+				<span class="preview__data__time">
+					<span class="material-symbols-outlined preview__data__timer">
+						schedule
+					</span>
+					{{ readingTime }} min</span>
+			</section>
+			<p class="preview__description">{{ descriptionContent}}</p>
+			<hr>
+			<p [innerHTML]="quilleditorContent" class="preview__content"></p>
 		</tab>
 	</tabs>
 </main>

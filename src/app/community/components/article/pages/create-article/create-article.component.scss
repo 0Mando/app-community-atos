@@ -9,34 +9,40 @@
 
 	&__actions {
 		display: flex;
+		flex-direction: column;
 		margin-top: 2rem;
 	}
 
 	&__submit {
 		display: block;
+		width: 100%;
 		background-color: $main;
 		color: white;
 		border: none;
 		border-radius: 5px;
 		padding: .5rem 1rem;
-		margin-right: 1rem;
+		margin-bottom: .5rem;
 	}
 
 	&__draft {
 		display: block;
+		width: 100%;
 		background-color: white;
 		border: 1px solid $main;
 		color: $main;
 		border-radius: 5px;
 		padding: .5rem 1rem;
+		margin-bottom: .5rem;
 	}
 
 	&__cancel {
-		margin-top: 1rem;
+		display: block;
+		width: 100%;
 		padding: .5rem 1rem;
 		color: $main;
 		border: none;
 		background: none;
+		margin-bottom: .5rem;
 	}
 
 	&__title-post {
@@ -45,7 +51,7 @@
 		background: none;
 		height: 2.6rem;
 		font-size: 1.4rem;
-		font-weight: bold;
+		// font-weight: bold;
 		width: 100%;
 		border-bottom: 1px solid #ccc;
 		margin-bottom: 1rem;
@@ -57,7 +63,7 @@
 		background: none;
 		height: 2.6rem;
 		font-size: 1rem;
-		font-weight: bold;
+		// font-weight: bold;
 		width: 100%;
 		border-bottom: 1px solid #ccc;
 		margin-bottom: 1rem;
@@ -82,6 +88,74 @@
 
 		&__label {
 			margin-right: 1rem;
+		}
+	}
+}
+
+.preview {
+	&__title {
+		margin: 1rem 0;
+	}
+
+	&__data {
+		display: flex;
+		flex-direction: column;
+
+		&__date {
+			margin-bottom: 1rem;
+		}
+
+		&__time {
+			display: flex;
+			align-items: center;
+		}
+
+		&__timer {
+			margin-right: 5px;
+		}
+	}
+
+	&__description {
+		margin: 1rem 0;
+	}
+
+	&__content {
+		margin-top: 1rem;
+	}
+}
+
+@include media-md {
+	.post {
+		&__actions {
+			flex-direction: row;
+		}
+
+		&__submit {
+			width: auto;
+			margin-right: 1rem;
+		}
+
+		&__draft {
+			width: auto;
+			margin-right: 1rem;
+		}
+
+		&__cancel {
+			width: auto;
+			margin-right: 1rem;
+		}
+	}
+
+	.preview {
+		&__data {
+			flex-direction: row;
+			justify-content: space-between;
+
+			&__date {
+				margin-bottom: 0;
+				display: flex;
+				align-items: center;
+			}
 		}
 	}
 }
