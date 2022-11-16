@@ -15,6 +15,7 @@ import { ListArticlesComponent } from './community/components/article/pages/list
 import { CreateArticleComponent } from './community/components/article/pages/create-article/create-article.component';
 import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
 import { ArticleGuard } from './infrastructure/guards/article.guard';
+import { ArticleGuardService } from './infrastructure/services/article-guard.service';
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
 	{
 		path : 'create-article',
 		canActivate : [ArticleGuard],
+		canDeactivate : [ArticleGuardService],
 		component : CreateArticleComponent
 	},
 	{
