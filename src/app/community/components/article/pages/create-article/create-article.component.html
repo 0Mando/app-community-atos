@@ -31,22 +31,19 @@
 
 				<section class="post__comments">
 					<label class="post__comments__label">Comments</label>
-					<!-- <select name="" id="" formControlName="comments">
-						<option value="{{ enableComments() }}">Enable</option>
-						<option value="{{ disableComments() }}">Disable</option>
-					</select> -->
 					<label class="switch">
-						<input type="checkbox" checked>
+						<input type="checkbox" formControlName="comments">
 						<span class="slider round"></span>
 					</label>
 				</section>
 				<br>
 				<section class="post__actions">
 					<button class="post__submit">Publish</button>
-					<button class="post__draft">Save draft</button>
-					<button class="post__cancel">Cancel</button>
+					<button class="post__draft" (click)="onSaveDraft()">Save draft</button>
+					<a (click)="onCancelArticle()" class="post__cancel">Cancel</a>
 				</section>
 			</form>
+			<!-- <button class="post__cancel">Cancel</button> -->
 		</tab>
 		<tab tabTitle="Preview">
 			<h1 class="preview__title">{{ titlePost }}</h1>

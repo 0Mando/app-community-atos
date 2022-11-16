@@ -26,6 +26,7 @@ export class CreateArticleComponent implements OnInit {
 	readingTime : number;
 	quilleditorContent : string;
 	comments : boolean;
+	archiveArticle : boolean = false;
 
 	//* Parameters
 	channelParentParam : string = '';
@@ -81,7 +82,7 @@ export class CreateArticleComponent implements OnInit {
 			'descriptionContentForm' : new FormControl(null, Validators.required),
 			'readingTimeForm': new FormControl(null, Validators.required),
 			'contentForm': new FormControl(null, Validators.required),
-			'comments' : new FormControl(null, Validators.required)
+			'comments' : new FormControl(true, Validators.required)
 		})
 	}
 
@@ -94,14 +95,6 @@ export class CreateArticleComponent implements OnInit {
 		)
 	}
 
-	disableComments() : boolean {
-		return this.comments = false;
-	}
-
-	enableComments() : boolean {
-		return this.comments = true;
-	}
-
 	submitPost() : void {
 		this.post = {
 			userCreatedId : this.authenticationService.currentSessionUserId(),
@@ -110,8 +103,8 @@ export class CreateArticleComponent implements OnInit {
 			titlePost : this.markdownForm.get('titlePostForm').value,
 			descriptionContent : this.markdownForm.get('descriptionContentForm').value,
 			content : this.markdownForm.get('contentForm').value,
-			disableComments : false,
-			archive : false,
+			disableComments : this.markdownForm.get('comments').value,
+			archive : this.archiveArticle,
 			readingTime : this.markdownForm.get('readingTimeForm').value,
 			boardParent : this.boardParam
 		}
@@ -123,6 +116,18 @@ export class CreateArticleComponent implements OnInit {
 
 		// this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
 		// this.markdownForm.reset();
+	}
+
+	onPublishArticle() : boolean {
+		return this.archiveArticle = false;
+	}
+
+	onSaveDraft() : boolean{
+		return this.archiveArticle = true;
+	}
+
+	onCancelArticle() : void {
+		console.log('Go abck');
 	}
 
 	/**
