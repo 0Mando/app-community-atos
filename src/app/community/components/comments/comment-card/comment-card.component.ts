@@ -17,6 +17,7 @@ export class CommentCardComponent implements OnInit {
 	@Input() idAuthorComment: string;
 	@Input() createdAt: number;
 	@Input() commentBody: string;
+	@Input() idComment : string;
 
 	userAuthorData: User = {
 		firstName: '',

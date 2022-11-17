@@ -12,6 +12,7 @@
 			[canEdit]="editComment(idAuthorComment)"
 			[canDelete]="deleteComment(idAuthorComment)"
 			[canReport]="reportComment(idAuthorComment)"
+			[idCommentReference]="idComment"
 			(editComment)="canEditComment = $event"
 			></app-button-actions>
 		</div>

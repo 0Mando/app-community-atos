@@ -37,4 +37,8 @@ export class CommentsService {
 	deleteComment(idComment : string){
 		return this.afs.collection('comments').doc(idComment).delete();
 	}
+
+	updateComment(idComment : string) {
+
+	}
 }
