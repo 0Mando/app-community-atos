@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IComment } from 'src/app/domain/models/icomment';
 import { CommentsService } from 'src/app/infrastructure/services/comments.service';
@@ -13,6 +13,7 @@ export class ListCommentsComponent implements OnInit {
 	idArticle : string;
 	comments : IComment[] = [];
 	commentsLength : number = 0;
+	@Output() amountComments = new EventEmitter<number>();
 
 	constructor(
 		private commentService : CommentsService,
@@ -37,6 +38,7 @@ export class ListCommentsComponent implements OnInit {
 			(comments) => {
 				this.comments = comments;
 				this.commentsLength = this.comments.length;
+				this.amountComments.emit(this.commentsLength);
 			}
 		)
 	}

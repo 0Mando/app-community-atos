@@ -35,6 +35,7 @@ export class ArticlePageComponent implements OnInit {
 
 	currentArticle: IArticle;
 	displayArticle: boolean = false;
+	amountComments : number = 0;
 
 	constructor(
 		private route: ActivatedRoute,

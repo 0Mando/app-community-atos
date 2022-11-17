@@ -21,7 +21,7 @@
 					<span class="material-symbols-outlined">
 						chat_bubble
 					</span>
-					4 Comments
+					{{ amountComments }} Comments
 				</li>
 			</ul>
 			<hr class="post__bar">
@@ -42,7 +42,9 @@
 				<app-comment-form></app-comment-form>
 			</section>
 			<section class="post__comments-list">
-				<app-list-comments></app-list-comments>
+				<app-list-comments
+				(amountComments)="amountComments = $event"
+				></app-list-comments>
 			</section>
 		</section>
 	</ng-container>
