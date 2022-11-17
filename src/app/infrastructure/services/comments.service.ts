@@ -34,10 +34,19 @@ export class CommentsService {
 		return comments.valueChanges({ idField : 'id' });
 	}
 
+	/**
+	 * Delete a comment
+	 * @param idComment Reference the comment
+	 */
 	deleteComment(idComment : string){
 		return this.afs.collection('comments').doc(idComment).delete();
 	}
 
+	/**
+	 * Update the content of an comment
+	 * @param idComment Reference the comment
+	 * @param content Comment body
+	 */
 	updateComment(idComment : string, content : string) {
 		return this.afs.collection('comments').doc(idComment).update({commentBody : content});
 	}

@@ -118,6 +118,10 @@ export class CommentCardComponent implements OnInit {
 		)
 	}
 
+	onCancelEditComment() : boolean {
+		return this.canEditComment = false;
+	}
+
 	onFetchDataUser(idUser: string) {
 		this.authenticationService.onFetchUserInformation(idUser).subscribe(
 			(user: User) => {
