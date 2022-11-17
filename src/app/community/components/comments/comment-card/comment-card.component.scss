@@ -40,6 +40,32 @@
 		background-color: $--main--50;
 		border-radius: 10px;
 	}
+
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__btn-update {
+		margin-top: 1rem;
+		border: none;
+		background-color: $main;
+		color: white;
+		display: block;
+		width: 100%;
+		padding: .5rem 1rem;
+		border-radius: 5px;
+	}
+
+	&__btn-cancel {
+		margin-top: 1rem;
+		border: 1px solid $main;
+		background-color: white;
+		display: block;
+		padding: .5rem 1rem;
+		width: 100%;
+		border-radius: 5px;
+	}
 }
 
 hr {
@@ -84,6 +110,19 @@ hr {
 					}
 				}
 			}
+		}
+
+		&__buttons {
+			flex-direction: row-reverse;
+		}
+
+		&__btn-update {
+			width: auto;
+		}
+
+		&__btn-cancel {
+			width: auto;
+			margin-right: 1rem;
 		}
 	}
 }

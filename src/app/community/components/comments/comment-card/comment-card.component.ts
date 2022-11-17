@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { CommentsService } from 'src/app/infrastructure/services/comments.service';
 
 @Component({
 	selector: 'app-comment-card',
@@ -18,6 +19,8 @@ export class CommentCardComponent implements OnInit {
 	@Input() createdAt: number;
 	@Input() commentBody: string;
 	@Input() idComment : string;
+
+	quillEditorContent : string;
 
 	userAuthorData: User = {
 		firstName: '',
@@ -74,7 +77,8 @@ export class CommentCardComponent implements OnInit {
 	}
 
 	constructor(
-		private authenticationService: AuthService
+		private authenticationService: AuthService,
+		private commentService : CommentsService
 	) {
 		this.commentEditForm = new FormGroup({
 			'CommentBody': new FormControl(this.commentBody)
@@ -83,6 +87,7 @@ export class CommentCardComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.onFetchDataUser(this.idAuthorComment);
+		this.quillEditorContent = this.commentBody;
 	}
 
 	/**
@@ -106,7 +111,11 @@ export class CommentCardComponent implements OnInit {
 	}
 
 	onEditComment() {
-		return this.commentEditForm.get('CommentBody').value;
+		let content : string;
+		content = this.commentEditForm.get('CommentBody').value;
+		this.commentService.updateComment(this.idComment, content).catch(
+			error => console.log('An error ocurred : ' + error)
+		)
 	}
 
 	onFetchDataUser(idUser: string) {

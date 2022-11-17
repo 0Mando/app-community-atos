@@ -19,19 +19,23 @@
 	</header>
 	<section class="comment-card__content">
 		<p [innerHTML]="commentBody" *ngIf="!canEditComment"></p>
-		<!-- <article *ngIf="canEditComment">
-			TODO : Inyectar texto de MD al input de quill editor
-			<form [formGroup]="commentEditForm">
+		<article *ngIf="canEditComment">
+			<!-- TODO : Inyectar texto de MD al input de quill editor -->
+			<form [formGroup]="commentEditForm" (ngSubmit)="onEditComment()">
 				<quill-editor
-					[textContent] = onEditComment()
+					[(ngModel)]="quillEditorContent"
 					class="comment-card__quill-editor"
 					formControlName="CommentBody"
 					[modules]="editorModules"
 					[defaultEmptyValue]="commentBody"
 					[styles]="{height: '200px'}">
 				</quill-editor>
+				<section class="comment-card__buttons">
+					<button class="comment-card__btn-update">Update comment</button>
+					<button class="comment-card__btn-cancel">Cancel</button>
+				</section>
 			</form>
-		</article> -->
+		</article>
 	</section>
 	<hr>
 </article>

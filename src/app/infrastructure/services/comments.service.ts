@@ -38,7 +38,7 @@ export class CommentsService {
 		return this.afs.collection('comments').doc(idComment).delete();
 	}
 
-	updateComment(idComment : string) {
-
+	updateComment(idComment : string, content : string) {
+		return this.afs.collection('comments').doc(idComment).update({commentBody : content});
 	}
 }
