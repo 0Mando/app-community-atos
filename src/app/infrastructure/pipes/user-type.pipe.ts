@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UserTypePipe implements PipeTransform {
 	transform(
-		type: 'normal-user' | 'auth-user' | 'moderator' | 'admin'|'disabled'
+		type: 'normal-user' | 'auth-user' | 'moderator' | 'admin'| 'disabled'
 	): string {
 		switch (type) {
 			case 'normal-user':

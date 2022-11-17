@@ -61,7 +61,7 @@
 						<input
 							type="checkbox"
 							class="users-checkbox-child"
-							[value]="user.email"
+							[value]="user.id"
 							[checked]="user.checked"
 							(change)="onChangeUsers($event)"
 						/>
@@ -77,9 +77,12 @@
 					{{ user.firstName + " " + user.lastName }}
 				</div>
 				<div class="users__list-email">{{ user.email }}</div>
-				<div class="users__list-title">
+				<div class="users__list-title" (click)="handleUndoDisableUser(user.id, user.userTypeBackup)">
 					<div class="users__title {{ user.userType }}">
 						{{ user.userType | userType }}
+					</div>
+					<div *ngIf="user.userType == 'disabled'" class="users__title {{ user.userType }} disabled-hover">
+						Enable user
 					</div>
 				</div>
 				<div class="users__list-date">07/04/1927</div>

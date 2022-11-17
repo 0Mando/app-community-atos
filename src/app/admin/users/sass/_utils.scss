@@ -1,52 +1,66 @@
-.fa{
-    &-plus{
-        font-size: 1rem;
-    }
+.fa {
+	&-plus {
+		font-size: 1rem;
+	}
 
-    &-gear{
-        align-self: center;
-        color: lightgray;
-        margin: 0 20px;
-        cursor: pointer;
-    }
+	&-gear {
+		align-self: center;
+		color: lightgray;
+		margin: 0 20px;
+		cursor: pointer;
+	}
 }
 
-.disable__user{
-    width: 110px;
-    height: 30px;
-    align-self: center;
-    border-radius: 5px;
-    margin-left: auto;
-    border: 1px solid darkred;
-    color: darkred;
-    background: none;
-    cursor: pointer;
+.disable__user {
+	width: 110px;
+	height: 30px;
+	align-self: center;
+	border-radius: 5px;
+	margin-left: auto;
+	border: 1px solid darkred;
+	color: darkred;
+	background: none;
+	cursor: pointer;
 
-    &:hover{
-        background-color: rgb(248, 207, 207);
-    }
+	&:hover {
+		background-color: rgb(248, 207, 207);
+	}
 }
 
 .checkmark {
-    position: absolute;
-    left: 35%;
-    height: 16px;
-    width: 16px;
-    background-color: white;
-    padding: 0 !important;
-    border-radius: 2px;
-    border: 1px solid #a5c9ff;
-    cursor: pointer;
+	position: absolute;
+	left: 35%;
+	height: 16px;
+	width: 16px;
+	background-color: white;
+	padding: 0 !important;
+	border-radius: 2px;
+	border: 1px solid #a5c9ff;
+	cursor: pointer;
 
-    &:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
+	&:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
 }
 
-.disable__title{
-    color: darkblue;
-    margin-left: 1.5rem;
-    margin-bottom: 15px;
+.disable__title {
+	color: darkblue;
+	margin-left: 1.5rem;
+	margin-bottom: 15px;
+}
+
+div .disabled-hover {
+	display: none;
+}
+
+div:hover .disabled {
+	display: none;
+}
+
+div:hover .disabled-hover {
+	display: block;
+    background: rgb(243, 119, 119);
+    color: white;
 }

@@ -22,31 +22,40 @@ export class UsersComponent implements OnInit {
 	}
 
 	private getUserList() {
+		console.log("1");
+		this.users = [];
 		this.authenticationService.getUserList<User>().subscribe((users) => {
-			this.users = users.map((user) => {
-				user.checked = false;
+			users.forEach((user) => {
+				this.users.push({
+          id: user.payload.doc.id,
+					checked: false,
+          ...user.payload.doc.data(),
+        })
 				return user;
 			});
 		});
 	}
-
+	
 	onChangeUsers($event) {
 		const id = $event.target.value;
 		const isChecked = $event.target.checked;
-
+		
+		console.log(this.users);
+		console.log("2");
 		this.users = this.users.map((user) => {
-			if (user.email == id) {
+			if (user.id == id) {
 				user.checked = isChecked;
 				this.usersParentCheckbox = isChecked
-					? this.validateAllChecked()
-					: false;
+				? this.validateAllChecked()
+				: false;
 			} else if (id == -1) {
 				user.checked = this.usersParentCheckbox;
 			}
 			return user;
 		});
+		console.log(this.users);
 	}
-
+	
 	validateAllChecked(): boolean {
 		for (let i = 0; i < this.users.length; i++) {
 			if (this.users[i].checked == false) {
@@ -55,19 +64,28 @@ export class UsersComponent implements OnInit {
 		}
 		return true;
 	}
-
+	
 	sortHandler(sortBy: 'Name' | 'Email' | 'Title'): void {
 		this.sortOrder = this.sortOrder === 'ASC' ? 'DESC' : 'ASC';
 		this.sortColumn = sortBy;
 	}
-
+	
 	handleDisableUser(): void {
-		console.log('users to be disabled');
-		this.users.map((user) => {
+		console.log(this.users);
+		
+		console.log("3");
+		this.users = this.users.map((user) => {
 			if (user.checked && user.userType != 'disabled') {
-				console.log(user.firstName, user.lastName);
+				this.authenticationService.disableUser(user.id);
+				user.checked = false;
 				user.userType = 'disabled';
 			}
+			return user;
 		});
+		console.log(this.users);
+	}
+	
+	handleUndoDisableUser(userId:string, userTypeBackup:"normal-user" | "auth-user" | "moderator" | "admin"):void{
+		this.authenticationService.undoDisableUser(userId, userTypeBackup);
 	}
 }
