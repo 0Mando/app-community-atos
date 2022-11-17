@@ -22,9 +22,8 @@ export class UsersComponent implements OnInit {
 	}
 
 	private getUserList() {
-		console.log("1");
-		this.users = [];
 		this.authenticationService.getUserList<User>().subscribe((users) => {
+			this.users = [];
 			users.forEach((user) => {
 				this.users.push({
           id: user.payload.doc.id,
@@ -39,9 +38,7 @@ export class UsersComponent implements OnInit {
 	onChangeUsers($event) {
 		const id = $event.target.value;
 		const isChecked = $event.target.checked;
-		
-		console.log(this.users);
-		console.log("2");
+
 		this.users = this.users.map((user) => {
 			if (user.id == id) {
 				user.checked = isChecked;
@@ -53,7 +50,7 @@ export class UsersComponent implements OnInit {
 			}
 			return user;
 		});
-		console.log(this.users);
+		
 	}
 	
 	validateAllChecked(): boolean {
@@ -71,18 +68,12 @@ export class UsersComponent implements OnInit {
 	}
 	
 	handleDisableUser(): void {
-		console.log(this.users);
-		
-		console.log("3");
-		this.users = this.users.map((user) => {
+		this.users.map((user) => {
 			if (user.checked && user.userType != 'disabled') {
 				this.authenticationService.disableUser(user.id);
-				user.checked = false;
-				user.userType = 'disabled';
 			}
-			return user;
 		});
-		console.log(this.users);
+		this.getUserList();
 	}
 	
 	handleUndoDisableUser(userId:string, userTypeBackup:"normal-user" | "auth-user" | "moderator" | "admin"):void{
