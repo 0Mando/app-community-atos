@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //* Components
 import { AdminComponent } from './admin.component';
@@ -19,8 +19,9 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
-
-
+import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
+import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
+import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
 
 
 @NgModule({
@@ -35,13 +36,16 @@ import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
     ChannelsComponent,
     FormularyComponent,
     TimeAgoPipe,
-    ShortenModPipe
+    ShortenModPipe,
+    UserTypePipe,
+    FilterUsersPipe,
+    SortUsersPipe
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    
+    FormsModule
     // HttpClientModule
   ]
 })
