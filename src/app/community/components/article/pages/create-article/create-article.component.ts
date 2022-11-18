@@ -103,25 +103,41 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
 			channelId: this.channelIdParam,
-			titlePost: this.markdownForm.get('titlePostForm').value,
-			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
-			content: this.markdownForm.get('contentForm').value,
-			disableComments: this.markdownForm.get('comments').value,
+			titlePost: this.markdownForm.get('titlePostForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
+			content: this.markdownForm.get('contentForm').value || '',
+			disableComments: this.markdownForm.get('comments').value || '',
 			archive: this.archiveArticle,
-			readingTime: this.markdownForm.get('readingTimeForm').value,
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
 		}
 		console.table(this.post);
 
-		// *Send post to database
-		this.articleService.createPost(this.post).catch(
-			error => console.log('An error ocurred : ' + error)
-		)
-		// *Changes saved
-		this.articleChangesSaved = true;
-		// *Reset form
-		this.markdownForm.reset();
-		// *Go back to list articles page
-		this.router.navigate(['/articles/'+ this.channelIdParam +'/posts']);
+		if (this.markdownForm.valid) {
+			// *Send post to database
+			this.articleService.createPost(this.post).catch(
+				error => console.log('An error ocurred : ' + error)
+			)
+			// *Reset form
+			// this.markdownForm.reset();
+			// *Go back to list articles page
+			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+			// *Changes saved
+			this.articleChangesSaved = true;
+		} else if (!this.markdownForm.valid && this.post.archive) {
+			// *Send post to database
+			this.articleService.createPost(this.post).catch(
+				error => console.log('An error ocurred : ' + error)
+			)
+			// *Reset form
+			// this.markdownForm.reset();
+			// *Go back to list articles page
+			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+			// *Changes saved
+			this.articleChangesSaved = true;
+		} else {
+			alert('Complete form or save your draft')
+		}
+
 	}
 
 	/**
@@ -150,11 +166,12 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
 		if (!this.markdownForm.valid) {
-			return  confirm(
-			`Are you sure you want to leave this page?\nYou can save this draft and continue later`
+			console.log(!this.markdownForm.valid);
+			return confirm(
+				`Are you sure you want to leave this page?\nYou can save this draft and continue later`
 			);
 		} else {
-			return false;
+			return true;
 		}
 	}
 }
