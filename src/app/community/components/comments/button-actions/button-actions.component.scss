@@ -22,6 +22,10 @@
 			display: flex;
 			align-items: center;
 		}
+
+		&__actions {
+			display: none;
+		}
 	}
 }
 
@@ -55,7 +59,7 @@
 }
 
 @include media-md {
-	.options {
+	.btn-options {
 
 		&__list {
 
