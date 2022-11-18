@@ -33,8 +33,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	articleChangesSaved: boolean = false;
 
 	//* Parameters
-	channelParentParam: string = '';
-	boardParam: string = '';
+	channelIdParam: string = '';
 
 	//* Toolbar settings input text for create a post
 	//* If more properties are needed in the editor, just uncomment them.
@@ -94,8 +93,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	ngOnInit(): void {
 		this.route.queryParams.subscribe(
 			(params: Params) => {
-				this.channelParentParam = params['channel']
-				this.boardParam = params['board']
+				this.channelIdParam = params['channelId']
 			}
 		)
 	}
@@ -104,24 +102,26 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
-			channelId: '',
+			channelId: this.channelIdParam,
 			titlePost: this.markdownForm.get('titlePostForm').value,
 			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
 			content: this.markdownForm.get('contentForm').value,
 			disableComments: this.markdownForm.get('comments').value,
 			archive: this.archiveArticle,
 			readingTime: this.markdownForm.get('readingTimeForm').value,
-			boardParent: this.boardParam
 		}
 		console.table(this.post);
 
-		// this.articleService.createPost(this.post).catch(
-		// 	error => console.log('An error ocurred : ' + error)
-		// )
+		// *Send post to database
+		this.articleService.createPost(this.post).catch(
+			error => console.log('An error ocurred : ' + error)
+		)
+		// *Changes saved
 		this.articleChangesSaved = true;
-
-		// this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
-		// this.markdownForm.reset();
+		// *Reset form
+		this.markdownForm.reset();
+		// *Go back to list articles page
+		this.router.navigate(['/articles/'+ this.channelIdParam +'/posts']);
 	}
 
 	/**

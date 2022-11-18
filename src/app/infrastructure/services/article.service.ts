@@ -22,10 +22,10 @@ export class ArticleService {
 		return newPost.doc(this.afs.createId()).set(postData);
 	}
 
-	displayPost<IPost>(channelParent : string) {
+	displayPost<IPost>(channelId : string) {
 		const post = this.afs.collection<IPost>(
 			'posts',
-			ref => ref.where('channelParent', '==', channelParent)
+			ref => ref.where('channelId', '==', channelId)
 		)
 		return post.valueChanges({ idField : 'id' });
 	}

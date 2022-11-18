@@ -32,7 +32,7 @@ const routes: Routes = [
 		component: BoardsComponent
 	},
 	{
-		path: 'channels/:boardName',
+		path: 'channels/:boardId',
 		component: ChannelsComponent
 	},
 	{
@@ -48,7 +48,7 @@ const routes: Routes = [
 		component: MyprofileComponent
   	},
 	{
-		path : 'articles/:parentBoard/:channelName/posts',
+		path : 'articles/:channelId/posts',
 		component : ListArticlesComponent
 	},
 	{

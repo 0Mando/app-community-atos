@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Channel } from 'src/app/domain/models/channel.model';
 import { IArticle } from 'src/app/domain/models/ipost';
-import { User } from 'src/app/domain/models/user.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
-
-import { ArticleCardComponent } from '../../components/article-card/article-card.component';
+import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
 @Component({
 	selector: 'app-list-articles',
@@ -15,8 +14,7 @@ import { ArticleCardComponent } from '../../components/article-card/article-card
 export class ListArticlesComponent implements OnInit {
 
 	//* Information of origin
-	channelName : string = '';
-	boardName : string = '';
+	channelId : string = '';
 
 	//* List of articles
 	articles: IArticle[];
@@ -25,27 +23,32 @@ export class ListArticlesComponent implements OnInit {
 	lengthListArticles : number = 0;
 	page: number = 1;
 
+	currentChannel : Channel = {
+		channelName : '',
+		channelDescription : '',
+		channelImage : '',
+		parentBoard : ''
+	}
+
 	constructor(
 		private route: ActivatedRoute,
 		private router : Router,
 		private article : ArticleService,
-		private auth : AuthService
+		private auth : AuthService,
+		private channel : ChannelService
 	) { }
 
 	ngOnInit(): void {
-		// Board and channel origin
+		// Channel origin
 		this.route.params.subscribe(
 			(params : Params)=>{
-				this.channelName = params['channelName']
-				this.boardName = params['parentBoard']
+				this.channelId = params['channelId']
 			}
 		)
-
+		// Display name of the channel
+		this.onFetchChannelName(this.channelId);
 		// Display list of articles
 		this.onFetchArticles();
-
-		// Get user information to check if you can publish an article
-		// this.auth.getUserById<User>().subscribe()
 	}
 
 	/**
@@ -65,10 +68,7 @@ export class ListArticlesComponent implements OnInit {
 	 */
 	onCreateArticle() {
 		if(this.userIsLogged() && this.isVerified()){
-			this.router.navigate(['create-article'], { queryParams : {
-				channel : this.channelName,
-				board : this.boardName
-			} });
+			this.router.navigate(['create-article'], { queryParams : { channelId : this.channelId } } );
 		} else if(this.userIsLogged() && !this.isVerified()) {
 			alert('Please verified your accout');
 		} else {
@@ -80,10 +80,27 @@ export class ListArticlesComponent implements OnInit {
 	 * Fetch the articles from the channel.
 	 */
 	onFetchArticles() {
-		this.article.displayPost<IArticle>(this.channelName).subscribe(
+		this.article.displayPost<IArticle>(this.channelId).subscribe(
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;
+			}
+		)
+	}
+
+	/**
+	 * Fetch data channel.
+	 * @param idChannel Reference of the channel.
+	 */
+	onFetchChannelName(idChannel : string) {
+		this.channel.getChannelById(idChannel).subscribe(
+			(channel : Channel) => {
+				this.currentChannel = {
+					channelName : channel.channelName,
+					channelDescription : channel.channelDescription,
+					channelImage : channel.channelImage,
+					parentBoard : channel.parentBoard
+				}
 			}
 		)
 	}

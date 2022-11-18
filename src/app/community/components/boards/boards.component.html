@@ -27,7 +27,7 @@
 						<p>Lorem, ipsum dolor.</p>
 					</div>
 				</div>
-				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
+				<a routerLink="/channels/{{ board.id }}" class="board__btn-i">Access</a>
 			</div>
 		</article>
 		<h3 *ngIf="!(boards | searchFilter: boardFilter )?.length">No items found</h3>
