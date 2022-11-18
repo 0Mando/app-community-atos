@@ -39,7 +39,8 @@ export class RegisterComponent implements OnInit {
 			birthday : this.formRegisterUser.get('birthday').value,
 			email : this.formRegisterUser.get('email').value,
 			password : this.formRegisterUser.get('password').value,
-			userType : 'normal-user'
+			userType : 'normal-user',
+			userTypeBackup : 'normal-user',
 		}
 
 		this.isLoading = true;

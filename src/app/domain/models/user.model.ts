@@ -5,7 +5,9 @@ export interface User{
 	birthday: string;
 	email: string;
 	password: string;
-	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin';
+	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin' | 'disabled';
+	userTypeBackup: 'normal-user' | 'auth-user' | 'moderator' | 'admin';
+	checked?: boolean;
 }
 
 /**
