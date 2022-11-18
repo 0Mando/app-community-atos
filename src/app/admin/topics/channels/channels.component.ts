@@ -1,4 +1,8 @@
+import { Channel } from 'src/app/domain/models/channel.model';
+import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
+import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-channels',
@@ -6,13 +10,62 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./channels.component.scss']
 })
 export class ChannelsComponent implements OnInit {
-  cards = ['','','','','','','','','',''];
   currentType = "channel";
-  isIt = false;
+  currentName: string = "New Channel"
 
-  constructor() { }
+  onEdition = false;
+
+  printChannels: Channel[] = [];
+
+  resetFormSubject: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private _roomService: BoardCRUDService ,private _modService: ModeratorsService) { }
 
   ngOnInit(): void {
+    // this.obtainMODS();
+    this.getChannels();
+  }
+  
+  // obtainMODS(){
+  //   this._modService.readMods().subscribe(doc => {
+  //     doc.forEach(element => {
+  //       this._modService.modList.push({
+  //         id: element.payload.doc.id,
+  //         ...element.payload.doc.data()
+  //       });
+  //     });
+  //   });
+  // }
+
+  getChannels(){
+    this._roomService.readRoom('channels').subscribe(doc => {
+      if(this.printChannels){
+        this.printChannels = [];
+      }
+      doc.forEach(element => {
+        this.printChannels.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      }); 
+    })
   }
 
+  updateChannel(chanel: Channel){
+    this.currentName = chanel.channelName;
+    this.onEdition = true;
+    setTimeout(() => {
+      this._roomService.addRoomEdit(chanel);
+    }, 10);
+  }
+
+  changeState(value: boolean){
+    this.onEdition = value;
+  }
+
+  newChannel(){
+    this.currentName = 'New Channel';
+    this.resetFormSubject.next(true);
+    this.onEdition = true;
+  }
 }

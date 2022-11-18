@@ -1,3 +1,4 @@
+import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { Subject } from 'rxjs';
 import { Board } from 'src/app/domain/models/board.model';
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
@@ -19,17 +20,28 @@ export class BoardsComponent implements OnInit {
   onEdition = false;
 
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
-  
-  cards = ['','','','','','','','','',''];
 
-  constructor(private _boardService: BoardCRUDService) { }
+  constructor(private _roomService: BoardCRUDService,
+    private _modService: ModeratorsService) { }
 
   ngOnInit(): void {
+    this.obtainMODS();
     this.getBoards();
   }
 
+  obtainMODS(){
+    this._modService.readMods().subscribe(doc => {
+      doc.forEach(element => {
+        this._modService.modList.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        });
+      });
+    });
+  }
+
   getBoards(){
-    this._boardService.readBoard().subscribe(doc => {
+    this._roomService.readRoom('boards').subscribe(doc => {
       if (this.printBoards){
         this.printBoards = [];
       }
@@ -46,7 +58,7 @@ export class BoardsComponent implements OnInit {
     this.currentName = board.boardName;
     this.onEdition = true;
     setTimeout(() => {
-      this._boardService.addBoardEdit(board);
+      this._roomService.addRoomEdit(board);
     }, 10);
   }
 

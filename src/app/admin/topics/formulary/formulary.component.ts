@@ -24,7 +24,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   id: string | undefined = undefined;
   printMods: any[] = [];
   modList: any[] = [];
-  modsID: string[] = [];
+  modsID: any[] = [];
 
   loading: boolean = false;
   file: any = {};
@@ -39,7 +39,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   constructor(
       private fb: FormBuilder,
-      private _boardService: BoardCRUDService,
+      private _roomService: BoardCRUDService,
       private _modService: ModeratorsService) {
     this.newForm = this.fb.group({
       name: [null, Validators.required],
@@ -50,36 +50,9 @@ export class FormularyComponent implements OnInit, AfterViewInit{
    }
 
   ngOnInit(): void {
-
-    // const getMods = async () => {
-    //   try {
-    //     let mods = await this.obtainMODS();        
-    //     this.displayMods(this.modsID, mods); 
-    //   } catch (error) {
-        
-    //   }
-    // }
-
-    this.obtainMODS();
+    this.modList = this._modService.modList;
     
-    this._boardService.getBoardEdit().subscribe(data => {
-      this.newForm.patchValue({
-        name: data.boardName,
-        description: data.boardDescription,
-        visibility: data.boardVisibility
-      })
-      // this.modsID = [];
-      this.id = data.id;
-      
-      // this.modsID = data.boardMods;
-      // getMods();
-
-      this.title = 'editing';
-      this.action = 'edit';
-    })
-
     this.resetFormSubject.subscribe( response => {
-      // getMods();
       if (response){
         this.resForm();
         this.title = 'creating';
@@ -87,44 +60,41 @@ export class FormularyComponent implements OnInit, AfterViewInit{
         this.id = undefined;
       }
     });
-    
-    
+
+    this.createEdition();
   }
 
-  obtainMODS(){
-    let mods = [];
-    this._modService.readMods().subscribe(doc => {
-      if (this.modList){
-        this.modList = [];
-      }
-      doc.forEach(element => {
-        this.modList.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        });
-        mods.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
+  createEdition(){
+    this._roomService.getBoardEdit().subscribe(data => {
+      this.printMods = [];
+      this.newForm.patchValue({
+        name: data.boardName,
+        description: data.boardDescription,
+        visibility: data.boardVisibility
       });
-    });
-    return mods;
+      this.modsID = [];
+
+      if (data.boardMods){
+        data.boardMods.forEach(mod => {
+          this.modsID.push(mod);
+        });
+      }
+           
+      this.displayMods(this.modsID, this.modList);
+      this.id = data.id;
+      this.title = 'editing';
+      this.action = 'edit';
+    })
   }
 
   displayMods(mods?: string[], list?: any[]){
-    this.printMods = [];
-    
-    console.log(list);
-    console.log(list.length);
-    // mods.forEach(mod => {
-    //   list.forEach(x => {
-    //     console.log(x);
-        
-    //     if(x.id === mod){
-    //       this.printMods.push(x);
-    //     }
-    //   })
-    // })
+    mods.forEach(mod => {
+      list.forEach(x => {
+        if(x.id === mod){
+          this.printMods.push(x);
+        }
+      });
+    });
   }
 
   ngAfterViewInit(): void {        
@@ -187,7 +157,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       boardMods: this.modsID
     }
 
-    this._boardService.createBoard(TYPE).then(() => {
+    this._roomService.createRoom(TYPE, 'boards').then(() => {
       this.newForm.reset();
       this.closeForm();
       
@@ -205,7 +175,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       boardMods: this.modsID
     }
 
-    this._boardService.updateBoard(id, TYPE).then(() => {
+    this._roomService.updateRoom(id, TYPE, 'boards').then(() => {
       this.resForm();
       this.closeForm();
       this.id = undefined;
@@ -222,7 +192,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       'Yes',
       'No',
       () => {
-        this._boardService.deleteBoard(tempID).then(() => {
+        this._roomService.deleteRoom(tempID, 'boards').then(() => {
           Notiflix.Notify.success(
             'Board Eliminated Correctly',
             {
