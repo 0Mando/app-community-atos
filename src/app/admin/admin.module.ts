@@ -19,6 +19,7 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
+import { ReportsComponent } from './reports/reports.component';
 
 
 
@@ -35,7 +36,8 @@ import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
     ChannelsComponent,
     FormularyComponent,
     TimeAgoPipe,
-    ShortenModPipe
+    ShortenModPipe,
+    ReportsComponent
   ],
   imports: [
     CommonModule,

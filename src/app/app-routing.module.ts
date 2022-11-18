@@ -12,6 +12,7 @@ import { AdminBoardFormComponent } from './community/admin/admin-board-form/admi
 import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './presentation/shared/channels-empty/channels-empty.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,10 @@ const routes: Routes = [
 	{
 		path : 'admin/boards',
 		component : AdminBoardFormComponent
+	},
+	{
+		path : 'admin/reports',
+		component : ReportsComponent
 	},
 	{
 		path: 'admin/channels',
