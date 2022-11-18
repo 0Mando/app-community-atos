@@ -94,10 +94,14 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		this.route.queryParams.subscribe(
 			(params: Params) => {
 				this.channelIdParam = params['channelId']
+				if(this.channelIdParam === undefined){
+					this.router.navigate(['/boards'])
+				}
 			}
 		)
 	}
 
+	// TODO : Issue submit information, save draft
 	submitPost(): void {
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
