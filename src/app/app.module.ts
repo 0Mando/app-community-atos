@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -124,7 +125,8 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 	],
 	providers: [
 		AngularFirestore,
-		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+		AuthService
 	],
 	bootstrap: [AppComponent]
 })
