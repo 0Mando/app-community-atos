@@ -1,40 +1,37 @@
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, filter, map } from 'rxjs';
+import { Observable, lastValueFrom, filter, switchMap, map, take, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
 
-  userId: string;
+  currentUserId: string;
 
   constructor(private _authService: AuthService, private router: Router) {
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
-    this.getUserID();
-    
-    return true;
-  }
 
-  getUserID(){
-    const uid = this._authService.userID$.pipe(
-      filter(res => res != undefined)
-      );
-
-    const sub = uid.subscribe(data => {
-      console.log('the user id is ' + data);
-    })
+    return this._authService.getCurrentUser().pipe(
+      switchMap(user => this._authService.getAdmins().pipe(
+        map(admins => {
+          let isAdmin: boolean;
+          admins.forEach(admin => {
+            if(user.uid === admin.id){
+              isAdmin = true;
+            }
+          })
+          if(isAdmin){
+            return true;
+          }
+          this.router.navigate(['/'])
+          return false;
+        })
+      ))
+    );
   }
-
-  verify(){
-    console.log(this.userId);
-    
-    return true;
-  }
-  
 }
