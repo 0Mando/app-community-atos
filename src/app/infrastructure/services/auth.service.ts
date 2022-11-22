@@ -59,8 +59,12 @@ export class AuthService {
 		return this.afs.collection<User>('Users').snapshotChanges();
 	}
 
-	currentSessionUserId() {
+	currentSessionUserId() : string {
 		return this.userData.uid;
+	}
+
+	onFetchUserInformation(idUser : string) {
+		return this.afs.collection('Users').doc(idUser).valueChanges()
 	}
 	
 	disableUser(userId:string){

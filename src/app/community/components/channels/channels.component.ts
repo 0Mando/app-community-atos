@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class ChannelsComponent implements OnInit {
 
-	boardName: string
+	boardId: string
 
 	constructor(
 		private route: ActivatedRoute,
@@ -17,11 +17,11 @@ export class ChannelsComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		this.boardName = this.route.snapshot.params['boardName']
+		this.boardId = this.route.snapshot.params['boardId']
 
 		this.route.params.subscribe(
 			(params: Params)=>{
-				this.boardName = params['boardName'];
+				this.boardId = params['boardId'];
 			}
 		)
 	}

@@ -1,0 +1,41 @@
+<article class="comment-card">
+	<header class="comment-card__header">
+		<img class="comment-card__header__author-profile" src="{{ userAuthorData.profilePicture }}" alt="">
+		<div class="comment-card__header__author-data">
+			<span class="comment-card__header__author-name">
+				{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}
+			</span>
+			<small class="comment-card__header__days-ago">{{ createdAt | date }}</small>
+		</div>
+		<div class="comment-card__header__options" *ngIf="userNoRegister()">
+			<app-button-actions
+			[canEdit]="editComment(idAuthorComment)"
+			[canDelete]="deleteComment(idAuthorComment)"
+			[canReport]="reportComment(idAuthorComment)"
+			[idCommentReference]="idComment"
+			(editComment)="canEditComment = $event"
+			></app-button-actions>
+		</div>
+	</header>
+	<section class="comment-card__content">
+		<p [innerHTML]="commentBody" *ngIf="!canEditComment"></p>
+		<article *ngIf="canEditComment">
+			<!-- TODO : Inyectar texto de MD al input de quill editor -->
+			<form [formGroup]="commentEditForm" (ngSubmit)="onEditComment()">
+				<quill-editor
+					[(ngModel)]="quillEditorContent"
+					class="comment-card__quill-editor"
+					formControlName="CommentBody"
+					[modules]="editorModules"
+					[defaultEmptyValue]="commentBody"
+					[styles]="{height: '200px'}">
+				</quill-editor>
+				<section class="comment-card__buttons">
+					<button class="comment-card__btn-update">Update comment</button>
+					<button class="comment-card__btn-cancel" (click)="onCancelEditComment">Cancel</button>
+				</section>
+			</form>
+		</article>
+	</section>
+	<hr>
+</article>
