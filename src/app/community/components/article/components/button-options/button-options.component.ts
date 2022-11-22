@@ -17,4 +17,8 @@ export class ButtonOptionsComponent implements OnInit {
 	onPressedOptions(): void {
 		this.showOptionsList = !this.showOptionsList;
 	}
+
+	onPressedCover(): void {
+		this.showOptionsList = !this.showOptionsList;
+	}
 }
