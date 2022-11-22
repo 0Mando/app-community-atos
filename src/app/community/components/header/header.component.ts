@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit, DoCheck {
 		email: '',
 		password: '',
 		profilePicture : 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-		userType : 'normal-user'
+		userType : 'normal-user',
+		userTypeBackup : 'normal-user'
 	};
 
 	// private subscription : Subscription;
@@ -84,6 +85,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 					email: user.email,
 					password: '************',
 					userType : user.userType,
+					userTypeBackup : user.userTypeBackup,
 					profilePicture : user.profilePicture
 				}
 			}
