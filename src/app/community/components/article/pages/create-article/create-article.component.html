@@ -51,7 +51,11 @@
 				</section>
 				<br>
 				<section class="post__actions">
-					<button class="post__submit" (click)="onSubmitArticle()">Publish</button>
+					<button class="post__submit" (click)="onSubmitArticle()"
+						[disabled]="markdownForm.invalid"
+						[ngStyle]="{opacity : validateForm()}">
+						Publish
+					</button>
 					<button class="post__draft" (click)="onSaveDraft()">Save draft</button>
 					<a (click)="onCancelArticle()" class="post__cancel">Cancel</a>
 				</section>

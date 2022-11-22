@@ -170,12 +170,12 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
 			channelId: this.channelIdParam,
-			titlePost: this.markdownForm.get('titlePostForm').value,
-			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
-			content: this.markdownForm.get('contentForm').value,
+			titlePost: this.markdownForm.get('titlePostForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
+			content: this.markdownForm.get('contentForm').value || '',
 			disableComments: this.markdownForm.get('comments').value,
-			archive: false,
-			readingTime: this.markdownForm.get('readingTimeForm').value
+			archive: true,
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0
 		}
 		console.table(this.post);
 	}
@@ -195,6 +195,14 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		this.quilleditorContent = event['editor']['root']['innerHTML'];
 		this.titlePost = this.markdownForm.get('titlePostForm').value;
 		// this.article.date = this.markdownForm.get('currentDateForm').value;
+	}
+
+	/**
+	 * Add styles to publish button if form is valid.
+	 * @returns Opacity percentage.
+	 */
+	validateForm() {
+		return this.markdownForm.invalid ? '50%' : '100%';
 	}
 
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
