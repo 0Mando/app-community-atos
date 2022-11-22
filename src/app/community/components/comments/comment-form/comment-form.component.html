@@ -1,9 +1,13 @@
 <section class="comment-form">
 	<img class="comment-form__author-profile-image"
 	src="{{ currentUser.profilePicture }}"
-	alt="">
-	<form [formGroup]="commentForm" (ngSubmit)="onCreateComment()" class="comment-form__container-form">
-		<quill-editor class="comment-form__quill-editor" [modules]="editorModules" formControlName="CommentBody" [styles]="{height: '200px'}" [placeholder]="'Type here to reply to $name_user'">
+	alt="{{ currentUser.firstName + ' ' + currentUser.lastName }}">
+	<form [formGroup]="commentForm"
+		(ngSubmit)="onCreateComment()"
+		class="comment-form__container-form">
+		<quill-editor class="comment-form__quill-editor" [modules]="editorModules"
+			formControlName="CommentBody" [styles]="{height: '200px'}"
+			[placeholder]="'Type here to reply to $name_user'">
 		</quill-editor>
 		<button class="comment-form__submit">Post comment</button>
 	</form>

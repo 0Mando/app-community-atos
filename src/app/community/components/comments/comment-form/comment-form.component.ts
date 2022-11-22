@@ -13,10 +13,10 @@ import { CommentsService } from 'src/app/infrastructure/services/comments.servic
 })
 export class CommentFormComponent implements OnInit {
 
-	commentForm : FormGroup;
-	currentDate : Date = new Date();
-	commentI : IComment;
-	idPost : string;
+	commentForm: FormGroup;
+	currentDate: Date = new Date();
+	commentI: IComment;
+	idPost: string;
 
 	currentUser: User = {
 		firstName: '',
@@ -29,9 +29,11 @@ export class CommentFormComponent implements OnInit {
 		profilePicture: ''
 	};
 
+	private idUser: string = this.authenticationService.currentSessionUserId();
+
 	//* Toolbar settings input text for create a post
 	editorModules = {
-		toolbar : [
+		toolbar: [
 			[
 				// 'bold',
 				// 'italic',
@@ -72,18 +74,18 @@ export class CommentFormComponent implements OnInit {
 	}
 
 	constructor(
-		private commentsService : CommentsService,
-		private authenticationService : AuthService,
-		private route : ActivatedRoute
+		private commentsService: CommentsService,
+		private authenticationService: AuthService,
+		private route: ActivatedRoute
 	) {
 		this.commentForm = new FormGroup({
-			'CommentBody' : new FormControl(null, Validators.required)
+			'CommentBody': new FormControl(null, Validators.required)
 		})
 	}
 
 	ngOnInit(): void {
 		this.route.params.subscribe(
-			(params : Params) => {
+			(params: Params) => {
 				this.idPost = params['id']
 			}
 		)
@@ -93,9 +95,8 @@ export class CommentFormComponent implements OnInit {
 	/**
 	 * Get user data.
 	 */
-	onFetchDataUser() : void {
-		const idUser : string = this.authenticationService.currentSessionUserId();
-		this.authenticationService.onFetchUserInformation(idUser).subscribe(
+	onFetchDataUser(): void {
+		this.authenticationService.onFetchUserInformation(this.idUser).subscribe(
 			(user: User) => {
 				this.currentUser = {
 					firstName: user.firstName,
@@ -111,29 +112,24 @@ export class CommentFormComponent implements OnInit {
 		)
 	}
 
-	onCreateComment() : void {
-		this.authenticationService.getUserById<User>().subscribe(
-			(user : User) => {
-				console.log(user.id);
-				console.log(this.commentForm.get('CommentBody').value);
-
-				this.commentI = {
-					idUserAuthor : user.id,
-					idPost : this.idPost,
-					commentBody : this.commentForm.get('CommentBody').value,
-					createdAt : this.currentDate.getTime()
+	/**
+	 * Create a new comment in article page.
+	 */
+	onCreateComment(): void {
+		const comment: IComment = {
+			idUserAuthor: this.idUser,
+			idPost: this.idPost,
+			commentBody: this.commentForm.get('CommentBody').value,
+			createdAt: this.currentDate.getTime()
+		}
+		console.table(comment);
+		this.commentsService.createComment(this.commentI)
+			.catch(
+				error => {
+					console.log('Something went wrong');
+					console.log(error);
 				}
-				console.table(this.commentI);
-				this.commentsService.createComment(this.commentI)
-				.catch(
-					error => {
-						console.log('Something went wrong');
-						console.log(error);
-					}
-				);
-				this.commentForm.reset();
-			}
-		)
+			);
+		this.commentForm.reset();
 	}
-
 }
