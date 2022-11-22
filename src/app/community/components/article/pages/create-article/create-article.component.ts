@@ -116,6 +116,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			readingTime: this.markdownForm.get('readingTimeForm').value
 		}
 		console.table(this.post);
+
+		this.sendArticle(this.post);
 	}
 
 	// TODO : Issue submit information, save draft
@@ -178,6 +180,25 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			readingTime: this.markdownForm.get('readingTimeForm').value || 0
 		}
 		console.table(this.post);
+
+		this.sendArticle(this.post);
+	}
+
+	/**
+	 * Send article to database.
+	 * @param post Created article.
+	 */
+	sendArticle(post : IArticle): void {
+		//* Send article to database
+		this.articleService.createPost(post).catch(
+			error => console.log('Something go wrong -> '+error)
+		)
+
+		// *Go back to list articles page
+		this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+
+		// *Changes saved
+		this.articleChangesSaved = true;
 	}
 
 	/**
@@ -194,7 +215,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	changeEditor(event: EditorChangeContent | EditorChangeSelection) {
 		this.quilleditorContent = event['editor']['root']['innerHTML'];
 		this.titlePost = this.markdownForm.get('titlePostForm').value;
-		// this.article.date = this.markdownForm.get('currentDateForm').value;
 	}
 
 	/**
