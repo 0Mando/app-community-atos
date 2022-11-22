@@ -59,6 +59,7 @@ import { CommentCardComponent } from './community/components/comments/comment-ca
 import { CommentFormComponent } from './community/components/comments/comment-form/comment-form.component';
 import { ListCommentsComponent } from './community/components/comments/list-comments/list-comments.component';
 import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
+import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
 
 @NgModule({
 	declarations: [
@@ -94,6 +95,7 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 		CommentFormComponent,
 		ListCommentsComponent,
 		ButtonActionsComponent,
+  ButtonOptionsComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],

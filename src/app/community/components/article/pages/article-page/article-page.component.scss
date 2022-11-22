@@ -11,19 +11,14 @@
 	margin-bottom: 2rem;
 
 	&__header {
-		border: 1px solid red;
 		display: flex;
 		align-items: flex-start;
+		justify-content: space-between;
 	}
 
 	&__title {
-		border: 1px solid red;
 		font-size: 2.5rem;
 		margin-top: 0;
-	}
-
-	&__options {
-		margin-top: 10px;
 	}
 
 	&__bar-about {

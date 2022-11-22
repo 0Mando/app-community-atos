@@ -1,0 +1,13 @@
+@import '../../../../../../sass/variables';
+
+.options {
+	margin-top: 10px;
+	border: none;
+	background: none;
+
+	&__list {
+		z-index: 2;
+		top: -38px;
+		left: 20px;
+	}
+}
