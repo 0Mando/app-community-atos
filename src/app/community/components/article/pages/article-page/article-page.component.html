@@ -3,7 +3,14 @@
 <main class="container">
 	<ng-container *ngIf="displayArticle; else loading">
 		<section class="post">
-			<h1 class="post__title">{{ currentArticle.titlePost }}</h1>
+			<header class="post__header">
+				<h1 class="post__title">{{ currentArticle.titlePost }}</h1>
+				<button class="post__options">
+					<span class="material-symbols-outlined">
+						more_vert
+					</span>
+				</button>
+			</header>
 			<ul class="post__bar-about">
 				<li>
 					{{ channelData.channelName }}
@@ -22,6 +29,9 @@
 						chat_bubble
 					</span>
 					{{ amountComments }} Comments
+				</li>
+				<li>
+					...
 				</li>
 			</ul>
 			<hr class="post__bar">
