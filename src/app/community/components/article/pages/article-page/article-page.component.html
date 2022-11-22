@@ -47,7 +47,7 @@
 		<hr class="post__bar">
 		<section *ngIf="currentArticle.disableComments">
 			<section class="post__comment-form">
-				<app-comment-form></app-comment-form>
+				<app-comment-form [replyToAuthor]="userAuthorData.firstName + ' ' + userAuthorData.lastName"></app-comment-form>
 			</section>
 			<section class="post__comments-list">
 				<app-list-comments (amountComments)="amountComments = $event"></app-list-comments>

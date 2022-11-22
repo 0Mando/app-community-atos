@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IComment } from 'src/app/domain/models/icomment';
@@ -17,6 +17,7 @@ export class CommentFormComponent implements OnInit {
 	currentDate: Date = new Date();
 	commentI: IComment;
 	idPost: string;
+	@Input() replyToAuthor : string;
 
 	currentUser: User = {
 		firstName: '',

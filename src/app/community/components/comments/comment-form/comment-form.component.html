@@ -7,7 +7,7 @@
 		class="comment-form__container-form">
 		<quill-editor class="comment-form__quill-editor" [modules]="editorModules"
 			formControlName="CommentBody" [styles]="{height: '200px'}"
-			[placeholder]="'Type here to reply to $name_user'">
+			[placeholder]="'Type here to reply to ' + replyToAuthor">
 		</quill-editor>
 		<button class="comment-form__submit">Post comment</button>
 	</form>
