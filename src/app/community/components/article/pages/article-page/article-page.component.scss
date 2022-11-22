@@ -1,0 +1,101 @@
+@import '../../../../../../sass/variables';
+
+#code {
+	color: white;
+	cursor: unset;
+}
+
+.post {
+
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+
+	&__header {
+		border: 1px solid red;
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&__title {
+		border: 1px solid red;
+		font-size: 2.5rem;
+		margin-top: 0;
+	}
+
+	&__options {
+		margin-top: 10px;
+	}
+
+	&__bar-about {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+
+		li {
+			display: inline-block;
+			margin: 0.5rem 0;
+			list-style-type: none;
+			font-weight: bold;
+			color: #707070;
+			padding: 3px 0;
+			vertical-align: text-bottom;
+		}
+
+		span {
+			vertical-align: text-bottom;
+		}
+
+	}
+
+	&__bar {
+		border: 1px solid $text-secondary;
+		margin-top: .5rem;
+	}
+
+	&__author {
+		display: flex;
+		margin-top: 1rem;
+
+		&__profile {
+			border-radius: 50%;
+			width: 3.4rem;
+			height: 3.4rem;
+			margin-right: 1.5rem;
+		}
+
+		&__name {
+			display: block;
+			padding-top: .5rem;
+		}
+	}
+
+	&__days {
+		color: $description-text;
+	}
+
+	&__content {
+		display: block;
+		width: 100%;
+		margin-top: 1rem;
+	}
+
+	&__comment-form {
+		margin-top: 4rem;
+	}
+
+	&__comments-list {
+		margin-top: 4rem;
+	}
+}
+
+@include media-md {
+	.post {
+		&__bar-about {
+			flex-direction: row;
+		}
+
+		li {
+			margin-right: 7rem;
+		}
+	}
+}

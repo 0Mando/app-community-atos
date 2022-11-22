@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<main class="container">
+	<ng-container *ngIf="displayArticle; else loading">
+		<section class="post">
+			<header class="post__header">
+				<h1 class="post__title">{{ currentArticle.titlePost }}</h1>
+				<button class="post__options">
+					<span class="material-symbols-outlined">
+						more_vert
+					</span>
+				</button>
+			</header>
+			<ul class="post__bar-about">
+				<li>
+					{{ channelData.channelName }}
+					<span class="material-symbols-outlined" id="code" (click)="easterEgg()">
+						code
+					</span>
+				</li>
+				<li>
+					<span class="material-symbols-outlined">
+						schedule
+					</span>
+					{{ currentArticle.readingTime }} minutes
+				</li>
+				<li>
+					<span class="material-symbols-outlined">
+						chat_bubble
+					</span>
+					{{ amountComments }} Comments
+				</li>
+				<li>
+					...
+				</li>
+			</ul>
+			<hr class="post__bar">
+			<section class="post__author">
+				<img class="post__author__profile" src="{{ userAuthorData.profilePicture }}" alt="{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}">
+				<div>
+					<span class="post__author__name">{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}</span>
+					<small class="post__days">{{ currentArticle.date | date }}</small>
+				</div>
+			</section>
+			<article class="post__content">
+				<p [innerHTML]="currentArticle.content"></p>
+			</article>
+		</section>
+		<hr class="post__bar">
+		<section *ngIf="currentArticle.disableComments">
+			<section class="post__comment-form">
+				<app-comment-form></app-comment-form>
+			</section>
+			<section class="post__comments-list">
+				<app-list-comments
+				(amountComments)="amountComments = $event"
+				></app-list-comments>
+			</section>
+		</section>
+	</ng-container>
+	<ng-template #loading>
+		<app-loading-spinner></app-loading-spinner>
+	</ng-template>
+</main>

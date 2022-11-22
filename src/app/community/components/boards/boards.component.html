@@ -4,13 +4,13 @@
 		<input type="text" name="boardFilter" id="boardFilter" placeholder="Search a board" [(ngModel)]="boardFilter">
 	</section>
 	<section class="board" id="board">
-		<article class="board__item"
-			*ngFor="let board of boards | searchFilter: boardFilter |
-			paginate : { itemsPerPage: 4, currentPage: page, totalItems: boardsLength }">
+		<article class="board__item" *ngFor="let board of boards | searchFilter: boardFilter |
+				paginate : { itemsPerPage: 4, currentPage: page }">
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
 				<p class="board__about-channel__description">{{ board.boardDescription }}</p>
-				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__about-channel__link">Go to section</a>
+				<a routerLink="/channels/{{ board.id }}"
+					class="board__about-channel__link">Go to section</a>
 			</div>
 			<div class="board__more-information">
 				<div class="board___stadistics">
@@ -27,9 +27,11 @@
 						<p>Lorem, ipsum dolor.</p>
 					</div>
 				</div>
-				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
+				<a routerLink="/channels/{{ board.id }}" class="board__btn-i">Access</a>
 			</div>
 		</article>
-		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+		<h3 *ngIf="!(boards | searchFilter: boardFilter )?.length">No items found</h3>
+		<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel="" *ngIf="(boards | searchFilter: boardFilter )?.length">
+		</pagination-controls>
 	</section>
 </main>
