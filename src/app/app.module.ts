@@ -38,8 +38,6 @@ import { ProfileComponent } from './community/components/profile/profile.compone
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { RegisterComponent } from './community/components/register/register.component';
 import { LoadingSpinnerComponent } from './community/shared/loading-spinner/loading-spinner.component';
-import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
-import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './community/components/channels/channels-list/channels-list.component';
@@ -75,8 +73,6 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		RegisterComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-		AdminBoardFormComponent,
-		AdminChannelFormComponent,
 		SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,

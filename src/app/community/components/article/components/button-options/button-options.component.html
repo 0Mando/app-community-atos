@@ -1,5 +1,5 @@
-<button class="options">
-	<ul class="options__list">
+<button class="options" (click)="onPressedOptions()">
+	<ul class="options__list" *ngIf="showOptionsList">
 		<li id="edit">
 			<span class="material-symbols-outlined">
 				edit
