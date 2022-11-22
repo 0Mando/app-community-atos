@@ -15,9 +15,11 @@ export class ReportService {
 		return newReport.doc(this.afs.createId()).set(report);
 	}
 
-	readReports<IReport>() {
-		const collection = this.afs.collection<IReport>('reports');
-		return collection.valueChanges({idField : 'id'});
+	getReportList<IReport>() {
+		// const collection = this.afs.collection<IReport>('reports');
+		// return collection.valueChanges({idField : 'id'});
+
+		return this.afs.collection<IReport>('reports').snapshotChanges();
 	}
 
 	updateReport(idReport : string, status : string) {
