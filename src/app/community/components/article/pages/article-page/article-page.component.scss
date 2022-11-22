@@ -21,6 +21,10 @@
 		margin-top: 0;
 	}
 
+	&__options {
+		position: relative;
+	}
+
 	&__bar-about {
 		margin-top: 1rem;
 		display: flex;
