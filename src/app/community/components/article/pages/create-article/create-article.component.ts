@@ -102,6 +102,9 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		)
 	}
 
+	/**
+	 * Publish a new article.
+	 */
 	onSubmitArticle(): void {
 		console.log('--- Submit Article ---');
 		this.post = {
@@ -173,7 +176,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			date: this.currentDate.getTime(),
 			channelId: this.channelIdParam,
 			titlePost: this.markdownForm.get('titlePostForm').value || '',
-			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value
+			|| '',
 			content: this.markdownForm.get('contentForm').value || '',
 			disableComments: this.markdownForm.get('comments').value,
 			archive: true,
@@ -225,9 +229,9 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		return this.markdownForm.invalid ? '50%' : '100%';
 	}
 
+	// TODO Fix guard
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-		if (!this.markdownForm.valid) {
-			console.log(!this.markdownForm.valid);
+		if(this.markdownForm.invalid) {
 			return confirm(
 				`Are you sure you want to leave this page?\nYou can save this draft and continue later`
 			);
