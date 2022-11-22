@@ -71,6 +71,7 @@ export class ButtonActionsComponent implements OnInit {
 	onReport(): void {
 		const report : IReport = {
 			reporterUserId : this.authService.currentSessionUserId(),
+			idItemReported : this.idCommentReference,
 			activity : 'Comment',
 			reportedUserId : this.currentComment.idUserAuthor,
 			reportDate : new Date().getTime(),
