@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IReport } from 'src/app/domain/models/report.model';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
 
@@ -19,16 +20,15 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getReportsList();
-    console.log(this.reports);
   }
 
   private getReportsList(){
-    this.reportService.getReportList<IReport>().subscribe((reports) => {
+    this.reportService.getReportList().subscribe((reports) => {
 			this.reports = [];
 			reports.forEach((report) => {
 				this.reports.push({
-          id: report.payload.doc.id,
-          ...report.payload.doc.data(),
+          id: report.id,
+          ...report,
         })
 				return report;
 			});

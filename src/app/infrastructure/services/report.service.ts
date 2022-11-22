@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 import { IReport } from 'src/app/domain/models/report.model';
 
 @Injectable({
@@ -14,12 +15,9 @@ export class ReportService {
 		const newReport = this.afs.collection('reports');
 		return newReport.doc(this.afs.createId()).set(report);
 	}
-
-	getReportList<IReport>() {
-		// const collection = this.afs.collection<IReport>('reports');
-		// return collection.valueChanges({idField : 'id'});
-
-		return this.afs.collection<IReport>('reports').snapshotChanges();
+	
+	getReportList():Observable<any> {
+		return this.afs.collection<IReport>('reports').valueChanges({ idField : 'id' });
 	}
 
 	updateReport(idReport : string, status : string) {
