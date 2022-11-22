@@ -1,7 +1,7 @@
 import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import { async, fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import * as Notiflix from 'notiflix'
 
 //* Services
@@ -10,7 +10,6 @@ import { BoardCRUDService } from './../../../infrastructure/services/board-crud.
 //* Models
 import { Board } from 'src/app/domain/models/board.model';
 import { Channel } from 'src/app/domain/models/channel.model';
-import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -26,6 +25,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   printMods: any[] = [];
   modList: any[] = [];
   modsID: any[] = [];
+  parentBoardsList: any[] = [];
 
   loading: boolean = false;
   file: any = {};
@@ -41,20 +41,15 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   constructor(
       private fb: FormBuilder,
       private _roomService: BoardCRUDService,
-      private _modService: ModeratorsService) {
-    // this.newForm = this.fb.group({
-    //   name: [null, Validators.required],
-    //   description: [null, Validators.required],
-    //   visibility: ['', Validators.required],
-    //   parent: ['', Validators.required],
-    //   image: [null, Validators.required],
-    // });
-   }
+      private _modService: ModeratorsService) {}
 
   ngOnInit(): void {
     this.buildForm();
 
     this.modList = this._modService.modList;
+    this.parentBoardsList = this._roomService.parentBoards;
+    
+
     
     this.resetFormSubject.subscribe( response => {
       if (response){
@@ -219,7 +214,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           channelName: this.newForm.value.name,
           channelDescription: this.newForm.value.description,
           channelImage: this.newForm.value.image,
-          parentBoard: '',
+          parentBoard: this.newForm.value.parent,
           channelCreation: Date.now(),
           channelMods: this.modsID
         }
@@ -309,7 +304,8 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   resForm(){
     this.newForm.reset();
     this.newForm.patchValue({
-      visibility: ""
+      visibility: "",
+      parent: ""
     })
   }
 

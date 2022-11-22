@@ -11,6 +11,8 @@ export class BoardCRUDService {
 
   private room$ = new Subject<any>();
 
+  parentBoards: any[] = [];
+
   constructor(private firebase: AngularFirestore) { }
 
   createRoom(room: Board | Channel, roomType: string): Promise<any>{

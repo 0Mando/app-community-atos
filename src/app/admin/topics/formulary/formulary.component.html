@@ -83,8 +83,7 @@
                             class="board-input"
                             formControlName="parent">
                             <option value="" hidden disabled selected>Pick a visibility for your {{type}}</option>
-                            <option value="visible">Visible</option>
-                            <option value="hidden">Hidden</option>
+                            <option *ngFor="let board of parentBoardsList" [value]="board.id">{{ board.name}}</option>
                         </select>
                         </div>
                     </ng-template>

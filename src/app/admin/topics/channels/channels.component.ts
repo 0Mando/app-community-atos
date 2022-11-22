@@ -24,6 +24,7 @@ export class ChannelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtainMODS();
+    this.obtainParents();
     this.getChannels();
   }
   
@@ -37,6 +38,19 @@ export class ChannelsComponent implements OnInit {
           });
         });
       });
+    }
+  }
+
+  obtainParents(){
+    if(this._roomService.parentBoards.length === 0){
+      this._roomService.readRoom('boards').subscribe(doc => {
+        doc.forEach(element => {
+          this._roomService.parentBoards.push({
+            id: element.payload.doc.id,
+            name: element.payload.doc.data().boardName
+          })
+        });
+      })
     }
   }
 
