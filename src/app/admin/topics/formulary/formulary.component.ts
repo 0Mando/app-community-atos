@@ -9,6 +9,7 @@ import { BoardCRUDService } from './../../../infrastructure/services/board-crud.
 
 //* Models
 import { Board } from 'src/app/domain/models/board.model';
+import { Channel } from 'src/app/domain/models/channel.model';
 import { ThisReceiver } from '@angular/compiler';
 
 
@@ -41,15 +42,18 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       private fb: FormBuilder,
       private _roomService: BoardCRUDService,
       private _modService: ModeratorsService) {
-    this.newForm = this.fb.group({
-      name: [null, Validators.required],
-      description: [null, Validators.required],
-      visibility: ['', Validators.required],
-      image: [null, Validators.required],
-    });
+    // this.newForm = this.fb.group({
+    //   name: [null, Validators.required],
+    //   description: [null, Validators.required],
+    //   visibility: ['', Validators.required],
+    //   parent: ['', Validators.required],
+    //   image: [null, Validators.required],
+    // });
    }
 
   ngOnInit(): void {
+    this.buildForm();
+
     this.modList = this._modService.modList;
     
     this.resetFormSubject.subscribe( response => {
@@ -64,27 +68,74 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     this.createEdition();
   }
 
-  createEdition(){
-    this._roomService.getBoardEdit().subscribe(data => {
-      this.printMods = [];
-      this.newForm.patchValue({
-        name: data.boardName,
-        description: data.boardDescription,
-        visibility: data.boardVisibility
-      });
-      this.modsID = [];
+  buildForm(){
+    switch(this.type){
+      case 'board':
+        this.newForm = this.fb.group({
+          name: [null, Validators.required],
+          description: [null, Validators.required],
+          visibility: ['', Validators.required],
+          image: [null, Validators.required],
+        })
+        break;
+      case 'channel':
+        this.newForm = this.fb.group({
+          name: [null, Validators.required],
+          description: [null, Validators.required],
+          parent: ['', Validators.required],
+          image: [null, Validators.required],
+        })
+        break;
+    }
+  }
 
-      if (data.boardMods){
-        data.boardMods.forEach(mod => {
-          this.modsID.push(mod);
+  createEdition(){
+    switch(this.type){
+      case 'board':
+        this._roomService.getBoardEdit().subscribe(data => {
+          this.printMods = [];
+          this.newForm.patchValue({
+            name: data.boardName,
+            description: data.boardDescription,
+            visibility: data.boardVisibility
+          });
+          this.modsID = [];
+    
+          if (data.boardMods){
+            data.boardMods.forEach(mod => {
+              this.modsID.push(mod);
+            });
+          }
+               
+          this.displayMods(this.modsID, this.modList);
+          this.id = data.id;
+          this.title = 'editing';
+          this.action = 'edit';
         });
-      }
-           
-      this.displayMods(this.modsID, this.modList);
-      this.id = data.id;
-      this.title = 'editing';
-      this.action = 'edit';
-    })
+        break;
+      case 'channel':
+        this._roomService.getChannelEdit().subscribe(data => {
+          this.printMods = [];
+          this.newForm.patchValue({
+            name: data.channelName,
+            description: data.channelDescription,
+            parent: data.parentBoard,
+          });
+          this.modsID = [];
+
+          if (data.channelMods){
+            data.channelMods.forEach(mod => {
+              this.modsID.push(mod);
+            });
+          }
+
+          this.displayMods(this.modsID, this.modList);
+          this.id = data.id;
+          this.title = 'editing';
+          this.action = 'edit';
+        })
+        break;
+    }
   }
 
   displayMods(mods?: string[], list?: any[]){
@@ -141,23 +192,40 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   generate(){
     if(this.id == undefined){
-      this.addBoard();
+      console.log('undefined');
+      this.addRoom();
     } else{
-      this.editBoard(this.id);
+      console.log(this.id);
+      this.editRoom(this.id);
     }
   }
 
-  addBoard(){
-    const TYPE: Board = {
-      boardName: this.newForm.value.name,
-      boardDescription: this.newForm.value.description,
-      boardImage: this.newForm.value.image,
-      boardVisibility: this.newForm.value.visibility,
-      boardCreation: Date.now(),
-      boardMods: this.modsID
+  addRoom(){
+    let TYPE: Board | Channel;
+    let room = this.type + 's';
+    switch(this.type){
+      case 'board':
+        TYPE = {
+          boardName: this.newForm.value.name,
+          boardDescription: this.newForm.value.description,
+          boardImage: this.newForm.value.image,
+          boardVisibility: this.newForm.value.visibility,
+          boardCreation: Date.now(),
+          boardMods: this.modsID
+        }
+        break;
+      case 'channel':
+        TYPE = {
+          channelName: this.newForm.value.name,
+          channelDescription: this.newForm.value.description,
+          channelImage: this.newForm.value.image,
+          parentBoard: '',
+          channelCreation: Date.now(),
+          channelMods: this.modsID
+        }
     }
 
-    this._roomService.createRoom(TYPE, 'boards').then(() => {
+    this._roomService.createRoom(TYPE, room).then(() => {
       this.newForm.reset();
       this.closeForm();
       
@@ -166,16 +234,30 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     })
   }
 
-  editBoard(id: string){
-    const TYPE: Board = {
-      boardName: this.newForm.value.name,
-      boardDescription: this.newForm.value.description,
-      boardImage: this.newForm.value.image,
-      boardVisibility: this.newForm.value.visibility,
-      boardMods: this.modsID
+  editRoom(id: string){
+    let TYPE: Board | Channel;
+    let room = this.type+'s';
+    switch(this.type){
+      case 'board':
+        TYPE = {
+          boardName: this.newForm.value.name,
+          boardDescription: this.newForm.value.description,
+          boardImage: this.newForm.value.image,
+          boardVisibility: this.newForm.value.visibility,
+          boardMods: this.modsID
+        }
+        break;
+      case 'channel':
+        TYPE = {
+          channelName: this.newForm.value.name,
+          channelDescription: this.newForm.value.description,
+          channelImage: this.newForm.value.image,
+          parentBoard: this.newForm.value.parent,
+          channelMods: this.modsID
+        }
     }
 
-    this._roomService.updateRoom(id, TYPE, 'boards').then(() => {
+    this._roomService.updateRoom(id, TYPE, room).then(() => {
       this.resForm();
       this.closeForm();
       this.id = undefined;
@@ -184,17 +266,18 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     })
   }
 
-  deleteBoard(){
+  deleteRoom(){
     let tempID = this.id;
+    let type = this.type+'s';
     Notiflix.Confirm.show(
       'Delete Board',
-      'Are you sure you want to delete this board?',
+      'Are you sure you want to delete this '+this.type+'?',
       'Yes',
       'No',
       () => {
-        this._roomService.deleteRoom(tempID, 'boards').then(() => {
+        this._roomService.deleteRoom(tempID, type).then(() => {
           Notiflix.Notify.success(
-            'Board Eliminated Correctly',
+            this.type.toUpperCase() + ' Eliminated Correctly',
             {
               timeout: 2000,
             },

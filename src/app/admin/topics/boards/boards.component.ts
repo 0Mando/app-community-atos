@@ -30,14 +30,16 @@ export class BoardsComponent implements OnInit {
   }
 
   obtainMODS(){
-    this._modService.readMods().subscribe(doc => {
-      doc.forEach(element => {
-        this._modService.modList.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
+    if(this._modService.modList.length === 0){
+      this._modService.readMods().subscribe(doc => {
+        doc.forEach(element => {
+          this._modService.modList.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          });
         });
       });
-    });
+    }
   }
 
   getBoards(){

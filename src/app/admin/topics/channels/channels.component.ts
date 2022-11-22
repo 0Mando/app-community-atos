@@ -23,20 +23,22 @@ export class ChannelsComponent implements OnInit {
   constructor(private _roomService: BoardCRUDService ,private _modService: ModeratorsService) { }
 
   ngOnInit(): void {
-    // this.obtainMODS();
+    this.obtainMODS();
     this.getChannels();
   }
   
-  // obtainMODS(){
-  //   this._modService.readMods().subscribe(doc => {
-  //     doc.forEach(element => {
-  //       this._modService.modList.push({
-  //         id: element.payload.doc.id,
-  //         ...element.payload.doc.data()
-  //       });
-  //     });
-  //   });
-  // }
+  obtainMODS(){
+    if(this._modService.modList.length === 0){
+      this._modService.readMods().subscribe(doc => {
+        doc.forEach(element => {
+          this._modService.modList.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          });
+        });
+      });
+    }
+  }
 
   getChannels(){
     this._roomService.readRoom('channels').subscribe(doc => {

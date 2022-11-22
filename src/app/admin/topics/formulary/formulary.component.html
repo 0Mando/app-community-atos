@@ -13,7 +13,7 @@
                 </div>
             </div>
             <!-- <button (click)="doSome()">Something</button> -->
-            <div class="menu__header-options" (click)="deleteBoard()">
+            <div class="menu__header-options" (click)="deleteRoom()">
                 <i class="fa-solid fa-trash"></i>
             </div>
         </div>
@@ -81,7 +81,7 @@
                             name="parentBoard" 
                             id="parentBoard" 
                             class="board-input"
-                            formControlName="visibility">
+                            formControlName="parent">
                             <option value="" hidden disabled selected>Pick a visibility for your {{type}}</option>
                             <option value="visible">Visible</option>
                             <option value="hidden">Hidden</option>
@@ -95,6 +95,7 @@
                             id="mod-search" 
                             class="board-input" 
                             name="moderators" 
+                            (keydown.enter)="$event.preventDefault()"
                             placeholder=" &#xF002;  Search Moderator by Name or ID"
                             style="font-family:Arial, FontAwesome">
                         <datalist id="mods">

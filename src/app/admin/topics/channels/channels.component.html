@@ -21,7 +21,7 @@
                 <div *ngIf="printChannels.length > 0; else channelList">
                     <div *ngFor="let card of printChannels; index as i">
                         <div class="channel" (click)="updateChannel(card)">
-                            <div class="channel-parent"><span>{{card.parentBoard | parentBoards | uppercase}}</span></div>
+                            <div class="channel-parent"><span>{{card.parentBoard | parentBoards | async | uppercase}}</span></div>
                             <div class="channel-name">{{ card.channelName }}</div>
                             <img class="channel-image" [src]="card.channelImage" alt="">
                         </div>
