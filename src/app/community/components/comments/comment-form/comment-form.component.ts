@@ -123,7 +123,7 @@ export class CommentFormComponent implements OnInit {
 			createdAt: this.currentDate.getTime()
 		}
 		console.table(comment);
-		this.commentsService.createComment(this.commentI)
+		this.commentsService.createComment(comment)
 			.catch(
 				error => {
 					console.log('Something went wrong');
