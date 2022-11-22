@@ -3,6 +3,7 @@ import { BoardCRUDService } from './../../../infrastructure/services/board-crud.
 import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-channels',
@@ -51,11 +52,11 @@ export class ChannelsComponent implements OnInit {
     })
   }
 
-  updateChannel(chanel: Channel){
-    this.currentName = chanel.channelName;
+  updateChannel(channel: Channel){
+    this.currentName = channel.channelName;
     this.onEdition = true;
     setTimeout(() => {
-      this._roomService.addRoomEdit(chanel);
+      this._roomService.addRoomEdit(channel);
     }, 10);
   }
 

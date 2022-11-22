@@ -19,6 +19,7 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
 import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 // import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
 
 
@@ -37,6 +38,7 @@ import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
     FormularyComponent,
     TimeAgoPipe,
     ShortenModPipe,
+    ParentBoardsPipe,
     // FirstwordPipe
   ],
   imports: [
