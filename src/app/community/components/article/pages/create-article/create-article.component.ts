@@ -18,9 +18,6 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 })
 export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 
-	// TODO : Refactorizar campos para crear un artículo
-	post: IArticle;
-
 	//* Create an article form
 	markdownForm: FormGroup;
 	titlePost: string;
@@ -34,6 +31,10 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 
 	//* Parameters
 	channelIdParam: string = '';
+
+	//* Article creation
+	post: IArticle;
+
 
 	//* Toolbar settings input text for create a post
 	//* If more properties are needed in the editor, just uncomment them.
@@ -99,6 +100,19 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 				}
 			}
 		)
+
+		this.post = {
+			userCreatedId: this.authenticationService.currentSessionUserId(),
+			date: this.currentDate.getTime(),
+			channelId: this.channelIdParam,
+			titlePost: this.markdownForm.get('titlePostForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
+			content: this.markdownForm.get('contentForm').value || '',
+			disableComments: this.markdownForm.get('comments').value || '',
+			archive: this.archiveArticle,
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
+		}
+		console.log(this.post);
 	}
 
 	// TODO : Issue submit information, save draft
