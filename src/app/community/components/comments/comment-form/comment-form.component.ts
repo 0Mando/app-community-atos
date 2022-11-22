@@ -17,6 +17,18 @@ export class CommentFormComponent implements OnInit {
 	currentDate : Date = new Date();
 	commentI : IComment;
 	idPost : string;
+
+	currentUser: User = {
+		firstName: '',
+		lastName: '',
+		birthday: '',
+		email: '',
+		password: '',
+		userType: 'normal-user',
+		userTypeBackup: 'normal-user',
+		profilePicture: ''
+	};
+
 	//* Toolbar settings input text for create a post
 	editorModules = {
 		toolbar : [
@@ -73,6 +85,28 @@ export class CommentFormComponent implements OnInit {
 		this.route.params.subscribe(
 			(params : Params) => {
 				this.idPost = params['id']
+			}
+		)
+		this.onFetchDataUser();
+	}
+
+	/**
+	 * Get user data.
+	 */
+	onFetchDataUser() : void {
+		const idUser : string = this.authenticationService.currentSessionUserId();
+		this.authenticationService.onFetchUserInformation(idUser).subscribe(
+			(user: User) => {
+				this.currentUser = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					birthday: user.birthday,
+					email: user.email,
+					password: '************',
+					userType: user.userType,
+					userTypeBackup: user.userTypeBackup,
+					profilePicture: user.profilePicture
+				}
 			}
 		)
 	}
