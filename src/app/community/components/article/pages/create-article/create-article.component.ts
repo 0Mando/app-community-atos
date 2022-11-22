@@ -100,19 +100,22 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 				}
 			}
 		)
+	}
 
+	onSubmitArticle(): void {
+		console.log('--- Submit Article ---');
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
 			channelId: this.channelIdParam,
-			titlePost: this.markdownForm.get('titlePostForm').value || '',
-			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
-			content: this.markdownForm.get('contentForm').value || '',
-			disableComments: this.markdownForm.get('comments').value || '',
-			archive: this.archiveArticle,
-			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
+			titlePost: this.markdownForm.get('titlePostForm').value,
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
+			content: this.markdownForm.get('contentForm').value,
+			disableComments: this.markdownForm.get('comments').value,
+			archive: false,
+			readingTime: this.markdownForm.get('readingTimeForm').value
 		}
-		console.log(this.post);
+		console.table(this.post);
 	}
 
 	// TODO : Issue submit information, save draft
@@ -161,8 +164,20 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	/**
 	 * Archive the current article.
 	 */
-	onSaveDraft(): boolean {
-		return this.archiveArticle = true;
+	onSaveDraft(): void {
+		console.log('--- Save draft ---');
+		this.post = {
+			userCreatedId: this.authenticationService.currentSessionUserId(),
+			date: this.currentDate.getTime(),
+			channelId: this.channelIdParam,
+			titlePost: this.markdownForm.get('titlePostForm').value,
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
+			content: this.markdownForm.get('contentForm').value,
+			disableComments: this.markdownForm.get('comments').value,
+			archive: false,
+			readingTime: this.markdownForm.get('readingTimeForm').value
+		}
+		console.table(this.post);
 	}
 
 	/**
