@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IReport } from 'src/app/domain/models/report.model';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
+import { UsersService } from 'src/app/infrastructure/services/users.service';
 
 @Component({
   selector: 'app-reports',
@@ -15,7 +17,8 @@ export class ReportsComponent implements OnInit {
   reports:IReport[] = [];
 
   constructor(
-    private reportService: ReportService
+    private reportService: ReportService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -26,8 +29,10 @@ export class ReportsComponent implements OnInit {
     this.reportService.getReportList().subscribe((reports) => {
 			this.reports = [];
 			reports.forEach((report) => {
-				this.reports.push({
+        console.log(this.authService.onFetchUserInformation(report.reporterUserId))
+        this.reports.push({
           id: report.id,
+          // reporterName: this.userService.getUser(report.reporterUserId),
           ...report,
         })
 				return report;
