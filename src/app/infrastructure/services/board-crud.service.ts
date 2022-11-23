@@ -1,5 +1,6 @@
+import { Channel } from 'src/app/domain/models/channel.model';
 import { Observable, Subject } from 'rxjs';
-import { Board } from './../../domain/models/board.model';
+import { Board } from 'src/app/domain/models/board.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 
@@ -8,27 +9,37 @@ import { Injectable } from '@angular/core';
 })
 export class BoardCRUDService {
 
-  private board$ = new Subject<any>();
+  private room$ = new Subject<any>();
+
+  parentBoards: any[] = [];
 
   constructor(private firebase: AngularFirestore) { }
 
-  createBoard(board: Board): Promise<any>{
-    return this.firebase.collection('boards').add(board);
+  createRoom(room: Board | Channel, roomType: string): Promise<any>{
+    return this.firebase.collection(roomType).add(room);
   }
 
-  readBoard(): Observable<any>{
-    return this.firebase.collection('boards').snapshotChanges();
+  readRoom(roomType: string): Observable<any>{
+    return this.firebase.collection(roomType).snapshotChanges();
   }
 
-  updateBoard(id: string, board: any): Promise<any>{
-    return this.firebase.collection('boards').doc(id).update(board);
+  updateRoom(id: string, room: any, roomType: string): Promise<any>{
+    return this.firebase.collection(roomType).doc(id).update(room);
   }
 
-  addBoardEdit(board: Board){
-    this.board$.next(board);
+  addRoomEdit(board: Board | Channel){
+    this.room$.next(board);
   }
 
   getBoardEdit(): Observable<Board>{
-    return this.board$.asObservable();
+    return this.room$.asObservable();
+  }
+
+  getChannelEdit(): Observable<Channel>{
+    return this.room$.asObservable();
+  }
+
+  deleteRoom(id: string, roomType: string): Promise<any> {
+    return this.firebase.collection(roomType).doc(id).delete();
   }
 }

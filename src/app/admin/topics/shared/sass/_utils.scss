@@ -95,13 +95,13 @@ select{
 }
 
 .last{
-    margin-bottom: 0px;
+    margin-bottom: 0px !important;
 }
 
 .create-board{
     width: 100%;
     border: 1px solid transparent;
-    padding: 6px;
+    padding: 7px 6px;
     cursor: pointer;
     background: #03A79D;
     color: #FFF;

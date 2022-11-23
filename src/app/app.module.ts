@@ -1,3 +1,4 @@
+import { AppPipesModule } from './app-pipes/app-pipes.module';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,7 +8,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
-
+// import * as Notiflix from 'notiflix';
 
 //* Angular Firebase Set up
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -22,11 +23,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+// import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
-// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
 
 //* Components
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
@@ -77,7 +76,7 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-		SearchFilterPipe,
+		// SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ChannelArticlesListComponent,
@@ -104,6 +103,8 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		AppPipesModule,
+		
 
 		//* Angular Firebase Set up
 		// AngularFireModule.initializeApp(environment.firebase),
