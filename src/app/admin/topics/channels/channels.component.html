@@ -24,7 +24,7 @@
                         <div class="channel" (click)="updateChannel(card)">
                             <div class="channel-parent"><span>{{card.parentBoard | parentBoards | async | uppercase}}</span></div>
                             <div class="channel-name">{{ card.channelName }}</div>
-                            <img class="channel-image" src="{{card.channelImage}}" alt="">
+                            <img class="channel-image" [src]="card.channelImage | safe:'url'" alt="">
                         </div>
                     </div>
                 </div>
