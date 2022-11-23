@@ -1,0 +1,34 @@
+@import '../../../../../../sass/variables';
+
+.interactions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0 1rem;
+
+	li {
+		list-style-type: none;
+	}
+
+	&__arrow {
+
+		&__up :hover {
+			color: $main;
+		}
+
+		&__down :hover {
+			color: red;
+		}
+	}
+
+	button {
+		background: none;
+		border: none;
+		color: $description-text;
+	}
+
+	span {
+		font-weight: bold;
+	}
+}

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //* Components
 import { AdminComponent } from './admin.component';
@@ -24,6 +24,9 @@ import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 // import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
 
 
+import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
+import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
+import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
 
 
 @NgModule({
@@ -41,13 +44,16 @@ import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
     ShortenModPipe,
     ParentBoardsPipe,
     // FirstwordPipe
+    UserTypePipe,
+    FilterUsersPipe,
+    SortUsersPipe
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    AppPipesModule
-    
+    AppPipesModule,
+    FormsModule
     // HttpClientModule
   ]
 })
