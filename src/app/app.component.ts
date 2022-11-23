@@ -22,4 +22,12 @@ export class AppComponent {
 			}
 		})
 	}
+
+	/**
+	 * Hide the navigation bar if you are on the sign-in and sign-up paths.
+	 * @returns The current route is different from sign in and sign up.
+	 */
+	currentPage() : boolean {
+		return this.router.url !== '/sign-in' && this.router.url !== '/sign-up';
+	}
 }

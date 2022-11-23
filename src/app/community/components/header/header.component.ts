@@ -1,5 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
@@ -9,20 +9,21 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, DoCheck {
+export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
+	// export class HeaderComponent implements OnInit, DoCheck {
 
-	currentUser : User = {
+	currentUser: User = {
 		firstName: 'Benito',
 		lastName: 'Camelo',
 		birthday: '',
 		email: '',
 		password: '',
-		profilePicture : 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-		userType : 'normal-user',
-		userTypeBackup : 'normal-user'
+		profilePicture: 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+		userType: 'normal-user',
+		userTypeBackup: 'normal-user'
 	};
 
-	// private subscription : Subscription;
+	private subscription : Subscription;
 
 	boards: string[] = [
 		'Board 1',
@@ -38,21 +39,32 @@ export class HeaderComponent implements OnInit, DoCheck {
 	];
 	loggedIn = false;
 
-	constructor(private authenticationService: AuthService, private router : Router) {
+	constructor(
+		private authenticationService: AuthService,
+		private router: Router,
+		private route: ActivatedRoute
+	) {
 		this.loggedIn = this.authenticationService.isLoggedIn;
 	}
 
 	ngDoCheck(): void {
-		this.loggedIn = this.authenticationService.isLoggedIn;
-		// let idUser = '';
-		// if(this.loggedIn) {
-		// 	idUser = this.authenticationService.currentSessionUserId();
-		// 	this.fetchUserData(idUser)
-		// }
+		this.loggedIn;
+		if(this.loggedIn) {
+			this.fetchUserData();
+		}
 	}
 
 	ngOnInit(): void {
+		console.log('%c*** INIT ***', 'color:blue; font-size: 1rem;');
+		console.log('URL : ' + this.router.url);
+	}
 
+	ngOnDestroy(): void {
+		console.log('%c*** DESTROY ***', 'color:red; font-size: 1rem;');
+		if(this.loggedIn) {
+			this.subscription.closed;
+			this.loggedIn = false;
+		}
 	}
 
 	toggleMenu(): void {
@@ -65,7 +77,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 		menu.classList.remove('active-menu');
 	}
 
-	onLogout(): void{
+	onLogout(): void {
 		this.authenticationService.logout();
 		this.loggedIn = this.authenticationService.isLoggedIn;
 		this.router.navigate(['sign-in']);
@@ -75,8 +87,9 @@ export class HeaderComponent implements OnInit, DoCheck {
 	 * Get the information of the current user in the session.
 	 * @param idUser
 	 */
-	fetchUserData(idUser : string){
-		this.authenticationService.onFetchUserInformation(idUser).subscribe(
+	fetchUserData() {
+		const idUser = this.authenticationService.currentSessionUserId();
+		this.subscription = this.authenticationService.onFetchUserInformation(idUser).subscribe(
 			(user: User) => {
 				this.currentUser = {
 					firstName: user.firstName,
@@ -84,9 +97,9 @@ export class HeaderComponent implements OnInit, DoCheck {
 					birthday: user.birthday,
 					email: user.email,
 					password: '************',
-					userType : user.userType,
-					userTypeBackup : user.userTypeBackup,
-					profilePicture : user.profilePicture
+					userType: user.userType,
+					userTypeBackup: user.userTypeBackup,
+					profilePicture: user.profilePicture
 				}
 			}
 		)
