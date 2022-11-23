@@ -9,7 +9,7 @@
 			<div class="board__about-channel">
 				<h4 class="board__about-channel__title">{{ board.boardName }}</h4>
 				<p class="board__about-channel__description">{{ board.boardDescription }}</p>
-				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}"
+				<a routerLink="/channels/{{ board.id }}"
 					class="board__about-channel__link">Go to section</a>
 			</div>
 			<div class="board__more-information">
@@ -27,7 +27,7 @@
 						<p>Lorem, ipsum dolor.</p>
 					</div>
 				</div>
-				<a routerLink="/channels/{{ board.boardName | formatUrl | lowercase }}" class="board__btn-i">Access</a>
+				<a routerLink="/channels/{{ board.id }}" class="board__btn-i">Access</a>
 			</div>
 		</article>
 		<h3 *ngIf="!(boards | searchFilter: boardFilter )?.length">No items found</h3>

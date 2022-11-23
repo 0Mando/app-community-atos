@@ -63,6 +63,10 @@ export class AuthService {
 		const userDocument = this.afs.collection<User>('Users').doc(this.userData.uid);
 		return userDocument.valueChanges({ idField : 'id' });
 	}
+	
+	getUserList<User>(){
+		return this.afs.collection<User>('Users').snapshotChanges();
+	}
 
 	currentSessionUserId() : string {
 		return this.userData.uid;
@@ -78,5 +82,13 @@ export class AuthService {
 
 	getCurrentUser(){
 		return this.fireAuth.authState;
+	}
+	
+	disableUser(userId:string){
+		this.afs.collection<User>('Users').doc(userId).update({userType: "disabled"});
+	}
+	
+	undoDisableUser(userId:string, userTypeBackup: "normal-user" | "auth-user" | "moderator" | "admin"){
+		this.afs.collection<User>('Users').doc(userId).update({userType: userTypeBackup});
 	}
 }

@@ -27,7 +27,7 @@ export class ChannelService {
 			'channels',
 			ref => ref.where('parentBoard', '==', parentBoard)
 		)
-		return collection.valueChanges();
+		return collection.valueChanges({ idField : 'id' });
 	}
 
 	getChannelById(idChannel : string) {

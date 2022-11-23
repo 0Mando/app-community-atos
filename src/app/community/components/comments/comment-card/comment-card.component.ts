@@ -29,6 +29,7 @@ export class CommentCardComponent implements OnInit {
 		email: '',
 		password: '',
 		userType: 'normal-user',
+		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
@@ -132,6 +133,7 @@ export class CommentCardComponent implements OnInit {
 					email: user.email,
 					password: '************',
 					userType: user.userType,
+					userTypeBackup: user.userTypeBackup,
 					profilePicture: user.profilePicture
 				}
 			}

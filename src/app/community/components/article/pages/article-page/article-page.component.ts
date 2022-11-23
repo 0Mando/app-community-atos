@@ -23,6 +23,7 @@ export class ArticlePageComponent implements OnInit {
 		email: '',
 		password: '',
 		userType: 'normal-user',
+		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
@@ -69,8 +70,7 @@ export class ArticlePageComponent implements OnInit {
 					content: article.content,
 					disableComments: article.disableComments,
 					archive: article.archive,
-					readingTime: article.readingTime,
-					boardParent: article.boardParent,
+					readingTime: article.readingTime
 				}
 				this.onFetchChannelData(this.currentArticle.channelId)
 				this.onFetchAuthorData(this.currentArticle.userCreatedId)
@@ -93,6 +93,7 @@ export class ArticlePageComponent implements OnInit {
 					email: user.email,
 					password: '************',
 					userType: user.userType,
+					userTypeBackup: user.userTypeBackup,
 					profilePicture: user.profilePicture
 				}
 			}

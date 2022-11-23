@@ -18,9 +18,6 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 })
 export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 
-	// TODO : Refactorizar campos para crear un artículo
-	post: IArticle;
-
 	//* Create an article form
 	markdownForm: FormGroup;
 	titlePost: string;
@@ -33,8 +30,11 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	articleChangesSaved: boolean = false;
 
 	//* Parameters
-	channelParentParam: string = '';
-	boardParam: string = '';
+	channelIdParam: string = '';
+
+	//* Article creation
+	post: IArticle;
+
 
 	//* Toolbar settings input text for create a post
 	//* If more properties are needed in the editor, just uncomment them.
@@ -94,41 +94,115 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	ngOnInit(): void {
 		this.route.queryParams.subscribe(
 			(params: Params) => {
-				this.channelParentParam = params['channel']
-				this.boardParam = params['board']
+				this.channelIdParam = params['channelId']
+				if(this.channelIdParam === undefined){
+					this.router.navigate(['/boards'])
+				}
 			}
 		)
 	}
 
-	submitPost(): void {
+	/**
+	 * Publish a new article.
+	 */
+	onSubmitArticle(): void {
+		console.log('--- Submit Article ---');
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
-			channelId: '',
+			channelId: this.channelIdParam,
 			titlePost: this.markdownForm.get('titlePostForm').value,
 			descriptionContent: this.markdownForm.get('descriptionContentForm').value,
 			content: this.markdownForm.get('contentForm').value,
 			disableComments: this.markdownForm.get('comments').value,
-			archive: this.archiveArticle,
-			readingTime: this.markdownForm.get('readingTimeForm').value,
-			boardParent: this.boardParam
+			archive: false,
+			readingTime: this.markdownForm.get('readingTimeForm').value
 		}
 		console.table(this.post);
 
-		// this.articleService.createPost(this.post).catch(
-		// 	error => console.log('An error ocurred : ' + error)
-		// )
-		this.articleChangesSaved = true;
+		this.sendArticle(this.post);
+	}
 
-		// this.router.navigate(['/articles/'+ this.boardParam + '/' + this.channelParentParam +'/posts']);
-		// this.markdownForm.reset();
+	// TODO : Issue submit information, save draft
+	submitPost(): void {
+		this.post = {
+			userCreatedId: this.authenticationService.currentSessionUserId(),
+			date: this.currentDate.getTime(),
+			channelId: this.channelIdParam,
+			titlePost: this.markdownForm.get('titlePostForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
+			content: this.markdownForm.get('contentForm').value || '',
+			disableComments: this.markdownForm.get('comments').value || '',
+			archive: this.archiveArticle,
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
+		}
+		console.table(this.post);
+
+		if (this.markdownForm.valid) {
+			// *Send post to database
+			this.articleService.createPost(this.post).catch(
+				error => console.log('An error ocurred : ' + error)
+			)
+			// *Reset form
+			// this.markdownForm.reset();
+			// *Go back to list articles page
+			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+			// *Changes saved
+			this.articleChangesSaved = true;
+		} else if (!this.markdownForm.valid && this.post.archive) {
+			// *Send post to database
+			this.articleService.createPost(this.post).catch(
+				error => console.log('An error ocurred : ' + error)
+			)
+			// *Reset form
+			// this.markdownForm.reset();
+			// *Go back to list articles page
+			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+			// *Changes saved
+			this.articleChangesSaved = true;
+		} else {
+			alert('Complete form or save your draft')
+		}
+
 	}
 
 	/**
 	 * Archive the current article.
 	 */
-	onSaveDraft(): boolean {
-		return this.archiveArticle = true;
+	onSaveDraft(): void {
+		console.log('--- Save draft ---');
+		this.post = {
+			userCreatedId: this.authenticationService.currentSessionUserId(),
+			date: this.currentDate.getTime(),
+			channelId: this.channelIdParam,
+			titlePost: this.markdownForm.get('titlePostForm').value || '',
+			descriptionContent: this.markdownForm.get('descriptionContentForm').value
+			|| '',
+			content: this.markdownForm.get('contentForm').value || '',
+			disableComments: this.markdownForm.get('comments').value,
+			archive: true,
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0
+		}
+		console.table(this.post);
+
+		this.sendArticle(this.post);
+	}
+
+	/**
+	 * Send article to database.
+	 * @param post Created article.
+	 */
+	sendArticle(post : IArticle): void {
+		//* Send article to database
+		this.articleService.createPost(post).catch(
+			error => console.log('Something go wrong -> '+error)
+		)
+
+		// *Go back to list articles page
+		this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
+
+		// *Changes saved
+		this.articleChangesSaved = true;
 	}
 
 	/**
@@ -145,16 +219,24 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	changeEditor(event: EditorChangeContent | EditorChangeSelection) {
 		this.quilleditorContent = event['editor']['root']['innerHTML'];
 		this.titlePost = this.markdownForm.get('titlePostForm').value;
-		// this.article.date = this.markdownForm.get('currentDateForm').value;
 	}
 
+	/**
+	 * Add styles to publish button if form is valid.
+	 * @returns Opacity percentage.
+	 */
+	validateForm() {
+		return this.markdownForm.invalid ? '50%' : '100%';
+	}
+
+	// TODO Fix guard
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-		if (!this.markdownForm.valid) {
-			return  confirm(
-			`Are you sure you want to leave this page?\nYou can save this draft and continue later`
+		if(this.markdownForm.invalid) {
+			return confirm(
+				`Are you sure you want to leave this page?\nYou can save this draft and continue later`
 			);
 		} else {
-			return false;
+			return true;
 		}
 	}
 }

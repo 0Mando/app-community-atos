@@ -5,12 +5,13 @@
                 <div class="list__header-title">Boards</div>
                 <button class="list__header-new" (click)="newBoard()">New Board</button>
             </div>
-            <form class="list__query">
+            <form class="list__query" [formGroup]="searchForm">
                 <input 
                     type="text" 
                     class="searchbox"
                     placeholder=" &#xF002;  Search"
-                    style="font-family:Arial, FontAwesome">
+                    style="font-family:Arial, FontAwesome"
+                    formControlName="search">
             </form>
             <!-- <div class="list__current" *ngIf="onEdition">
                 <div class="list__current-title">On edition</div>
@@ -30,7 +31,7 @@
             <div class="list__all">
                 <!-- <div class="list__all-title" *ngIf="onEdition">Boards</div> -->
                 <div *ngIf="printBoards.length > 0; else boardList">
-                    <div *ngFor="let card of printBoards">
+                    <div *ngFor="let card of printBoards | searchFilter: searchForm.value.search">
                         <div class="card" (click)="updateBoard(card)">
                             <div class="card__header">
                                 <div class="card__header-status"></div>

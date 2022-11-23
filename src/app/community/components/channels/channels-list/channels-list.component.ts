@@ -16,7 +16,7 @@ export class ChannelsListComponent implements OnInit {
 	channelsLength : number;
 	pageChannel : number = 1;
 
-	@Input() boardName : string;
+	@Input() boardId : string;
 
 	constructor(
 		private channelService : ChannelService,
@@ -28,7 +28,7 @@ export class ChannelsListComponent implements OnInit {
 	}
 
 	private fetchChannels() {
-		this.channelService.displayChannelsOfParenBoard<Channel>(this.boardName).subscribe(
+		this.channelService.displayChannelsOfParenBoard<Channel>(this.boardId).subscribe(
 			channels =>{
 				this.channels = channels;
 				this.channelsLength = this.channels.length;

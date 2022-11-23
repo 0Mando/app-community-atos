@@ -4,7 +4,8 @@
 	<h2 class="post__title">New Post</h2>
 	<tabs>
 		<tab tabTitle="Editor" class="tab">
-			<form [formGroup]="markdownForm" (ngSubmit)="submitPost()">
+			<form [formGroup]="markdownForm">
+			<!-- <form [formGroup]="markdownForm" (ngSubmit)="submitPost()"> -->
 
 				<input type="text" class="post__title-post"
 					placeholder="Post title..." formControlName="titlePostForm"
@@ -50,7 +51,11 @@
 				</section>
 				<br>
 				<section class="post__actions">
-					<button class="post__submit">Publish</button>
+					<button class="post__submit" (click)="onSubmitArticle()"
+						[disabled]="markdownForm.invalid"
+						[ngStyle]="{opacity : validateForm()}">
+						Publish
+					</button>
 					<button class="post__draft" (click)="onSaveDraft()">Save draft</button>
 					<a (click)="onCancelArticle()" class="post__cancel">Cancel</a>
 				</section>

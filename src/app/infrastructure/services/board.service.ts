@@ -28,6 +28,6 @@ export class BoardService {
 	 */
 	getBoardsList<Board>(){
 		const boardList = this.afs.collection<Board>('boards');
-		return boardList.valueChanges();
+		return boardList.valueChanges({ idField : 'id' });
 	}
 }

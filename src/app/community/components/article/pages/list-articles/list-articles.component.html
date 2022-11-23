@@ -2,7 +2,7 @@
 	<section class="articles">
 		<section class="articles__header">
 			<h2 class="articles__title">
-				{{ channelName }}
+				{{ currentChannel.channelName }}
 			</h2>
 			<div class="articles__action">
 				<small class="articles__not-verified" *ngIf="userIsLogged() && !isVerified()">Your account is not verified</small>

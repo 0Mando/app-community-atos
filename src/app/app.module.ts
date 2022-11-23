@@ -1,4 +1,5 @@
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { AppPipesModule } from './app-pipes/app-pipes.module';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +9,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
-
+// import * as Notiflix from 'notiflix';
 
 //* Angular Firebase Set up
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -23,11 +24,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+// import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
-// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
 
 //* Components
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
@@ -60,6 +59,7 @@ import { CommentCardComponent } from './community/components/comments/comment-ca
 import { CommentFormComponent } from './community/components/comments/comment-form/comment-form.component';
 import { ListCommentsComponent } from './community/components/comments/list-comments/list-comments.component';
 import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
+import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
 
 @NgModule({
 	declarations: [
@@ -77,7 +77,7 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-		SearchFilterPipe,
+		// SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ChannelArticlesListComponent,
@@ -95,6 +95,7 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 		CommentFormComponent,
 		ListCommentsComponent,
 		ButtonActionsComponent,
+  ButtonOptionsComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
@@ -103,6 +104,8 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		AppPipesModule,
+		
 
 		//* Angular Firebase Set up
 		// AngularFireModule.initializeApp(environment.firebase),

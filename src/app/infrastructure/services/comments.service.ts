@@ -50,4 +50,8 @@ export class CommentsService {
 	updateComment(idComment : string, content : string) {
 		return this.afs.collection('comments').doc(idComment).update({commentBody : content});
 	}
+
+	getCommentById(idComment : string) {
+		return this.afs.collection('comments').doc(idComment).valueChanges();
+	}
 }
