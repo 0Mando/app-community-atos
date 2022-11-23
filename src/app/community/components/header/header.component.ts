@@ -13,12 +13,12 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 	// export class HeaderComponent implements OnInit, DoCheck {
 
 	currentUser: User = {
-		firstName: 'Benito',
-		lastName: 'Camelo',
+		firstName: '',
+		lastName: '',
 		birthday: '',
 		email: '',
 		password: '',
-		profilePicture: 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+		profilePicture: '',
 		userType: 'normal-user',
 		userTypeBackup: 'normal-user'
 	};
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 		'Profile 2',
 		'Profile 3'
 	];
-	loggedIn = false;
+	loggedIn : boolean;
 
 	constructor(
 		private authenticationService: AuthService,
@@ -45,18 +45,20 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 		private route: ActivatedRoute
 	) {
 		this.loggedIn = this.authenticationService.isLoggedIn;
+		console.log('%cCONSTRUCTOR', 'color:#ff3b66; font-size: 1rem;');
+		console.log('%cIs logged in -> ' + this.authenticationService.isLoggedIn, 'color:#ff3b66; font-size: 1rem;');
 	}
 
-	ngDoCheck(): void {
-		this.loggedIn;
+	ngOnInit(): void {
+		console.log('%c*** INIT ***', 'color:blue; font-size: 1rem;');
+		console.log('%c***Is logged in *** '+this.loggedIn, 'color:blue; font-size: 1rem;');
 		if(this.loggedIn) {
 			this.fetchUserData();
 		}
 	}
 
-	ngOnInit(): void {
-		console.log('%c*** INIT ***', 'color:blue; font-size: 1rem;');
-		console.log('URL : ' + this.router.url);
+	ngDoCheck(): void {
+		this.loggedIn = this.authenticationService.isLoggedIn;
 	}
 
 	ngOnDestroy(): void {
