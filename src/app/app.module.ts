@@ -1,3 +1,4 @@
+import { AppPipesModule } from './app-pipes/app-pipes.module';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+// import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 
@@ -62,7 +63,7 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		FormatUrlPipe,
 		AdminBoardFormComponent,
 		AdminChannelFormComponent,
-		SearchFilterPipe,
+		// SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ArticlesListComponent,
@@ -74,6 +75,7 @@ import { ArticlesListComponent } from './presentation/components/channels/articl
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		AppPipesModule,
 		
 		provideFirebaseApp(() => initializeApp(environment.firebase)),
 		AngularFireAuthModule,

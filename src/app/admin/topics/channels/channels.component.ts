@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
@@ -12,7 +13,9 @@ import { map } from 'rxjs/operators';
 })
 export class ChannelsComponent implements OnInit {
   currentType = "channel";
-  currentName: string = "New Channel"
+  currentName: string = "New Channel";
+
+  searchForm: FormGroup;
 
   onEdition = false;
 
@@ -20,7 +23,14 @@ export class ChannelsComponent implements OnInit {
 
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _roomService: BoardCRUDService ,private _modService: ModeratorsService) { }
+  constructor(
+      private _roomService: BoardCRUDService,
+      private _modService: ModeratorsService,
+      private fb: FormBuilder ) { 
+    this.searchForm = this.fb.group({
+      search: ''
+    })
+  }
 
   ngOnInit(): void {
     this.obtainMODS();

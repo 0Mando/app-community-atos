@@ -1,3 +1,4 @@
+import { AppPipesModule } from './../app-pipes/app-pipes.module';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -45,6 +46,7 @@ import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
+    AppPipesModule
     
     // HttpClientModule
   ]

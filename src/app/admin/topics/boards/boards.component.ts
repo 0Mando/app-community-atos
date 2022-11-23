@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Board } from 'src/app/domain/models/board.model';
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-boards',
@@ -16,13 +17,21 @@ export class BoardsComponent implements OnInit {
   currentType = "board";
   currentName: string = 'New Board';
 
+  searchForm: FormGroup;
+
   isIt = true;
   onEdition = false;
 
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _roomService: BoardCRUDService,
-    private _modService: ModeratorsService) { }
+  constructor(
+    private _roomService: BoardCRUDService,
+    private _modService: ModeratorsService,
+    private fb: FormBuilder ) {
+      this.searchForm = this.fb.group({
+        search: ''
+      })
+     }
 
   ngOnInit(): void {
     this.obtainMODS();
