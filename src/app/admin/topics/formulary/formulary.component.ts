@@ -1,16 +1,18 @@
 import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges} from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
+import { Storage, ref, getDownloadURL, uploadBytes,  } from '@angular/fire/storage';
 import * as Notiflix from 'notiflix'
 
 //* Services
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 
 //* Models
+import { async } from '@firebase/util';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Board } from 'src/app/domain/models/board.model';
 import { Channel } from 'src/app/domain/models/channel.model';
-
 
 @Component({
   selector: 'app-formulary',
@@ -28,7 +30,9 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   parentBoardsList: any[] = [];
 
   loading: boolean = false;
-  file: any = {};
+  file?: File;
+  imageUrl = "";
+  imageUrlStyle : SafeStyle;
   
   @Input() type = '';
   @Input() board = '';
@@ -41,16 +45,16 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   constructor(
       private fb: FormBuilder,
       private _roomService: BoardCRUDService,
-      private _modService: ModeratorsService) {}
+      private _modService: ModeratorsService,
+      private storage: Storage,
+      private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.buildForm();
 
     this.modList = this._modService.modList;
     this.parentBoardsList = this._roomService.parentBoards;
-    
 
-    
     this.resetFormSubject.subscribe( response => {
       if (response){
         this.resForm();
@@ -95,17 +99,19 @@ export class FormularyComponent implements OnInit, AfterViewInit{
             visibility: data.boardVisibility
           });
           this.modsID = [];
-    
+
           if (data.boardMods){
             data.boardMods.forEach(mod => {
               this.modsID.push(mod);
             });
           }
-               
+
           this.displayMods(this.modsID, this.modList);
           this.id = data.id;
           this.title = 'editing';
           this.action = 'edit';
+          this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.boardImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
+      
         });
         break;
       case 'channel':
@@ -185,6 +191,19 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     reader.readAsDataURL(this.file);
   }
 
+  async uploadImage(file : File){
+    const imgRef = ref(this.storage, `board-images/${file.lastModified}`)
+
+    try {
+      const res = await uploadBytes(imgRef, file);
+      const downloadUrl = await getDownloadURL(imgRef)
+      this.imageUrl = downloadUrl;
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
   generate(){
     if(this.id == undefined){
       console.log('undefined');
@@ -195,25 +214,26 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     }
   }
 
-  addRoom(){
+  async addRoom(){
     let TYPE: Board | Channel;
     let room = this.type + 's';
+    await this.uploadImage(this.file);
     switch(this.type){
       case 'board':
         TYPE = {
           boardName: this.newForm.value.name,
           boardDescription: this.newForm.value.description,
-          boardImage: this.newForm.value.image,
+          boardImage: this.imageUrl,
           boardVisibility: this.newForm.value.visibility,
           boardCreation: Date.now(),
           boardMods: this.modsID
         }
         break;
-      case 'channel':
-        TYPE = {
+        case 'channel':
+          TYPE = {
           channelName: this.newForm.value.name,
           channelDescription: this.newForm.value.description,
-          channelImage: this.newForm.value.image,
+          channelImage: this.imageUrl,
           parentBoard: this.newForm.value.parent,
           channelCreation: Date.now(),
           channelMods: this.modsID
@@ -228,16 +248,17 @@ export class FormularyComponent implements OnInit, AfterViewInit{
       console.log(error);
     })
   }
-
-  editRoom(id: string){
+  
+  async editRoom(id: string){
     let TYPE: Board | Channel;
     let room = this.type+'s';
+    await this.uploadImage(this.file);
     switch(this.type){
       case 'board':
         TYPE = {
           boardName: this.newForm.value.name,
           boardDescription: this.newForm.value.description,
-          boardImage: this.newForm.value.image,
+          boardImage: this.imageUrl,
           boardVisibility: this.newForm.value.visibility,
           boardMods: this.modsID
         }
@@ -246,7 +267,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
         TYPE = {
           channelName: this.newForm.value.name,
           channelDescription: this.newForm.value.description,
-          channelImage: this.newForm.value.image,
+          channelImage: this.imageUrl,
           parentBoard: this.newForm.value.parent,
           channelMods: this.modsID
         }
