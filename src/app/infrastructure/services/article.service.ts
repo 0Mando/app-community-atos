@@ -35,6 +35,14 @@ export class ArticleService {
 		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
 	}
 
+	updatePost(articleId : string, article : IArticle) {
+		return this.afs.collection('posts').doc(articleId).update(article);
+	}
+
+	deletePost(articleId : string) {
+		return this.afs.collection('posts').doc(articleId).delete();
+	}
+
 	fetchPostFromParentBoard<IPost>(boardParent : string) {
 		const postsCollection = this.afs.collection<IPost>(
 			'posts',
