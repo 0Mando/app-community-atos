@@ -40,7 +40,7 @@ export class ArticlePageComponent implements OnInit {
 	displayArticle: boolean = false;
 	amountComments: number = 0;
 	displayHeaderButton: boolean;
-	editArticle: boolean = true;
+	editArticle: boolean;
 
 	//* Edit article
 	editArticleForm: FormGroup;
