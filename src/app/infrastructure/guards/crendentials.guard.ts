@@ -13,6 +13,9 @@ export class CrendentialsGuard implements CanActivate {
 		private router : Router
 	) { }
 
+	/**
+	 * *If the user is already logged in, he cannot access the sign-in and sign-up pages and is redirected to the boards page, otherwise he can access
+	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :
 	Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		return this.auth.isLoggedIn ? this.router.navigate(['/boards']) : true;
