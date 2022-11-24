@@ -38,12 +38,12 @@ export class ArticlePageComponent implements OnInit {
 	//* Article page
 	currentArticle: IArticle;
 	displayArticle: boolean = false;
-	amountComments : number = 0;
-	displayHeaderButton : boolean;
-	editArticle : boolean = true;
+	amountComments: number = 0;
+	displayHeaderButton: boolean;
+	editArticle: boolean = true;
 
 	//* Edit article
-	editArticleForm : FormGroup;
+	editArticleForm: FormGroup;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -51,12 +51,7 @@ export class ArticlePageComponent implements OnInit {
 		private auth: AuthService,
 		private channel: ChannelService
 	) {
-		this.editArticleForm = new FormGroup({
-			'titlePostForm': new FormControl(null, Validators.required),
-			'descriptionContentForm': new FormControl(null, Validators.required),
-			'readingTimeForm': new FormControl(null, Validators.required),
-			'contentForm': new FormControl(null, Validators.required),
-		})
+
 	}
 
 	ngOnInit(): void {
@@ -90,6 +85,16 @@ export class ArticlePageComponent implements OnInit {
 				this.onFetchChannelData(this.currentArticle.channelId)
 				this.onFetchAuthorData(this.currentArticle.userCreatedId)
 				this.displayArticle = true;
+				this.editArticleForm = new FormGroup({
+					'titlePostForm':
+						new FormControl(this.currentArticle.titlePost),
+					'descriptionContentForm':
+						new FormControl(this.currentArticle.descriptionContent),
+					'readingTimeForm':
+						new FormControl(this.currentArticle.readingTime),
+					'contentForm':
+						new FormControl(this.currentArticle.content),
+				})
 			}
 		)
 	}
