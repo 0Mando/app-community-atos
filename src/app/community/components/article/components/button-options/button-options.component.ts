@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { IArticle } from 'src/app/domain/models/ipost';
 import { IReport } from 'src/app/domain/models/report.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
@@ -14,6 +15,7 @@ export class ButtonOptionsComponent implements OnInit {
 
 	showOptionsList: boolean = false;
 	@Input() idArticle: string;
+	@Output() editArticle = new EventEmitter<boolean>();
 
 	currentArticle: IArticle = {
 		userCreatedId: '',
@@ -26,16 +28,19 @@ export class ButtonOptionsComponent implements OnInit {
 		archive: false,
 		readingTime: 0,
 	}
+	canEditArticle: boolean;
+	canReportArticle : boolean;
 
 	constructor(
 		private reportService: ReportService,
 		private auth: AuthService,
-		private articleService: ArticleService
+		private articleService: ArticleService,
+		private router : Router
 	) { }
 
 	ngOnInit(): void {
 		this.articleService.getArticleById(this.idArticle).subscribe(
-			(article : IArticle) => {
+			(article: IArticle) => {
 				this.currentArticle = {
 					userCreatedId: article.userCreatedId,
 					date: article.date,
@@ -47,6 +52,8 @@ export class ButtonOptionsComponent implements OnInit {
 					archive: article.archive,
 					readingTime: article.readingTime
 				}
+				this.canEditArticle = this.currentArticle.userCreatedId === this.auth.currentSessionUserId();
+				this.canReportArticle = this.currentArticle.userCreatedId !== this.auth.currentSessionUserId();
 			}
 		)
 	}
@@ -63,17 +70,21 @@ export class ButtonOptionsComponent implements OnInit {
 	 * Create a new report of an article.
 	 */
 	onReportArticle(): void {
-		const report : IReport = {
-			reporterUserId : this.auth.currentSessionUserId(),
-			idItemReported : this.idArticle,
-			activity : 'Post',
-			reportedUserId : this.currentArticle.userCreatedId,
-			reportDate : new Date().getTime(),
-			status : 'In Review'
+		const report: IReport = {
+			reporterUserId: this.auth.currentSessionUserId(),
+			idItemReported: this.idArticle,
+			activity: 'Post',
+			reportedUserId: this.currentArticle.userCreatedId,
+			reportDate: new Date().getTime(),
+			status: 'In Review'
 		}
 		console.table(report);
 		this.reportService.createReport(report).catch(
-			error => console.log('An error ocurred -> '+ error)
+			error => console.log('An error ocurred -> ' + error)
 		)
+	}
+
+	onEditArticle() : void {
+		this.editArticle.emit(true);
 	}
 }

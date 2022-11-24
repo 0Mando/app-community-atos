@@ -87,6 +87,77 @@
 	}
 }
 
+.edit-post {
+	margin-top: 1rem;
+
+	&__title {
+		margin-bottom: 1.2rem;
+	}
+
+	&__form {
+		background-color: #f5f7fa;
+		border-radius: 5px;
+		padding: 1rem;
+	}
+
+	&__title-post{
+		display: block;
+		border: none;
+		background: none;
+		height: 2.6rem;
+		font-size: 1.4rem;
+		// font-weight: bold;
+		width: 100%;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 1rem;
+	}
+
+	&__description-post {
+		display: block;
+		border: none;
+		background: none;
+		height: 2.6rem;
+		font-size: 1rem;
+		// font-weight: bold;
+		width: 100%;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 1rem;
+	}
+
+	&__quill-editor {
+		display: block;
+		margin-top: 1.2rem;
+	}
+
+	&__btn-section {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+
+		&__save {
+			display: block;
+			background-color: $main;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			padding: .5rem 1rem;
+			font-size: 1rem;
+			margin-bottom: .5rem;
+		}
+
+		&__cancel {
+			display: block;
+			background-color: white;
+			color: $main;
+			border: 1px solid $main;
+			border-radius: 5px;
+			padding: .5rem 1rem;
+			font-size: 1rem;
+			margin-bottom: .5rem;
+		}
+	}
+}
+
 @include media-md {
 	.post {
 		&__bar-about {
@@ -95,6 +166,17 @@
 
 		li {
 			margin-right: 7rem;
+		}
+	}
+
+	.edit-post {
+		&__btn-section {
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+
+			&__save {
+				margin-left: .5rem;
+			}
 		}
 	}
 }

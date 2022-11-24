@@ -91,7 +91,7 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		CommentFormComponent,
 		ListCommentsComponent,
 		ButtonActionsComponent,
-  ButtonOptionsComponent,
+		ButtonOptionsComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],

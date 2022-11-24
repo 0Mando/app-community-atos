@@ -1,12 +1,12 @@
 <button class="options" (click)="onPressedOptions()">
 	<ul class="options__list" *ngIf="showOptionsList">
-		<li id="edit">
+		<li id="edit" *ngIf="canEditArticle" (click)="onEditArticle()">
 			<span class="material-symbols-outlined">
 				edit
 			</span>
 			<span class="options__list__actions">Edit</span>
 		</li>
-		<li id="warning" (click)="onReportArticle()">
+		<li id="warning" *ngIf="canReportArticle" (click)="onReportArticle()">
 			<span class="material-symbols-outlined">
 				warning
 			</span>

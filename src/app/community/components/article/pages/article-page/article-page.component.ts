@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { IArticle } from 'src/app/domain/models/ipost';
@@ -34,16 +35,29 @@ export class ArticlePageComponent implements OnInit {
 		parentBoard: '',
 	}
 
+	//* Article page
 	currentArticle: IArticle;
 	displayArticle: boolean = false;
 	amountComments : number = 0;
+	displayHeaderButton : boolean;
+	editArticle : boolean = true;
+
+	//* Edit article
+	editArticleForm : FormGroup;
 
 	constructor(
 		private route: ActivatedRoute,
 		private article: ArticleService,
 		private auth: AuthService,
 		private channel: ChannelService
-	) { }
+	) {
+		this.editArticleForm = new FormGroup({
+			'titlePostForm': new FormControl(null, Validators.required),
+			'descriptionContentForm': new FormControl(null, Validators.required),
+			'readingTimeForm': new FormControl(null, Validators.required),
+			'contentForm': new FormControl(null, Validators.required),
+		})
+	}
 
 	ngOnInit(): void {
 		this.route.params.subscribe(
@@ -51,6 +65,7 @@ export class ArticlePageComponent implements OnInit {
 				this.idArticle = params['id']
 			}
 		)
+		this.displayHeaderButton = this.auth.isLoggedIn;
 		this.onFetchArticle(this.idArticle);
 	}
 
@@ -115,6 +130,45 @@ export class ArticlePageComponent implements OnInit {
 				}
 			}
 		)
+	}
+
+	//* Toolbar settings input text for create a post
+	//* If more properties are needed in the editor, just uncomment them.
+	editorModules = {
+		syntax: true,
+		toolbar: [
+			['bold', 'italic', 'underline', 'strike'],
+			[
+				// 'blockquote',
+				'code-block'
+			],
+			// [{ 'header' : 1 }, { 'header' : 2 }],
+			// [{ 'list' : 'ordered' }, { 'list' : 'bullet' }],
+			// [{ 'script' : 'sub' }, { 'script' : 'super' }],
+			// [{ 'indent' : '-1' }, { 'indent' : '+1' }],
+			// [{ 'direction' : 'rtl' }],
+
+			//* Toolbar fontsize stuff
+			// [{ 'size' : ['small', false, 'large', 'huge'] }],
+			// [{ 'header' : [1,2,3,4,5,6, false] }],
+
+			//* Toolbar font stuff
+			[
+				{ 'color': [] },
+				// { 'background' : [] }
+			],
+			[{ 'font': [] }],
+			[{ 'align': ['', 'center', 'right', 'justify'] }],
+
+			// ['clean'],
+
+			//* Toolbar multimedia
+			[
+				// 'link',
+				'image',
+				// 'video'
+			]
+		]
 	}
 
 	/**
