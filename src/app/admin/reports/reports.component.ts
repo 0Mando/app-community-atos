@@ -30,7 +30,7 @@ export class ReportsComponent implements OnInit {
 			reports.forEach((report) => {
 				this.reports.push({
 					id: report.id,
-					reportedName: this.authService.getUsernameById(
+					reportedName: this.authService.onFetchUserInformation(
 						report.reportedUserId
 					),
 					reporterName: this.onFetchUserData(report.reporterUserId),

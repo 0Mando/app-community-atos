@@ -67,16 +67,6 @@ export class AuthService {
 	onFetchUserInformation(idUser : string) {
 		return this.afs.collection('Users').doc(idUser).valueChanges()
 	}
-
-	getUsernameById(idUser : string) {
-		console.log(idUser);
-		return this.afs.collection('Users').doc(idUser).valueChanges().pipe(
-			map(user => {
-				console.log(user);
-				return user;
-			})
-		)
-	}
 	
 	disableUser(userId:string){
 		this.afs.collection<User>('Users').doc(userId).update({userType: "disabled"});
