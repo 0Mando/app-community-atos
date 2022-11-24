@@ -89,6 +89,11 @@ export class ButtonActionsComponent implements OnInit {
 				this.reportService.createReport(report).catch(
 					error => console.log('An error ocurred : ' + error)
 				)
+			},
+			() => {},
+			{
+				titleColor: '#0195ff',
+				okButtonBackground: '#0195ff'
 			}
 		)
 	}
