@@ -17,16 +17,11 @@ export class CommentFormComponent implements OnInit {
 	currentDate: Date = new Date();
 	commentI: IComment;
 	idPost: string;
-	@Input() replyToAuthor : string;
+	@Input() replyToAuthor: string;
 
-	currentUser: User = {
+	currentUser = {
 		firstName: '',
 		lastName: '',
-		birthday: '',
-		email: '',
-		password: '',
-		userType: 'normal-user',
-		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
@@ -102,11 +97,6 @@ export class CommentFormComponent implements OnInit {
 				this.currentUser = {
 					firstName: user.firstName,
 					lastName: user.lastName,
-					birthday: user.birthday,
-					email: user.email,
-					password: '************',
-					userType: user.userType,
-					userTypeBackup: user.userTypeBackup,
 					profilePicture: user.profilePicture
 				}
 			}
