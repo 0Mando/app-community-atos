@@ -206,10 +206,8 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   generate(){
     if(this.id == undefined){
-      console.log('undefined');
       this.addRoom();
     } else{
-      console.log(this.id);
       this.editRoom(this.id);
     }
   }
