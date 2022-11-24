@@ -229,9 +229,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		return this.markdownForm.invalid ? '50%' : '100%';
 	}
 
-	// TODO Fix guard
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-		if(this.markdownForm.invalid) {
+		if(this.channelIdParam !== undefined && !this.articleChangesSaved) {
 			return confirm(
 				`Are you sure you want to leave this page?\nYou can save this draft and continue later`
 			);
