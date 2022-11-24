@@ -15,6 +15,6 @@ export class CrendentialsGuard implements CanActivate {
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :
 	Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		return this.auth.isLoggedIn ? this.router.navigate(['/boards']) : this.router.navigate(['/sign-in']);
+		return this.auth.isLoggedIn ? this.router.navigate(['/boards']) : true;
 	}
 }
