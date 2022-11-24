@@ -1,5 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
@@ -8,6 +10,19 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, DoCheck {
+
+	currentUser : User = {
+		firstName: 'Benito',
+		lastName: 'Camelo',
+		birthday: '',
+		email: '',
+		password: '',
+		profilePicture : 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+		userType : 'normal-user',
+		userTypeBackup : 'normal-user'
+	};
+
+	// private subscription : Subscription;
 
 	boards: string[] = [
 		'Board 1',
@@ -29,6 +44,11 @@ export class HeaderComponent implements OnInit, DoCheck {
 
 	ngDoCheck(): void {
 		this.loggedIn = this.authenticationService.isLoggedIn;
+		// let idUser = '';
+		// if(this.loggedIn) {
+		// 	idUser = this.authenticationService.currentSessionUserId();
+		// 	this.fetchUserData(idUser)
+		// }
 	}
 
 	ngOnInit(): void {
@@ -51,8 +71,24 @@ export class HeaderComponent implements OnInit, DoCheck {
 		this.router.navigate(['sign-in']);
 	}
 
-	// TODO: Remove this method
-	displayUserId() {
-		return this.authenticationService.currentSessionUserId();
+	/**
+	 * Get the information of the current user in the session.
+	 * @param idUser
+	 */
+	fetchUserData(idUser : string){
+		this.authenticationService.onFetchUserInformation(idUser).subscribe(
+			(user: User) => {
+				this.currentUser = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					birthday: user.birthday,
+					email: user.email,
+					password: '************',
+					userType : user.userType,
+					userTypeBackup : user.userTypeBackup,
+					profilePicture : user.profilePicture
+				}
+			}
+		)
 	}
 }

@@ -1,0 +1,128 @@
+@import '../../../../../sass/variables';
+
+.comment-card {
+	padding: 0 2rem;
+	margin-bottom: 2rem;
+
+	&__header {
+		display: flex;
+		margin-bottom: 1rem;
+
+		&__author-profile {
+			border-radius: 50%;
+			width: 3.5rem;
+			height: 3.5rem;
+			margin-right: 1.5rem;
+		}
+
+		&__author-data {
+			display: flex;
+			flex-direction: column;
+			margin: .5rem;
+		}
+
+		&__options {
+			background: none;
+			border: none;
+			margin-left: auto;
+			position: relative;
+		}
+	}
+
+	&__content {
+		display: block;
+		width: 100%;
+	}
+
+	&__quill-editor {
+		display: block;
+		width: 100%;
+		background-color: $--main--50;
+		border-radius: 10px;
+	}
+
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__btn-update {
+		margin-top: 1rem;
+		border: none;
+		background-color: $main;
+		color: white;
+		display: block;
+		width: 100%;
+		padding: .5rem 1rem;
+		border-radius: 5px;
+	}
+
+	&__btn-cancel {
+		margin-top: 1rem;
+		border: 1px solid $main;
+		background-color: white;
+		display: block;
+		padding: .5rem 1rem;
+		width: 100%;
+		border-radius: 5px;
+	}
+}
+
+hr {
+	margin: 1rem 0;
+	color: #ccc;
+	border: 0;
+	border-top: 2px solid;
+	opacity: .25;
+	margin-bottom: 1.5rem;
+}
+
+#edit {
+	color: $b-third;
+}
+
+#delete {
+	color: $b-second;
+}
+
+#warning {
+	color: #feb90d;
+}
+
+.no-comments {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@include media-md {
+	.comment-card {
+		padding: 0 5rem;
+
+		&__header {
+
+			&__options {
+
+				&__list {
+
+					&__actions {
+						display: block;
+					}
+				}
+			}
+		}
+
+		&__buttons {
+			flex-direction: row-reverse;
+		}
+
+		&__btn-update {
+			width: auto;
+		}
+
+		&__btn-cancel {
+			width: auto;
+			margin-right: 1rem;
+		}
+	}
+}

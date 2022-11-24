@@ -1,0 +1,47 @@
+<main class="container wrapper-content">
+	<section class="articles">
+		<section class="articles__header">
+			<h2 class="articles__title">
+				{{ currentChannel.channelName }}
+			</h2>
+			<div class="articles__action">
+				<small class="articles__not-verified" *ngIf="userIsLogged() && !isVerified()">Your account is not verified</small>
+				<button
+					[ngClass]="
+					{
+						'articles__create-post' : userIsLogged() && isVerified(),
+						'articles__btn-create-post-none' : !userIsLogged(),
+						'articles__verify-account' : userIsLogged() && !isVerified()
+					}"
+					(click)="onCreateArticle()">
+					Create Post
+				</button>
+			</div>
+		</section>
+		<section class="list-articles">
+			<ng-container *ngIf="lengthListArticles > 0; else noArticles">
+				<app-article-card *ngFor="let article of articles |
+				paginate : { itemsPerPage: 5, currentPage: page }"
+				[idArticle]="article.id"
+				[userCreatedId]="article.userCreatedId"
+				[date]="article.date"
+				[title]="article.titlePost"
+				[descriptionContent]="article.descriptionContent"
+				>
+				</app-article-card>
+				<section class="controls">
+					<pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+				</section>
+			</ng-container>
+			<ng-template #noArticles>
+				<h3>
+					Aún no hay artículos disponibles.
+				</h3>
+				<p>Crea el primer artículo</p>
+			</ng-template>
+		</section>
+	</section>
+	<section class="speakers">
+		<app-top-speakers></app-top-speakers>
+	</section>
+</main>
