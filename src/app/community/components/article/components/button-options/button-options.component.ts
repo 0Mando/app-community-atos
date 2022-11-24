@@ -5,6 +5,7 @@ import { IReport } from 'src/app/domain/models/report.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 @Component({
 	selector: 'app-button-options',
@@ -29,13 +30,13 @@ export class ButtonOptionsComponent implements OnInit {
 		readingTime: 0,
 	}
 	canEditArticle: boolean;
-	canReportArticle : boolean;
+	canReportArticle: boolean;
 
 	constructor(
 		private reportService: ReportService,
 		private auth: AuthService,
 		private articleService: ArticleService,
-		private router : Router
+		private router: Router
 	) { }
 
 	ngOnInit(): void {
@@ -70,21 +71,30 @@ export class ButtonOptionsComponent implements OnInit {
 	 * Create a new report of an article.
 	 */
 	onReportArticle(): void {
-		const report: IReport = {
-			reporterUserId: this.auth.currentSessionUserId(),
-			idItemReported: this.idArticle,
-			activity: 'Post',
-			reportedUserId: this.currentArticle.userCreatedId,
-			reportDate: new Date().getTime(),
-			status: 'In Review'
-		}
-		console.table(report);
-		this.reportService.createReport(report).catch(
-			error => console.log('An error ocurred -> ' + error)
+		Confirm.prompt(
+			'Report reason',
+			'Write the reason for the report',
+			'Inappropriate message',
+			'Submit report',
+			'Cancel',
+			(clientAnswer) => {
+				const report: IReport = {
+					reporterUserId: this.auth.currentSessionUserId(),
+					idItemReported: this.idArticle,
+					activity: 'Post',
+					reportedUserId: this.currentArticle.userCreatedId,
+					reportDate: new Date().getTime(),
+					status: 'In Review',
+					reason: clientAnswer
+				}
+				this.reportService.createReport(report).catch(
+					error => console.log('An error ocurred -> ' + error)
+				)
+			}
 		)
 	}
 
-	onEditArticle() : void {
+	onEditArticle(): void {
 		this.editArticle.emit(true);
 	}
 }
