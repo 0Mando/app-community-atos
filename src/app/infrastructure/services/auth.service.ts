@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 
 @Injectable({
@@ -65,6 +66,16 @@ export class AuthService {
 
 	onFetchUserInformation(idUser : string) {
 		return this.afs.collection('Users').doc(idUser).valueChanges()
+	}
+
+	getUsernameById(idUser : string) {
+		console.log(idUser);
+		return this.afs.collection('Users').doc(idUser).valueChanges().pipe(
+			map(user => {
+				console.log(user);
+				return user;
+			})
+		)
 	}
 	
 	disableUser(userId:string){

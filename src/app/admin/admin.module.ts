@@ -25,6 +25,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
+import { ReportComponent } from './reports/report/report.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
     ReportsComponent,
     UserTypePipe,
     FilterUsersPipe,
-    SortUsersPipe
+    SortUsersPipe,
+    ReportComponent
   ],
   imports: [
     CommonModule,

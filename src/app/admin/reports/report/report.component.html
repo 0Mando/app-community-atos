@@ -1,0 +1,17 @@
+<div class="reports__list-user">
+  <div class="reports__list-check">
+      <label class="container">
+          <input type="checkbox">
+          <span class="checkmark"></span>
+      </label>
+  </div>
+  <div class="reports__list-name"><img class="reports-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">{{reporterName}}</div>
+  <div class="reports__list-activity"><div class="reports__title admin">{{report.activity}}</div></div>
+  <div class="reports__list-name"><img class="reports-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">{{reportedName}}</div>
+  <div class="reports__list-karma">{{report.reportDate | date}}</div>
+  <div class="reports__list-status"><div class="reports__title admin">{{report.status}}</div></div>
+  <div class="reports__list-options">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+  </div>
+</div>

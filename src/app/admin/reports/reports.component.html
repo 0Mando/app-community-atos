@@ -30,7 +30,6 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
-            <div class="reports__list-id-title">Reporter Id</div>
             <div class="reports__list-reporter">Reporter</div>
             <div class="reports__list-activity">Activity</div>
             <div class="reports__list-reporter">Reported User</div>
@@ -40,14 +39,13 @@
         </div>
 
         <div class="reports__list-table" *ngFor="let report of reports">
-            <div class="reports__list-user">
+            <!-- <div class="reports__list-user">
                 <div class="reports__list-check">
                     <label class="container">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div class="reports__list-id">11</div>
                 <div class="reports__list-name"><img class="reports-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">{{report.reporterUserId}}</div>
                 <div class="reports__list-activity"><div class="reports__title admin">{{report.activity}}</div></div>
                 <div class="reports__list-name"><img class="reports-pfp" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="">{{report.reportedUserId}}</div>
@@ -57,7 +55,8 @@
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
-            </div>
+            </div> -->
+            <app-report [report]="report"></app-report>
 <!---->     
                         <!-- <div class="reports__list-user">
                 <div class="reports__list-check">
