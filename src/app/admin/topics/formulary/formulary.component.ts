@@ -121,6 +121,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
             name: data.channelName,
             description: data.channelDescription,
             parent: data.parentBoard,
+            
           });
           this.modsID = [];
 
@@ -134,6 +135,8 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           this.id = data.id;
           this.title = 'editing';
           this.action = 'edit';
+          this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.channelImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
+      
         })
         break;
     }
