@@ -60,7 +60,7 @@
 		<article *ngIf="editArticle" class="edit-post">
 			<h2 class="edit-post__title">Edit article</h2>
 			<section class="edit-post__form">
-				<form [formGroup]="editArticleForm">
+				<form [formGroup]="editArticleForm" (ngSubmit)="onUpdateArticle()">
 					<input type="text" formControlName="titlePostForm"
 					class="edit-post__title-post"
 					placeholder="Post title...">
@@ -78,9 +78,26 @@
 					[modules]="editorModules"
 					[sanitize]="true" [styles]="{height: '300px'}"></quill-editor>
 
+					<section class="edit-post__comments">
+						<label class="edit-post__comments__label">Comments</label>
+						<label class="switch">
+							<input type="checkbox" formControlName="commentsForm">
+							<span class="slider round"></span>
+						</label>
+					</section>
+
+					<section class="edit-post__comments">
+						<label class="edit-post__comments__label">Archive</label>
+						<label class="switch">
+							<input type="checkbox" formControlName="archiveForm">
+							<span class="slider round"></span>
+						</label>
+					</section>
+
 					<section class="edit-post__btn-section">
 						<button class="edit-post__btn-section__save">Save</button>
-						<button class="edit-post__btn-section__cancel">Cancel</button>
+						<button class="edit-post__btn-section__cancel"
+						(click)="onCancelEditArticle()">Cancel</button>
 					</section>
 				</form>
 			</section>

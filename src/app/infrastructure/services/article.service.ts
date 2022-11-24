@@ -35,8 +35,18 @@ export class ArticleService {
 		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
 	}
 
-	updatePost(articleId : string, article : IArticle) {
-		return this.afs.collection('posts').doc(articleId).update(article);
+	updatePost(articleId : string, title : string, desc : string, time : number,
+		content : string, comments : boolean, archive : boolean) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{
+				titlePost : title,
+				descriptionContent : desc,
+				readingTime : time,
+				content : content,
+				disableComments : comments,
+				archive : archive
+			}
+		);
 	}
 
 	deletePost(articleId : string) {

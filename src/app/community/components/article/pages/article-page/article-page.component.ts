@@ -55,11 +55,7 @@ export class ArticlePageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.route.params.subscribe(
-			(params: Params) => {
-				this.idArticle = params['id']
-			}
-		)
+		this.idArticle = this.route.snapshot.params['id'];
 		this.displayHeaderButton = this.auth.isLoggedIn;
 		this.onFetchArticle(this.idArticle);
 	}
@@ -94,6 +90,10 @@ export class ArticlePageComponent implements OnInit {
 						new FormControl(this.currentArticle.readingTime),
 					'contentForm':
 						new FormControl(this.currentArticle.content),
+					'commentsForm':
+						new FormControl(this.currentArticle.disableComments),
+					'archiveForm' :
+						new FormControl(this.currentArticle.archive)
 				})
 			}
 		)
@@ -135,6 +135,27 @@ export class ArticlePageComponent implements OnInit {
 				}
 			}
 		)
+	}
+
+	onCancelEditArticle(): void {
+		this.editArticle = false;
+	}
+
+	onUpdateArticle(): void {
+		const titlePost = this.editArticleForm.get('titlePostForm').value;
+		const descriptionContent = this.editArticleForm.get
+			('descriptionContentForm').value;
+		const readingTime = this.editArticleForm.get('readingTimeForm').value;
+		const content = this.editArticleForm.get('contentForm').value;
+		const comments = this.editArticleForm.get('commentsForm').value;
+		const archive = this.editArticleForm.get('archiveForm').value;
+
+		this.article.updatePost(this.idArticle, titlePost, descriptionContent,
+		readingTime, content, comments, archive).catch(
+			error => console.log('An error ocurred '+error)
+		)
+
+		this.editArticle = false;
 	}
 
 	//* Toolbar settings input text for create a post
