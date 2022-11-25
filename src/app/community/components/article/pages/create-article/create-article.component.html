@@ -5,8 +5,6 @@
 	<tabs>
 		<tab tabTitle="Editor" class="tab">
 			<form [formGroup]="markdownForm">
-			<!-- <form [formGroup]="markdownForm" (ngSubmit)="submitPost()"> -->
-
 				<input type="text" class="post__title-post"
 					placeholder="Post title..." formControlName="titlePostForm"
 					[(ngModel)]="titlePost">

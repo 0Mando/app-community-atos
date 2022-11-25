@@ -14,6 +14,7 @@ import { CreateArticleComponent } from './community/components/article/pages/cre
 import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
 import { ArticleGuard } from './infrastructure/guards/article.guard';
 import { ArticleGuardService } from './infrastructure/services/article-guard.service';
+import { CrendentialsGuard } from './infrastructure/guards/crendentials.guard';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'sign-in',
+		canActivate : [CrendentialsGuard],
 		component: LoginComponent
 	},
 	{
@@ -61,6 +63,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'sign-up',
+		canActivate : [CrendentialsGuard],
 		component: RegisterComponent
 	},
 	{

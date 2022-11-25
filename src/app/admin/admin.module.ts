@@ -1,4 +1,4 @@
-import { AppPipesModule } from './../app-pipes/app-pipes.module';
+
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,7 +26,7 @@ import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
-
+import { AppPipesModule } from '../app-pipes/app-pipes.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
     AdminRoutingModule,
     ReactiveFormsModule,
     AppPipesModule,
-    FormsModule
+    FormsModule,
     // HttpClientModule
   ]
 })

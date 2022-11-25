@@ -24,7 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-// import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 
@@ -58,6 +58,7 @@ import { CommentFormComponent } from './community/components/comments/comment-fo
 import { ListCommentsComponent } from './community/components/comments/list-comments/list-comments.component';
 import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
 import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
+import { ChannelArticleCardComponent } from './community/components/channels/channel-article-card/channel-article-card.component';
 
 @NgModule({
 	declarations: [
@@ -73,7 +74,6 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		RegisterComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-		// SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ChannelArticlesListComponent,
@@ -91,7 +91,8 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		CommentFormComponent,
 		ListCommentsComponent,
 		ButtonActionsComponent,
-  ButtonOptionsComponent,
+		ButtonOptionsComponent,
+    ChannelArticleCardComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],

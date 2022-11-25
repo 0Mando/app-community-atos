@@ -5,5 +5,6 @@ export interface IReport {
 	activity : 'Comment' | 'Post';
 	reportedUserId : string;
 	reportDate : number;
-	status : 'In Review' | 'Checked'
+	status : 'In Review' | 'Checked',
+	reason : string
 }
