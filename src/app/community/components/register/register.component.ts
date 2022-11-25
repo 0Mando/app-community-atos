@@ -42,6 +42,8 @@ export class RegisterComponent implements OnInit {
 			bannerImage: "https://firebasestorage.googleapis.com/v0/b/atos-community-upgrade.appspot.com/o/default-templates%2Fbanner-default.png?alt=media&token=e29f562a-977a-4ca0-bbcd-a63556a18fe8",
 			userType : 'normal-user',
 			userTypeBackup : 'normal-user',
+			website: 'None',
+			work: 'None',
 		}
 
 		this.isLoading = true;

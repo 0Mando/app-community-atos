@@ -8,6 +8,8 @@ export interface User{
 	bannerImage?: string;
 	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin' | 'disabled';
 	userTypeBackup: 'normal-user' | 'auth-user' | 'moderator' | 'admin';
+	website?: string;
+	work?: string;
 	checked?: boolean;
 }
 
