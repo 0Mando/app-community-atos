@@ -29,9 +29,12 @@
 		margin-top: 1rem;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 
 		li {
-			display: inline-block;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 			margin: 0.5rem 0;
 			list-style-type: none;
 			font-weight: bold;
