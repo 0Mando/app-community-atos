@@ -34,8 +34,7 @@ export class RegisterComponent implements OnInit {
 	async onSubmit(){
 
 		this.user = {
-			firstName : this.formRegisterUser.get('firstName').value,
-			lastName : this.formRegisterUser.get('lastName').value,
+			name : this.formRegisterUser.get('firstName').value + ' ' + this.formRegisterUser.get('lastName').value,
 			birthday : this.formRegisterUser.get('birthday').value,
 			email : this.formRegisterUser.get('email').value,
 			password : this.formRegisterUser.get('password').value,
