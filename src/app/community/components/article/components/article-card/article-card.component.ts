@@ -16,8 +16,7 @@ export class ArticleCardComponent implements OnInit {
 	@Input() descriptionContent : string;
 
 	userAuthorData: User = {
-		firstName: '',
-		lastName: '',
+		name: '',
 		birthday: '',
 		email: '',
 		password: '',
@@ -37,17 +36,8 @@ export class ArticleCardComponent implements OnInit {
 	 */
 	onFetchAuthorData (idUser : string) : void {
 		this.auth.onFetchUserInformation(idUser).subscribe(
-			(user : User) => {
-				this.userAuthorData = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					birthday: user.birthday,
-					email: user.email,
-					password: '************',
-					userType: user.userType,
-					userTypeBackup: user.userTypeBackup,
-					profilePicture: user.profilePicture
-				}
+			(user) => {
+				this.userAuthorData = {...user.payload.data()}
 			}
 		)
 	}
