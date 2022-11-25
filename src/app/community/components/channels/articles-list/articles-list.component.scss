@@ -5,10 +5,11 @@
 	display: flex;
 	flex-direction: column;
 	box-shadow: 5px 10px 18px 10px rgba(220, 220, 220, 0.856);
+	height: 365px;
 }
 
 .list-item {
-	margin: 10px 25px;
+	margin: 10px 25px 0px;
 	height: 25%;
 	display: flex;
 
@@ -67,6 +68,7 @@
 
 .my-pagination-articles {
 	margin-left: auto;
+	margin-top: auto;
 	padding-right: 2rem;
 }
 

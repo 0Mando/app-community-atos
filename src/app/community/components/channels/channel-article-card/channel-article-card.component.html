@@ -1,0 +1,7 @@
+<article class="card">
+	<img  class="card__user-profile-picture" src="{{ profilePicture }}" alt="">
+	<section class="card__content">
+		<h4 class="card__content__title">{{ titlePost }}</h4>
+		<p class="card__content__body">{{ descriptionPost | shortString : 90 }}</p>
+	</section>
+</article>

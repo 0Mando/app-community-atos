@@ -18,16 +18,8 @@ export class ButtonOptionsComponent implements OnInit {
 	@Input() idArticle: string;
 	@Output() editArticle = new EventEmitter<boolean>();
 
-	currentArticle: IArticle = {
+	currentArticle = {
 		userCreatedId: '',
-		date: 0,
-		channelId: '',
-		titlePost: '',
-		descriptionContent: '',
-		content: '',
-		disableComments: false,
-		archive: false,
-		readingTime: 0,
 	}
 	canEditArticle: boolean;
 	canReportArticle: boolean;
@@ -44,14 +36,6 @@ export class ButtonOptionsComponent implements OnInit {
 			(article: IArticle) => {
 				this.currentArticle = {
 					userCreatedId: article.userCreatedId,
-					date: article.date,
-					channelId: article.channelId,
-					titlePost: article.titlePost,
-					descriptionContent: article.descriptionContent,
-					content: article.content,
-					disableComments: article.disableComments,
-					archive: article.archive,
-					readingTime: article.readingTime
 				}
 				this.canEditArticle = this.currentArticle.userCreatedId === this.auth.currentSessionUserId();
 				this.canReportArticle = this.currentArticle.userCreatedId !== this.auth.currentSessionUserId();

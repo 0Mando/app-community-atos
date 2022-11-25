@@ -70,11 +70,12 @@ export class ArticleService {
 		return this.afs.collection('posts').doc(articleId).delete();
 	}
 
-	fetchPostFromParentBoard<IPost>(boardParent : string) {
+	fetchPostFromParentBoard<IPost>(boardId : string) {
 		const postsCollection = this.afs.collection<IPost>(
 			'posts',
-			ref => ref
-				.where('boardParent','==', boardParent)
+			(ref) => ref
+				.where('boardId','==', boardId)
+				.where('archive', '==', false)
 		);
 		return postsCollection.valueChanges({ idField : 'id' });
 	}

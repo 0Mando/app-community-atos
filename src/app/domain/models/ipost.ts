@@ -9,4 +9,5 @@ export interface IArticle {
 	disableComments : boolean;
 	archive : boolean;
 	readingTime : number;
+	boardId : string;
 }
