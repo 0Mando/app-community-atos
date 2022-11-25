@@ -1,6 +1,9 @@
+import { map, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 @Component({
   selector: 'app-myprofile',
@@ -16,7 +19,10 @@ export class MyprofileComponent implements OnInit {
     'website': new FormControl()
   });
   isDisabled: boolean = true;
+  isLoading: boolean;
   id: string;
+  pfp: string;
+  banner: string;
 
   totalLength: any;
   page: number = 1
@@ -104,10 +110,36 @@ export class MyprofileComponent implements OnInit {
   postsBool = false;
   
 
-  constructor(private _profileService: MyprofileService) { }
+  constructor(
+      private _profileService: MyprofileService,
+      private _authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getInfo();
+    this.isLoading = true;
+    
+
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        
+        return data.uid
+      }),
+      switchMap(data => this._profileService.getInfo(data).pipe(
+        map(data => {
+          this.id = data.payload.id;
+          this.pfp = data.payload.data().profilePicture;
+          this.banner = data.payload.data().bannerImage;
+          this.myProfile = {...data.payload.data()}
+          this.profileForm = new FormGroup({
+            'name': new FormControl({value: data.payload.data().firstName, disabled: this.isDisabled}),
+            'email': new FormControl({value: data.payload.data().email, disabled: this.isDisabled}),
+            'work': new FormControl({value: data.payload.data().work, disabled: this.isDisabled}),
+            'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
+          })
+          this.isLoading = false;
+        })
+      ))
+    ).subscribe()
+    // this.getInfo();
     this.totalLength = this.posts.length;
     
   }
@@ -198,24 +230,6 @@ export class MyprofileComponent implements OnInit {
     }
 
     this.page = 1;
-  }
-
-  getInfo(){
-    this._profileService.getInfo().subscribe(data => {
-      data.forEach((element: any) => {
-        this.myProfile = {...element.payload.doc.data()};
-        this.id = element.payload.doc.id;
-
-        this.setImages(this.myProfile.pfp, this.myProfile.banner);
-        
-        this.profileForm = new FormGroup({
-          'name': new FormControl({value: this.myProfile.name, disabled: this.isDisabled}),
-          'email': new FormControl({value: this.myProfile.email, disabled: this.isDisabled}),
-          'work': new FormControl({value: this.myProfile.work, disabled: this.isDisabled}),
-          'website': new FormControl({value: this.myProfile.website, disabled: this.isDisabled})
-        });
-      });
-    })
   }
 
   setInfo(){

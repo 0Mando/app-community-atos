@@ -12,6 +12,7 @@
                     <p class="profile__dropdown-name">{{ currentUser.firstName + ' ' + currentUser.lastName}}</p>
                 </a>
                 <div class="profile__dropdown-content">
+                    <a [routerLink]="['/admin']" *ngIf="isAdmin">My ADMIN</a>
                     <a [routerLink]="['/myprofile']">My Profile</a>
                     <a (click)="onLogout()">Logout</a>
                 </div>

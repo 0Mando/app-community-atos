@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Subscription, switchMap } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 		'Profile 3'
 	];
 	loggedIn = false;
+	isAdmin: boolean;
 
 	constructor(private authenticationService: AuthService, private router : Router) {
 		this.loggedIn = this.authenticationService.isLoggedIn;
@@ -52,7 +53,17 @@ export class HeaderComponent implements OnInit, DoCheck {
 	}
 
 	ngOnInit(): void {
-
+		this.authenticationService.getCurrentUser().pipe(
+			switchMap(user => this.authenticationService.getAdmins().pipe(
+			  map(admins => {
+				admins.forEach(admin => {
+				  if(user.uid === admin.id){
+					this.isAdmin = true;
+				  }
+				})
+			  })
+			))
+		).subscribe();
 	}
 
 	toggleMenu(): void {

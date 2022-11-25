@@ -18,7 +18,6 @@ import { ChannelsComponent } from './topics/channels/channels.component';
 import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
-import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
 import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
 import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 // import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
@@ -40,7 +39,6 @@ import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
     BoardsComponent,
     ChannelsComponent,
     FormularyComponent,
-    TimeAgoPipe,
     ShortenModPipe,
     ParentBoardsPipe,
     // FirstwordPipe
