@@ -38,8 +38,12 @@ export class RegisterComponent implements OnInit {
 			birthday : this.formRegisterUser.get('birthday').value,
 			email : this.formRegisterUser.get('email').value,
 			password : this.formRegisterUser.get('password').value,
+			profilePicture: "https://firebasestorage.googleapis.com/v0/b/atos-community-upgrade.appspot.com/o/default-templates%2Fprofile-default.png?alt=media&token=f65caca8-7ec0-4211-adf5-48512ba27a7a",
+			bannerImage: "https://firebasestorage.googleapis.com/v0/b/atos-community-upgrade.appspot.com/o/default-templates%2Fbanner-default.png?alt=media&token=e29f562a-977a-4ca0-bbcd-a63556a18fe8",
 			userType : 'normal-user',
 			userTypeBackup : 'normal-user',
+			website: 'None',
+			work: 'None',
 		}
 
 		this.isLoading = true;

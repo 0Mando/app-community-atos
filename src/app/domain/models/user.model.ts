@@ -5,8 +5,11 @@ export interface User{
 	email: string;
 	password: string;
 	profilePicture? : string;
+	bannerImage?: string;
 	userType: 'normal-user' | 'auth-user' | 'moderator' | 'admin' | 'disabled';
 	userTypeBackup: 'normal-user' | 'auth-user' | 'moderator' | 'admin';
+	website?: string;
+	work?: string;
 	checked?: boolean;
 }
 
