@@ -10,6 +10,20 @@
     text-decoration: underline;
 }
 
+.board{
+    &-url{
+        color: black;
+        text-decoration: none;
+        
+    }
+    
+    &-title{
+        color: black;
+        text-decoration: none;    
+    }
+}
+
+
 .lds-ring {
     display: inline-block;
     position: relative;

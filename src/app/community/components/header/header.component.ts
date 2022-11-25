@@ -1,8 +1,10 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Subscription, switchMap, filter, Observable, last, mergeMap } from 'rxjs';
+import { Board } from 'src/app/domain/models/board.model';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { BoardService } from 'src/app/infrastructure/services/board.service';
 
 @Component({
 	selector: 'app-header',
@@ -13,13 +15,7 @@ export class HeaderComponent implements OnInit {
 
 	currentUser: User;
 
-	boards: string[] = [
-		'Board 1',
-		'Board 2',
-		'Board 3',
-		'Board 4',
-		'Board 5'
-	];
+	boards: Board[] = [];
 	profiles: string[] = [
 		'Profile 1',
 		'Profile 2',
@@ -29,9 +25,10 @@ export class HeaderComponent implements OnInit {
 	isAdmin: boolean;
 	userData: User;
 
-	constructor(private authenticationService: AuthService, private router : Router) {}
+	constructor(private authenticationService: AuthService, private boardService : BoardService, private router : Router) {}
 
 	ngOnInit(): void {
+		this.fetchBoardsData();
 		this.authenticationService.getCurrentUser().pipe(
 			switchMap(user => this.authenticationService.getAdmins().pipe(
 			  map(admins => {
@@ -94,5 +91,13 @@ export class HeaderComponent implements OnInit {
 				this.currentUser = {...user.payload.data()}
 			}
 		)
+	}
+
+	fetchBoardsData(){
+		this.boardService.getBoardsList<Board>().subscribe(
+			boards =>{
+				this.boards = boards;
+			}
+		);
 	}
 }
