@@ -90,17 +90,8 @@ export class HeaderComponent implements OnInit {
 	 */
 	fetchUserData(idUser : string){
 		this.authenticationService.onFetchUserInformation(idUser).subscribe(
-			(user: User) => {
-				this.currentUser = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					birthday: user.birthday,
-					email: user.email,
-					password: '************',
-					userType : user.userType,
-					userTypeBackup : user.userTypeBackup,
-					profilePicture : user.profilePicture
-				}
+			(user) => {
+				this.currentUser = {...user.payload.data()}
 			}
 		)
 	}

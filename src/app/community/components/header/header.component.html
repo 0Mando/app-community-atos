@@ -9,7 +9,7 @@
             <li class="profile__dropdown" *ngIf="loggedIn; else elseProfile">
                 <a class="profile__dropdown-btn">
                     <img src="{{ currentUser.profilePicture }}" alt="" class="profile__dropdown-image" *ngIf=" currentUser ">
-                    <p class="profile__dropdown-name" *ngIf=" currentUser ">{{ currentUser.firstName + ' ' + currentUser.lastName }}</p>
+                    <p class="profile__dropdown-name" *ngIf=" currentUser ">{{ currentUser.name }}</p>
                     <div class="lds-ring" *ngIf="!currentUser"><div></div><div></div><div></div><div></div></div>
                 </a>
                 <div class="profile__dropdown-content">
