@@ -59,7 +59,7 @@ export class MyprofileComponent implements OnInit {
             this.banner = data.payload.data().bannerImage;
             this.myProfile = {...data.payload.data()}
             this.profileForm = new FormGroup({
-              'name': new FormControl({value: data.payload.data().firstName, disabled: this.isDisabled}),
+              'name': new FormControl({value: data.payload.data().name, disabled: this.isDisabled}),
               'email': new FormControl({value: data.payload.data().email, disabled: this.isDisabled}),
               'work': new FormControl({value: data.payload.data().work, disabled: this.isDisabled}),
               'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
