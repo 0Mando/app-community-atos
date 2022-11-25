@@ -1,4 +1,4 @@
-import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,10 +19,15 @@ import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
+import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
+// import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
+
+
 import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
-
+import { AppPipesModule } from '../app-pipes/app-pipes.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,8 @@ import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
     FormularyComponent,
     TimeAgoPipe,
     ShortenModPipe,
+    ParentBoardsPipe,
+    // FirstwordPipe
     UserTypePipe,
     FilterUsersPipe,
     SortUsersPipe
@@ -45,7 +52,8 @@ import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    AppPipesModule,
+    FormsModule,
     // HttpClientModule
   ]
 })

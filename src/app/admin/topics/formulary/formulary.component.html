@@ -12,8 +12,9 @@
                     <div class="info__users-add"><i class="fa-solid fa-plus"></i></div>
                 </div>
             </div>
-            <div class="menu__header-options">
-                <i class="fa fa-solid fa-ellipsis"></i>
+            <!-- <button (click)="doSome()">Something</button> -->
+            <div class="menu__header-options" (click)="deleteRoom()">
+                <i class="fa-solid fa-trash"></i>
             </div>
         </div>
         <div class="separator"></div>
@@ -47,7 +48,9 @@
                             formControlName="description"></textarea>
                     </div>
                     <div class="field">
-                        <div class="field-image"></div>
+                        <div class="field-image"
+                        [style.background-image]="imageUrlStyle"
+                        ></div>
                         <label class="custom-file">
                             <input 
                                 type="file" 
@@ -59,10 +62,9 @@
                             SELECT PICTURE FOR {{ type | uppercase }}
                         </label>
                     </div>
-                    <button type="button" (click)="uploadImage()">UPLOAD</button>
                 </div>
                 <div class="right">
-                    <div class="field">
+                    <div class="field" *ngIf="type == 'board'; else channelField">
                         <label for="boardVisibility" class="board-label">VISIBILITY</label>
                         <select 
                             name="boardVisibility" 
@@ -74,6 +76,19 @@
                             <option value="hidden">Hidden</option>
                         </select>
                     </div>
+                    <ng-template #channelField>
+                        <div class="field">
+                            <label for="moderators" class="board-label">PARENT BOARD</label>
+                            <select 
+                            name="parentBoard" 
+                            id="parentBoard" 
+                            class="board-input"
+                            formControlName="parent">
+                            <option value="" hidden disabled selected>Pick a visibility for your {{type}}</option>
+                            <option *ngFor="let board of parentBoardsList" [value]="board.id">{{ board.name}}</option>
+                        </select>
+                        </div>
+                    </ng-template>
                     <div class="field">
                         <label for="moderators" class="board-label">MODERATORS</label>
                         <input 
@@ -81,6 +96,7 @@
                             id="mod-search" 
                             class="board-input" 
                             name="moderators" 
+                            (keydown.enter)="$event.preventDefault()"
                             placeholder=" &#xF002;  Search Moderator by Name or ID"
                             style="font-family:Arial, FontAwesome">
                         <datalist id="mods">
@@ -94,20 +110,20 @@
                             <label for="modsList" class="board-label">MODERATOR TEAM FOR NEW {{ type | uppercase }}</label>
                             <div class="field__mods-list">
                                 <div *ngIf="printMods.length > 0; else modsList">
-                                    <div *ngFor="let mods of printMods">
+                                    <div *ngFor="let mods of printMods; index as i">
                                         <div class="mod">
                                             <div class="mod-image">
                                                 <img 
-                                                    src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                                                    [src]="mods.pfp" 
                                                     class="mod-image" 
                                                     alt="">
                                             </div>
-                                            <div class="mod-name">{{ mods | shortenMod }}</div>
+                                            <div class="mod-name">{{ mods.name }}</div>
                                             <div class="mod__buttons">
-                                                <button type="button" class="mod__buttons-details close-button">
+                                                <button type="button" class="mod__buttons-details close-button" (click)="goToMod()">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
-                                                <button type="button" class="mod__buttons-close close-button">
+                                                <button type="button" class="mod__buttons-close close-button" (click)="removeMod(i)">
                                                     <i class="fa-solid fa-xmark"></i>
                                                 </button>
                                             </div>
@@ -123,7 +139,7 @@
                         </div>
                     </div>
                     <button type="submit" [disabled]="newForm.invalid" class="create-board">
-                        {{ action | uppercase }} BOARD
+                        {{ action | uppercase }} {{ type | uppercase}}
                     </button>
                 </div>
             </form>

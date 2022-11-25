@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { AppPipesModule } from './app-pipes/app-pipes.module';
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,7 +9,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
-
+// import * as Notiflix from 'notiflix';
 
 //* Angular Firebase Set up
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -25,8 +27,6 @@ import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
 import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
-// import { ShortenModPipe } from './infrastructure/pipes/shorten-mod.pipe';
-// import { TimeAgoPipe } from './infrastructure/pipes/time-ago.pipe';
 
 //* Components
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
@@ -74,7 +74,6 @@ import { ChannelArticleCardComponent } from './community/components/channels/cha
 		RegisterComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-		SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ChannelArticlesListComponent,
@@ -93,7 +92,7 @@ import { ChannelArticleCardComponent } from './community/components/channels/cha
 		ListCommentsComponent,
 		ButtonActionsComponent,
 		ButtonOptionsComponent,
-  ChannelArticleCardComponent,
+    ChannelArticleCardComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
@@ -102,6 +101,8 @@ import { ChannelArticleCardComponent } from './community/components/channels/cha
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		AppPipesModule,
+		
 
 		//* Angular Firebase Set up
 		// AngularFireModule.initializeApp(environment.firebase),
@@ -124,7 +125,8 @@ import { ChannelArticleCardComponent } from './community/components/channels/cha
 	],
 	providers: [
 		AngularFirestore,
-		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+		{ provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+		AuthService
 	],
 	bootstrap: [AppComponent]
 })
