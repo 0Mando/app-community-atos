@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, map, switchMap, filter, Observable, last, mergeMap } from 'rxjs';
+import { map, Subscription, switchMap, filter, Observable, last, mergeMap } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
 		'Profile 2',
 		'Profile 3'
 	];
+	loggedIn = false;
+	isAdmin: boolean;
 
 	loggedIn = false;
 	userData: User;
@@ -51,7 +53,19 @@ export class HeaderComponent implements OnInit {
 					}
 				})
 			))
-		).subscribe()
+		).subscribe();
+    
+		this.authenticationService.getCurrentUser().pipe(
+			switchMap(user => this.authenticationService.getAdmins().pipe(
+			  map(admins => {
+				admins.forEach(admin => {
+				  if(user.uid === admin.id){
+					this.isAdmin = true;
+				  }
+				})
+			  })
+			))
+		).subscribe();
 	}
 
 	toggleMenu(): void {

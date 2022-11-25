@@ -13,6 +13,7 @@
                     <div class="lds-ring" *ngIf="!currentUser"><div></div><div></div><div></div><div></div></div>
                 </a>
                 <div class="profile__dropdown-content">
+                    <a [routerLink]="['/admin']" *ngIf="isAdmin">My ADMIN</a>
                     <a [routerLink]="['/myprofile']">My Profile</a>
                     <a (click)="onLogout()">Logout</a>
                 </div>

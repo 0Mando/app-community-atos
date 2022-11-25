@@ -14,13 +14,44 @@
 
 .banner{
     height: 35vh;
+    object-fit: cover;
+    width: 100%;
     // background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-    background-size: cover;
+    // background-size: cover;
 }
 
 .fa-check{
     font-size: 1.1rem;
     color: white;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #0195ff;
+    border-color: #0195ff transparent #0195ff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
 }
 
 .my-pagination ::ng-deep .ngx-pagination {
