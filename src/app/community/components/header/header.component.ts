@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Subscription, switchMap, filter, Observable, last, mergeMap } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
@@ -27,13 +27,26 @@ export class HeaderComponent implements OnInit {
 	];
 	loggedIn = false;
 	isAdmin: boolean;
-
-	loggedIn = false;
 	userData: User;
 
 	constructor(private authenticationService: AuthService, private router : Router) {}
 
 	ngOnInit(): void {
+		this.authenticationService.getCurrentUser().pipe(
+			switchMap(user => this.authenticationService.getAdmins().pipe(
+			  map(admins => {
+				this.isAdmin = false;
+				if(user){
+					admins.forEach(admin => {
+						if(user.uid === admin.id){
+						  this.isAdmin = true;
+						} 
+					})
+				}
+			  })
+			))
+		).subscribe();
+
 		this.authenticationService.isUserLogged.pipe(
 			map(data => {
 				this.currentUser = undefined;
@@ -52,18 +65,6 @@ export class HeaderComponent implements OnInit {
 						...data.payload.data()
 					}
 				})
-			))
-		).subscribe();
-    
-		this.authenticationService.getCurrentUser().pipe(
-			switchMap(user => this.authenticationService.getAdmins().pipe(
-			  map(admins => {
-				admins.forEach(admin => {
-				  if(user.uid === admin.id){
-					this.isAdmin = true;
-				  }
-				})
-			  })
 			))
 		).subscribe();
 	}

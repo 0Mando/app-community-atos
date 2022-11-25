@@ -1,3 +1,4 @@
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { map, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
@@ -24,87 +25,13 @@ export class MyprofileComponent implements OnInit {
   pfp: string;
   banner: string;
 
-  totalLength: any;
+  totalLength: number = 0;
   page: number = 1
 
-  posts: {
-    title: string,
-    date: string,
-    likes: number,
-    comments: number,
-    visulizations: number
-  }[] = [
-    {
-      title: "CComplete Guide: Angular lifecycle hooks",
-      date: "5 Jun",
-      likes: 14,
-      comments: 4,
-      visulizations: 21
-    },
-    {
-      title: "Las piedras rodando se encuentran",
-      date: "28 Aug",
-      likes: 23,
-      comments: 8,
-      visulizations: 34
-    },
-    {
-      title: "La Casa de Cafe",
-      date: "7 Sep",
-      likes: 166,
-      comments: 67,
-      visulizations: 212
-    },
-    {
-      title: "Historia entre tus dedos",
-      date: "31 Jan",
-      likes: 420,
-      comments: 69,
-      visulizations: 777
-    },
-    {
-      title: "Gavilan o Paloma",
-      date: "20 Oct",
-      likes: 9999,
-      comments: 9999,
-      visulizations: 9999
-    },
-    {
-      title: "Complete Guide: Angular lifecycle hooks",
-      date: "5 Jun",
-      likes: 14,
-      comments: 4,
-      visulizations: 21
-    },
-    {
-      title: "Las piedras rodando se encuentran",
-      date: "28 Aug",
-      likes: 23,
-      comments: 8,
-      visulizations: 34
-    },
-    {
-      title: "La Casa de Cafe",
-      date: "7 Sep",
-      likes: 166,
-      comments: 67,
-      visulizations: 212
-    },
-    {
-      title: "Historia entre tus dedos",
-      date: "31 Jan",
-      likes: 420,
-      comments: 69,
-      visulizations: 777
-    },
-    {
-      title: "Gavilan o Paloma",
-      date: "20 Oct",
-      likes: 9999,
-      comments: 9999,
-      visulizations: 9999
-    }
-  ];
+  myPosts: any[] = [];
+  archivedPosts: any[] = [];
+
+  posts = [];
 
   // postsNum: number;
   postsBool = false;
@@ -112,36 +39,79 @@ export class MyprofileComponent implements OnInit {
 
   constructor(
       private _profileService: MyprofileService,
-      private _authService: AuthService) {}
+      private _authService: AuthService,
+      private _articleService: ArticleService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     
-
     this._authService.getCurrentUser().pipe(
       map(data => {
-        
-        return data.uid
+        if(data){
+          return data.uid
+        }
       }),
       switchMap(data => this._profileService.getInfo(data).pipe(
         map(data => {
-          this.id = data.payload.id;
-          this.pfp = data.payload.data().profilePicture;
-          this.banner = data.payload.data().bannerImage;
-          this.myProfile = {...data.payload.data()}
-          this.profileForm = new FormGroup({
-            'name': new FormControl({value: data.payload.data().firstName, disabled: this.isDisabled}),
-            'email': new FormControl({value: data.payload.data().email, disabled: this.isDisabled}),
-            'work': new FormControl({value: data.payload.data().work, disabled: this.isDisabled}),
-            'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
-          })
+          if(data){
+            this.id = data.payload.id;
+            this.pfp = data.payload.data().profilePicture;
+            this.banner = data.payload.data().bannerImage;
+            this.myProfile = {...data.payload.data()}
+            this.profileForm = new FormGroup({
+              'name': new FormControl({value: data.payload.data().firstName, disabled: this.isDisabled}),
+              'email': new FormControl({value: data.payload.data().email, disabled: this.isDisabled}),
+              'work': new FormControl({value: data.payload.data().work, disabled: this.isDisabled}),
+              'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
+            })
+          }
           this.isLoading = false;
         })
       ))
     ).subscribe()
-    // this.getInfo();
-    this.totalLength = this.posts.length;
     
+    this.getArchived();
+    this.getUnarchived();
+  }
+
+  getUnarchived(){
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        if(data){
+          return data.uid
+        }
+      }),
+      switchMap(data => this._articleService.getUserArticles(data, false).pipe(
+        map(data => {
+          if(data){
+            data.docs.forEach(x => {
+              this.myPosts.push(x.data());
+            })
+            this.posts = this.myPosts;
+            this.totalLength = this.myPosts.length;
+          }
+        })
+      ))
+    ).subscribe();
+  }
+
+  getArchived(){
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        if(data){
+          return data.uid
+        }
+      }),
+      switchMap(data => this._articleService.getUserArticles(data, true).pipe(
+        map(data => {
+          if(data){
+            data.docs.forEach(x => {
+              this.archivedPosts.push(x.data());
+            })
+          }
+        })
+      ))
+    ).subscribe();
   }
 
   switchPosts(type: number){
@@ -154,80 +124,12 @@ export class MyprofileComponent implements OnInit {
     buttons[type].classList.add('selected');
 
     if(type === 0){
-      this.posts = [
-        {
-          title: "Complete Guide: Angular lifecycle hooks",
-          date: "5 Jun",
-          likes: 14,
-          comments: 4,
-          visulizations: 21
-        },
-        {
-          title: "Las piedras rodando se encuentran",
-          date: "28 Aug",
-          likes: 23,
-          comments: 8,
-          visulizations: 34
-        },
-        {
-          title: "La Casa de Cafe",
-          date: "7 Sep",
-          likes: 166,
-          comments: 67,
-          visulizations: 212
-        },
-        {
-          title: "Historia entre tus dedos",
-          date: "31 Jan",
-          likes: 420,
-          comments: 69,
-          visulizations: 777
-        },
-        {
-          title: "Gavilan o Paloma",
-          date: "20 Oct",
-          likes: 9999,
-          comments: 9999,
-          visulizations: 9999
-        },
-        {
-          title: "Complete Guide: Angular lifecycle hooks",
-          date: "5 Jun",
-          likes: 14,
-          comments: 4,
-          visulizations: 21
-        },
-        {
-          title: "Las piedras rodando se encuentran",
-          date: "28 Aug",
-          likes: 23,
-          comments: 8,
-          visulizations: 34
-        },
-        {
-          title: "La Casa de Cafe",
-          date: "7 Sep",
-          likes: 166,
-          comments: 67,
-          visulizations: 212
-        },
-        {
-          title: "Historia entre tus dedos",
-          date: "31 Jan",
-          likes: 420,
-          comments: 69,
-          visulizations: 777
-        },
-        {
-          title: "Gavilan o Paloma",
-          date: "20 Oct",
-          likes: 9999,
-          comments: 9999,
-          visulizations: 9999
-        }]
+      this.posts = this.myPosts;
     } else{
-      this.posts = [];
+      this.posts = this.archivedPosts;
     }
+
+    this.totalLength = this.posts.length;
 
     this.page = 1;
   }

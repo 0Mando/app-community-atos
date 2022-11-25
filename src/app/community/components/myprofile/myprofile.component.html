@@ -76,8 +76,8 @@
                 <div *ngIf="posts.length; else noPosts">
                     <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
                         <div class="posts__content-text">  
-                            <div class="content-title">{{post.title}}</div>
-                            <div class="content-date">Published: {{post.date}}</div>
+                            <div class="content-title">{{post.titlePost}}</div>
+                            <div class="content-date">Published: {{post.date | timeAgo}}</div>
                         </div>
                         <div class="posts__content-util">
                             <div class="content-misc">

@@ -48,8 +48,8 @@ export class AuthService {
 	}
 
 	logout() {
-		this.isUserLogged.next(false);
 		return this.fireAuth.signOut().then(() => {
+			this.isUserLogged.next(false);
 			localStorage.removeItem('user');
 		})
 	}

@@ -43,4 +43,8 @@ export class ArticleService {
 		);
 		return postsCollection.valueChanges({ idField : 'id' });
 	}
+
+	getUserArticles(id: string, status: boolean){
+		return this.afs.collection('posts', ref => ref.where("userCreatedId", "==", id).where('archive',"==", status)).get();
+	}
 }
