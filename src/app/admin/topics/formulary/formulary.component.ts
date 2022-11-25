@@ -58,6 +58,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     this.resetFormSubject.subscribe( response => {
       if (response){
         this.resForm();
+        this.printMods = [];
         this.title = 'creating';
         this.action = 'create new';
         this.id = undefined;
