@@ -52,13 +52,11 @@ export class LoginComponent implements OnInit {
 
 		//* Acceso a boards
 		if(response){
-			console.log(response);
 			this.isLoading = false;
 			this.router.navigate(['/boards']);
 		}
 
-		console.log(this.authenticationService.isLoggedIn);
-
+		this.authenticationService.isUserLogged.next(true);
 		this.loginUserForm.reset();
 	}
 }
