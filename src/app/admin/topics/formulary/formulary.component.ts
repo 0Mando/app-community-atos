@@ -31,7 +31,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   loading: boolean = false;
   file?: File;
-  imageUrl = "";
+  imageUrl = 'https://i.pinimg.com/originals/ae/d6/55/aed655409db98115a35385b396dfb252.jpg';
   imageUrlStyle : SafeStyle;
   
   @Input() type = '';
@@ -58,6 +58,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     this.resetFormSubject.subscribe( response => {
       if (response){
         this.resForm();
+        this.printMods = [];
         this.title = 'creating';
         this.action = 'create new';
         this.id = undefined;
@@ -74,7 +75,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           name: [null, Validators.required],
           description: [null, Validators.required],
           visibility: ['', Validators.required],
-          image: [null, Validators.required],
+          image: [null],
         })
         break;
       case 'channel':
@@ -82,7 +83,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           name: [null, Validators.required],
           description: [null, Validators.required],
           parent: ['', Validators.required],
-          image: [null, Validators.required],
+          image: [null],
         })
         break;
     }
@@ -121,6 +122,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
             name: data.channelName,
             description: data.channelDescription,
             parent: data.parentBoard,
+            
           });
           this.modsID = [];
 
@@ -134,6 +136,8 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           this.id = data.id;
           this.title = 'editing';
           this.action = 'edit';
+          this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.channelImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
+      
         })
         break;
     }
@@ -192,9 +196,9 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   }
 
   async uploadImage(file : File){
-    const imgRef = ref(this.storage, `board-images/${file.lastModified}`)
-
+    
     try {
+      const imgRef = ref(this.storage, `${this.type}-images/${file.lastModified}`)
       const res = await uploadBytes(imgRef, file);
       const downloadUrl = await getDownloadURL(imgRef)
       this.imageUrl = downloadUrl;

@@ -36,9 +36,9 @@
 				<hr class="post__bar">
 				<section class="post__author">
 					<img class="post__author__profile" src="{{ userAuthorData.profilePicture }}"
-						alt="{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}">
+						alt="{{ userAuthorData.name }}">
 					<div>
-						<span class="post__author__name">{{ userAuthorData.firstName + ' ' + userAuthorData.lastName
+						<span class="post__author__name">{{ userAuthorData.name
 							}}</span>
 						<small class="post__days">{{ currentArticle.date | date }}</small>
 					</div>
@@ -50,7 +50,7 @@
 			<hr class="post__bar">
 			<section *ngIf="currentArticle.disableComments">
 				<section class="post__comment-form">
-					<app-comment-form [replyToAuthor]="userAuthorData.firstName + ' ' + userAuthorData.lastName"></app-comment-form>
+					<app-comment-form [replyToAuthor]="userAuthorData.name"></app-comment-form>
 				</section>
 				<section class="post__comments-list">
 					<app-list-comments (amountComments)="amountComments = $event"></app-list-comments>

@@ -13,20 +13,15 @@ export class AuthService {
 
 	userData : any;
 	userID: string;
-	userID$ = new BehaviorSubject<string>('')
+	isUserLogged = new BehaviorSubject<boolean>(this.isLoggedIn);
 
 	constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) {
 		this.fireAuth.authState.subscribe((user) => {
 			if(user) {
 				this.userData = user;
 				this.userID = user.uid;
-				this.userID$.next(this.userID);
 				localStorage.setItem('user', JSON.stringify(this.userData));
 				JSON.parse(localStorage.getItem('user')!);
-				// console.log('Session Information');
-				// console.log(this.userData);
-				// console.log(this.userID);
-				
 			} else {
 				localStorage.setItem('user', 'null');
 				JSON.parse(localStorage.getItem('user')!);
@@ -54,6 +49,7 @@ export class AuthService {
 
 	logout() {
 		return this.fireAuth.signOut().then(() => {
+			this.isUserLogged.next(false);
 			localStorage.removeItem('user');
 		})
 	}

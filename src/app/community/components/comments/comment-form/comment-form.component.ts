@@ -93,11 +93,9 @@ export class CommentFormComponent implements OnInit {
 	 */
 	onFetchDataUser(): void {
 		this.authenticationService.onFetchUserInformation(this.idUser).subscribe(
-			(user: User) => {
+			(user) => {
 				this.currentUser = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					profilePicture: user.profilePicture
+					...user.payload.data()
 				}
 			}
 		)

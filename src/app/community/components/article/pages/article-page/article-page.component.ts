@@ -18,8 +18,7 @@ export class ArticlePageComponent implements OnInit {
 	//* Article reference
 	idArticle: string = '';
 	userAuthorData: User = {
-		firstName: '',
-		lastName: '',
+		name: '',
 		birthday: '',
 		email: '',
 		password: '',
@@ -106,17 +105,8 @@ export class ArticlePageComponent implements OnInit {
 	 */
 	onFetchAuthorData(idUser: string): void {
 		this.auth.onFetchUserInformation(idUser).subscribe(
-			(user: User) => {
-				this.userAuthorData = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					birthday: user.birthday,
-					email: user.email,
-					password: '************',
-					userType: user.userType,
-					userTypeBackup: user.userTypeBackup,
-					profilePicture: user.profilePicture
-				}
+			(user) => {
+				this.userAuthorData = {...user.payload.data()}
 			}
 		)
 	}

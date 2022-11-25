@@ -17,11 +17,11 @@ export class SortUsersPipe implements PipeTransform {
 			switch (sortColumn) {
 				case 'Name':
 					elemA = isAsc
-						? a.firstName + a.lastName
-						: b.firstName + b.lastName;
+						? a.name
+						: b.name;
 					elemB = !isAsc
-						? a.firstName + a.lastName
-						: b.firstName + b.lastName;
+						? a.name
+						: b.name;
 					break;
 				case 'Email':
 					elemA = isAsc ? a.email : b.email;
