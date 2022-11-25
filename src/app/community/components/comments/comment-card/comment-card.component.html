@@ -3,7 +3,7 @@
 		<img class="comment-card__header__author-profile" src="{{ userAuthorData.profilePicture }}" alt="">
 		<div class="comment-card__header__author-data">
 			<span class="comment-card__header__author-name">
-				{{ userAuthorData.firstName + ' ' + userAuthorData.lastName }}
+				{{ userAuthorData.name }}
 			</span>
 			<small class="comment-card__header__days-ago">{{ createdAt | date }}</small>
 		</div>
