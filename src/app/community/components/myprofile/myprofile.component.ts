@@ -1,10 +1,10 @@
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
-import { map, switchMap } from 'rxjs';
+import { fromEvent, map, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-myprofile',
@@ -150,6 +150,12 @@ export class MyprofileComponent implements OnInit {
     let last = document.querySelector('.resume__list-add-li');
     let li = document.createElement("li");
     let input = this.createInput();
+    let inputEvnt = fromEvent(input, 'keyup');
+    inputEvnt.subscribe((e: KeyboardEvent) => {
+      if(e.key === 'Enter'){
+        this.setSkills();
+      }
+    })
 
     li.appendChild(input)
     // li.setAttribute('class', 'resume__list-added')
@@ -160,34 +166,40 @@ export class MyprofileComponent implements OnInit {
   }
 
   createInput(){
-    let input = document.createElement('input');
+    let input = document.createElement('input')! as HTMLInputElement;
     input.setAttribute("type","text");
     input.setAttribute("class", "resume__list-added");
     input.setAttribute("placeholder", "Add Skill");
     input.setAttribute("style", `width: 80px; height: 23px; border-radius: 5px; border: 1px solid; margin-bottom: 5px;`);
-    input.addEventListener('keyup', (e) => {
-      if(e.key === 'Enter'){
-        this.setSkills();
-      }
-      
-    });
-    
+
     return input;
   }
 
   setSkills(){
-    const SKILLS = {
-      skills: this.myProfile.skills
+    let SKILLS = {
+      skills: []
     }
+    if(this.myProfile.skills){
+      SKILLS = {
+        skills: this.myProfile.skills
+      }
+    } else {
+      ;
+    }
+     
 
     let remove = document.querySelectorAll('.resume__list-added')!as NodeListOf<HTMLInputElement>;
     remove?.forEach( e => {
       if(e.value){
-        SKILLS.skills.push(e.value);
-        e.parentElement?.remove();
-        this._profileService.saveInfo(this.id, SKILLS);
+        if(e.value.length <= 14){
+          SKILLS.skills.push(e.value);
+          e.parentElement?.remove();
+          this._profileService.saveInfo(this.id, SKILLS);
+        } else {
+          Notify.failure('Please enter a shorter word');
+        }
       }else{
-        alert('Please add a value')
+        Notify.failure('Please add a value')
       }
     })
   }
