@@ -18,10 +18,7 @@ export class FilterUsersPipe implements PipeTransform {
 			case 'Name':
 				users = users.filter((user) => {
 					return (
-						user.firstName
-							.toLowerCase()
-							.includes(input.toLowerCase()) ||
-						user.lastName
+						user.name
 							.toLowerCase()
 							.includes(input.toLowerCase())
 					);

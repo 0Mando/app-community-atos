@@ -1,0 +1,67 @@
+@import '../../../../../../sass/variables';
+
+.options {
+	margin-top: 10px;
+	border: none;
+	background: none;
+
+	&__list {
+		z-index: 2;
+		background-color: white;
+		position: absolute;
+		top: 15px;
+		left: -45px;
+		padding: .5rem;
+		border-radius: 5px;
+		box-shadow: 0px 6px 5px 3px rgba(136, 136, 136, 0.5);
+		-webkit-box-shadow: 0px 6px 5px 3px rgba(136, 136, 136, 0.5);
+		-moz-box-shadow: 0px 6px 5px 3px rgba(136, 136, 136, 0.5);
+
+		li {
+			list-style-type: none;
+			display: flex;
+			align-items: center;
+		}
+
+		&__actions {
+			display: none;
+		}
+	}
+}
+
+#edit {
+	color: $b-third;
+}
+
+#warning {
+	color: #feb90d;
+}
+
+#cover {
+	z-index: 1;
+	position: fixed;
+	opacity: 0;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	// background-color: rgba(0,0,0,.5);
+	pointer-events: none;
+}
+
+#cover.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+@include media-md {
+	.options {
+		&__list {
+			left: -88px;
+
+			&__actions {
+				display: block;
+			}
+		}
+	}
+}

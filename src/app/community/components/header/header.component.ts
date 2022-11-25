@@ -1,6 +1,6 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Subscription, switchMap, filter, Observable, last, mergeMap } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
@@ -9,20 +9,9 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, DoCheck {
+export class HeaderComponent implements OnInit {
 
-	currentUser : User = {
-		firstName: 'Benito',
-		lastName: 'Camelo',
-		birthday: '',
-		email: '',
-		password: '',
-		profilePicture : 'https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-		userType : 'normal-user',
-		userTypeBackup : 'normal-user'
-	};
-
-	// private subscription : Subscription;
+	currentUser: User;
 
 	boards: string[] = [
 		'Board 1',
@@ -37,22 +26,47 @@ export class HeaderComponent implements OnInit, DoCheck {
 		'Profile 3'
 	];
 	loggedIn = false;
+	isAdmin: boolean;
+	userData: User;
 
-	constructor(private authenticationService: AuthService, private router : Router) {
-		this.loggedIn = this.authenticationService.isLoggedIn;
-	}
-
-	ngDoCheck(): void {
-		this.loggedIn = this.authenticationService.isLoggedIn;
-		// let idUser = '';
-		// if(this.loggedIn) {
-		// 	idUser = this.authenticationService.currentSessionUserId();
-		// 	this.fetchUserData(idUser)
-		// }
-	}
+	constructor(private authenticationService: AuthService, private router : Router) {}
 
 	ngOnInit(): void {
+		this.authenticationService.getCurrentUser().pipe(
+			switchMap(user => this.authenticationService.getAdmins().pipe(
+			  map(admins => {
+				this.isAdmin = false;
+				if(user){
+					admins.forEach(admin => {
+						if(user.uid === admin.id){
+						  this.isAdmin = true;
+						} 
+					})
+				}
+			  })
+			))
+		).subscribe();
 
+		this.authenticationService.isUserLogged.pipe(
+			map(data => {
+				this.currentUser = undefined;
+				this.loggedIn = data;
+			}),
+			switchMap(data => this.authenticationService.getCurrentUser().pipe(
+				map(user => {
+					if(user){
+						return user.uid;
+					}
+				})
+			)),
+			switchMap(data => this.authenticationService.onFetchUserInformation(data).pipe(
+				map(data => {
+					this.currentUser = {
+						...data.payload.data()
+					}
+				})
+			))
+		).subscribe();
 	}
 
 	toggleMenu(): void {
@@ -67,7 +81,6 @@ export class HeaderComponent implements OnInit, DoCheck {
 
 	onLogout(): void{
 		this.authenticationService.logout();
-		this.loggedIn = this.authenticationService.isLoggedIn;
 		this.router.navigate(['sign-in']);
 	}
 
@@ -77,17 +90,8 @@ export class HeaderComponent implements OnInit, DoCheck {
 	 */
 	fetchUserData(idUser : string){
 		this.authenticationService.onFetchUserInformation(idUser).subscribe(
-			(user: User) => {
-				this.currentUser = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					birthday: user.birthday,
-					email: user.email,
-					password: '************',
-					userType : user.userType,
-					userTypeBackup : user.userTypeBackup,
-					profilePicture : user.profilePicture
-				}
+			(user) => {
+				this.currentUser = {...user.payload.data()}
 			}
 		)
 	}

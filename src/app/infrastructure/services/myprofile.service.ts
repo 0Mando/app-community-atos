@@ -16,10 +16,10 @@ export class MyprofileService {
   // }
 
   saveInfo(id: string, profile: any): Promise<any>{
-    return this.firebase.collection('profiles').doc(id).update(profile);
+    return this.firebase.collection('Users').doc(id).update(profile);
   }
 
-  getInfo(): Observable<any> {
-    return this.firebase.collection('profiles').snapshotChanges();
+  getInfo(id: string): Observable<any> {
+    return this.firebase.collection('Users').doc(id).snapshotChanges();
   }
 }

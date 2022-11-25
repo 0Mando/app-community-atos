@@ -1,7 +1,9 @@
+import { ModeratorsService } from './../../../infrastructure/services/moderators.service';
 import { Subject } from 'rxjs';
 import { Board } from 'src/app/domain/models/board.model';
 import { BoardCRUDService } from './../../../infrastructure/services/board-crud.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-boards',
@@ -15,21 +17,42 @@ export class BoardsComponent implements OnInit {
   currentType = "board";
   currentName: string = 'New Board';
 
+  searchForm: FormGroup;
+
   isIt = true;
   onEdition = false;
 
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
-  
-  cards = ['','','','','','','','','',''];
 
-  constructor(private _boardService: BoardCRUDService) { }
+  constructor(
+    private _roomService: BoardCRUDService,
+    private _modService: ModeratorsService,
+    private fb: FormBuilder ) {
+      this.searchForm = this.fb.group({
+        search: ''
+      })
+     }
 
   ngOnInit(): void {
+    this.obtainMODS();
     this.getBoards();
   }
 
+  obtainMODS(){
+    if(this._modService.modList.length === 0){
+      this._modService.readMods().subscribe(doc => {
+        doc.forEach(element => {
+          this._modService.modList.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          });
+        });
+      });
+    }
+  }
+
   getBoards(){
-    this._boardService.readBoard().subscribe(doc => {
+    this._roomService.readRoom('boards').subscribe(doc => {
       if (this.printBoards){
         this.printBoards = [];
       }
@@ -46,7 +69,7 @@ export class BoardsComponent implements OnInit {
     this.currentName = board.boardName;
     this.onEdition = true;
     setTimeout(() => {
-      this._boardService.addBoardEdit(board);
+      this._roomService.addRoomEdit(board);
     }, 10);
   }
 

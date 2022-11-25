@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
 import { IArticle } from 'src/app/domain/models/ipost';
 
 
@@ -22,10 +21,17 @@ export class ArticleService {
 		return newPost.doc(this.afs.createId()).set(postData);
 	}
 
+	/**
+	 * Shows available articles that are not archived.
+	 * @param channelId Origin channel reference.
+	 * @returns Articles list.
+	 */
 	displayPost<IPost>(channelId : string) {
 		const post = this.afs.collection<IPost>(
 			'posts',
-			ref => ref.where('channelId', '==', channelId)
+			(ref) => ref
+			.where('channelId', '==', channelId)
+			.where('archive', '==', false)
 		)
 		return post.valueChanges({ idField : 'id' });
 	}
@@ -35,12 +41,46 @@ export class ArticleService {
 		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
 	}
 
-	fetchPostFromParentBoard<IPost>(boardParent : string) {
+	/**
+	 * Update the content of an article.
+	 * @param articleId Article reference.
+	 * @param title Article title.
+	 * @param desc Article description.
+	 * @param time Article time to read.
+	 * @param content Article content body.
+	 * @param comments Enable or not comments.
+	 * @param archive Is it archived or not
+	 * @returns Update the content in firebase.
+	 */
+	updatePost(articleId : string, title : string, desc : string, time : number,
+		content : string, comments : boolean, archive : boolean) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{
+				titlePost : title,
+				descriptionContent : desc,
+				readingTime : time,
+				content : content,
+				disableComments : comments,
+				archive : archive
+			}
+		);
+	}
+
+	deletePost(articleId : string) {
+		return this.afs.collection('posts').doc(articleId).delete();
+	}
+
+	fetchPostFromParentBoard<IPost>(boardId : string) {
 		const postsCollection = this.afs.collection<IPost>(
 			'posts',
-			ref => ref
-				.where('boardParent','==', boardParent)
+			(ref) => ref
+				.where('boardId','==', boardId)
+				.where('archive', '==', false)
 		);
 		return postsCollection.valueChanges({ idField : 'id' });
+	}
+
+	getUserArticles(id: string, status: boolean){
+		return this.afs.collection('posts', ref => ref.where("userCreatedId", "==", id).where('archive',"==", status)).get();
 	}
 }

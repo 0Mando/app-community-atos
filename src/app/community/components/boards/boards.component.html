@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container" *ngIf="!isLoading; else loader">
 	<section class="title-page">
 		<h2>Boards</h2>
 		<input type="text" name="boardFilter" id="boardFilter" placeholder="Search a board" [(ngModel)]="boardFilter">
@@ -35,3 +35,6 @@
 		</pagination-controls>
 	</section>
 </main>
+<ng-template #loader>
+	<div class="lds-dual-ring"></div>
+</ng-template>

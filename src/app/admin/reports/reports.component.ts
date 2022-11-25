@@ -46,7 +46,7 @@ export class ReportsComponent implements OnInit {
 		await this.authService
 			.onFetchUserInformation(idUser)
 			.subscribe((user: User) => {
-				this.fullName = user.firstName;
+				this.fullName = user.name;
 			});
 	}
 }

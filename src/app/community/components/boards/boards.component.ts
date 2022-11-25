@@ -11,6 +11,7 @@ export class BoardsComponent implements OnInit {
 
 	boards: Board[] = [];
 	boardFilter : string = '';
+	isLoading: boolean;
 
 	//* Pagination stuff
 	boardsLength: number;
@@ -19,6 +20,7 @@ export class BoardsComponent implements OnInit {
 	constructor(private boardService : BoardService) { }
 
 	ngOnInit(): void {
+		this.isLoading = true;
 		this.showBoardsList();
 	}
 
@@ -27,6 +29,7 @@ export class BoardsComponent implements OnInit {
 			boards =>{
 				this.boards = boards;
 				this.boardsLength = this.boards.length;
+				this.isLoading = false;
 			}
 		);
 	}

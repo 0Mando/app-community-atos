@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminBoardFormComponent } from './admin-board-form.component';
+import { ButtonOptionsComponent } from './button-options.component';
 
-describe('AdminBoardFormComponent', () => {
-  let component: AdminBoardFormComponent;
-  let fixture: ComponentFixture<AdminBoardFormComponent>;
+describe('ButtonOptionsComponent', () => {
+  let component: ButtonOptionsComponent;
+  let fixture: ComponentFixture<ButtonOptionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminBoardFormComponent ]
+      declarations: [ ButtonOptionsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminBoardFormComponent);
+    fixture = TestBed.createComponent(ButtonOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

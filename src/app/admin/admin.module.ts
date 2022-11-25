@@ -1,4 +1,4 @@
-import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+
 //* Default Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,15 +18,17 @@ import { ChannelsComponent } from './topics/channels/channels.component';
 import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
-import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
 import { ReportsComponent } from './reports/reports.component';
+import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
+import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
+// import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
 
 
 import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
 import { ReportComponent } from './reports/report/report.component';
-
+import { AppPipesModule } from '../app-pipes/app-pipes.module';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,10 @@ import { ReportComponent } from './reports/report/report.component';
     BoardsComponent,
     ChannelsComponent,
     FormularyComponent,
-    TimeAgoPipe,
     ShortenModPipe,
     ReportsComponent,
+    ParentBoardsPipe,
+    // FirstwordPipe
     UserTypePipe,
     FilterUsersPipe,
     SortUsersPipe,
@@ -51,7 +54,8 @@ import { ReportComponent } from './reports/report/report.component';
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    AppPipesModule,
+    FormsModule,
     // HttpClientModule
   ]
 })

@@ -26,13 +26,13 @@ export class ReportComponent implements OnInit {
 	}
 
 	onFetchAuthorData(reportedId: string, reporterId: string): void {
-		this.auth.onFetchUserInformation(reportedId).subscribe((user: User) => {
-			this.reportedName = user.firstName + " " + user.lastName;
-			this.reportedPhoto = user.profilePicture;
+		this.auth.onFetchUserInformation(reportedId).subscribe((user) => {
+			this.reportedName = user.payload.data().name;
+			this.reportedPhoto = user.payload.data().profilePicture;
 		});
-		this.auth.onFetchUserInformation(reporterId).subscribe((user: User) => {
-			this.reporterName = user.firstName + " " + user.lastName;
-			this.reporterPhoto = user.profilePicture;
+		this.auth.onFetchUserInformation(reporterId).subscribe((user) => {
+			this.reporterName = user.payload.data().name;
+			this.reporterPhoto = user.payload.data().profilePicture;
 		});
 	}
 }

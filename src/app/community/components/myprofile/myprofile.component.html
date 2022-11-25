@@ -1,10 +1,13 @@
-<main>
-    <div class="banner"></div>
+<main *ngIf="!isLoading; else loader">
+    <img class="banner" [src]="banner" alt="">
     <section class="profile">
-        <div class="profile__image"></div>
+        <img 
+            class="profile__image" 
+            [src]="pfp" alt="">
+        <!-- <div class="profile__image"></div> -->
         <article class="profile__info">
             <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
-            <span class="profile__info-description">{{myProfile.age}} years | {{ myProfile.work }} </span>
+            <span class="profile__info-description">{{myProfile.birthday | toDate | timeAgo | removeString:'ago'}} | {{ myProfile.work }} </span>
         </article>
     </section>
     <section class="info">
@@ -73,8 +76,8 @@
                 <div *ngIf="posts.length; else noPosts">
                     <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
                         <div class="posts__content-text">  
-                            <div class="content-title">{{post.title}}</div>
-                            <div class="content-date">Published: {{post.date}}</div>
+                            <div class="content-title">{{post.titlePost}}</div>
+                            <div class="content-date">Published: {{post.date | timeAgo}}</div>
                         </div>
                         <div class="posts__content-util">
                             <div class="content-misc">
@@ -134,4 +137,7 @@
             </div>
         </article> -->
 </main>
+<ng-template #loader>
+    <div class="lds-dual-ring"></div>
+</ng-template>
 

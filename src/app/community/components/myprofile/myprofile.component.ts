@@ -1,6 +1,10 @@
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
+import { fromEvent, map, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-myprofile',
@@ -16,100 +20,98 @@ export class MyprofileComponent implements OnInit {
     'website': new FormControl()
   });
   isDisabled: boolean = true;
+  isLoading: boolean;
   id: string;
+  pfp: string;
+  banner: string;
 
-  totalLength: any;
+  totalLength: number = 0;
   page: number = 1
 
-  posts: {
-    title: string,
-    date: string,
-    likes: number,
-    comments: number,
-    visulizations: number
-  }[] = [
-    {
-      title: "CComplete Guide: Angular lifecycle hooks",
-      date: "5 Jun",
-      likes: 14,
-      comments: 4,
-      visulizations: 21
-    },
-    {
-      title: "Las piedras rodando se encuentran",
-      date: "28 Aug",
-      likes: 23,
-      comments: 8,
-      visulizations: 34
-    },
-    {
-      title: "La Casa de Cafe",
-      date: "7 Sep",
-      likes: 166,
-      comments: 67,
-      visulizations: 212
-    },
-    {
-      title: "Historia entre tus dedos",
-      date: "31 Jan",
-      likes: 420,
-      comments: 69,
-      visulizations: 777
-    },
-    {
-      title: "Gavilan o Paloma",
-      date: "20 Oct",
-      likes: 9999,
-      comments: 9999,
-      visulizations: 9999
-    },
-    {
-      title: "Complete Guide: Angular lifecycle hooks",
-      date: "5 Jun",
-      likes: 14,
-      comments: 4,
-      visulizations: 21
-    },
-    {
-      title: "Las piedras rodando se encuentran",
-      date: "28 Aug",
-      likes: 23,
-      comments: 8,
-      visulizations: 34
-    },
-    {
-      title: "La Casa de Cafe",
-      date: "7 Sep",
-      likes: 166,
-      comments: 67,
-      visulizations: 212
-    },
-    {
-      title: "Historia entre tus dedos",
-      date: "31 Jan",
-      likes: 420,
-      comments: 69,
-      visulizations: 777
-    },
-    {
-      title: "Gavilan o Paloma",
-      date: "20 Oct",
-      likes: 9999,
-      comments: 9999,
-      visulizations: 9999
-    }
-  ];
+  myPosts: any[] = [];
+  archivedPosts: any[] = [];
+
+  posts = [];
 
   // postsNum: number;
   postsBool = false;
   
 
-  constructor(private _profileService: MyprofileService) { }
+  constructor(
+      private _profileService: MyprofileService,
+      private _authService: AuthService,
+      private _articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.getInfo();
-    this.totalLength = this.posts.length;
+    this.isLoading = true;
     
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        if(data){
+          return data.uid
+        }
+      }),
+      switchMap(data => this._profileService.getInfo(data).pipe(
+        map(data => {
+          if(data){
+            this.id = data.payload.id;
+            this.pfp = data.payload.data().profilePicture;
+            this.banner = data.payload.data().bannerImage;
+            this.myProfile = {...data.payload.data()}
+            this.profileForm = new FormGroup({
+              'name': new FormControl({value: data.payload.data().name, disabled: this.isDisabled}),
+              'email': new FormControl({value: data.payload.data().email, disabled: this.isDisabled}),
+              'work': new FormControl({value: data.payload.data().work, disabled: this.isDisabled}),
+              'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
+            })
+          }
+          this.isLoading = false;
+        })
+      ))
+    ).subscribe()
+    
+    this.getArchived();
+    this.getUnarchived();
+  }
+
+  getUnarchived(){
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        if(data){
+          return data.uid
+        }
+      }),
+      switchMap(data => this._articleService.getUserArticles(data, false).pipe(
+        map(data => {
+          if(data){
+            data.docs.forEach(x => {
+              this.myPosts.push(x.data());
+            })
+            this.posts = this.myPosts;
+            this.totalLength = this.myPosts.length;
+          }
+        })
+      ))
+    ).subscribe();
+  }
+
+  getArchived(){
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        if(data){
+          return data.uid
+        }
+      }),
+      switchMap(data => this._articleService.getUserArticles(data, true).pipe(
+        map(data => {
+          if(data){
+            data.docs.forEach(x => {
+              this.archivedPosts.push(x.data());
+            })
+          }
+        })
+      ))
+    ).subscribe();
   }
 
   switchPosts(type: number){
@@ -122,100 +124,14 @@ export class MyprofileComponent implements OnInit {
     buttons[type].classList.add('selected');
 
     if(type === 0){
-      this.posts = [
-        {
-          title: "Complete Guide: Angular lifecycle hooks",
-          date: "5 Jun",
-          likes: 14,
-          comments: 4,
-          visulizations: 21
-        },
-        {
-          title: "Las piedras rodando se encuentran",
-          date: "28 Aug",
-          likes: 23,
-          comments: 8,
-          visulizations: 34
-        },
-        {
-          title: "La Casa de Cafe",
-          date: "7 Sep",
-          likes: 166,
-          comments: 67,
-          visulizations: 212
-        },
-        {
-          title: "Historia entre tus dedos",
-          date: "31 Jan",
-          likes: 420,
-          comments: 69,
-          visulizations: 777
-        },
-        {
-          title: "Gavilan o Paloma",
-          date: "20 Oct",
-          likes: 9999,
-          comments: 9999,
-          visulizations: 9999
-        },
-        {
-          title: "Complete Guide: Angular lifecycle hooks",
-          date: "5 Jun",
-          likes: 14,
-          comments: 4,
-          visulizations: 21
-        },
-        {
-          title: "Las piedras rodando se encuentran",
-          date: "28 Aug",
-          likes: 23,
-          comments: 8,
-          visulizations: 34
-        },
-        {
-          title: "La Casa de Cafe",
-          date: "7 Sep",
-          likes: 166,
-          comments: 67,
-          visulizations: 212
-        },
-        {
-          title: "Historia entre tus dedos",
-          date: "31 Jan",
-          likes: 420,
-          comments: 69,
-          visulizations: 777
-        },
-        {
-          title: "Gavilan o Paloma",
-          date: "20 Oct",
-          likes: 9999,
-          comments: 9999,
-          visulizations: 9999
-        }]
+      this.posts = this.myPosts;
     } else{
-      this.posts = [];
+      this.posts = this.archivedPosts;
     }
 
+    this.totalLength = this.posts.length;
+
     this.page = 1;
-  }
-
-  getInfo(){
-    this._profileService.getInfo().subscribe(data => {
-      data.forEach((element: any) => {
-        this.myProfile = {...element.payload.doc.data()};
-        this.id = element.payload.doc.id;
-
-        this.setImages(this.myProfile.pfp, this.myProfile.banner);
-        
-        this.profileForm = new FormGroup({
-          'name': new FormControl({value: this.myProfile.name, disabled: this.isDisabled}),
-          'email': new FormControl({value: this.myProfile.email, disabled: this.isDisabled}),
-          'work': new FormControl({value: this.myProfile.work, disabled: this.isDisabled}),
-          'website': new FormControl({value: this.myProfile.website, disabled: this.isDisabled})
-        });
-      });
-    })
   }
 
   setInfo(){
@@ -234,6 +150,12 @@ export class MyprofileComponent implements OnInit {
     let last = document.querySelector('.resume__list-add-li');
     let li = document.createElement("li");
     let input = this.createInput();
+    let inputEvnt = fromEvent(input, 'keyup');
+    inputEvnt.subscribe((e: KeyboardEvent) => {
+      if(e.key === 'Enter'){
+        this.setSkills();
+      }
+    })
 
     li.appendChild(input)
     // li.setAttribute('class', 'resume__list-added')
@@ -244,34 +166,40 @@ export class MyprofileComponent implements OnInit {
   }
 
   createInput(){
-    let input = document.createElement('input');
+    let input = document.createElement('input')! as HTMLInputElement;
     input.setAttribute("type","text");
     input.setAttribute("class", "resume__list-added");
     input.setAttribute("placeholder", "Add Skill");
     input.setAttribute("style", `width: 80px; height: 23px; border-radius: 5px; border: 1px solid; margin-bottom: 5px;`);
-    input.addEventListener('keyup', (e) => {
-      if(e.key === 'Enter'){
-        this.setSkills();
-      }
-      
-    });
-    
+
     return input;
   }
 
   setSkills(){
-    const SKILLS = {
-      skills: this.myProfile.skills
+    let SKILLS = {
+      skills: []
     }
+    if(this.myProfile.skills){
+      SKILLS = {
+        skills: this.myProfile.skills
+      }
+    } else {
+      ;
+    }
+     
 
     let remove = document.querySelectorAll('.resume__list-added')!as NodeListOf<HTMLInputElement>;
     remove?.forEach( e => {
       if(e.value){
-        SKILLS.skills.push(e.value);
-        e.parentElement?.remove();
-        this._profileService.saveInfo(this.id, SKILLS);
+        if(e.value.length <= 14){
+          SKILLS.skills.push(e.value);
+          e.parentElement?.remove();
+          this._profileService.saveInfo(this.id, SKILLS);
+        } else {
+          Notify.failure('Please enter a shorter word');
+        }
       }else{
-        alert('Please add a value')
+        Notify.failure('Please add a value')
       }
     })
   }
