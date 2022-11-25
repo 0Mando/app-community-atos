@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IComment } from 'src/app/domain/models/icomment';
@@ -13,13 +13,23 @@ import { CommentsService } from 'src/app/infrastructure/services/comments.servic
 })
 export class CommentFormComponent implements OnInit {
 
-	commentForm : FormGroup;
-	currentDate : Date = new Date();
-	commentI : IComment;
-	idPost : string;
+	commentForm: FormGroup;
+	currentDate: Date = new Date();
+	commentI: IComment;
+	idPost: string;
+	@Input() replyToAuthor: string;
+
+	currentUser = {
+		firstName: '',
+		lastName: '',
+		profilePicture: ''
+	};
+
+	private idUser: string = this.authenticationService.currentSessionUserId();
+
 	//* Toolbar settings input text for create a post
 	editorModules = {
-		toolbar : [
+		toolbar: [
 			[
 				// 'bold',
 				// 'italic',
@@ -60,46 +70,57 @@ export class CommentFormComponent implements OnInit {
 	}
 
 	constructor(
-		private commentsService : CommentsService,
-		private authenticationService : AuthService,
-		private route : ActivatedRoute
+		private commentsService: CommentsService,
+		private authenticationService: AuthService,
+		private route: ActivatedRoute
 	) {
 		this.commentForm = new FormGroup({
-			'CommentBody' : new FormControl(null, Validators.required)
+			'CommentBody': new FormControl(null, Validators.required)
 		})
 	}
 
 	ngOnInit(): void {
 		this.route.params.subscribe(
-			(params : Params) => {
+			(params: Params) => {
 				this.idPost = params['id']
 			}
 		)
+		this.onFetchDataUser();
 	}
 
-	onCreateComment() : void {
-		this.authenticationService.getUserById<User>().subscribe(
-			(user : User) => {
-				console.log(user.id);
-				console.log(this.commentForm.get('CommentBody').value);
-
-				this.commentI = {
-					idUserAuthor : user.id,
-					idPost : this.idPost,
-					commentBody : this.commentForm.get('CommentBody').value,
-					createdAt : this.currentDate.getTime()
+	/**
+	 * Get user data.
+	 */
+	onFetchDataUser(): void {
+		this.authenticationService.onFetchUserInformation(this.idUser).subscribe(
+			(user: User) => {
+				this.currentUser = {
+					firstName: user.firstName,
+					lastName: user.lastName,
+					profilePicture: user.profilePicture
 				}
-				console.table(this.commentI);
-				this.commentsService.createComment(this.commentI)
-				.catch(
-					error => {
-						console.log('Something went wrong');
-						console.log(error);
-					}
-				);
-				this.commentForm.reset();
 			}
 		)
 	}
 
+	/**
+	 * Create a new comment in article page.
+	 */
+	onCreateComment(): void {
+		const comment: IComment = {
+			idUserAuthor: this.idUser,
+			idPost: this.idPost,
+			commentBody: this.commentForm.get('CommentBody').value,
+			createdAt: this.currentDate.getTime()
+		}
+		console.table(comment);
+		this.commentsService.createComment(comment)
+			.catch(
+				error => {
+					console.log('Something went wrong');
+					console.log(error);
+				}
+			);
+		this.commentForm.reset();
+	}
 }

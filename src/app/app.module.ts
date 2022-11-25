@@ -24,7 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-// import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
+import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 
@@ -38,8 +38,6 @@ import { ProfileComponent } from './community/components/profile/profile.compone
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { RegisterComponent } from './community/components/register/register.component';
 import { LoadingSpinnerComponent } from './community/shared/loading-spinner/loading-spinner.component';
-import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
-import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
 import { ChannelsListComponent } from './community/components/channels/channels-list/channels-list.component';
@@ -60,6 +58,7 @@ import { CommentFormComponent } from './community/components/comments/comment-fo
 import { ListCommentsComponent } from './community/components/comments/list-comments/list-comments.component';
 import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
 import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
+import { ChannelArticleCardComponent } from './community/components/channels/channel-article-card/channel-article-card.component';
 
 @NgModule({
 	declarations: [
@@ -75,9 +74,6 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		RegisterComponent,
 		LoadingSpinnerComponent,
 		FormatUrlPipe,
-		AdminBoardFormComponent,
-		AdminChannelFormComponent,
-		// SearchFilterPipe,
 		ChannelsEmptyComponent,
 		ChannelsListComponent,
 		ChannelArticlesListComponent,
@@ -95,7 +91,8 @@ import { ButtonOptionsComponent } from './community/components/article/component
 		CommentFormComponent,
 		ListCommentsComponent,
 		ButtonActionsComponent,
-  ButtonOptionsComponent,
+		ButtonOptionsComponent,
+    ChannelArticleCardComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],

@@ -1,12 +1,12 @@
-<button class="options">
-	<ul class="options__list">
-		<li id="edit">
+<button class="options" (click)="onPressedOptions()">
+	<ul class="options__list" *ngIf="showOptionsList">
+		<li id="edit" *ngIf="canEditArticle" (click)="onEditArticle()">
 			<span class="material-symbols-outlined">
 				edit
 			</span>
 			<span class="options__list__actions">Edit</span>
 		</li>
-		<li id="warning">
+		<li id="warning" *ngIf="canReportArticle" (click)="onReportArticle()">
 			<span class="material-symbols-outlined">
 				warning
 			</span>
@@ -17,3 +17,4 @@
 		more_horiz
 	</span>
 </button>
+<div [ngClass]="{ 'active' : showOptionsList }" id="cover" (click)="onPressedCover()"></div>

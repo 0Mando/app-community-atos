@@ -4,6 +4,7 @@ import { IReport } from 'src/app/domain/models/report.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { CommentsService } from 'src/app/infrastructure/services/comments.service';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 @Component({
 	selector: 'app-button-actions',
@@ -69,18 +70,31 @@ export class ButtonActionsComponent implements OnInit {
 	}
 
 	onReport(): void {
-		const report : IReport = {
-			reporterUserId : this.authService.currentSessionUserId(),
-			idItemReported : this.idCommentReference,
-			activity : 'Comment',
-			reportedUserId : this.currentComment.idUserAuthor,
-			reportDate : new Date().getTime(),
-			status : 'In Review'
-		}
-		console.table(report);
-
-		this.reportService.createReport(report).catch(
-			error => console.log('An error ocurred : ' + error)
+		Confirm.prompt(
+			'Report reason',
+			'Write the reason for the report',
+			'Inappropriate message',
+			'Submit report',
+			'Cancel',
+			(clientAnswer) => {
+				const report : IReport = {
+					reporterUserId : this.authService.currentSessionUserId(),
+					idItemReported : this.idCommentReference,
+					activity : 'Comment',
+					reportedUserId : this.currentComment.idUserAuthor,
+					reportDate : new Date().getTime(),
+					status : 'In Review',
+					reason : clientAnswer
+				}
+				this.reportService.createReport(report).catch(
+					error => console.log('An error ocurred : ' + error)
+				)
+			},
+			() => {},
+			{
+				titleColor: '#0195ff',
+				okButtonBackground: '#0195ff'
+			}
 		)
 	}
 }

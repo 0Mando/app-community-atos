@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
 import { ArticleCanDeactivate } from 'src/app/infrastructure/services/article-guard.service';
 import { Observable } from 'rxjs';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { ChannelService } from 'src/app/infrastructure/services/channel.service';
+import { Channel } from 'src/app/domain/models/channel.model';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	comments: boolean;
 	archiveArticle: boolean = false;
 	articleChangesSaved: boolean = false;
+	boardId : string = '';
 
 	//* Parameters
 	channelIdParam: string = '';
@@ -78,6 +81,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	constructor(
 		private authenticationService: AuthService,
 		private articleService: ArticleService,
+		private channelService : ChannelService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private location: Location
@@ -97,6 +101,12 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 				this.channelIdParam = params['channelId']
 				if(this.channelIdParam === undefined){
 					this.router.navigate(['/boards'])
+				} else {
+					this.channelService.getChannelById(this.channelIdParam).subscribe(
+						(channel : Channel) => {
+							this.boardId = channel.parentBoard;
+						}
+					)
 				}
 			}
 		)
@@ -116,54 +126,12 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			content: this.markdownForm.get('contentForm').value,
 			disableComments: this.markdownForm.get('comments').value,
 			archive: false,
-			readingTime: this.markdownForm.get('readingTimeForm').value
+			readingTime: this.markdownForm.get('readingTimeForm').value,
+			boardId : this.boardId
 		}
 		console.table(this.post);
 
 		this.sendArticle(this.post);
-	}
-
-	// TODO : Issue submit information, save draft
-	submitPost(): void {
-		this.post = {
-			userCreatedId: this.authenticationService.currentSessionUserId(),
-			date: this.currentDate.getTime(),
-			channelId: this.channelIdParam,
-			titlePost: this.markdownForm.get('titlePostForm').value || '',
-			descriptionContent: this.markdownForm.get('descriptionContentForm').value || '',
-			content: this.markdownForm.get('contentForm').value || '',
-			disableComments: this.markdownForm.get('comments').value || '',
-			archive: this.archiveArticle,
-			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
-		}
-		console.table(this.post);
-
-		if (this.markdownForm.valid) {
-			// *Send post to database
-			this.articleService.createPost(this.post).catch(
-				error => console.log('An error ocurred : ' + error)
-			)
-			// *Reset form
-			// this.markdownForm.reset();
-			// *Go back to list articles page
-			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
-			// *Changes saved
-			this.articleChangesSaved = true;
-		} else if (!this.markdownForm.valid && this.post.archive) {
-			// *Send post to database
-			this.articleService.createPost(this.post).catch(
-				error => console.log('An error ocurred : ' + error)
-			)
-			// *Reset form
-			// this.markdownForm.reset();
-			// *Go back to list articles page
-			this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);
-			// *Changes saved
-			this.articleChangesSaved = true;
-		} else {
-			alert('Complete form or save your draft')
-		}
-
 	}
 
 	/**
@@ -181,7 +149,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			content: this.markdownForm.get('contentForm').value || '',
 			disableComments: this.markdownForm.get('comments').value,
 			archive: true,
-			readingTime: this.markdownForm.get('readingTimeForm').value || 0
+			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
+			boardId : this.boardId
 		}
 		console.table(this.post);
 
@@ -229,9 +198,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		return this.markdownForm.invalid ? '50%' : '100%';
 	}
 
-	// TODO Fix guard
 	canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-		if(this.markdownForm.invalid) {
+		if(this.channelIdParam !== undefined && !this.articleChangesSaved) {
 			return confirm(
 				`Are you sure you want to leave this page?\nYou can save this draft and continue later`
 			);

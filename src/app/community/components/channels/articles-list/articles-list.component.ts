@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IArticle } from 'src/app/domain/models/ipost';
+import { User } from 'src/app/domain/models/user.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
 	selector: 'app-articles-list',
@@ -9,24 +11,26 @@ import { ArticleService } from 'src/app/infrastructure/services/article.service'
 })
 export class ChannelArticlesListComponent implements OnInit {
 
-	posts : IArticle[];
-	@Input() boardNameArticles : string;
+	posts: IArticle[];
+	@Input() boardNameArticles: string;
+	userProfilePicture: string = '';
 
 	//* Pagination stuff
 	postsLength: number;
-	pagePost : number = 1;
+	pagePost: number = 1;
 
 	constructor(
-		private articlesService : ArticleService
+		private articlesService: ArticleService,
+		private auth: AuthService
 	) { }
 
 	ngOnInit(): void {
 		this.fetchArticles(this.boardNameArticles);
 	}
 
-	private fetchArticles(boardName : string) {
+	private fetchArticles(boardName: string) {
 		this.articlesService.fetchPostFromParentBoard<IArticle>(boardName).subscribe(
-			(posts)  => {
+			(posts) => {
 				this.posts = posts;
 				this.postsLength = this.posts.length;
 			}

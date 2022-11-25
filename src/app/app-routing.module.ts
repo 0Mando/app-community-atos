@@ -7,8 +7,6 @@ import { BoardsComponent } from './community/components/boards/boards.component'
 import { LandingPageComponent } from './community/components/landing-page/landing-page.component';
 import { LoginComponent } from './community/components/login/login.component';
 import { RegisterComponent } from './community/components/register/register.component';
-import { AdminBoardFormComponent } from './community/admin/admin-board-form/admin-board-form.component';
-import { AdminChannelFormComponent } from './community/admin/admin-channel-form/admin-channel-form.component';
 import { ErrorComponent } from './community/components/error/error.component';
 import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
 import { ListArticlesComponent } from './community/components/article/pages/list-articles/list-articles.component';
@@ -16,6 +14,7 @@ import { CreateArticleComponent } from './community/components/article/pages/cre
 import { ArticlePageComponent } from './community/components/article/pages/article-page/article-page.component';
 import { ArticleGuard } from './infrastructure/guards/article.guard';
 import { ArticleGuardService } from './infrastructure/services/article-guard.service';
+import { CrendentialsGuard } from './infrastructure/guards/crendentials.guard';
 
 
 const routes: Routes = [
@@ -25,6 +24,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'sign-in',
+		canActivate : [CrendentialsGuard],
 		component: LoginComponent
 	},
 	{
@@ -63,15 +63,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'sign-up',
+		canActivate : [CrendentialsGuard],
 		component: RegisterComponent
-	},
-	{
-		path : 'admin/boards',
-		component : AdminBoardFormComponent
-	},
-	{
-		path: 'admin/channels',
-		component : AdminChannelFormComponent
 	},
 	{
 		path: 'page-not-found',
