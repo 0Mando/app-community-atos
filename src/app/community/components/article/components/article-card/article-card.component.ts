@@ -15,13 +15,8 @@ export class ArticleCardComponent implements OnInit {
 	@Input() title : string;
 	@Input() descriptionContent : string;
 
-	userAuthorData: User = {
+	userAuthorData = {
 		name: '',
-		birthday: '',
-		email: '',
-		password: '',
-		userType: 'normal-user',
-		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
@@ -35,9 +30,10 @@ export class ArticleCardComponent implements OnInit {
 	 * Get the information of the author of the article
 	 */
 	onFetchAuthorData (idUser : string) : void {
-		this.auth.onFetchUserInformation(idUser).subscribe(
-			(user) => {
-				this.userAuthorData = {...user.payload.data()}
+		this.auth.getUserInformation(idUser).subscribe(
+			(user : User) => {
+				this.userAuthorData.name = user.name;
+				this.userAuthorData.profilePicture = user.profilePicture;
 			}
 		)
 	}

@@ -76,7 +76,8 @@ export class ArticlePageComponent implements OnInit {
 					disableComments: article.disableComments,
 					archive: article.archive,
 					readingTime: article.readingTime,
-					boardId : article.boardId
+					boardId : article.boardId,
+					likes : article.likes
 				}
 				this.onFetchChannelData(this.currentArticle.channelId)
 				this.onFetchAuthorData(this.currentArticle.userCreatedId)

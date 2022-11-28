@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
 import { IArticle } from 'src/app/domain/models/ipost';
 
 
@@ -8,14 +9,14 @@ import { IArticle } from 'src/app/domain/models/ipost';
 })
 export class ArticleService {
 
-	constructor(private afs : AngularFirestore) { }
+	constructor(private afs: AngularFirestore) { }
 
 	/**
 	 * Create a new post and storage on db
 	 * @param postData Information of the post
 	 * @returns A new document on Firebase.
 	 */
-	createPost(postData : IArticle) {
+	createPost(postData: IArticle) {
 		console.log('Creating post');
 		const newPost = this.afs.collection('posts');
 		return newPost.doc(this.afs.createId()).set(postData);
@@ -26,19 +27,19 @@ export class ArticleService {
 	 * @param channelId Origin channel reference.
 	 * @returns Articles list.
 	 */
-	displayPost<IPost>(channelId : string) {
-		const post = this.afs.collection<IPost>(
+	displayPost<IArticle>(channelId: string) {
+		const post = this.afs.collection<IArticle>(
 			'posts',
 			(ref) => ref
-			.where('channelId', '==', channelId)
-			.where('archive', '==', false)
+				.where('channelId', '==', channelId)
+				.where('archive', '==', false)
 		)
-		return post.valueChanges({ idField : 'id' });
+		return post.valueChanges({ idField: 'id' });
 	}
 
 	// TODO: Recuperar artículo por ID
-	getArticleById<IPost>(articleId : string) {
-		return this.afs.collection<IPost>('posts').doc(articleId).valueChanges();
+	getArticleById<IArticle>(articleId: string) {
+		return this.afs.collection<IArticle>('posts').doc(articleId).valueChanges();
 	}
 
 	/**
@@ -52,35 +53,47 @@ export class ArticleService {
 	 * @param archive Is it archived or not
 	 * @returns Update the content in firebase.
 	 */
-	updatePost(articleId : string, title : string, desc : string, time : number,
-		content : string, comments : boolean, archive : boolean) {
+	updatePost(articleId: string, title: string, desc: string, time: number,
+		content: string, comments: boolean, archive: boolean) {
 		return this.afs.collection('posts').doc(articleId).update(
 			{
-				titlePost : title,
-				descriptionContent : desc,
-				readingTime : time,
-				content : content,
-				disableComments : comments,
-				archive : archive
+				titlePost: title,
+				descriptionContent: desc,
+				readingTime: time,
+				content: content,
+				disableComments: comments,
+				archive: archive
 			}
 		);
 	}
 
-	deletePost(articleId : string) {
+	deletePost(articleId: string) {
 		return this.afs.collection('posts').doc(articleId).delete();
 	}
 
-	fetchPostFromParentBoard<IPost>(boardId : string) {
-		const postsCollection = this.afs.collection<IPost>(
+	fetchPostFromParentBoard<IArticle>(boardId: string) {
+		const postsCollection = this.afs.collection<IArticle>(
 			'posts',
 			(ref) => ref
-				.where('boardId','==', boardId)
+				.where('boardId', '==', boardId)
 				.where('archive', '==', false)
 		);
-		return postsCollection.valueChanges({ idField : 'id' });
+		return postsCollection.valueChanges({ idField: 'id' });
 	}
 
-	getUserArticles(id: string, status: boolean){
-		return this.afs.collection('posts', ref => ref.where("userCreatedId", "==", id).where('archive',"==", status)).get();
+	getUserArticles(id: string, status: boolean) {
+		return this.afs.collection('posts', ref => ref.where("userCreatedId", "==", id).where('archive', "==", status)).get();
+	}
+
+	addLike(articleId: string, userId: string) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{ likes: arrayUnion(userId) }
+		)
+	}
+
+	removeLike(articleId: string, userId: string) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{ likes : arrayRemove(userId) }
+		)
 	}
 }

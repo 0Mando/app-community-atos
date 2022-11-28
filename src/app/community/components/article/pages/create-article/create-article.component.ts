@@ -127,7 +127,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			disableComments: this.markdownForm.get('comments').value,
 			archive: false,
 			readingTime: this.markdownForm.get('readingTimeForm').value,
-			boardId : this.boardId
+			boardId : this.boardId,
+			likes : []
 		}
 		console.table(this.post);
 
@@ -150,7 +151,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			disableComments: this.markdownForm.get('comments').value,
 			archive: true,
 			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
-			boardId : this.boardId
+			boardId : this.boardId,
+			likes : []
 		}
 		console.table(this.post);
 

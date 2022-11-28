@@ -1,16 +1,10 @@
-<ul class="interactions">
+<ul class="likes">
 	<li>
-		<button class="interactions__arrow__up">
-			<span class="material-icons">arrow_upward</span>
+		<button [ngClass]="classNameLikeButton" (click)="onToggleLikeButton()">
+			<span class="material-icons">favorite</span>
 		</button>
 	</li>
 	<li>
-		<label>17</label>
-	</li>
-	<li>
-		<button class="interactions__arrow__down">
-			<span class="material-icons">arrow_downward</span>
-		</button>
+		<label class="likes__counter">{{ counter }}</label>
 	</li>
 </ul>
-<!-- TODO: Desaparecer componente en resolución de desktop -->

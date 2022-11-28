@@ -1,15 +1,7 @@
 @import '../../../../../../sass/variables';
 
 .interactions {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 0 1rem;
 
-	li {
-		list-style-type: none;
-	}
 
 	&__arrow {
 
@@ -30,5 +22,29 @@
 
 	span {
 		font-weight: bold;
+	}
+}
+
+.likes {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0 1rem;
+
+	li {
+		list-style-type: none;
+	}
+
+	&__heart {
+		border: none;
+		background: none;
+		color: $text-secondary;
+
+		&__active {
+			border: none;
+			background: none;
+			color: $b-second;
+		}
 	}
 }
