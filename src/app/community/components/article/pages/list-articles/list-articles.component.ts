@@ -59,7 +59,6 @@ export class ListArticlesComponent implements OnInit {
 		this.auth.getUserInformation(this.currentUserId).subscribe(
 			(user : User) => {
 				this.userRole = user.userType;
-				console.log(this.userRole);
 			}
 		)
 	}

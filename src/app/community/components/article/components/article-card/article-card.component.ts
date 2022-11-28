@@ -31,13 +31,10 @@ export class ArticleCardComponent implements OnInit {
 	 * Get the information of the author of the article
 	 */
 	onFetchAuthorData (idUser : string) : void {
-		console.log(idUser);
-
 		this.auth.getUserInformation(idUser).subscribe(
 			async (user : User) => {
 				this.userAuthorData.name = await user.name;
 				this.userAuthorData.profilePicture = await user.profilePicture;
-				console.table(this.userAuthorData);
 			}
 		)
 	}
