@@ -14,6 +14,7 @@ export class ArticleCardComponent implements OnInit {
 	@Input() date : number;
 	@Input() title : string;
 	@Input() descriptionContent : string;
+	@Input() likes : number;
 
 	userAuthorData = {
 		name: '',

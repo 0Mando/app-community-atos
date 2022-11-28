@@ -11,14 +11,17 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 })
 export class LikesComponent implements OnInit {
 
-	counter: number;
+	@Input() counter: number;
 	classNameLikeButton: string = 'likes__heart';
 	@Input() referenceArticleId: string;
+	currentUserId: string;
 
 	constructor(
 		private auth: AuthService,
 		private articleService: ArticleService
-	) { }
+	) {
+		this.currentUserId = this.auth.currentSessionUserId();
+	}
 
 	ngOnInit(): void {
 		this.articleService.getArticleById<IArticle>(this.referenceArticleId)
@@ -27,7 +30,7 @@ export class LikesComponent implements OnInit {
 					this.counter = article.likes.length;
 					if (this.auth.isLoggedIn) {
 						this.classNameLikeButton = article.likes.includes(
-							this.auth.currentSessionUserId()
+							this.currentUserId
 						) ? 'likes__heart__active' : 'likes__heart'
 					}
 				}
@@ -41,7 +44,7 @@ export class LikesComponent implements OnInit {
 			} else {
 				this.articleService.addLike(
 					this.referenceArticleId,
-					this.auth.currentSessionUserId()
+					this.currentUserId
 				).catch(
 					error => console.log('An error ocurred ' + error
 					)
@@ -50,7 +53,7 @@ export class LikesComponent implements OnInit {
 		} else {
 			this.articleService.removeLike(
 				this.referenceArticleId,
-				this.auth.currentSessionUserId()
+				this.currentUserId
 			).catch(
 				error => console.log('An error ocurred :'+error)
 			)

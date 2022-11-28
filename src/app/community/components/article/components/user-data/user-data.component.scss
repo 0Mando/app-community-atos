@@ -1,0 +1,29 @@
+@import '../../../../../../sass/variables';
+
+.card {
+	&__header {
+		display: flex;
+		margin-bottom: 10px;
+
+		&__user {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: 1rem;
+
+			&__profile {
+				border-radius: 50%;
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+
+			&__data {
+				margin-left: 1rem;
+
+				small {
+					color: $description-text;
+				}
+			}
+		}
+	}
+}
