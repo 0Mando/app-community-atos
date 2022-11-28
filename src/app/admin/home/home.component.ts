@@ -1,3 +1,5 @@
+import { map, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +15,11 @@ export class HomeComponent implements OnInit {
   commentReport = [];
   page : number = 1;
 
-  constructor(private _reportService: ReportService) { }
+  myUser;
+
+  constructor(
+    private _reportService: ReportService,
+    private _authService: AuthService) { }
 
   ngOnInit(): void {
     this.reports = [];
@@ -33,6 +39,15 @@ export class HomeComponent implements OnInit {
         }
       })
     });
+
+    this._authService.getCurrentUser().pipe(
+      map(data => {
+        return data.uid
+      }),
+      switchMap(data => this._authService.onFetchUserInformation(data))
+    ).subscribe(user => {
+      this.myUser = {...user.payload.data()}
+    })
   }
 
 }
