@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Report } from 'notiflix';
 import { IComment } from 'src/app/domain/models/icomment';
 import { User } from 'src/app/domain/models/user.model';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
@@ -20,9 +21,9 @@ export class CommentFormComponent implements OnInit {
 	@Input() replyToAuthor: string;
 
 	currentUser = {
-		firstName: '',
-		lastName: '',
-		profilePicture: ''
+		username: '',
+		profilePicture: '',
+		role: ''
 	};
 
 	private idUser: string = this.authenticationService.currentSessionUserId();
@@ -50,11 +51,11 @@ export class CommentFormComponent implements OnInit {
 	 * Get user data.
 	 */
 	onFetchDataUser(): void {
-		this.authenticationService.onFetchUserInformation(this.idUser).subscribe(
-			(user) => {
-				this.currentUser = {
-					...user.payload.data()
-				}
+		this.authenticationService.getUserInformation(this.idUser).subscribe(
+			(user: User) => {
+				this.currentUser.profilePicture = user.profilePicture;
+				this.currentUser.username = user.name;
+				this.currentUser.role = user.userType;
 			}
 		)
 	}
@@ -63,21 +64,48 @@ export class CommentFormComponent implements OnInit {
 	 * Create a new comment in article page.
 	 */
 	onCreateComment(): void {
-		const comment: IComment = {
-			idUserAuthor: this.idUser,
-			idPost: this.idPost,
-			commentBody: this.commentForm.get('CommentBody').value,
-			createdAt: this.currentDate.getTime()
+		if(this.currentUser.role !== 'disabled'){
+			const comment: IComment = {
+				idUserAuthor: this.idUser,
+				idPost: this.idPost,
+				commentBody: this.commentForm.get('CommentBody').value,
+				createdAt: this.currentDate.getTime()
+			}
+			console.table(comment);
+			this.commentsService.createComment(comment)
+				.catch(
+					error => {
+						console.log('Something went wrong');
+						console.log(error);
+					}
+				);
+			this.commentForm.reset();
+		} else {
+			this.alertRolePermissions();
+			this.commentForm.reset();
 		}
-		console.table(comment);
-		this.commentsService.createComment(comment)
-			.catch(
-				error => {
-					console.log('Something went wrong');
-					console.log(error);
-				}
-			);
-		this.commentForm.reset();
+	}
+
+	alertRolePermissions() {
+		Report.info(
+			'Atos Community Upgrade',
+			'You do not have permissions to comment an article',
+			'Okay',
+			() => { },
+			{
+				svgSize: '42px',
+				messageMaxLength: 1923,
+				plainText: false,
+				info: {
+					svgColor: '#0195ff',
+					titleColor: '#1e1e1e',
+					messageColor: '#242424',
+					buttonBackground: '#0195ff',
+					buttonColor: '#fff',
+					backOverlayColor: 'rgba(1,149,255,0.2)',
+				},
+			}
+		)
 	}
 
 	//* Toolbar settings input text for create a post

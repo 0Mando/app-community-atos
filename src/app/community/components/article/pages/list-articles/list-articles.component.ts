@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Report } from 'notiflix';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { IArticle } from 'src/app/domain/models/ipost';
+import { User } from 'src/app/domain/models/user.model';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { ChannelService } from 'src/app/infrastructure/services/channel.service';
@@ -31,6 +32,8 @@ export class ListArticlesComponent implements OnInit {
 		parentBoard : ''
 	}
 
+	private userRole: string = '';
+
 	constructor(
 		private route: ActivatedRoute,
 		private router : Router,
@@ -38,6 +41,8 @@ export class ListArticlesComponent implements OnInit {
 		private auth : AuthService,
 		private channel : ChannelService
 	) { }
+
+	private currentUserId = this.auth.currentSessionUserId();
 
 	ngOnInit(): void {
 		// Channel origin
@@ -50,6 +55,13 @@ export class ListArticlesComponent implements OnInit {
 		this.onFetchChannelName(this.channelId);
 		// Display list of articles
 		this.onFetchArticles();
+		// Get user role
+		this.auth.getUserInformation(this.currentUserId).subscribe(
+			(user : User) => {
+				this.userRole = user.userType;
+				console.log(this.userRole);
+			}
+		)
 	}
 
 	/**
@@ -68,11 +80,11 @@ export class ListArticlesComponent implements OnInit {
 	 * Redirect to the create article page if you are registered and verified.
 	 */
 	onCreateArticle() {
-		if(this.userIsLogged() && this.isVerified()){
+		if(this.userIsLogged() && this.isVerified() && this.userRole !== 'disabled'){
 			this.router.navigate(['create-article'],
 			{ queryParams : { channelId : this.channelId } } );
-		} else if(this.userIsLogged() && !this.isVerified()) {
-			alert('Please verified your accout');
+		} else if(this.userIsLogged() && this.userRole === 'disabled') {
+			this.alertRolePermissions();
 		} else {
 			alert('Please login');
 		}

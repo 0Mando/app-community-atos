@@ -1,7 +1,7 @@
 <section class="comment-form">
 	<img class="comment-form__author-profile-image"
 	src="{{ currentUser.profilePicture }}"
-	alt="{{ currentUser.firstName + ' ' + currentUser.lastName }}">
+	alt="{{ currentUser.username }}">
 	<form [formGroup]="commentForm"
 		(ngSubmit)="onCreateComment()"
 		class="comment-form__container-form">
