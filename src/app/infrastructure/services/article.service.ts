@@ -96,4 +96,10 @@ export class ArticleService {
 			{ likes : arrayRemove(userId) }
 		)
 	}
+
+	getComments(articleId : string, comments : number) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{ comments : comments }
+		)
+	}
 }

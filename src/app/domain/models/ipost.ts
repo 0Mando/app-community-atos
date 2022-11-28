@@ -11,4 +11,5 @@ export interface IArticle {
 	readingTime : number;
 	boardId : string;
 	likes : string[];
+	comments? : number;
 }
