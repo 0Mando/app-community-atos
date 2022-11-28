@@ -33,13 +33,19 @@
             <p class="profile__mobile-email">someone@example.com</p>
         </div>
         <hr>
-        <div class="boards" *ngFor="let board of boards">
-            <i class="fa-solid fa-rectangle-list"></i>{{board}}
+        <div>
+            <div class="boards" *ngFor="let board of boards; let i=index">
+                <div *ngIf="i<5">
+                    <i class="fa-solid fa-rectangle-list"></i><a routerLink="/channels/{{ board.id }}" class="board-title">
+                        {{board.boardName}}</a>
+                    </div>
+                </div>
+                <a routerLink="/boards" class="board-url">Watch all boards</a>
         </div>
         <hr>
-        <div class="profiles" *ngFor="let profile of profiles">
+        <!-- <div class="profiles" *ngFor="let profile of profiles">
             <i class="fa-regular fa-id-card"></i>{{profile}}
-        </div>
+        </div> -->
     </section>
     <section class="header__none" (click)="toggleMenu()"></section>
     <!-- <section class="header__mobile" (click)="toggleMenu()">
