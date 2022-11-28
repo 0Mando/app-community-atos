@@ -1,8 +1,8 @@
 <main *ngIf="!isLoading; else loader">
     <img class="banner" [src]="banner" alt="">
     <section class="profile">
-        <img 
-            class="profile__image" 
+        <img
+            class="profile__image"
             [src]="pfp" alt="">
         <!-- <div class="profile__image"></div> -->
         <article class="profile__info">
@@ -15,29 +15,29 @@
         <form class="info__items" [formGroup]="profileForm" (keydown.enter)="$event.preventDefault()">
             <article class="info__items-item">
                 <label for="name">Name</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="name"
                     formControlName="name">
             </article>
             <article class="info__items-item">
                 <label for="name">Email</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="email"
                     formControlName="email">
             </article>
             <article class="info__items-item">
                 <label for="name">Work</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="work"
                     formControlName="work">
             </article>
             <article class="info__items-item">
                 <label for="name">Website</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="website"
                     formControlName="website">
             </article>
@@ -75,14 +75,14 @@
                 </div>
                 <div *ngIf="posts.length; else noPosts">
                     <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
-                        <div class="posts__content-text">  
+                        <div class="posts__content-text">
                             <div class="content-title">{{post.titlePost}}</div>
                             <div class="content-date">Published: {{post.date | timeAgo}}</div>
                         </div>
                         <div class="posts__content-util">
                             <div class="content-misc">
                                 <i class="fa-solid fa-heart"></i>
-                                {{post.likes}}
+                                {{post.likes.length}}
                             </div>
                             <div class="content-misc">
                                 <i class="fa-solid fa-comment"></i>
@@ -95,8 +95,8 @@
                             <i class="fa-solid fa-gear"></i>
                         </div>
                     </div>
-                    <pagination-controls 
-                        (pageChange)="page = $event" 
+                    <pagination-controls
+                        (pageChange)="page = $event"
                         class="my-pagination"
                         previousLabel=""
                         nextLabel=""></pagination-controls>
@@ -127,7 +127,7 @@
                             <p><i class="fa-solid fa-comment"></i> {{post.comments}} </p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="resume__list-pagination">
