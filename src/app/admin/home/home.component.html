@@ -9,7 +9,7 @@
             <div class="news__title">HAPPENING NOW</div>
             <div class="news__items">
                 <div class="item" *ngFor="let card of articleReport |
-				paginate : { itemsPerPage: 4, currentPage: page }">
+				paginate : { itemsPerPage: 4, currentPage: page }" [routerLink]="['/article/', card.idItemReported]">
                     <img src="{{card.idItemReported | parentImage | async }}" alt="">
                     <div class="item__title">{{card.activity}} Report</div>
                     <div class="item__description">{{ card.reason }}</div>
