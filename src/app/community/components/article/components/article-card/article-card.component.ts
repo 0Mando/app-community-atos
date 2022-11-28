@@ -14,6 +14,7 @@ export class ArticleCardComponent implements OnInit {
 	@Input() date : number;
 	@Input() title : string;
 	@Input() descriptionContent : string;
+	@Input() counter : number;
 
 	userAuthorData = {
 		name: '',
@@ -23,19 +24,20 @@ export class ArticleCardComponent implements OnInit {
 	constructor(private auth : AuthService) { }
 
 	ngOnInit(): void {
-		console.log('INIT');
 		this.onFetchAuthorData(this.userCreatedId);
-		console.table(this.userAuthorData);
 	}
 
 	/**
 	 * Get the information of the author of the article
 	 */
 	onFetchAuthorData (idUser : string) : void {
+		console.log(idUser);
+
 		this.auth.getUserInformation(idUser).subscribe(
-			(user : User) => {
-				this.userAuthorData.name = user.name;
-				this.userAuthorData.profilePicture = user.profilePicture;
+			async (user : User) => {
+				this.userAuthorData.name = await user.name;
+				this.userAuthorData.profilePicture = await user.profilePicture;
+				console.table(this.userAuthorData);
 			}
 		)
 	}
