@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Report } from 'notiflix';
 import { Channel } from 'src/app/domain/models/channel.model';
 import { IArticle } from 'src/app/domain/models/ipost';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
@@ -68,7 +69,8 @@ export class ListArticlesComponent implements OnInit {
 	 */
 	onCreateArticle() {
 		if(this.userIsLogged() && this.isVerified()){
-			this.router.navigate(['create-article'], { queryParams : { channelId : this.channelId } } );
+			this.router.navigate(['create-article'],
+			{ queryParams : { channelId : this.channelId } } );
 		} else if(this.userIsLogged() && !this.isVerified()) {
 			alert('Please verified your accout');
 		} else {
@@ -101,6 +103,28 @@ export class ListArticlesComponent implements OnInit {
 					channelImage : channel.channelImage,
 					parentBoard : channel.parentBoard
 				}
+			}
+		)
+	}
+
+	alertRolePermissions() {
+		Report.info(
+			'Atos Community Upgrade',
+			'You do not have permissions to create an article',
+			'Okay',
+			() => { },
+			{
+				svgSize: '42px',
+				messageMaxLength: 1923,
+				plainText: false,
+				info: {
+					svgColor: '#0195ff',
+					titleColor: '#1e1e1e',
+					messageColor: '#242424',
+					buttonBackground: '#0195ff',
+					buttonColor: '#fff',
+					backOverlayColor: 'rgba(1,149,255,0.2)',
+				},
 			}
 		)
 	}
