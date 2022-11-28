@@ -1,15 +1,22 @@
 <article class="channels__items-list">
-	<div class="list-item" *ngFor="let channel of channels |
+	<div class="print__channels" *ngIf="channels; else loader">
+		<div class="list-item" *ngFor="let channel of channels |
 		paginate : { itemsPerPage: 4, currentPage: pageChannel, id : 'channels' }">
-		<img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}"
-		class="channel__image">
-		<h3 class="channel-title">{{ channel.channelName }}</h3>
-		<a routerLink="/articles/{{ channel.id }}/posts">
-			Show More
-			<i class="fa-solid fa-chevron-right"></i>
-		</a>
+			<img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}"
+			class="channel__image">
+			<h3 class="channel-title">{{ channel.channelName }}</h3>
+			<a routerLink="/articles/{{ channel.id }}/posts">
+				Show More
+				<i class="fa-solid fa-chevron-right"></i>
+			</a>
+		</div>
+		<pagination-controls class="my-pagination-channels" id="channels"
+		(pageChange)="pageChannel = $event" previousLabel="" nextLabel="">
+		</pagination-controls>
 	</div>
-	<pagination-controls class="my-pagination-channels" id="channels"
-	(pageChange)="pageChannel = $event" previousLabel="" nextLabel="">
-	</pagination-controls>
+	<ng-template #loader>
+		<div class="loader">
+			<div class="lds-ring" *ngIf="!channels"><div></div><div></div><div></div><div></div></div>
+		</div>
+	</ng-template>
 </article>
