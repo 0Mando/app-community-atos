@@ -24,7 +24,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 

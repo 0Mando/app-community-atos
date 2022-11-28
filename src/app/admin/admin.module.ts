@@ -27,6 +27,7 @@ import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
 import { AppPipesModule } from '../app-pipes/app-pipes.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,9 @@ import { AppPipesModule } from '../app-pipes/app-pipes.module';
     AppPipesModule,
     FormsModule,
     // HttpClientModule
+
+    //* NGX Pagination
+		NgxPaginationModule,
   ]
 })
 export class AdminModule { }

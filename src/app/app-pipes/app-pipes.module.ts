@@ -1,3 +1,4 @@
+import { ParentImagePipe } from './../infrastructure/pipes/parent-image.pipe';
 import { RemoveStringPipe } from './../infrastructure/pipes/remove-string.pipe';
 import { TimeAgoPipe } from './../infrastructure/pipes/time-ago.pipe';
 import { ToDatePipe } from './../infrastructure/pipes/to-date.pipe';
@@ -6,6 +7,7 @@ import { SearchPipe } from './../infrastructure/pipes/search.pipe';
 import { SearchFilterPipe } from './../infrastructure/pipes/search-filter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ParentNamePipe } from '../infrastructure/pipes/parent-name.pipe';
 
 @NgModule({
   declarations: [
@@ -14,14 +16,18 @@ import { CommonModule } from '@angular/common';
     SafePipe,
     ToDatePipe,
     TimeAgoPipe,
-    RemoveStringPipe],
+    RemoveStringPipe,
+    ParentNamePipe,
+    ParentImagePipe],
   exports: [
     SearchFilterPipe,
     SearchPipe, 
     SafePipe,
     ToDatePipe,
     TimeAgoPipe,
-    RemoveStringPipe],
+    RemoveStringPipe,
+    ParentNamePipe,
+    ParentImagePipe],
   imports: [
     CommonModule
   ]

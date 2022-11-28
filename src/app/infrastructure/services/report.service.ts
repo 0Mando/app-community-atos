@@ -27,4 +27,8 @@ export class ReportService {
 	deleteComment(idReport : string) {
 		return this.afs.collection('reports').doc(idReport).delete();
 	}
+
+	readReportsByType<IReport>() {
+		return this.afs.collection<IReport>('reports', ref => ref.orderBy("reportDate", 'desc')).snapshotChanges();
+	}
 }

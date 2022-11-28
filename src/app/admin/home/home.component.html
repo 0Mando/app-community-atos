@@ -7,119 +7,25 @@
         <article class="home__left-news">
             <div class="news__title">HAPPENING NOW</div>
             <div class="news__items">
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
+                <div class="item" *ngFor="let card of articleReport |
+				paginate : { itemsPerPage: 4, currentPage: page }">
+                    <img src="{{card.idItemReported | parentImage | async }}" alt="">
+                    <div class="item__title">{{card.activity}} Report</div>
+                    <div class="item__description">{{ card.reason }}</div>
                     <div class="item__footer">
                         <div class="item__footer-icons">
                             <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
+                             {{card.idItemReported | parentName | async }}
                         </div>
                         <div class="item__footer-icons">
                             <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="https://images.unsplash.com/photo-1661956601031-4cf09efadfce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80" alt="">
-                    <div class="item__title">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="item__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Odit ipsa necessitatibus corporis accusamus adipisci est earum porro soluta distinctio natus.</div>
-                    <div class="item__footer">
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-earth-americas"></i>
-                             Long name here
-                        </div>
-                        <div class="item__footer-icons">
-                            <i class="fa-solid fa-clock"></i>
-                             1h ago
+                             {{ card.reportDate | timeAgo}}
                         </div>
                     </div>
                 </div>
             </div>
+            <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="" nextLabel="">
+            </pagination-controls>
         </article>
     </section>
     <section class="home__right">
@@ -135,80 +41,16 @@
             <div class="reports__title">
                 Reports
             </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
-                    </div>
-                </div>
-            </div>
-            <div class="reports__content">
-                <div class="reports__content-card">
-                    <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
-                    <div class="card__title">
-                        Lorem, ipsum dolor.
-                    </div>
-                    <div class="card__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, doloribus.
+            <div *ngFor="let card of commentReport" class="comment-reports">
+                <div class="reports__content">
+                    <div class="reports__content-card">
+                        <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
+                        <div class="card__title">
+                            {{card.activity}} Report
+                        </div>
+                        <div class="card__description">
+                            {{ card.reason }}
+                        </div>
                     </div>
                 </div>
             </div>
