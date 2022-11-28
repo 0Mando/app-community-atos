@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
 	currentUser: User;
 
-	boards: Board[] = [];
+	boards: Board[];
 	profiles: string[] = [
 		'Profile 1',
 		'Profile 2',

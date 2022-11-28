@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Channel } from 'src/app/domain/models/channel.model';
@@ -6,6 +7,8 @@ import { Channel } from 'src/app/domain/models/channel.model';
 	providedIn: 'root'
 })
 export class ChannelService {
+
+	channelRoute = new BehaviorSubject('');
 
 	constructor(
 		private afs : AngularFirestore

@@ -32,3 +32,10 @@
 .my-pagination-articles ::ng-deep .ngx-pagination .pagination-previous a::before {
 	color: $description-text;
 }
+
+.empty{
+	height: 100%;
+	display: grid;
+	place-items: center;
+	font-size: 1.2em;
+}

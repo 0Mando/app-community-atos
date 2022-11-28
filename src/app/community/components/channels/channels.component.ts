@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class ChannelsComponent implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
+		private _channelService : ChannelService
 	) { }
 
 	ngOnInit(): void {
@@ -22,6 +24,7 @@ export class ChannelsComponent implements OnInit {
 		this.route.params.subscribe(
 			(params: Params)=>{
 				this.boardId = params['boardId'];
+				this._channelService.channelRoute.next(params['boardId']);
 			}
 		)
 	}

@@ -1,3 +1,4 @@
+import { switchMap } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Channel } from 'src/app/domain/models/channel.model';
@@ -24,18 +25,14 @@ export class ChannelsListComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		this.fetchChannels();
-	}
-
-	private fetchChannels() {
-		this.channelService.displayChannelsOfParenBoard<Channel>(this.boardId).subscribe(
-			channels =>{
-				this.channels = channels;
-				this.channelsLength = this.channels.length;
-				if(this.channels.length === 0) {
-					this.router.navigate(['not-available-articles']);
-				}
+		this.channelService.channelRoute.pipe(
+			switchMap(route => this.channelService.displayChannelsOfParenBoard<Channel>(route))
+		).subscribe(channels => {
+			this.channels = channels;
+			this.channelsLength = this.channels.length;
+			if(this.channels.length === 0) {
+				this.router.navigate(['not-available-articles']);
 			}
-		)
+		});
 	}
 }
