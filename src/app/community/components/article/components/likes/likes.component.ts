@@ -28,7 +28,7 @@ export class LikesComponent implements OnInit {
 					if (this.auth.isLoggedIn) {
 						this.classNameLikeButton = article.likes.includes(
 							this.auth.currentSessionUserId()
-						) ? 'likes__heart__active' : 'likes__heart'
+						) ? 'likes__active' : 'likes__heart'
 					}
 				}
 			)

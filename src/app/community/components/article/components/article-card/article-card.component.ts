@@ -23,7 +23,9 @@ export class ArticleCardComponent implements OnInit {
 	constructor(private auth : AuthService) { }
 
 	ngOnInit(): void {
+		console.log('INIT');
 		this.onFetchAuthorData(this.userCreatedId);
+		console.table(this.userAuthorData);
 	}
 
 	/**

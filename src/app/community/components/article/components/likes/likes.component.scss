@@ -41,10 +41,11 @@
 		background: none;
 		color: $text-secondary;
 
-		&__active {
-			border: none;
-			background: none;
-			color: $b-second;
-		}
+	}
+
+	&__active {
+		border: none;
+		background: none;
+		color: $b-second;
 	}
 }
