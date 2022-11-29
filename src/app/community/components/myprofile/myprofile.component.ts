@@ -186,13 +186,13 @@ export class MyprofileComponent implements OnInit {
     this._profileService.saveInfo(this.id, PHOTO)
   }
 
-  async setProfileBanner(){
+  async setProfileBanner(event){
+    const file = event.target.files[0];
     this.type = 'banner-pictures'
-    const downloadUrl = await this.uploadImage(this.file);
+    const downloadUrl = await this.uploadImage(file);
     const PHOTO = {
       bannerImage: downloadUrl
     }
-
     this._profileService.saveInfo(this.id, PHOTO)
   }
 
