@@ -10,16 +10,27 @@ export class ReportService {
 
 	constructor(private afs : AngularFirestore) { }
 
-	createReport(report : IReport) {
-		console.log('Creating report');
-		const newReport = this.afs.collection('reports');
-		return newReport.doc(this.afs.createId()).set(report);
-	}
-	
 	getReportList():Observable<any> {
 		return this.afs.collection<IReport>('reports').valueChanges({ idField : 'id' });
 	}
 
+	createReport(report : IReport) {
+		console.log('Creating report');
+		let existingReportBoolean = false;
+		this.getReportList().subscribe((reports) => {
+			reports.forEach((existingReport) => {
+				if(existingReport.idItemReported == report.idItemReported){
+					existingReportBoolean = true;
+					return;
+				}
+			});
+		})
+		if(!existingReportBoolean){
+			const newReport = this.afs.collection('reports');
+			return newReport.doc(this.afs.createId()).set(report);
+		}
+	}
+	
 	updateReport(idReport : string, status : string) {
 		return this.afs.collection('reports').doc(idReport).update({status : status});
 	}
