@@ -2,8 +2,9 @@
     '../../shared/profile/profile', 
     '../../shared/profile/resume', 
     '../../shared/profile/icons',
-    '../../shared/profile/responsive', 
+    '../../shared/profile/responsive',
     './sass/responsive',
+    './sass/profile', 
     './sass/posts',
     'sass/info';
 
@@ -29,6 +30,10 @@ main{
 .fa-check{
     font-size: 1.1rem;
     color: white;
+}
+
+.fa-pen{
+    cursor: pointer;
 }
 
 .my-pagination ::ng-deep .ngx-pagination {

@@ -5,6 +5,7 @@ import { MyprofileService } from '../../../infrastructure/services/myprofile.ser
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-myprofile',
@@ -24,9 +25,12 @@ export class MyprofileComponent implements OnInit {
   id: string;
   pfp: string;
   banner: string;
-
+  imageUrl = ''
+  file?: File;
+  newForm: FormGroup;
   totalLength: number = 0;
   page: number = 1
+  type = ''
 
   myPosts: any[] = [];
   archivedPosts: any[] = [];
@@ -40,7 +44,8 @@ export class MyprofileComponent implements OnInit {
   constructor(
       private _profileService: MyprofileService,
       private _authService: AuthService,
-      private _articleService: ArticleService) {}
+      private _articleService: ArticleService,
+      private storage: Storage) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -143,6 +148,60 @@ export class MyprofileComponent implements OnInit {
     }
 
     this._profileService.saveInfo(this.id, PROFILE)
+  }
+
+  onChangeProfile(event){
+    this.file = event.target.files[0];
+    const reader = new FileReader();
+    fromEvent(reader, 'load').subscribe(() => {
+      const img = reader.result;
+      let image = document.querySelector('.profile__image')! as HTMLElement;
+      image.style.backgroundImage = `url(${img})`;
+    });
+    reader.readAsDataURL(this.file);
+  }
+
+  onChangeBanner(event){
+    this.file = event.target.files[0];
+    const reader = new FileReader();
+    fromEvent(reader, 'load').subscribe(() => {
+      const img = reader.result;
+      let image = document.querySelector('.banner')! as HTMLElement;
+      image.style.backgroundImage = `url(${img})`;
+    });
+    reader.readAsDataURL(this.file);
+  }
+
+  async uploadImage(file : File){
+    try {
+      console.log(file)
+      const imgRef = ref(this.storage, `${this.type}/${file.lastModified}`)
+      const res = await uploadBytes(imgRef, file);
+      const downloadUrl = await getDownloadURL(imgRef)
+      this.imageUrl = downloadUrl;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+   async setProfilePhoto(){
+    this.type = 'profile-pictures'
+    await this.uploadImage(this.file);
+    const PHOTO = {
+      profilePicture: this.imageUrl
+    }
+
+    this._profileService.saveInfo(this.id, PHOTO)
+  }
+
+  async setProfileBanner(){
+    this.type = 'banner-pictures'
+    await this.uploadImage(this.file);
+    const PHOTO = {
+      bannerImage: this.imageUrl
+    }
+
+    this._profileService.saveInfo(this.id, PHOTO)
   }
 
   addSkill(){

@@ -1,10 +1,34 @@
 <main *ngIf="!isLoading; else loader">
-    <img class="banner" [src]="banner" alt="">
+    <div class="profile__edit-banner">
+        <input 
+            type="file" 
+            name="profileBanner"
+            id="profileBanner"
+            accept="image/jpeg, image/png, image/jpg"
+            (change)="onChangeBanner($event)"
+            (change)="setProfileBanner()"
+            >
+            <label for="profileBanner">
+                <i class="fa-solid fa-pen"></i>
+            </label>
+        </div><img class="banner" [src]="banner" alt="">
     <section class="profile">
+        <div class="profile__edit-profile">
+        <input 
+            type="file" 
+            name="profilePicture"
+            id="profilePicture"
+            accept="image/jpeg, image/png, image/jpg"
+            (change)="onChangeProfile($event)"
+            (change)="setProfilePhoto()"
+            >
+            <label for="profilePicture">
+                <i class="fa-solid fa-pen"></i>
+            </label>
+        </div>
         <img 
             class="profile__image" 
             [src]="pfp" alt="">
-        <!-- <div class="profile__image"></div> -->
         <article class="profile__info">
             <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
             <span class="profile__info-description">{{myProfile.birthday | toDate | timeAgo | removeString:'ago'}} | {{ myProfile.work }} </span>
