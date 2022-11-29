@@ -3,9 +3,8 @@
         <a (click)="iconToggleMenu()" [routerLink]="['/']"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Atos_logo.png" alt="" class="header__logo"></a>
         <div (click)="toggleMenu()" class="header__toggle"></div>
         <ul class="header__menu">
-            <li><a class="header__web-link" [routerLink]="['/boards']" routerLinkActive="active">Home</a></li>
+            <li><a class="header__web-link" [routerLink]="['/']" routerLinkActive="active">Home</a></li>
             <li><a routerLink="/boards">Categories</a></li>
-            <li><a>QA</a></li>
             <li class="profile__dropdown" *ngIf="loggedIn; else elseProfile">
                 <a class="profile__dropdown-btn">
                     <img src="{{ currentUser.profilePicture }}" alt="" class="profile__dropdown-image" *ngIf=" currentUser ">
