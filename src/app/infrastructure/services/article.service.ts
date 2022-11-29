@@ -103,9 +103,9 @@ export class ArticleService {
 		)
 	}
 
-	counterViews(articleId: string) {
+	counterViews(articleId: string, views: number) {
 		return this.afs.collection('posts').doc(articleId).update(
-			{ views: 1 }
+			{ views: views+1 }
 		)
 	}
 }

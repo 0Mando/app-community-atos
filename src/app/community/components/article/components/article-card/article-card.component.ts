@@ -16,6 +16,7 @@ export class ArticleCardComponent implements OnInit {
 	@Input() title : string;
 	@Input() descriptionContent : string;
 	@Input() counter : number;
+	@Input() views : number;
 
 	userAuthorData = {
 		name: '',
@@ -43,8 +44,8 @@ export class ArticleCardComponent implements OnInit {
 		)
 	}
 
-	onViewArticleCounter(idArticle: string) {
-		this.articleService.counterViews(idArticle);
+	onViewArticleCounter(idArticle: string, views: number) {
+		this.articleService.counterViews(idArticle, views);
 	}
 
 }
