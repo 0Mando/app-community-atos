@@ -1,34 +1,39 @@
 <main *ngIf="!isLoading; else loader">
-    <div class="profile__edit-banner">
-        <input 
-            type="file" 
-            name="profileBanner"
-            id="profileBanner"
-            accept="image/jpeg, image/png, image/jpg"
-            (change)="setProfileBanner($event)"
-            >
-            <label for="profileBanner">
-                <i class="fa-solid fa-pen"></i>
-            </label>
-        </div><img class="banner" [src]="banner" alt="">
-    <section class="profile">
-        <div class="profile__edit-profile">
-        <input 
-            type="file" 
-            name="profilePicture"
-            id="profilePicture"
-            accept="image/jpeg, image/png, image/jpg"
-            (change)="setProfilePhoto($event)"
-            >
-            <label for="profilePicture">
-                <i class="fa-solid fa-pen"></i>
-            </label>
+    <!-- <div class="profile__edit-banner"> -->
+        <div class="banner">
+            <img class="banner" [src]="banner" alt="">
+            <div class="banner-edit">
+                <input 
+                    type="file" 
+                    name="profileBanner"
+                    id="profileBanner"
+                    accept="image/jpeg, image/png, image/jpg"
+                    (change)="setProfileBanner($event)"
+                    >
+                    <label for="profileBanner">
+                        <i class="fa-solid fa-pen"></i>
+                    </label>
+                </div>
         </div>
-        <img 
-        class="profile__image" 
-        [src]="pfp" alt="">
-        <div class="profile__loading" 
-        [ngStyle]="{'display' : isProfilePictureUploading ? 'flex' : 'none'}">Loading...</div>
+    <section class="profile">
+        <div class="profile__image">
+            
+            <img 
+                class="profile__image-img" 
+                [src]="pfp" alt=""><div class="profile__loading" 
+                [ngStyle]="{'display' : isProfilePictureUploading ? 'flex' : 'none'}">Loading...</div>
+                <div class="profile__image-edit">
+                    <input 
+                        type="file" 
+                        name="profilePicture"
+                        id="profilePicture"
+                        accept="image/jpeg, image/png, image/jpg"
+                        (change)="setProfilePhoto($event)">
+                    <label for="profilePicture">
+                        <i class="fa-solid fa-pen"></i>
+                    </label>
+                </div>
+        </div>
         <article class="profile__info">
             <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
             <span class="profile__info-description">{{myProfile.birthday | toDate | timeAgo | removeString:'ago'}} | {{ myProfile.work }} </span>
