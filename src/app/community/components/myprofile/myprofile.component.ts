@@ -91,7 +91,6 @@ export class MyprofileComponent implements OnInit {
               this.myPosts.push(x.data());
             })
             this.posts = this.myPosts;
-			console.table(this.posts);
             this.totalLength = this.myPosts.length;
           }
         })

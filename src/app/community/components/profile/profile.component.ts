@@ -92,13 +92,10 @@ export class ProfileComponent implements OnInit {
 	private fetchUserData(userId: string) {
 		this._auth.getUserInformation(userId).subscribe(
 			(user: User) => {
-				console.table(user)
 				this.skills = user.skills;
 				this.name = user.name;
 				this.pfp = user.profilePicture;
-				console.log(this.pfp);
 				this.bg = user.bannerImage;
-				console.log(this.bg);
 			}
 		)
 	}
