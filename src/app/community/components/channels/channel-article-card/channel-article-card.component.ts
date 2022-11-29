@@ -20,7 +20,6 @@ export class ChannelArticleCardComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.onFetchUserProfilePicture(this.article.userCreatedId);
-		console.log(this.article.userCreatedId);
 		
 		this.titlePost = this.article.titlePost;
 		this.descriptionPost = this.article.descriptionContent;
