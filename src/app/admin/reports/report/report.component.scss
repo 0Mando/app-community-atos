@@ -1,1 +1,13 @@
-@import './../sass/container', './../sass/reports', './../sass/utils';
+@import './../sass/container', './../sass/reports', './../sass/utils', './../../../../sass/variables';
+
+.resolve-btn{
+  background-color: $--main--100;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 9%;
+  text-align: center;
+  
+  &:hover{
+    background-color: $--main--200;
+  }
+}
