@@ -1,42 +1,35 @@
-.profile {
-	&__edit {
-		&-profile {
-			border-radius: 80%;
-			width: 30px;
-			height: 30px;
-			position: relative;
-			z-index: 1;
-			border: none;
-			color: green;
-			background: #e3e2e2;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-top: 4%;
-			margin-left: 50%;
-		}
-		&-banner {
-			border-radius: 80%;
-			width: 30px;
-			height: 30px;
-			position: absolute;
-			z-index: 1;
-			border: none;
-			color: black;
-			background: #e3e2e2;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-            margin-top: 2%;
-            margin-left: 86%;
-		}
-	}
-}
-#profilePicture {
-	display: none;
-    position: absolute;
-}
+// .profile {
+// 	&__edit {
+// 		// &-profile {
+// 		// 	border-radius: 80%;
+// 		// 	width: 30px;
+// 		// 	height: 30px;
+// 		// 	position: relative;
+// 		// 	z-index: 1;
+// 		// 	border: none;
+// 		// 	color: green;
+// 		// 	background: #e3e2e2;
+// 		// 	display: flex;
+// 		// 	justify-content: center;
+// 		// 	align-items: center;
+// 		// 	margin-top: 4%;
+// 		// 	margin-left: 50%;
+// 		// }
+// 		&-banner {
+// 			border-radius: 80%;
+// 			width: 30px;
+// 			height: 30px;
+// 			position: absolute;
+// 			z-index: 1;
+// 			border: none;
+// 			color: black;
+// 			background: #e3e2e2;
+// 			display: flex;
+// 			justify-content: center;
+// 			align-items: center;
+//             margin-top: 2%;
+//             margin-left: 86%;
+// 		}
+// 	}
+// }
 
-#profileBanner {
-	display: none;
-}
