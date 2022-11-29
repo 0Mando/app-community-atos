@@ -50,47 +50,26 @@ export class ReportViewComponent implements OnInit {
 	}
 
 	getReportData(reportedId) {
-		this.reportService
-			.getReportById(reportedId)
-			.pipe(
-				map((reportInput: IReport) => {
-					this.report = reportInput;
-					return reportInput.idItemReported;
-				}),
-				switchMap((type) => this.commentService.getCommentById(type))
-			)
-			.subscribe((comment: IComment) => {
-				this.comment = comment;
-			});
-
-		this.reportService
-			.getReportById(reportedId)
-			.pipe(
-				map((reportInput: IReport) => {
-					this.report = reportInput;
-					return reportInput.idItemReported;
-				}),
-				switchMap((type) => this.articleService.getArticleById(type))
-			)
-			.subscribe((article: IArticle) => {
-				this.article = article;
-			});
-		// .subscribe((reportInput) => {
-		// 	this.report = reportInput;
-		// });
-
-		// if (this.report.activity == 'Comment') {
-		// 	this.commentService
-		// 		.getCommentById(this.report.idItemReported)
-		// 		.subscribe((comment: IComment) => {
-		// 			this.comment = comment;
-		// 		});
-		// } else if (this.report.activity == 'Post') {
-		// 	this.articleService
-		// 		.getArticleById(this.report.idItemReported)
-		// 		.subscribe((article: IArticle) => {
-		// 			this.item = article;
-		// 		});
-		// }
+		this.reportService.getReportById(reportedId).pipe(
+			map((reportInput: IReport) => {
+				this.report = reportInput;
+				return reportInput;
+			}),
+			switchMap((type) => {
+				if(type.activity === 'Comment'){
+					return this.commentService.getCommentById(type.idItemReported).pipe(
+						map((data: IComment) => {
+							this.comment = data
+						})
+					)
+				} else if (type.activity === 'Post'){
+					return this.articleService.getArticleById(type.idItemReported).pipe(
+						map((data: IArticle) => {
+							this.article = data
+						})
+					)
+				}
+			})
+		).subscribe();
 	}
 }
