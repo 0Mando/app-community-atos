@@ -1,6 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as Notiflix from 'notiflix';
+import { Confirm } from 'notiflix';
+import { IComment } from 'src/app/domain/models/icomment';
+import { IArticle } from 'src/app/domain/models/ipost';
+import { IReport } from 'src/app/domain/models/report.model';
 import { User } from 'src/app/domain/models/user.model';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
+import { CommentsService } from 'src/app/infrastructure/services/comments.service';
+
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-report',
@@ -9,14 +18,25 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 })
 export class ReportComponent implements OnInit {
 	@Input() report;
-
+	
 	reportedName: string = '';
 	reporterName: string = '';
+	
+	reportedPhoto: string = '';
+	reporterPhoto: string = '';
+	
+	reportedContent:string  = '';
+	reportedUrl:string  = '';
+	reportedItemId:string = '';
+	message:string = '';
 
-	reportedPhoto:string = '';
-	reporterPhoto:string = '';
-
-	constructor(private auth: AuthService) {}
+	constructor(
+		private auth: AuthService,
+		private commentsService: CommentsService,
+		private articleService: ArticleService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {}
 
 	ngOnInit(): void {
 		this.onFetchAuthorData(
@@ -34,5 +54,51 @@ export class ReportComponent implements OnInit {
 			this.reporterName = user.payload.data().name;
 			this.reporterPhoto = user.payload.data().profilePicture;
 		});
+	}
+
+	actOnReport(report): void {
+		console.log(report);
+		let reportedItem = report.id;
+		// this.getReportUrl(report.activity, reportedItem).then((value)=>{
+		// 	let aux = value;
+		// 	this.reportedUrl = aux;
+		// });
+
+		
+		Notiflix.Confirm.show(
+			'Reported ' + report.activity.toLowerCase(),
+			'Reason of report: ' + (report.reason ? report.reason  : 'No reason was submitted'),
+			'Take action',
+			'Cancel',
+			() => {
+				console.log(reportedItem);
+				this.router.navigate(['admin/report/'+reportedItem]);
+				// this.router.navigate(['admin/reports']);
+				
+				// if (report.activity == 'Comment') {
+				// 	//delete comment
+				// } else if (report.activity == 'Post') {
+				// 	//delete post
+				// } else {
+				// 	Notiflix.Notify.warning(
+				// 		'There was an error deleting the element',
+				// 		{
+				// 			timeout: 2000,
+				// 		}
+				// 	);
+				// }
+			},
+			function cancelCb() {
+				Notiflix.Notify.warning('Action Cancelled', {
+					timeout: 2000,
+				});
+			},
+			{
+				width: '400px',
+				borderRadius: '8px',
+				titleColor: '#0195ff',
+				okButtonBackground: '#0195ff',
+			}
+		);
 	}
 }

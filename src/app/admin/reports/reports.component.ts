@@ -38,7 +38,6 @@ export class ReportsComponent implements OnInit {
 				});
 				return report;
 			});
-			console.log(this.reports);
 		});
 	}
 

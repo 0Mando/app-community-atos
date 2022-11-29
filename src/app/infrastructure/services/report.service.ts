@@ -27,4 +27,8 @@ export class ReportService {
 	deleteComment(idReport : string) {
 		return this.afs.collection('reports').doc(idReport).delete();
 	}
+
+	getReportById(idReport : string) {
+		return this.afs.collection('reports').doc(idReport).valueChanges();
+	}
 }

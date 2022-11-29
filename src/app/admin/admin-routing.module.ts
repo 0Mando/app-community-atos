@@ -13,56 +13,74 @@ import { ChannelsComponent } from './topics/channels/channels.component';
 //* Guards
 import { AdminGuard } from './../infrastructure/guards/admin.guard';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportViewComponent } from './reports/report-view/report-view.component';
 
 const routes: Routes = [
-  {
-    path: 'admin',
-    redirectTo: '/admin/home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'admin/topics',
-    redirectTo: '/admin/topics/boards',
-    pathMatch: 'full'
-  },
-  {
-    path: 'admin',
-    canActivate: [AdminGuard] ,
-    component: AdminComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'users',
-        component: UsersComponent
-      },
-      {
-        path : 'reports',
-        component : ReportsComponent
-      },
-      {
-        path: 'topics',
-        component: TopicsComponent,
-        children: [
-          {
-            path: 'boards',
-            component: BoardsComponent
-          },
-          {
-            path: 'channels',
-            component: ChannelsComponent
-          }
-        ]
-      }
-    ]
-  }
-  
+	{
+		path: 'admin',
+		redirectTo: '/admin/home',
+		pathMatch: 'full',
+	},
+	{
+		path: 'admin/topics',
+		redirectTo: '/admin/topics/boards',
+		pathMatch: 'full',
+	},
+	{
+		path: 'admin',
+		canActivate: [AdminGuard],
+		component: AdminComponent,
+		children: [
+			{
+				path: 'home',
+				component: HomeComponent,
+			},
+			{
+				path: 'users',
+				component: UsersComponent,
+			},
+			{
+				path: 'reports',
+				component: ReportsComponent,
+				// pathMatch: 'full',
+				// children: [
+				//   {
+				//     path: ':reportId',
+				//     component: ReportViewComponent,
+				//     // pathMatch: 'full',
+				//   }
+				// ]
+			},
+			{
+				path: 'report/:reportId',
+				component: ReportViewComponent,
+				// pathMatch: 'full',
+			},
+			// {
+			//   path: 'reports/:reportId',
+			//   component: ReportViewComponent,
+			//   // pathMatch: 'full',
+			// },
+			{
+				path: 'topics',
+				component: TopicsComponent,
+				children: [
+					{
+						path: 'boards',
+						component: BoardsComponent,
+					},
+					{
+						path: 'channels',
+						component: ChannelsComponent,
+					},
+				],
+			},
+		],
+	},
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-  })
-  export class AdminRoutingModule { }
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
+})
+export class AdminRoutingModule {}

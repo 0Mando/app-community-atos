@@ -1,0 +1,24 @@
+<section class="body" *ngIf="report">
+
+  <h1>Report of a {{ report.activity.toLowerCase() }}</h1>
+  <h4>{{ report.id }}</h4>
+
+  <p>Reason of report: {{ report.reason ? '' + report.reason : 'No reason was submitted' }}</p>
+
+  <!-- <p>{{ item | json }}</p> -->
+  <section *ngIf="report.activity == 'Comment' && comment">
+    <p>Isacomment</p>
+    <p>{{comment.commentBody}}</p>
+    <!-- <app-comment-card
+      [idAuthorComment]="comment.idUserAuthor"
+      [createdAt]="comment.createdAt"
+      [commentBody]="comment.commentBody"
+      [idComment]="report.idItemReported"
+      >
+    </app-comment-card> -->
+  </section>
+  <section>
+    <button>Delete</button>
+    <button>Remove report</button>
+  </section>
+</section>
