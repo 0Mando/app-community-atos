@@ -92,7 +92,8 @@
                                 <i class="fa-solid fa-eye"></i>
                                 {{post.views}}
                             </div>
-                            <i class="fa-solid fa-gear"></i>
+							<!-- TODO : Recuperar el ID del post en el servicio -->
+                            <i class="fa-solid fa-gear" (click)="onArticleSettings(post.id)"></i>
                         </div>
                     </div>
                     <pagination-controls

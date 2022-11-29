@@ -22,13 +22,8 @@ export class CommentCardComponent implements OnInit {
 
 	quillEditorContent : string;
 
-	userAuthorData: User = {
+	userAuthorData = {
 		name: '',
-		birthday: '',
-		email: '',
-		password: '',
-		userType: 'normal-user',
-		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
@@ -123,9 +118,10 @@ export class CommentCardComponent implements OnInit {
 	}
 
 	onFetchDataUser(idUser: string) {
-		this.authenticationService.onFetchUserInformation(idUser).subscribe(
-			(user) => {
-				this.userAuthorData = {...user.payload.data()}
+		this.authenticationService.getUserInformation(idUser).subscribe(
+			(user: User) => {
+				this.userAuthorData.name = user.name;
+				this.userAuthorData.profilePicture = user.profilePicture;
 			}
 		)
 	}

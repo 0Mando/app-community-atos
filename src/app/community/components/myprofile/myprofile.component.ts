@@ -5,6 +5,7 @@ import { MyprofileService } from '../../../infrastructure/services/myprofile.ser
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-myprofile',
@@ -35,16 +36,18 @@ export class MyprofileComponent implements OnInit {
 
   // postsNum: number;
   postsBool = false;
-  
+
 
   constructor(
       private _profileService: MyprofileService,
       private _authService: AuthService,
-      private _articleService: ArticleService) {}
+      private _articleService: ArticleService,
+	  private router : Router
+	) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    
+
     this._authService.getCurrentUser().pipe(
       map(data => {
         if(data){
@@ -69,7 +72,7 @@ export class MyprofileComponent implements OnInit {
         })
       ))
     ).subscribe()
-    
+
     this.getArchived();
     this.getUnarchived();
   }
@@ -88,6 +91,7 @@ export class MyprofileComponent implements OnInit {
               this.myPosts.push(x.data());
             })
             this.posts = this.myPosts;
+			console.table(this.posts);
             this.totalLength = this.myPosts.length;
           }
         })
@@ -116,7 +120,7 @@ export class MyprofileComponent implements OnInit {
 
   switchPosts(type: number){
     let buttons = document.querySelectorAll('.posts__header-button')!as NodeListOf<HTMLButtonElement>;
-    
+
     buttons.forEach( element => {
       element.classList.remove('selected');
     });
@@ -162,7 +166,7 @@ export class MyprofileComponent implements OnInit {
 
     ul?.insertBefore(li, last);
     // ul?.appendChild(li);
-    
+
   }
 
   createInput(){
@@ -186,7 +190,7 @@ export class MyprofileComponent implements OnInit {
     } else {
       ;
     }
-     
+
 
     let remove = document.querySelectorAll('.resume__list-added')!as NodeListOf<HTMLInputElement>;
     remove?.forEach( e => {
@@ -234,5 +238,11 @@ export class MyprofileComponent implements OnInit {
       btn.innerHTML = '<i class="fa-solid fa-check"></i>';
       btn.style.color = 'green';
     }
+  }
+
+  onArticleSettings(articleId: string) {
+	console.log('-------> '+articleId);
+
+	this.router.navigate(['article/'+articleId]);
   }
 }

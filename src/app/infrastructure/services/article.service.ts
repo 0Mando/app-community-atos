@@ -81,6 +81,7 @@ export class ArticleService {
 		return postsCollection.valueChanges({ idField: 'id' });
 	}
 
+	// TODO : Recuperar el ID del post en el servicio
 	getUserArticles(id: string, status: boolean) {
 		return this.afs.collection('posts', ref => ref.where("userCreatedId", "==", id).where('archive', "==", status)).get();
 	}
@@ -107,5 +108,15 @@ export class ArticleService {
 		return this.afs.collection('posts').doc(articleId).update(
 			{ views: views+1 }
 		)
+	}
+
+	onFetchUserArticles<IArticle>(userId: string) {
+		const postsCollection = this.afs.collection<IArticle>(
+			'posts',
+			(ref) => ref
+				.where('userCreatedId', '==', userId)
+				.where('archive', '==', false)
+		);
+		return postsCollection.valueChanges({ idField: 'id' });
 	}
 }

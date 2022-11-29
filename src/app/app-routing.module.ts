@@ -40,7 +40,7 @@ const routes: Routes = [
 		component: ChannelsEmptyComponent
 	},
 	{
-		path: 'profile',
+		path: 'profile/:userId',
 		component: ProfileComponent
 	},
 	{

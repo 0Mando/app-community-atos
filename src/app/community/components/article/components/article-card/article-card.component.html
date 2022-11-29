@@ -12,7 +12,7 @@
 				<img src="{{ userAuthorData.profilePicture }}"
 				class="card__header__user__profile" alt="{{ userAuthorData.name }}">
 				<div class="card__header__user__data">
-					<h5>{{ userAuthorData.name }}</h5>
+					<h5 routerLink="/profile/{{ userCreatedId }}" >{{ userAuthorData.name }}</h5>
 					<small>{{ date | date }}</small>
 				</div>
 			</section>
