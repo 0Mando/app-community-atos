@@ -1,10 +1,11 @@
 .profile {
 	&__edit {
+
 		&-profile {
 			border-radius: 80%;
 			width: 30px;
 			height: 30px;
-			position: relative;
+			position: absolute;
 			z-index: 1;
 			border: none;
 			color: green;
@@ -34,7 +35,6 @@
 }
 #profilePicture {
 	display: none;
-    position: absolute;
 }
 
 #profileBanner {
