@@ -71,22 +71,7 @@ export class ReportComponent implements OnInit {
 			'Take action',
 			'Cancel',
 			() => {
-				console.log(reportedItem);
 				this.router.navigate(['admin/report/'+reportedItem]);
-				// this.router.navigate(['admin/reports']);
-				
-				// if (report.activity == 'Comment') {
-				// 	//delete comment
-				// } else if (report.activity == 'Post') {
-				// 	//delete post
-				// } else {
-				// 	Notiflix.Notify.warning(
-				// 		'There was an error deleting the element',
-				// 		{
-				// 			timeout: 2000,
-				// 		}
-				// 	);
-				// }
 			},
 			function cancelCb() {
 				Notiflix.Notify.warning('Action Cancelled', {

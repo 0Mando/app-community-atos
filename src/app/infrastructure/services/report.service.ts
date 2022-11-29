@@ -24,7 +24,7 @@ export class ReportService {
 		return this.afs.collection('reports').doc(idReport).update({status : status});
 	}
 
-	deleteComment(idReport : string) {
+	deleteReport(idReport : string) {
 		return this.afs.collection('reports').doc(idReport).delete();
 	}
 

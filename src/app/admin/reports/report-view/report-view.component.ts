@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap, switchMap } from 'rxjs';
 import { IComment } from 'src/app/domain/models/icomment';
 import { IArticle } from 'src/app/domain/models/ipost';
@@ -14,44 +14,27 @@ import { ReportService } from 'src/app/infrastructure/services/report.service';
 	styleUrls: ['./report-view.component.scss'],
 })
 export class ReportViewComponent implements OnInit {
-	// reportedId: string = '';
-	report;
-	// report: IReport = {
-	// 	// id? : string;
-	// 	reporterUserId: '',
-	// 	idItemReported: '',
-	// 	activity: 'Comment',
-	// 	reportedUserId: '',
-	// 	reportDate: 0,
-	// 	status: 'In Review',
-	// 	reason: '',
-	// };
-
-	item: IArticle | IComment;
+	report: IReport;
 	article: IArticle;
 	comment: IComment;
-	// comment: IComment = {
-	// 	idUserAuthor: '',
-	// 	idPost: '',
-	// 	commentBody: '',
-	// 	createdAt: 0,
-	// };
+
 
 	constructor(
 		private route: ActivatedRoute,
 		private reportService: ReportService,
 		private articleService: ArticleService,
-		private commentService: CommentsService
+		private commentService: CommentsService,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
-		// console.log(typeof(this.route.snapshot.params['reportId']));
 		this.getReportData(this.route.snapshot.params['reportId']);
 	}
 
 	getReportData(reportedId) {
 		this.reportService.getReportById(reportedId).pipe(
 			map((reportInput: IReport) => {
+				console.log(reportInput)
 				this.report = reportInput;
 				return reportInput;
 			}),
@@ -71,5 +54,21 @@ export class ReportViewComponent implements OnInit {
 				}
 			})
 		).subscribe();
+	}
+
+	removeReportHandler(){
+		console.log(this.route.snapshot.params['reportId']);
+		this.reportService.deleteReport(this.route.snapshot.params['reportId']);
+		this.router.navigate(['admin/reports']);
+	}
+
+	deleteCommentHandler(commentId){
+		this.commentService.deleteComment(commentId);
+		this.removeReportHandler();
+	}
+	
+	deleteArticleHandler(articleId){
+		this.articleService.deletePost(articleId);
+		this.removeReportHandler();
 	}
 }

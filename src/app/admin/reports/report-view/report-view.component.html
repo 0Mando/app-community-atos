@@ -1,24 +1,46 @@
 <section class="body" *ngIf="report">
+	<h1 class="report-title">
+		Report of a {{ report.activity.toLowerCase() }}
+	</h1>
 
-  <h1>Report of a {{ report.activity.toLowerCase() }}</h1>
-  <h4>{{ report.id }}</h4>
+	<section class="report-reason">
+		<p class="report-reason-title">Reason of report:&nbsp;</p>
+		{{ report.reason ? report.reason : "No reason was submitted" }}
+	</section>
 
-  <p>Reason of report: {{ report.reason ? '' + report.reason : 'No reason was submitted' }}</p>
+	<section *ngIf="report.activity == 'Comment' && comment">
+		<p class="report-reason-title">Reported comment:</p>
+    <p class="report-content" [innerHTML]="comment.commentBody"></p>
+		<section class="report">
+			<article
+				class="report-btn"
+				(click)="deleteCommentHandler(report.idItemReported)"
+			>
+				<i class="fa-solid fa-trash"></i>
+				<div class="report-btn-title">Delete</div>
+			</article>
+			<article class="report-btn" (click)="removeReportHandler()">
+				<i class="fa-solid fa-folder-open"></i>
+				<div class="report-btn-title">Remove report</div>
+			</article>
+		</section>
+	</section>
 
-  <!-- <p>{{ item | json }}</p> -->
-  <section *ngIf="report.activity == 'Comment' && comment">
-    <p>Isacomment</p>
-    <p>{{comment.commentBody}}</p>
-    <!-- <app-comment-card
-      [idAuthorComment]="comment.idUserAuthor"
-      [createdAt]="comment.createdAt"
-      [commentBody]="comment.commentBody"
-      [idComment]="report.idItemReported"
-      >
-    </app-comment-card> -->
-  </section>
-  <section>
-    <button>Delete</button>
-    <button>Remove report</button>
-  </section>
+	<section *ngIf="report.activity == 'Post' && article">
+		<p class="report-reason-title">Reported article:</p>
+		<p class="report-content" [innerHTML]="article.content"></p>
+		<section class="report">
+			<article
+				class="report-btn"
+				(click)="deleteArticleHandler(article.id)"
+			>
+				<i class="fa-solid fa-trash"></i>
+				<div class="report-btn-title">Delete</div>
+			</article>
+			<article class="report-btn" (click)="removeReportHandler()">
+				<i class="fa-solid fa-folder-open"></i>
+				<div class="report-btn-title">Remove report</div>
+			</article>
+		</section>
+	</section>
 </section>
