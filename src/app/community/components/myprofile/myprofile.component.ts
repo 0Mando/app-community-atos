@@ -31,6 +31,7 @@ export class MyprofileComponent implements OnInit {
   totalLength: number = 0;
   page: number = 1
   type = ''
+  isProfilePictureUploading = false;
 
   myPosts: any[] = [];
   archivedPosts: any[] = [];
@@ -176,10 +177,12 @@ export class MyprofileComponent implements OnInit {
    async setProfilePhoto(event){
     const file = event.target.files[0];
     this.type = 'profile-pictures'
+    this.isProfilePictureUploading = true;
     const downloadUrl = await this.uploadImage(file);
     const PHOTO = {
       profilePicture: downloadUrl
     }
+    this.isProfilePictureUploading = false;
     this._profileService.saveInfo(this.id, PHOTO)
   }
 

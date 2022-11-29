@@ -26,8 +26,10 @@
             </label>
         </div>
         <img 
-            class="profile__image" 
-            [src]="pfp" alt="">
+        class="profile__image" 
+        [src]="pfp" alt="">
+        <div class="profile__loading" 
+        [ngStyle]="{'display' : isProfilePictureUploading ? 'flex' : 'none'}">Loading...</div>
         <article class="profile__info">
             <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
             <span class="profile__info-description">{{myProfile.birthday | toDate | timeAgo | removeString:'ago'}} | {{ myProfile.work }} </span>
