@@ -129,7 +129,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			readingTime: this.markdownForm.get('readingTimeForm').value,
 			boardId : this.boardId,
 			likes : [],
-			comments : 0
+			comments : 0,
+			views : 0
 		}
 		console.table(this.post);
 
@@ -154,7 +155,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			readingTime: this.markdownForm.get('readingTimeForm').value || 0,
 			boardId : this.boardId,
 			likes : [],
-			comments : 0
+			comments : 0,
+			views : 0
 		}
 		console.table(this.post);
 

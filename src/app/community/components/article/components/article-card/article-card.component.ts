@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/domain/models/user.model';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
@@ -21,7 +22,10 @@ export class ArticleCardComponent implements OnInit {
 		profilePicture: ''
 	};
 
-	constructor(private auth : AuthService) { }
+	constructor(
+		private auth : AuthService,
+		private articleService : ArticleService
+	) { }
 
 	ngOnInit(): void {
 		this.onFetchAuthorData(this.userCreatedId);
@@ -37,6 +41,10 @@ export class ArticleCardComponent implements OnInit {
 				this.userAuthorData.profilePicture = await user.profilePicture;
 			}
 		)
+	}
+
+	onViewArticleCounter(idArticle: string) {
+		this.articleService.counterViews(idArticle);
 	}
 
 }

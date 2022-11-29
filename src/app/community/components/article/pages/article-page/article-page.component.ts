@@ -78,7 +78,8 @@ export class ArticlePageComponent implements OnInit {
 					readingTime: article.readingTime,
 					boardId : article.boardId,
 					likes : article.likes,
-					comments : article.comments
+					comments : article.comments,
+					views : article.views
 				}
 				this.onFetchChannelData(this.currentArticle.channelId)
 				this.onFetchAuthorData(this.currentArticle.userCreatedId)

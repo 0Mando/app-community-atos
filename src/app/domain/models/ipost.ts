@@ -12,4 +12,5 @@ export interface IArticle {
 	boardId : string;
 	likes : string[];
 	comments : number;
+	views : number;
 }

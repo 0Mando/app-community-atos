@@ -93,13 +93,19 @@ export class ArticleService {
 
 	removeLike(articleId: string, userId: string) {
 		return this.afs.collection('posts').doc(articleId).update(
-			{ likes : arrayRemove(userId) }
+			{ likes: arrayRemove(userId) }
 		)
 	}
 
-	getComments(articleId : string, comments : number) {
+	getComments(articleId: string, comments: number) {
 		return this.afs.collection('posts').doc(articleId).update(
-			{ comments : comments }
+			{ comments: comments }
+		)
+	}
+
+	counterViews(articleId: string) {
+		return this.afs.collection('posts').doc(articleId).update(
+			{ views: 1 }
 		)
 	}
 }

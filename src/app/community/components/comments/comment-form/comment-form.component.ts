@@ -26,7 +26,7 @@ export class CommentFormComponent implements OnInit {
 		role: ''
 	};
 
-	private idUser: string = this.authenticationService.currentSessionUserId();
+	private idUser: string;
 
 	constructor(
 		private commentsService: CommentsService,
@@ -44,7 +44,14 @@ export class CommentFormComponent implements OnInit {
 				this.idPost = params['id']
 			}
 		)
-		this.onFetchDataUser();
+		if(this.userLoggin()) {
+			this.idUser = this.authenticationService.currentSessionUserId();
+			this.onFetchDataUser();
+		}
+	}
+
+	userLoggin(): boolean {
+		return this.authenticationService.isLoggedIn;
 	}
 
 	/**

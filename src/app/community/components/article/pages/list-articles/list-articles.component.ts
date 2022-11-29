@@ -42,7 +42,7 @@ export class ListArticlesComponent implements OnInit {
 		private channel : ChannelService
 	) { }
 
-	private currentUserId = this.auth.currentSessionUserId();
+	private currentUserId: string;
 
 	ngOnInit(): void {
 		// Channel origin
@@ -56,11 +56,14 @@ export class ListArticlesComponent implements OnInit {
 		// Display list of articles
 		this.onFetchArticles();
 		// Get user role
-		this.auth.getUserInformation(this.currentUserId).subscribe(
-			(user : User) => {
-				this.userRole = user.userType;
-			}
-		)
+		if(this.userIsLogged()) {
+			this.currentUserId = this.auth.currentSessionUserId();
+			this.auth.getUserInformation(this.currentUserId).subscribe(
+				(user : User) => {
+					this.userRole = user.userType;
+				}
+			)
+		}
 	}
 
 	/**
