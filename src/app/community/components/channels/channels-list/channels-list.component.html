@@ -1,14 +1,27 @@
+<article class="channels__items-header">
+	<h3 class="title">All channels</h3>
+	<form class="list__query" [formGroup]="searchForm">
+		<input 
+			type="text" 
+			class="searchbox"
+			placeholder=" &#xF002;  Search"
+			style="font-family:Arial, FontAwesome"
+			formControlName="search">
+	</form>
+</article>
 <article class="channels__items-list">
 	<div class="print__channels" *ngIf="channels; else loader">
-		<div class="list-item" *ngFor="let channel of channels |
-		paginate : { itemsPerPage: 4, currentPage: pageChannel, id : 'channels' }">
-			<img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}"
-			class="channel__image">
-			<h3 class="channel-title">{{ channel.channelName }}</h3>
-			<a routerLink="/articles/{{ channel.id }}/posts">
-				Show More
-				<i class="fa-solid fa-chevron-right"></i>
-			</a>
+		<div class="print__channels-items">
+			<div class="list-item" *ngFor="let channel of channels | search: searchForm.value.search |
+			paginate : { itemsPerPage: 4, currentPage: pageChannel, id : 'channels' }">
+				<img src="{{ channel.channelImage }}" alt="{{ channel.channelName }}"
+				class="channel__image">
+				<h3 class="channel-title">{{ channel.channelName }}</h3>
+				<a routerLink="/articles/{{ channel.id }}/posts">
+					Show More
+					<i class="fa-solid fa-chevron-right"></i>
+				</a>
+			</div>
 		</div>
 		<pagination-controls class="my-pagination-channels" id="channels"
 		(pageChange)="pageChannel = $event" previousLabel="" nextLabel="">
