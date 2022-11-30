@@ -151,16 +151,6 @@ export class MyprofileComponent implements OnInit {
     this._profileService.saveInfo(this.id, PROFILE)
   }
 
-  onChangeBanner(event){
-    const reader = new FileReader();
-    fromEvent(reader, 'load').subscribe(() => {
-      const img = reader.result;
-      let image = document.querySelector('.banner')! as HTMLElement;
-      image.style.backgroundImage = `url(${img})`;
-    });
-    reader.readAsDataURL(this.file);
-  }
-
   async uploadImage(file : File){
     try {
       console.log(file)
@@ -175,18 +165,23 @@ export class MyprofileComponent implements OnInit {
   }
 
    async setProfilePhoto(event){
-    const file = event.target.files[0];
-    this.type = 'profile-pictures'
-    this.isProfilePictureUploading = true;
-    const downloadUrl = await this.uploadImage(file);
-    const PHOTO = {
-      profilePicture: downloadUrl
-    }
-    this.isProfilePictureUploading = false;
-    this._profileService.saveInfo(this.id, PHOTO)
+    if(event.target.files[0] != undefined){
+      const file = event.target.files[0];
+      this.type = 'profile-pictures'
+      this.isProfilePictureUploading = true;
+      const downloadUrl = await this.uploadImage(file);
+      const PHOTO = {
+        profilePicture: downloadUrl
+      }
+      this.isProfilePictureUploading = false;
+      this._profileService.saveInfo(this.id, PHOTO)
+      }else{
+        console.log("Upload file cancelled")
+      }
   }
 
   async setProfileBanner(event){
+    if(event.target.files[0] != undefined){
     const file = event.target.files[0];
     this.type = 'banner-pictures'
     const downloadUrl = await this.uploadImage(file);
@@ -194,6 +189,9 @@ export class MyprofileComponent implements OnInit {
       bannerImage: downloadUrl
     }
     this._profileService.saveInfo(this.id, PHOTO)
+    }else{
+      console.log("Upload file cancelled")
+    }
   }
 
   addSkill(){
