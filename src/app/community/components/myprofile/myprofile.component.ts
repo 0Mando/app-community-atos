@@ -101,7 +101,9 @@ export class MyprofileComponent implements OnInit {
           
         })
       ))
-    ).subscribe(x => this.isLoading = false)
+    ).subscribe(x => this.isLoading = false);
+
+    this.posts = [];
     
     this.getArchived();
     this.getUnarchived();
@@ -121,7 +123,7 @@ export class MyprofileComponent implements OnInit {
               this.myPosts.push(x.data());
             })
             this.posts = this.myPosts;
-            this.totalLength = this.myPosts.length;
+            this.totalLength = this.posts.length;
           }
         })
       ))

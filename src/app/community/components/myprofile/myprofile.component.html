@@ -103,24 +103,44 @@
                     <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
                 </div>
                 <div *ngIf="posts.length; else noPosts">
-                    <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
+                    <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }">
                         <div class="posts__content-text">  
                             <div class="content-title">{{post.titlePost}}</div>
                             <div class="content-date">Published: {{post.date | timeAgo}}</div>
                         </div>
                         <div class="posts__content-util">
-                            <div class="content-misc">
+                            <div class="content-misc" *ngIf="post.likes; else noLikes">
                                 <i class="fa-solid fa-heart"></i>
                                 {{post.likes.length}}
                             </div>
-                            <div class="content-misc">
+                            <ng-template #noLikes>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-heart"></i>
+                                    0
+                                </div>
+                            </ng-template>
+                            
+                            <div class="content-misc" *ngIf="post.comments; else noComments">
                                 <i class="fa-solid fa-comment"></i>
                                 {{post.comments}}
                             </div>
-                            <div class="content-misc">
+                            <ng-template #noComments>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-comment"></i>
+                                    0
+                                </div>
+                            </ng-template>
+
+                            <div class="content-misc" *ngIf="post.visulizations; else noSeens">
                                 <i class="fa-solid fa-eye"></i>
                                 {{post.visulizations}}
                             </div>
+                            <ng-template #noSeens>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-eye"></i>
+                                    0
+                                </div>
+                            </ng-template>
                             <i class="fa-solid fa-gear"></i>
                         </div>
                     </div>
