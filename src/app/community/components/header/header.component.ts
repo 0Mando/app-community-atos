@@ -14,6 +14,7 @@ import { BoardService } from 'src/app/infrastructure/services/board.service';
 export class HeaderComponent implements OnInit {
 
 	currentUser: User;
+	itExists: boolean;
 
 	boards: Board[];
 	profiles: string[] = [
@@ -61,6 +62,8 @@ export class HeaderComponent implements OnInit {
 					this.currentUser = {
 						...data.payload.data()
 					}
+					this.itExists = data.payload.exists
+					
 				})
 			))
 		).subscribe();
