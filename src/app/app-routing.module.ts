@@ -1,3 +1,4 @@
+import { ProfileGuard } from './infrastructure/guards/profile.guard';
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { ProfileComponent } from './community/components/profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -45,6 +46,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'myprofile',
+		canActivate : [ProfileGuard],
 		component: MyprofileComponent
   	},
 	{
