@@ -238,7 +238,8 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           channelImage: this.imageUrl,
           parentBoard: this.newForm.value.parent,
           channelCreation: Date.now(),
-          channelMods: this.modsID
+          channelMods: this.modsID,
+          articles: 0,
         }
     }
 
