@@ -19,6 +19,10 @@ export class MyprofileService {
     return this.firebase.collection('Users').doc(id).update(profile);
   }
 
+  // updateProfile(id: string, photoType: string): Promise<any>{
+  //   return this.firebase.collection('Users').doc(id).update(photoType);
+  // }
+
   getInfo(id: string): Observable<any> {
     return this.firebase.collection('Users').doc(id).snapshotChanges();
   }

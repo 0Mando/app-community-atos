@@ -1,7 +1,7 @@
 .home{
     width: calc(100% - 200px);
     margin-left: 200px;
-    height: 100vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 3fr 1fr;
     background: #FAFBFE;
@@ -9,7 +9,7 @@
     &__left{
         display: flex;
         flex-direction: column;
-        padding: 40px;
+        padding: 20px;
 
         &-header{
             display: flex;
@@ -48,7 +48,7 @@
             }
         }
 
-        &-reports{
+        &-reports, .comment-reports{
             display: flex;
             flex-direction: column;
             align-items: center;

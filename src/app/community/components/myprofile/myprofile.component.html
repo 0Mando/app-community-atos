@@ -1,10 +1,39 @@
 <main *ngIf="!isLoading; else loader">
-    <img class="banner" [src]="banner" alt="">
+    <!-- <div class="profile__edit-banner"> -->
+        <div class="banner">
+            <img class="banner" [src]="banner" alt="">
+            <div class="banner-edit">
+                <input 
+                    type="file" 
+                    name="profileBanner"
+                    id="profileBanner"
+                    accept="image/jpeg, image/png, image/jpg"
+                    (change)="setProfileBanner($event)"
+                    >
+                    <label for="profileBanner">
+                        <i class="fa-solid fa-pen"></i>
+                    </label>
+                </div>
+        </div>
     <section class="profile">
-        <img
-            class="profile__image"
-            [src]="pfp" alt="">
-        <!-- <div class="profile__image"></div> -->
+        <button (click)="deleteMyUser()" class="profile__delete" title="Delete Profile"><i class="fa-solid fa-trash"></i></button>
+        <div class="profile__image">
+            <img 
+                class="profile__image-img" 
+                [src]="pfp" alt=""><div class="profile__loading" 
+                [ngStyle]="{'display' : isProfilePictureUploading ? 'flex' : 'none'}">Loading...</div>
+                <div class="profile__image-edit">
+                    <input 
+                        type="file" 
+                        name="profilePicture"
+                        id="profilePicture"
+                        accept="image/jpeg, image/png, image/jpg"
+                        (change)="setProfilePhoto($event)">
+                    <label for="profilePicture">
+                        <i class="fa-solid fa-pen"></i>
+                    </label>
+                </div>
+        </div>
         <article class="profile__info">
             <h2 class="profile__info-name">{{myProfile.name | firstword}}</h2>
             <span class="profile__info-description">{{myProfile.birthday | toDate | timeAgo | removeString:'ago'}} | {{ myProfile.work }} </span>
@@ -74,25 +103,44 @@
                     <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
                 </div>
                 <div *ngIf="posts.length; else noPosts">
-                    <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }; let i = index">
-                        <div class="posts__content-text">
+                    <div class="posts__content-list" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: page }">
+                        <div class="posts__content-text">  
                             <div class="content-title">{{post.titlePost}}</div>
                             <div class="content-date">Published: {{post.date | timeAgo}}</div>
                         </div>
                         <div class="posts__content-util">
-                            <div class="content-misc">
+                            <div class="content-misc" *ngIf="post.likes; else noLikes">
                                 <i class="fa-solid fa-heart"></i>
                                 {{post.likes.length}}
                             </div>
-                            <div class="content-misc">
+                            <ng-template #noLikes>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-heart"></i>
+                                    0
+                                </div>
+                            </ng-template>
+
+                            <div class="content-misc" *ngIf="post.comments; else noComments">
                                 <i class="fa-solid fa-comment"></i>
                                 {{post.comments}}
                             </div>
-                            <div class="content-misc">
+                            <ng-template #noComments>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-comment"></i>
+                                    0
+                                </div>
+                            </ng-template>
+
+                            <div class="content-misc" *ngIf="post.visulizations; else noSeens">
                                 <i class="fa-solid fa-eye"></i>
                                 {{post.views}}
                             </div>
-							<!-- TODO : Recuperar el ID del post en el servicio -->
+                            <ng-template #noSeens>
+                                <div class="content-misc">
+                                    <i class="fa-solid fa-eye"></i>
+                                    0
+                                </div>
+                            </ng-template>
                             <i class="fa-solid fa-gear" (click)="onArticleSettings(post.id)"></i>
                         </div>
                     </div>

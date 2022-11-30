@@ -1,3 +1,4 @@
+import { ProfileGuard } from './infrastructure/guards/profile.guard';
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { ProfileComponent } from './community/components/profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { LandingPageComponent } from './community/components/landing-page/landin
 import { LoginComponent } from './community/components/login/login.component';
 import { RegisterComponent } from './community/components/register/register.component';
 import { ErrorComponent } from './community/components/error/error.component';
+import { ReportsComponent } from './admin/reports/reports.component';
 import { ChannelsEmptyComponent } from './community/shared/channels-empty/channels-empty.component';
 import { ListArticlesComponent } from './community/components/article/pages/list-articles/list-articles.component';
 import { CreateArticleComponent } from './community/components/article/pages/create-article/create-article.component';
@@ -16,7 +18,6 @@ import { ArticleGuard } from './infrastructure/guards/article.guard';
 import { ArticleGuardService } from './infrastructure/services/article-guard.service';
 import { CrendentialsGuard } from './infrastructure/guards/crendentials.guard';
 import { ProfileGuard } from './infrastructure/guards/profile.guard';
-
 
 const routes: Routes = [
 	{
@@ -47,8 +48,9 @@ const routes: Routes = [
 	},
 	{
 		path: 'myprofile',
+		canActivate : [ProfileGuard],
 		component: MyprofileComponent
-  	},
+  },
 	{
 		path : 'articles/:channelId/posts',
 		component : ListArticlesComponent

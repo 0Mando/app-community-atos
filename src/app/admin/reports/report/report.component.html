@@ -1,0 +1,26 @@
+<div class="reports__list-user">
+	<div class="reports__list-name">
+		<img
+			class="reports-pfp"
+			src={{reporterPhoto}}
+			alt=""
+		/>{{ reporterName }}
+	</div>
+	<div class="reports__list-activity">
+		<div class="reports__title admin">{{ report.activity }}</div>
+	</div>
+	<div class="reports__list-name">
+		<img
+			class="reports-pfp"
+			src={{reportedPhoto}}
+			alt=""
+		/>{{ reportedName }}
+	</div>
+	<div class="reports__list-karma">{{ report.reportDate | date }}</div>
+	<div class="reports__list-status">
+		<div class="reports__title admin">{{ report.status }}</div>
+	</div>
+	<div class="resolve-btn" (click)="actOnReport(report)">
+		Resolve
+	</div>
+</div>

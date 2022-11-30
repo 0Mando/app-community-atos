@@ -1,6 +1,22 @@
 .profile{
     width: 100%;
     height: 185px;
+    position: relative;
+
+    &__delete{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        right: 0;
+        margin: 5px 6px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        color: white;
+        background: red;
+        display: grid;
+        place-items: center;
+    }
 
     &__actions{
         position: absolute;
@@ -29,6 +45,23 @@
         }
     }
 
+    &__loading{
+        position: absolute;
+        display: none;
+        padding: 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: transparentize($color: skyblue, $amount: 0.5);
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+
     &__image{
         position: relative;
         display: flex;
@@ -40,9 +73,29 @@
         top: -100px;
         margin: 0 auto;
         box-shadow: 0 0 0 6px grey;
-        object-fit: cover;
-        // background-image: url('https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-        align-items: flex-end;
+        
+
+        &-edit{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 1;
+			border: none;
+			color: green;
+            background: #e3e2e2;
+            border-radius: 80%;
+			width: 30px;
+			height: 30px;
+            display: grid;
+            place-items: center;
+        }
+
+        &-img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
         &-check{
             position: relative;

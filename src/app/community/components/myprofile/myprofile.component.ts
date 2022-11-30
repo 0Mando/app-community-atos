@@ -5,6 +5,8 @@ import { MyprofileService } from '../../../infrastructure/services/myprofile.ser
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,9 +27,13 @@ export class MyprofileComponent implements OnInit {
   id: string;
   pfp: string;
   banner: string;
-
+  imageUrl = ''
+  file?: File;
+  newForm: FormGroup;
   totalLength: number = 0;
   page: number = 1
+  type = ''
+  isProfilePictureUploading = false;
 
   myPosts: any[] = [];
   archivedPosts: any[] = [];
@@ -42,8 +48,33 @@ export class MyprofileComponent implements OnInit {
       private _profileService: MyprofileService,
       private _authService: AuthService,
       private _articleService: ArticleService,
-	  private router : Router
-	) {}
+      private router : Router,
+      private storage: Storage) {}
+
+  deleteMyUser(){
+    Confirm.show(
+      'Delete Profile',
+      'Are you sure you want to delete your profile? This action is irreversible',
+      'Yes',
+      'No, take me back',
+      () => {
+        this._authService.deleteUser(this._authService.auth.currentUser.uid);
+        this._authService.auth.currentUser.delete().then(() => {
+          Notify.success('User deleted. Signing Out');
+          this._authService.logout();
+		      this.router.navigate(['sign-in']);
+        })
+      },
+      () => {
+        Notify.info('Action Cancelled')
+      },
+      {
+        titleColor: '#FF0000',
+        okButtonBackground: '#FF0000',
+        cancelButtonBackground: '#0195ff'
+      }
+    )
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -68,11 +99,13 @@ export class MyprofileComponent implements OnInit {
               'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
             })
           }
-          this.isLoading = false;
+          
         })
       ))
-    ).subscribe()
+    ).subscribe(x => this.isLoading = false);
 
+    this.posts = [];
+    
     this.getArchived();
     this.getUnarchived();
   }
@@ -91,8 +124,7 @@ export class MyprofileComponent implements OnInit {
               this.myPosts.push({...x.data(), id : x.id});
             })
             this.posts = this.myPosts;
-			console.table(this.posts);
-            this.totalLength = this.myPosts.length;
+            this.totalLength = this.posts.length;
           }
         })
       ))
@@ -147,6 +179,49 @@ export class MyprofileComponent implements OnInit {
     }
 
     this._profileService.saveInfo(this.id, PROFILE)
+  }
+
+  async uploadImage(file : File){
+    try {
+      console.log(file)
+      const imgRef = ref(this.storage, `${this.type}/${file.lastModified}`)
+      const res = await uploadBytes(imgRef, file);
+      const downloadUrl = await getDownloadURL(imgRef)
+      return downloadUrl;
+    } catch (error) {
+      console.error(error);
+      return '';
+    }
+  }
+
+   async setProfilePhoto(event){
+    if(event.target.files[0] != undefined){
+      const file = event.target.files[0];
+      this.type = 'profile-pictures'
+      this.isProfilePictureUploading = true;
+      const downloadUrl = await this.uploadImage(file);
+      const PHOTO = {
+        profilePicture: downloadUrl
+      }
+      this.isProfilePictureUploading = false;
+      this._profileService.saveInfo(this.id, PHOTO)
+      }else{
+        console.log("Upload file cancelled")
+      }
+  }
+
+  async setProfileBanner(event){
+    if(event.target.files[0] != undefined){
+    const file = event.target.files[0];
+    this.type = 'banner-pictures'
+    const downloadUrl = await this.uploadImage(file);
+    const PHOTO = {
+      bannerImage: downloadUrl
+    }
+    this._profileService.saveInfo(this.id, PHOTO)
+    }else{
+      console.log("Upload file cancelled")
+    }
   }
 
   addSkill(){

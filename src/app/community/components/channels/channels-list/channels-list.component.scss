@@ -1,15 +1,46 @@
 @import '../../../../../sass/variables';
 
-.channels__items-list{
+.print__channels{
     border-radius: 10px;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     box-shadow: 5px 10px 18px 10px rgba(220, 220, 220, 0.856);
+    height: 365px;
+
+    &-items{
+        display: flex;
+        flex-direction: column;
+        
+    }
+}
+
+.channels__items-header{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list__query{
+    width: 50%;
+
+    input {
+        border: none;
+        width: 100%;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 1px lightgrey;
+    }
+}
+.loader{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
 
 .list-item {
     margin: 10px 25px;
-    height: 25%;
     display: flex;
 
      .channel-title{
@@ -49,7 +80,7 @@
         align-self: center;
         cursor: pointer;
         margin-left: auto;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         width: 120px;
 		text-decoration: none;
 		color: $description-text;
