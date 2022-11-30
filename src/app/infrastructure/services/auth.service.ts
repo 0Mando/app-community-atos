@@ -3,6 +3,7 @@ import { switchMap } from 'rxjs/operators'
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
 import { collection, query, where } from "firebase/firestore";
 

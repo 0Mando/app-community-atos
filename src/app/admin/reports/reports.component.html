@@ -1,0 +1,37 @@
+<main class="reports">
+	<section class="reports__filter">
+		<!-- <input
+			type="text"
+			placeholder=" &#xF002; Name or id"
+			name="filter"
+			id="filter"
+			style="font-family: Arial, FontAwesome"
+			class="reports__filter-filter"
+		/>
+		<select name="selection" id="selection" class="reports__filter-select">
+			<option value="none" selected disabled hidden>Action Status</option>
+			<option value="name">Desconozco</option>
+			<option value="email">Un</option>
+			<option value="title">Poco</option>
+		</select> -->
+	</section>
+	<section class="reports__list">
+		<div class="reports__list-menu">
+			<p class="reports__quantity">Reports ({{ reports.length }})</p>
+			<!-- <i class="fa-solid fa-gear"></i> -->
+		</div>
+
+		<div class="reports__list-header">
+			<div class="reports__list-reporter">Reporter</div>
+			<div class="reports__list-activity" (click)="sortHandler('Activity')">Activity</div>
+			<div class="reports__list-reporter">Reported User</div>
+			<div class="reports__list-karma" (click)="sortHandler('Date')">Report Date</div>
+			<div class="reports__list-state">Status</div>
+			<div class="reports__list-options"></div>
+		</div>
+
+		<div class="reports__list-table" *ngFor="let report of reports | sortReports:sortOrder:sortColumn">
+			<app-report [report]="report"></app-report>
+		</div>
+	</section>
+</main>
