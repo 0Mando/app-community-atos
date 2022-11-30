@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreventProfileGuard implements CanActivate {
+
+	currentUserId: string;
 
 	constructor(
 		private auth: AuthService,
@@ -21,9 +23,15 @@ export class PreventProfileGuard implements CanActivate {
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
 	Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		return this.auth.isLoggedIn &&
-			route.params['userId'] === this.auth.currentSessionUserId() ?
-				this.router.navigate(['myprofile']) : true;
+		return this.auth.getCurrentUser().pipe(
+			map(userId => {
+				if(userId.uid === route.params['userId']) {
+					this.router.navigate(['myprofile'])
+					return false;
+				} else {
+					return true;
+				}
+			})
+		)
 	}
-
 }
