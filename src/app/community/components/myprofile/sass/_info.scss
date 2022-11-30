@@ -12,20 +12,21 @@
     &__items{
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         &-edit{
             border-radius: 50%;
             width: 30px;
             height: 30px;
-            position: relative;
+            position: absolute;
+            right: 0;
             cursor: pointer;
             border: none;
             color: red;
             margin-top: -25px;
             background: #e3e2e2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            place-items: center;
 
             .skills{
                 position: absolute;
