@@ -5,6 +5,7 @@ import { MyprofileService } from '../../../infrastructure/services/myprofile.ser
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Router } from '@angular/router';
 
@@ -26,9 +27,13 @@ export class MyprofileComponent implements OnInit {
   id: string;
   pfp: string;
   banner: string;
-
+  imageUrl = ''
+  file?: File;
+  newForm: FormGroup;
   totalLength: number = 0;
   page: number = 1
+  type = ''
+  isProfilePictureUploading = false;
 
   myPosts: any[] = [];
   archivedPosts: any[] = [];
@@ -43,7 +48,8 @@ export class MyprofileComponent implements OnInit {
       private _profileService: MyprofileService,
       private _authService: AuthService,
       private _articleService: ArticleService,
-      private router : Router) {}
+      private router : Router,
+      private storage: Storage) {}
 
   deleteMyUser(){
     Confirm.show(
@@ -170,6 +176,49 @@ export class MyprofileComponent implements OnInit {
     }
 
     this._profileService.saveInfo(this.id, PROFILE)
+  }
+
+  async uploadImage(file : File){
+    try {
+      console.log(file)
+      const imgRef = ref(this.storage, `${this.type}/${file.lastModified}`)
+      const res = await uploadBytes(imgRef, file);
+      const downloadUrl = await getDownloadURL(imgRef)
+      return downloadUrl;
+    } catch (error) {
+      console.error(error);
+      return '';
+    }
+  }
+
+   async setProfilePhoto(event){
+    if(event.target.files[0] != undefined){
+      const file = event.target.files[0];
+      this.type = 'profile-pictures'
+      this.isProfilePictureUploading = true;
+      const downloadUrl = await this.uploadImage(file);
+      const PHOTO = {
+        profilePicture: downloadUrl
+      }
+      this.isProfilePictureUploading = false;
+      this._profileService.saveInfo(this.id, PHOTO)
+      }else{
+        console.log("Upload file cancelled")
+      }
+  }
+
+  async setProfileBanner(event){
+    if(event.target.files[0] != undefined){
+    const file = event.target.files[0];
+    this.type = 'banner-pictures'
+    const downloadUrl = await this.uploadImage(file);
+    const PHOTO = {
+      bannerImage: downloadUrl
+    }
+    this._profileService.saveInfo(this.id, PHOTO)
+    }else{
+      console.log("Upload file cancelled")
+    }
   }
 
   addSkill(){
