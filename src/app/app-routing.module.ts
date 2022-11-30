@@ -1,4 +1,3 @@
-import { ProfileGuard } from './infrastructure/guards/profile.guard';
 import { MyprofileComponent } from './community/components/myprofile/myprofile.component';
 import { ProfileComponent } from './community/components/profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +17,7 @@ import { ArticleGuard } from './infrastructure/guards/article.guard';
 import { ArticleGuardService } from './infrastructure/services/article-guard.service';
 import { CrendentialsGuard } from './infrastructure/guards/crendentials.guard';
 import { ProfileGuard } from './infrastructure/guards/profile.guard';
+import { PreventProfileGuard } from './infrastructure/guards/prevent-profile.guard';
 
 const routes: Routes = [
 	{
@@ -44,7 +44,7 @@ const routes: Routes = [
 	{
 		path: 'profile/:userId',
 		component: ProfileComponent,
-		canActivate : [ProfileGuard]
+		canActivate : [PreventProfileGuard]
 	},
 	{
 		path: 'myprofile',
