@@ -87,10 +87,11 @@ export class MyprofileComponent implements OnInit {
       switchMap(data => this._articleService.getUserArticles(data, false).pipe(
         map(data => {
           if(data){
-            data.docs.forEach(x => {
-              this.myPosts.push(x.data());
+            data.docs.forEach((x:any) => {
+              this.myPosts.push({...x.data(), id : x.id});
             })
             this.posts = this.myPosts;
+			console.table(this.posts);
             this.totalLength = this.myPosts.length;
           }
         })
@@ -108,8 +109,8 @@ export class MyprofileComponent implements OnInit {
       switchMap(data => this._articleService.getUserArticles(data, true).pipe(
         map(data => {
           if(data){
-            data.docs.forEach(x => {
-              this.archivedPosts.push(x.data());
+            data.docs.forEach((x:any) => {
+              this.archivedPosts.push({...x.data(), id : x.id});
             })
           }
         })
@@ -240,8 +241,6 @@ export class MyprofileComponent implements OnInit {
   }
 
   onArticleSettings(articleId: string) {
-	console.log('-------> '+articleId);
-
 	this.router.navigate(['article/'+articleId]);
   }
 }
