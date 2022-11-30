@@ -92,10 +92,10 @@ export class MyprofileComponent implements OnInit {
               'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
             })
           }
-          this.isLoading = false;
+          
         })
       ))
-    ).subscribe()
+    ).subscribe(x => this.isLoading = false)
     
     this.getArchived();
     this.getUnarchived();
