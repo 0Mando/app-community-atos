@@ -1,3 +1,4 @@
+import { first } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Report } from 'notiflix';
@@ -96,7 +97,7 @@ export class ListArticlesComponent implements OnInit {
 	 * Fetch the articles from the channel.
 	 */
 	onFetchArticles() {
-		this.article.displayPost<IArticle>(this.channelId).subscribe(
+		this.article.displayPost<IArticle>(this.channelId).pipe(first()).subscribe(
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;

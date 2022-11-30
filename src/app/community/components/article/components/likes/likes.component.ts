@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 })
 export class LikesComponent implements OnInit {
 
-	@Input() counter: number;
+	counter: number;
 	classNameLikeButton: string = 'likes__heart';
 	@Input() referenceArticleId: string;
 
@@ -24,6 +24,7 @@ export class LikesComponent implements OnInit {
 		this.articleService.getArticleById<IArticle>(this.referenceArticleId)
 			.subscribe(
 				(article: IArticle) => {
+					this.counter = article.likes.length;
 					if (this.auth.isLoggedIn) {
 						this.classNameLikeButton = article.likes.includes(
 							this.auth.currentSessionUserId()
