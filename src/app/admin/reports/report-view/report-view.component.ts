@@ -34,7 +34,6 @@ export class ReportViewComponent implements OnInit {
 	getReportData(reportedId) {
 		this.reportService.getReportById(reportedId).pipe(
 			map((reportInput: IReport) => {
-				console.log(reportInput)
 				this.report = reportInput;
 				return reportInput;
 			}),
@@ -57,7 +56,6 @@ export class ReportViewComponent implements OnInit {
 	}
 
 	removeReportHandler(){
-		console.log(this.route.snapshot.params['reportId']);
 		this.reportService.deleteReport(this.route.snapshot.params['reportId']);
 		this.router.navigate(['admin/reports']);
 	}

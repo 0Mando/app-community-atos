@@ -1,7 +1,8 @@
 .home{
     width: calc(100% - 200px);
     margin-left: 200px;
-    height: 100%;
+    height: 100vh;
+    overflow-y: hidden;
     display: grid;
     grid-template-columns: 3fr 1fr;
     background: #FAFBFE;
@@ -52,6 +53,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        &-reports{
+            justify-content: center;
+        }
+
+        .comment-reports{
+            justify-content: center;
         }
     }
 }

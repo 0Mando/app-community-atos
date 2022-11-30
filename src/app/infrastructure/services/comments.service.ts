@@ -54,4 +54,8 @@ export class CommentsService {
 	getCommentById(idComment : string) {
 		return this.afs.collection('comments').doc(idComment).valueChanges();
 	}
+
+	readComments(){
+		return this.afs.collection('comments').snapshotChanges();
+	}
 }

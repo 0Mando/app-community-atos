@@ -45,13 +45,13 @@
             </div>
             <div *ngFor="let card of commentReport" class="comment-reports">
                 <div class="reports__content">
-                    <div class="reports__content-card">
-                        <img class="card__image" src="https://images.unsplash.com/photo-1664575601711-67110e027b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
+                    <div class="reports__content-card" [routerLink]="['/admin/report',card.id]">
+                        <img class="card__image" src="{{ card.idItemReported | parentComment | async }}" alt="">
                         <div class="card__title">
                             {{card.activity}} Report
                         </div>
                         <div class="card__description">
-                            {{ card.reason }}
+                            {{ card.reason}}
                         </div>
                     </div>
                 </div>

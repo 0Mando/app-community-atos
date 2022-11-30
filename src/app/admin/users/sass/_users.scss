@@ -44,11 +44,11 @@
         }
 
         &-email{
-            width: 25%;
+            width: 23%;
         }
 
         &-title{
-            width: 15%;
+            width: 17%;
 
             .admin{
                 background: rgb(52, 255, 52);
@@ -70,6 +70,7 @@
             .disabled{
                 background: rgb(242, 67, 67);
                 color: white;
+                cursor: pointer;
             }
         }
 

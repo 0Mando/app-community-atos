@@ -119,4 +119,8 @@ export class ArticleService {
 		);
 		return postsCollection.valueChanges({ idField: 'id' });
 	}
+
+	readPosts(){
+		return this.afs.collection('posts').snapshotChanges();
+	}
 }

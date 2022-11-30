@@ -8,6 +8,7 @@ import { SearchFilterPipe } from './../infrastructure/pipes/search-filter.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParentNamePipe } from '../infrastructure/pipes/parent-name.pipe';
+import { ParentCommentPipe } from '../infrastructure/pipes/parent-comment.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ParentNamePipe } from '../infrastructure/pipes/parent-name.pipe';
     TimeAgoPipe,
     RemoveStringPipe,
     ParentNamePipe,
-    ParentImagePipe],
+    ParentImagePipe,
+    ParentCommentPipe,],
   exports: [
     SearchFilterPipe,
     SearchPipe, 
@@ -27,7 +29,8 @@ import { ParentNamePipe } from '../infrastructure/pipes/parent-name.pipe';
     TimeAgoPipe,
     RemoveStringPipe,
     ParentNamePipe,
-    ParentImagePipe],
+    ParentImagePipe,
+    ParentCommentPipe,],
   imports: [
     CommonModule
   ]

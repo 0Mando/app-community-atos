@@ -22,13 +22,14 @@ export class HomeComponent implements OnInit {
     private _authService: AuthService) { }
 
   ngOnInit(): void {
-    this.reports = [];
-    this.articleReport = [];
-    this.commentReport = [];
 
     this._reportService.readReportsByType().subscribe(data => {
-      data.forEach(x => {
-        this.reports.push(x.payload.doc.data());
+      this.reports = [];
+      this.articleReport = [];
+      this.commentReport = [];
+
+      data.forEach((x: any) => {
+        this.reports.push({id: x.payload.doc.id, ...x.payload.doc.data()});
       })
 
       this.reports.forEach(y => {
