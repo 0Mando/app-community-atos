@@ -1,5 +1,5 @@
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
-import { fromEvent, map, switchMap } from 'rxjs';
+import { fromEvent, map, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { MyprofileService } from '../../../infrastructure/services/myprofile.service';
 import { Component, OnInit} from '@angular/core';
@@ -183,7 +183,6 @@ export class MyprofileComponent implements OnInit {
 
   async uploadImage(file : File){
     try {
-      console.log(file)
       const imgRef = ref(this.storage, `${this.type}/${file.lastModified}`)
       const res = await uploadBytes(imgRef, file);
       const downloadUrl = await getDownloadURL(imgRef)
@@ -206,7 +205,7 @@ export class MyprofileComponent implements OnInit {
       this.isProfilePictureUploading = false;
       this._profileService.saveInfo(this.id, PHOTO)
       }else{
-        console.log("Upload file cancelled")
+        Notify.failure("Upload file cancelled");
       }
   }
 
@@ -220,7 +219,7 @@ export class MyprofileComponent implements OnInit {
     }
     this._profileService.saveInfo(this.id, PHOTO)
     }else{
-      console.log("Upload file cancelled")
+      Notify.failure("Upload file cancelled");
     }
   }
 

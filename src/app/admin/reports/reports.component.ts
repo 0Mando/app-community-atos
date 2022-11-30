@@ -29,7 +29,6 @@ export class ReportsComponent implements OnInit {
 	private getReportsList() {
 		this.reportService.getReportList().subscribe((reports) => {
 			this.reports = [];
-			console.log(this.reports);
 			reports.forEach((report) => {
 				this.reports.push({
 					id: report.id,

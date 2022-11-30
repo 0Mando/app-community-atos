@@ -15,7 +15,6 @@ export class ReportService {
 	}
 
 	createReport(report : IReport) {
-		console.log('Creating report');
 		let existingReportBoolean = false;
 		this.getReportList().subscribe((reports) => {
 			reports.forEach((existingReport) => {

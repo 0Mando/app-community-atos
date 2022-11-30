@@ -17,7 +17,6 @@ export class ArticleService {
 	 * @returns A new document on Firebase.
 	 */
 	createPost(postData: IArticle) {
-		console.log('Creating post');
 		const newPost = this.afs.collection('posts');
 		return newPost.doc(this.afs.createId()).set(postData);
 	}

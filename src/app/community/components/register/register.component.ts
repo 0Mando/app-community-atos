@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
 		this.isLoading = false;
 
 		if(response){
-			console.log('Created user');
 			const path = 'Users';
 			const id = response.user.uid;
 			this.authenticationService.createDocument(this.user, path, id);

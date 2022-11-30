@@ -57,7 +57,6 @@ export class AuthService {
 	}
 
 	getUserById<User>() {
-		console.log('Get data User');
 		const userDocument = this.afs.collection<User>('Users').doc(this.userData.uid);
 		return userDocument.valueChanges({ idField : 'id' });
 	}

@@ -6,8 +6,10 @@
 		<tab tabTitle="Editor" class="tab">
 			<form [formGroup]="markdownForm">
 				<input type="text" class="post__title-post"
-					placeholder="Post title..." formControlName="titlePostForm"
-					[(ngModel)]="titlePost">
+					placeholder="Post title..." 
+					formControlName="titlePostForm"
+					>
+					<!-- [(ngModel)]="titlePost" -->
 				<span class="alert-danger"
 					*ngIf="!markdownForm.get('titlePostForm').valid &&
 					markdownForm.get('titlePostForm').touched">
@@ -17,7 +19,8 @@
 				<input type="text" class="post__description-post"
 					placeholder="Add a description of the post"
 					formControlName="descriptionContentForm"
-					[(ngModel)]="descriptionContent">
+					>
+					<!-- [(ngModel)]="descriptionContent" -->
 				<span class="alert-danger"
 					*ngIf="!markdownForm.get('descriptionContentForm').valid &&
 					markdownForm.get('descriptionContentForm').touched">
@@ -25,7 +28,9 @@
 				</span>
 
 				<input type="number" class="post__description-post" placeholder="Time to read"
-					formControlName="readingTimeForm" [(ngModel)]="readingTime">
+					formControlName="readingTimeForm" 
+					>
+					<!-- [(ngModel)]="readingTime" -->
 				<span class="alert-danger"
 					*ngIf="!markdownForm.get('readingTimeForm').valid &&
 					markdownForm.get('readingTimeForm').touched">

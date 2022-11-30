@@ -119,7 +119,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	 * Publish a new article.
 	 */
 	onSubmitArticle(): void {
-		console.log('--- Submit Article ---');
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
@@ -135,7 +134,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			comments : 0,
 			views : 0
 		}
-		console.table(this.post);
 
 		this.sendArticle(this.post);
 	}
@@ -144,7 +142,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	 * Archive the current article.
 	 */
 	onSaveDraft(): void {
-		console.log('--- Save draft ---');
 		this.post = {
 			userCreatedId: this.authenticationService.currentSessionUserId(),
 			date: this.currentDate.getTime(),
@@ -161,7 +158,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 			comments : 0,
 			views : 0
 		}
-		console.table(this.post);
 
 		this.sendArticle(this.post);
 	}

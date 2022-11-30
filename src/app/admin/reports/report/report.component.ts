@@ -57,7 +57,6 @@ export class ReportComponent implements OnInit {
 	}
 
 	actOnReport(report): void {
-		console.log(report);
 		let reportedItem = report.id;
 		// this.getReportUrl(report.activity, reportedItem).then((value)=>{
 		// 	let aux = value;

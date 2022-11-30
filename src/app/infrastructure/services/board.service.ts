@@ -17,7 +17,6 @@ export class BoardService {
 	 * @returns Insert a new board on data base
 	 */
 	createBoard(boardData : Board){
-		console.log('Creating board...');
 		const newBoard = this.afs.collection('boards');
 		return newBoard.doc(this.afs.createId()).set(boardData);
 	}

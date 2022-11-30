@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 import { CommentsService } from 'src/app/infrastructure/services/comments.service';
 import { ReportService } from 'src/app/infrastructure/services/report.service';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Notify } from 'notiflix';
 
 @Component({
 	selector: 'app-button-actions',
@@ -40,11 +41,13 @@ export class ButtonActionsComponent implements OnInit {
 	ngOnInit(): void {
 		this.commentsService.getCommentById(this.idCommentReference).subscribe(
 			(comment: IComment) => {
-				this.currentComment = {
-					idUserAuthor: comment.idUserAuthor,
-					idPost: comment.idPost,
-					commentBody: comment.commentBody,
-					createdAt: comment.createdAt
+				if(comment){
+					this.currentComment = {
+						idUserAuthor: comment.idUserAuthor,
+						idPost: comment.idPost,
+						commentBody: comment.commentBody,
+						createdAt: comment.createdAt
+					}
 				}
 			}
 		)
@@ -66,7 +69,7 @@ export class ButtonActionsComponent implements OnInit {
 		this.commentsService.deleteComment(this.idCommentReference).catch(
 			error => console.log('An error ocurred : ' + error)
 		)
-		alert('Deleting');
+		Notify.success('Comment Deleted')
 	}
 
 	onReport(): void {

@@ -20,7 +20,6 @@ export class ChannelService {
 	 * @returns Insert a new channel on data base
 	 */
 	createChannel(channelData : Channel){
-		console.log('Creating channel...');
 		const newChannel = this.afs.collection('channels');
 		return newChannel.doc(this.afs.createId()).set(channelData);
 	}
@@ -48,12 +47,4 @@ export class ChannelService {
 	updateChannel(id: string, num: number): Promise<any>{
 		return this.afs.collection("channels").doc(id).update({articles: num});
 	}
-
-	// channelExists(parentBoard : string) {
-	// 	const collection = this.afs.collection<Channel>(
-	// 		'channels',
-	// 		ref => ref.where('parentBoard', '==', parentBoard)
-	// 	)
-	// 	console.log(collection.valueChanges());
-	// }
 }

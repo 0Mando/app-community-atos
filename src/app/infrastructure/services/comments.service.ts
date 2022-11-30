@@ -16,7 +16,6 @@ export class CommentsService {
 	 * @returns A new document on Firestore
 	 */
 	createComment(commentData : IComment) {
-		console.log('Creating a comment');
 		const newComment = this.afs.collection('comments');
 		return newComment.doc(this.afs.createId()).set(commentData);
 	}

@@ -1,4 +1,4 @@
-import { first, Subscription } from 'rxjs';
+import { first, Subscription, take } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Report } from 'notiflix';
@@ -79,7 +79,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
 		//* Get user role
 		if (this.userIsLogged()) {
 			this.currentUserId = this.auth.currentSessionUserId();
-			this.auth.getUserInformation(this.currentUserId).subscribe(
+			this.auth.getUserInformation(this.currentUserId).pipe(take(1)).subscribe(
 				(user: User) => {
 					this.userRole = user.userType;
 					//* Permissions
@@ -88,7 +88,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
 							{ queryParams: { channelId: this.channelId } });
 					} else if (this.userIsLogged() && this.userRole === 'disabled') {
 						this.alertRolePermissions();
-					} else {
+					} else if(!user){
 						alert('Please login');
 					}
 				}
@@ -100,7 +100,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
 	 * Fetch the articles from the channel.
 	 */
 	onFetchArticles() {
-		this.subArticles = this.article.displayPost<IArticle>(this.channelId).subscribe(
+		this.subArticles = this.article.displayPost<IArticle>(this.channelId).pipe(take(1)).subscribe(
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;

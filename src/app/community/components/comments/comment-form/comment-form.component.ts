@@ -78,7 +78,6 @@ export class CommentFormComponent implements OnInit {
 				commentBody: this.commentForm.get('CommentBody').value,
 				createdAt: this.currentDate.getTime()
 			}
-			console.table(comment);
 			this.commentsService.createComment(comment)
 				.catch(
 					error => {
