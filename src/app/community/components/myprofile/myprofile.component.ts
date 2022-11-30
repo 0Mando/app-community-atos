@@ -87,7 +87,7 @@ export class MyprofileComponent implements OnInit {
       }),
       switchMap(data => this._profileService.getInfo(data).pipe(
         map(data => {
-          if(data){
+          if(data.payload.exists){
             this.id = data.payload.id;
             this.pfp = data.payload.data().profilePicture;
             this.banner = data.payload.data().bannerImage;
@@ -112,35 +112,37 @@ export class MyprofileComponent implements OnInit {
 
   getUnarchived(){
     this._authService.getCurrentUser().pipe(
+      take(1),
       map(data => {
         if(data){
           return data.uid
         }
       }),
-      switchMap(data => this._articleService.getUserArticles(data, false).pipe(
-        map(data => {
-          if(data){
-            data.docs.forEach((x:any) => {
-              this.myPosts.push({...x.data(), id : x.id});
-            })
-            this.posts = this.myPosts;
-            this.totalLength = this.posts.length;
-          }
-        })
+      switchMap(datax => this._articleService.getUserArticles(datax, false).pipe(
+          map(data => {
+            if(datax && data){
+              data.docs.forEach((x:any) => {
+                this.myPosts.push({...x.data(), id : x.id});
+              })
+              this.posts = this.myPosts;
+              this.totalLength = this.posts.length;
+            }
+          })
       ))
     ).subscribe();
   }
 
   getArchived(){
     this._authService.getCurrentUser().pipe(
+      take(1),
       map(data => {
         if(data){
           return data.uid
         }
       }),
-      switchMap(data => this._articleService.getUserArticles(data, true).pipe(
+      switchMap(datax => this._articleService.getUserArticles(datax, true).pipe(
         map(data => {
-          if(data){
+          if(datax && data){
             data.docs.forEach((x:any) => {
               this.archivedPosts.push({...x.data(), id : x.id});
             })

@@ -43,7 +43,9 @@ export class HomeComponent implements OnInit {
 
     this._authService.getCurrentUser().pipe(
       map(data => {
-        return data.uid
+        if(data){
+          return data.uid
+        }
       }),
       switchMap(data => this._authService.onFetchUserInformation(data))
     ).subscribe(user => {
