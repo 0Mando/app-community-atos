@@ -136,11 +136,14 @@
         }
 
         &-header{
+            
+            padding-left: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
             display: flex;
             flex-direction: row;
             border-top: 2px solid #a5c9ff;
             border-bottom: 1px solid #a5c9ff;
-            padding: 10px 0;
 
             .checkmark{
                 top: 2px;
@@ -153,6 +156,7 @@
         }
 
         &-user{
+            padding-left: 1rem;
             display: flex;
             flex-direction: row;
             align-items: center;

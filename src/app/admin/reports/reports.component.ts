@@ -14,6 +14,9 @@ export class ReportsComponent implements OnInit {
 	reports: IReport[] = [];
 	fullName: string = '';
 
+	sortOrder: 'ASC' | 'DESC' = 'DESC';
+	sortColumn: 'Activity' | 'Date' | undefined = 'Date';
+
 	constructor(
 		private reportService: ReportService,
 		private authService: AuthService
@@ -47,5 +50,10 @@ export class ReportsComponent implements OnInit {
 			.subscribe((user: User) => {
 				this.fullName = user.name;
 			});
+	}
+
+	sortHandler(sortBy: 'Activity' | 'Date'): void {
+		this.sortOrder = this.sortOrder === 'ASC' ? 'DESC' : 'ASC';
+		this.sortColumn = sortBy;
 	}
 }

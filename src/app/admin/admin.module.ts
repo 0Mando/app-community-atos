@@ -31,6 +31,7 @@ import { ReportComponent } from './reports/report/report.component';
 import { AppPipesModule } from '../app-pipes/app-pipes.module';
 import { ReportViewComponent } from './reports/report-view/report-view.component';
 import { CommentCardComponent } from '../community/components/comments/comment-card/comment-card.component';
+import { SortReportsPipe } from '../infrastructure/pipes/sort-reports.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CommentCardComponent } from '../community/components/comments/comment-c
     SortUsersPipe,
     ReportComponent,
     ReportViewComponent,
+    SortReportsPipe
     // CommentCardComponent
   ],
   imports: [

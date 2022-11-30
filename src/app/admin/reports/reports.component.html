@@ -1,6 +1,6 @@
 <main class="reports">
 	<section class="reports__filter">
-		<input
+		<!-- <input
 			type="text"
 			placeholder=" &#xF002; Name or id"
 			name="filter"
@@ -13,33 +13,24 @@
 			<option value="name">Desconozco</option>
 			<option value="email">Un</option>
 			<option value="title">Poco</option>
-		</select>
+		</select> -->
 	</section>
 	<section class="reports__list">
 		<div class="reports__list-menu">
 			<p class="reports__quantity">Reports ({{ reports.length }})</p>
-			<button class="add__user">
-				Add New <i class="fa-thin fa-plus"></i>
-			</button>
-			<i class="fa-solid fa-gear"></i>
+			<!-- <i class="fa-solid fa-gear"></i> -->
 		</div>
 
 		<div class="reports__list-header">
-			<div class="reports__list-check">
-				<label class="container">
-					<input type="checkbox" />
-					<span class="checkmark"></span>
-				</label>
-			</div>
 			<div class="reports__list-reporter">Reporter</div>
-			<div class="reports__list-activity">Activity</div>
+			<div class="reports__list-activity" (click)="sortHandler('Activity')">Activity</div>
 			<div class="reports__list-reporter">Reported User</div>
-			<div class="reports__list-karma">Report Date</div>
+			<div class="reports__list-karma" (click)="sortHandler('Date')">Report Date</div>
 			<div class="reports__list-state">Status</div>
 			<div class="reports__list-options"></div>
 		</div>
 
-		<div class="reports__list-table" *ngFor="let report of reports">
+		<div class="reports__list-table" *ngFor="let report of reports | sortReports:sortOrder:sortColumn">
 			<app-report [report]="report"></app-report>
 		</div>
 	</section>
