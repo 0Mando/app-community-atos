@@ -1,6 +1,7 @@
 <main *ngIf="!isLoading; else loader">
     <img class="banner" [src]="banner" alt="">
     <section class="profile">
+        <button (click)="deleteMyUser()" class="profile__delete">Delete User</button>
         <img 
             class="profile__image" 
             [src]="pfp" alt="">
