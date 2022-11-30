@@ -29,6 +29,7 @@ import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
 import { ReportComponent } from './reports/report/report.component';
 import { AppPipesModule } from '../app-pipes/app-pipes.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ReportViewComponent } from './reports/report-view/report-view.component';
 import { CommentCardComponent } from '../community/components/comments/comment-card/comment-card.component';
 import { SortReportsPipe } from '../infrastructure/pipes/sort-reports.pipe';
@@ -63,6 +64,9 @@ import { SortReportsPipe } from '../infrastructure/pipes/sort-reports.pipe';
     AppPipesModule,
     FormsModule,
     // HttpClientModule
+
+    //* NGX Pagination
+		NgxPaginationModule,
   ]
 })
 export class AdminModule { }

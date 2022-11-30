@@ -1,6 +1,7 @@
 <main *ngIf="!isLoading; else loader">
     <img class="banner" [src]="banner" alt="">
     <section class="profile">
+        <button (click)="deleteMyUser()" class="profile__delete">Delete User</button>
         <img 
             class="profile__image" 
             [src]="pfp" alt="">
@@ -82,7 +83,7 @@
                         <div class="posts__content-util">
                             <div class="content-misc">
                                 <i class="fa-solid fa-heart"></i>
-                                {{post.likes}}
+                                {{post.likes.length}}
                             </div>
                             <div class="content-misc">
                                 <i class="fa-solid fa-comment"></i>

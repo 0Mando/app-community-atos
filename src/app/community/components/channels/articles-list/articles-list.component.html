@@ -1,6 +1,13 @@
-<article class="channels__items-list">
-	<div *ngFor="let post of posts | paginate : { itemsPerPage: 4, currentPage: pagePost, id : 'posts' }">
-		<app-channel-article-card [article]="post"></app-channel-article-card>
+<article class="channels__items-list" >
+	<div class="print_channels" *ngIf="this.postsLength; else emptyArticles">
+		<div *ngFor="let post of posts | paginate : { itemsPerPage: 4, currentPage: pagePost, id : 'posts' }">
+			<app-channel-article-card [article]="post"></app-channel-article-card>
+		</div>
+		<pagination-controls class="my-pagination-articles" id="posts" (pageChange)="pagePost = $event" previousLabel="" nextLabel=""></pagination-controls>
 	</div>
-	<pagination-controls class="my-pagination-articles" id="posts" (pageChange)="pagePost = $event" previousLabel="" nextLabel=""></pagination-controls>
+	<ng-template #emptyArticles>
+		<div class="empty">
+			<span class="empty-text">No articles to display</span>
+		</div>
+	</ng-template>
 </article>

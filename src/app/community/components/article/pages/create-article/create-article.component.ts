@@ -34,6 +34,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 
 	//* Parameters
 	channelIdParam: string = '';
+	channelChilds: number;
 
 	//* Article creation
 	post: IArticle;
@@ -105,6 +106,8 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 					this.channelService.getChannelById(this.channelIdParam).subscribe(
 						(channel : Channel) => {
 							this.boardId = channel.parentBoard;
+							this.channelChilds = channel.articles;
+							
 						}
 					)
 				}
@@ -166,6 +169,10 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 		this.articleService.createPost(post).catch(
 			error => console.log('Something go wrong -> '+error)
 		)
+
+		this.channelService.updateChannel(this.channelIdParam, (this.channelChilds + 1)).catch(
+			error => console.log(error)
+		);
 
 		// *Go back to list articles page
 		this.router.navigate(['/articles/' + this.channelIdParam + '/posts']);

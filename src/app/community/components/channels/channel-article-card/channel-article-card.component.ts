@@ -14,19 +14,24 @@ export class ChannelArticleCardComponent implements OnInit {
 	profilePicture : string = '';
 	titlePost : string = '';
 	descriptionPost : string = '';
+	id: string;
 
 	constructor(private auth : AuthService) { }
 
 	ngOnInit(): void {
 		this.onFetchUserProfilePicture(this.article.userCreatedId);
+		
 		this.titlePost = this.article.titlePost;
 		this.descriptionPost = this.article.descriptionContent;
+		this.id = this.article.id;
+		
 	}
 
 	onFetchUserProfilePicture(authorId: string) {
 		this.auth.onFetchUserInformation(authorId).subscribe(
-			(user: User) => {
-				this.profilePicture = user.profilePicture;
+			(user) => {
+				this.profilePicture = user.payload.data().profilePicture;
+				
 			}
 		)
 	}
