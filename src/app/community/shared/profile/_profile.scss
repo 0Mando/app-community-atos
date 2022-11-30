@@ -5,14 +5,17 @@
 
     &__delete{
         position: absolute;
+        width: 30px;
+        height: 30px;
         right: 0;
         margin: 5px 6px;
-        border-radius: 5px;
+        border-radius: 50%;
         border: none;
-        padding: 5px 10px;
         cursor: pointer;
         color: white;
-        background: #00a69c;
+        background: red;
+        display: grid;
+        place-items: center;
     }
 
     &__actions{

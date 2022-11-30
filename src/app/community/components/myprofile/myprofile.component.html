@@ -16,7 +16,7 @@
                 </div>
         </div>
     <section class="profile">
-        <button (click)="deleteMyUser()" class="profile__delete">Delete User</button>
+        <button (click)="deleteMyUser()" class="profile__delete" title="Delete Profile"><i class="fa-solid fa-trash"></i></button>
         <div class="profile__image">
             <img 
                 class="profile__image-img" 
@@ -119,7 +119,7 @@
                                     0
                                 </div>
                             </ng-template>
-                            
+
                             <div class="content-misc" *ngIf="post.comments; else noComments">
                                 <i class="fa-solid fa-comment"></i>
                                 {{post.comments}}

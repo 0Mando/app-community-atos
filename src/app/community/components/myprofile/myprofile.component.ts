@@ -69,8 +69,9 @@ export class MyprofileComponent implements OnInit {
         Notify.info('Action Cancelled')
       },
       {
-        titleColor: '#0195ff',
-        okButtonBackground: '#0195ff'
+        titleColor: '#FF0000',
+        okButtonBackground: '#FF0000',
+        cancelButtonBackground: '#0195ff'
       }
     )
   }
