@@ -1,3 +1,4 @@
+import { map, switchMap, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -64,8 +65,9 @@ export class ArticlePageComponent implements OnInit {
 	 * @param idArticle Reference of the article
 	 */
 	onFetchArticle(idArticle: string) {
-		this.article.getArticleById(idArticle).subscribe(
-			(article: IArticle) => {
+		this.article.getArticleById(idArticle).pipe(
+			take(1),
+			map((article: IArticle) => {
 				this.currentArticle = {
 					userCreatedId: article.userCreatedId,
 					date: article.date,
@@ -84,6 +86,7 @@ export class ArticlePageComponent implements OnInit {
 				this.onFetchChannelData(this.currentArticle.channelId)
 				this.onFetchAuthorData(this.currentArticle.userCreatedId)
 				this.displayArticle = true;
+
 				this.editArticleForm = new FormGroup({
 					'titlePostForm':
 						new FormControl(this.currentArticle.titlePost),
@@ -98,8 +101,10 @@ export class ArticlePageComponent implements OnInit {
 					'archiveForm' :
 						new FormControl(this.currentArticle.archive)
 				})
-			}
-		)
+				return this.currentArticle.views;
+			}),
+			switchMap(data => this.article.counterViews(this.idArticle, data))
+		).subscribe()
 	}
 
 	/**

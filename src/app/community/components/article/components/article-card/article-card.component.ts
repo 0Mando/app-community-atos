@@ -43,8 +43,8 @@ export class ArticleCardComponent implements OnInit {
 		)
 	}
 
-	onViewArticleCounter(idArticle: string, views: number) {
-		this.articleService.counterViews(idArticle, views);
-	}
+	// onViewArticleCounter(idArticle: string, views: number) {
+	// 	this.articleService.counterViews(idArticle, views);
+	// }
 
 }

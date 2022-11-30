@@ -44,7 +44,7 @@
 					</div>
 				</section>
 				<article class="post__content">
-					<p [innerHTML]="currentArticle.content"></p>
+					<p [innerHTML]="currentArticle.content | safe:'html'"></p>
 				</article>
 			</section>
 			<hr class="post__bar">
