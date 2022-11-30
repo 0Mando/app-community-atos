@@ -18,6 +18,7 @@ import { ChannelsComponent } from './topics/channels/channels.component';
 import { FormularyComponent } from './topics/formulary/formulary.component';
 
 //* Pipe
+import { ReportsComponent } from './reports/reports.component';
 import { ShortenModPipe } from './../infrastructure/pipes/shorten-mod.pipe';
 import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 // import { FirstwordPipe } from './../infrastructure/pipes/firstword.pipe';
@@ -26,8 +27,12 @@ import { ParentBoardsPipe } from './../infrastructure/pipes/parent-boards.pipe';
 import { UserTypePipe } from '../infrastructure/pipes/user-type.pipe';
 import { FilterUsersPipe } from '../infrastructure/pipes/filter-users.pipe';
 import { SortUsersPipe } from '../infrastructure/pipes/sort-users.pipe';
+import { ReportComponent } from './reports/report/report.component';
 import { AppPipesModule } from '../app-pipes/app-pipes.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ReportViewComponent } from './reports/report-view/report-view.component';
+import { CommentCardComponent } from '../community/components/comments/comment-card/comment-card.component';
+import { SortReportsPipe } from '../infrastructure/pipes/sort-reports.pipe';
 
 @NgModule({
   declarations: [
@@ -41,11 +46,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ChannelsComponent,
     FormularyComponent,
     ShortenModPipe,
+    ReportsComponent,
     ParentBoardsPipe,
     // FirstwordPipe
     UserTypePipe,
     FilterUsersPipe,
-    SortUsersPipe
+    SortUsersPipe,
+    ReportComponent,
+    ReportViewComponent,
+    SortReportsPipe
+    // CommentCardComponent
   ],
   imports: [
     CommonModule,

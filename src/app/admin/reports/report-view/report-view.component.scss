@@ -1,0 +1,65 @@
+@import '../../../../sass/variables';
+
+.body {
+	margin-left: 200px;
+  padding: 20px;
+}
+
+.report {
+  display: flex;
+  flex-direction: row;
+  
+  &-reason {
+    background-color: $--main--100;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    
+    &-title{
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  &-content{
+    background-color: $--main--100;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  &-title{
+    font-size: 2rem;
+  }
+
+  &-btn {
+    padding: 8px 20px;
+    margin: 15px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+		align-items: center;
+		background-color: $--main--50;
+
+		&:hover {
+			color: white;
+			background-color: darkred;
+		}
+
+		// &-delete {
+		// 	width: 100px;
+		// 	font-weight: 600;
+		// 	border-radius: 5px;
+		// 	display: flex;
+		// 	cursor: pointer;
+		// 	align-items: center;
+		// 	transition: all 0.3s ease;
+
+		&-title {
+			margin-left: 10px;
+		}
+		// }
+	}
+}
