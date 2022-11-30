@@ -28,7 +28,7 @@
 
 	<section *ngIf="report.activity == 'Post' && article">
 		<p class="report-reason-title">Reported article:</p>
-		<p class="report-content" [innerHTML]="article.content"></p>
+		<p class="report-content" [innerHTML]="article.content | safe:'html'"></p>
 		<section class="report">
 			<article
 				class="report-btn"
