@@ -1,5 +1,5 @@
-import { first } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { first, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Report } from 'notiflix';
 import { Channel } from 'src/app/domain/models/channel.model';
@@ -14,33 +14,35 @@ import { ChannelService } from 'src/app/infrastructure/services/channel.service'
 	templateUrl: './list-articles.component.html',
 	styleUrls: ['./list-articles.component.scss']
 })
-export class ListArticlesComponent implements OnInit {
+export class ListArticlesComponent implements OnInit, OnDestroy {
 
 	//* Information of origin
-	channelId : string = '';
+	channelId: string = '';
 
 	//* List of articles
 	articles: IArticle[];
 
 	//* Pagination stuff
-	lengthListArticles : number = 0;
+	lengthListArticles: number = 0;
 	page: number = 1;
 
-	currentChannel : Channel = {
-		channelName : '',
-		channelDescription : '',
-		channelImage : '',
-		parentBoard : ''
+	currentChannel: Channel = {
+		channelName: '',
+		channelDescription: '',
+		channelImage: '',
+		parentBoard: ''
 	}
 
 	private userRole: string = '';
 
+	private subArticles: Subscription;
+
 	constructor(
 		private route: ActivatedRoute,
-		private router : Router,
-		private article : ArticleService,
-		private auth : AuthService,
-		private channel : ChannelService
+		private router: Router,
+		private article: ArticleService,
+		private auth: AuthService,
+		private channel: ChannelService
 	) { }
 
 	private currentUserId: string;
@@ -48,7 +50,7 @@ export class ListArticlesComponent implements OnInit {
 	ngOnInit(): void {
 		// Channel origin
 		this.route.params.subscribe(
-			(params : Params)=>{
+			(params: Params) => {
 				this.channelId = params['channelId']
 			}
 		)
@@ -56,26 +58,17 @@ export class ListArticlesComponent implements OnInit {
 		this.onFetchChannelName(this.channelId);
 		// Display list of articles
 		this.onFetchArticles();
-		// Get user role
-		if(this.userIsLogged()) {
-			this.currentUserId = this.auth.currentSessionUserId();
-			this.auth.getUserInformation(this.currentUserId).subscribe(
-				(user : User) => {
-					this.userRole = user.userType;
-				}
-			)
-		}
 	}
 
 	/**
 	 * Verify if user is logged to publish an article.
 	 * @returns Confirmation if the user is logged in or not.
 	 */
-	userIsLogged() : boolean {
+	userIsLogged(): boolean {
 		return this.auth.isLoggedIn;
 	}
 
-	isVerified() : boolean {
+	isVerified(): boolean {
 		return true;
 	}
 
@@ -83,13 +76,23 @@ export class ListArticlesComponent implements OnInit {
 	 * Redirect to the create article page if you are registered and verified.
 	 */
 	onCreateArticle() {
-		if(this.userIsLogged() && this.isVerified() && this.userRole !== 'disabled'){
-			this.router.navigate(['create-article'],
-			{ queryParams : { channelId : this.channelId } } );
-		} else if(this.userIsLogged() && this.userRole === 'disabled') {
-			this.alertRolePermissions();
-		} else {
-			alert('Please login');
+		//* Get user role
+		if (this.userIsLogged()) {
+			this.currentUserId = this.auth.currentSessionUserId();
+			this.auth.getUserInformation(this.currentUserId).subscribe(
+				(user: User) => {
+					this.userRole = user.userType;
+					//* Permissions
+					if (this.userIsLogged() && this.isVerified() && this.userRole !== 'disabled') {
+						this.router.navigate(['create-article'],
+							{ queryParams: { channelId: this.channelId } });
+					} else if (this.userIsLogged() && this.userRole === 'disabled') {
+						this.alertRolePermissions();
+					} else {
+						alert('Please login');
+					}
+				}
+			)
 		}
 	}
 
@@ -97,7 +100,7 @@ export class ListArticlesComponent implements OnInit {
 	 * Fetch the articles from the channel.
 	 */
 	onFetchArticles() {
-		this.article.displayPost<IArticle>(this.channelId).pipe(first()).subscribe(
+		this.subArticles = this.article.displayPost<IArticle>(this.channelId).subscribe(
 			articles => {
 				this.articles = articles;
 				this.lengthListArticles = this.articles.length;
@@ -109,17 +112,21 @@ export class ListArticlesComponent implements OnInit {
 	 * Fetch data channel.
 	 * @param idChannel Reference of the channel.
 	 */
-	onFetchChannelName(idChannel : string) {
+	onFetchChannelName(idChannel: string) {
 		this.channel.getChannelById(idChannel).subscribe(
-			(channel : Channel) => {
+			(channel: Channel) => {
 				this.currentChannel = {
-					channelName : channel.channelName,
-					channelDescription : channel.channelDescription,
-					channelImage : channel.channelImage,
-					parentBoard : channel.parentBoard
+					channelName: channel.channelName,
+					channelDescription: channel.channelDescription,
+					channelImage: channel.channelImage,
+					parentBoard: channel.parentBoard
 				}
 			}
 		)
+	}
+
+	ngOnDestroy(): void {
+		this.subArticles.unsubscribe();
 	}
 
 	alertRolePermissions() {
