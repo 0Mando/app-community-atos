@@ -46,6 +46,8 @@ export class ChannelsComponent implements OnInit {
 				this.popularChannels.length = 4
 			}
 
+			this.popularChannels.sort((a: any,b: any) => b.articles - a.articles);
+
 			
 			// channels.forEach(channel => {
 			// 	this.popularChannels.push({
