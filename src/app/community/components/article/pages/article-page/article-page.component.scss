@@ -29,7 +29,6 @@
 		margin-top: 1rem;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 
 		li {
 			display: flex;
@@ -68,6 +67,7 @@
 		&__name {
 			display: block;
 			padding-top: .5rem;
+			cursor: pointer;
 		}
 	}
 

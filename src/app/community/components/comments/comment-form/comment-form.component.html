@@ -1,14 +1,29 @@
-<section class="comment-form">
-	<img class="comment-form__author-profile-image"
-	src="{{ currentUser.profilePicture }}"
-	alt="{{ currentUser.firstName + ' ' + currentUser.lastName }}">
-	<form [formGroup]="commentForm"
-		(ngSubmit)="onCreateComment()"
-		class="comment-form__container-form">
-		<quill-editor class="comment-form__quill-editor" [modules]="editorModules"
-			formControlName="CommentBody" [styles]="{height: '200px'}"
-			[placeholder]="'Type here to reply to ' + replyToAuthor">
-		</quill-editor>
-		<button class="comment-form__submit">Post comment</button>
-	</form>
-</section>
+<ng-container *ngIf="userLoggin(); else nologged">
+	<section class="comment-form">
+		<img class="comment-form__author-profile-image"
+		src="{{ currentUser.profilePicture }}"
+		alt="{{ currentUser.username }}">
+		<form [formGroup]="commentForm"
+			(ngSubmit)="onCreateComment()"
+			class="comment-form__container-form">
+			<quill-editor class="comment-form__quill-editor" [modules]="editorModules"
+				formControlName="CommentBody" [styles]="{height: '200px'}"
+				[placeholder]="'Type here to reply to ' + replyToAuthor">
+			</quill-editor>
+			<button class="comment-form__submit">Post comment</button>
+		</form>
+	</section>
+</ng-container>
+<ng-template #nologged>
+	<section class="no-logged">
+		<article class="no-logged__input">
+			<h3>Register or log in to commment</h3>
+		</article><br>
+		<button class="no-logged__btn">
+			Post comment
+			<span class="material-symbols-outlined" id="block">
+				block
+			</span>
+		</button>
+	</section>
+</ng-template>

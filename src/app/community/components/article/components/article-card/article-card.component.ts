@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/domain/models/user.model';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
 
 @Component({
@@ -14,18 +15,17 @@ export class ArticleCardComponent implements OnInit {
 	@Input() date : number;
 	@Input() title : string;
 	@Input() descriptionContent : string;
+	@Input() views : number;
 
-	userAuthorData: User = {
+	userAuthorData = {
 		name: '',
-		birthday: '',
-		email: '',
-		password: '',
-		userType: 'normal-user',
-		userTypeBackup: 'normal-user',
 		profilePicture: ''
 	};
 
-	constructor(private auth : AuthService) { }
+	constructor(
+		private auth : AuthService,
+		private articleService : ArticleService
+	) { }
 
 	ngOnInit(): void {
 		this.onFetchAuthorData(this.userCreatedId);
@@ -35,11 +35,16 @@ export class ArticleCardComponent implements OnInit {
 	 * Get the information of the author of the article
 	 */
 	onFetchAuthorData (idUser : string) : void {
-		this.auth.onFetchUserInformation(idUser).subscribe(
-			(user) => {
-				this.userAuthorData = {...user.payload.data()}
+		this.auth.getUserInformation(idUser).subscribe(
+			async (user : User) => {
+				this.userAuthorData.name = await user.name;
+				this.userAuthorData.profilePicture = await user.profilePicture;
 			}
 		)
+	}
+
+	onViewArticleCounter(idArticle: string, views: number) {
+		this.articleService.counterViews(idArticle, views);
 	}
 
 }

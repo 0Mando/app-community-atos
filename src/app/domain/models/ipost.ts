@@ -10,4 +10,7 @@ export interface IArticle {
 	archive : boolean;
 	readingTime : number;
 	boardId : string;
+	likes : string[];
+	comments : number;
+	views : number;
 }

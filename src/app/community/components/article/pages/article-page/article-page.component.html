@@ -38,7 +38,7 @@
 					<img class="post__author__profile" src="{{ userAuthorData.profilePicture }}"
 						alt="{{ userAuthorData.name }}">
 					<div>
-						<span class="post__author__name">{{ userAuthorData.name
+						<span class="post__author__name" routerLink="/profile/{{ currentArticle.userCreatedId }}">{{ userAuthorData.name
 							}}</span>
 						<small class="post__days">{{ currentArticle.date | date }}</small>
 					</div>

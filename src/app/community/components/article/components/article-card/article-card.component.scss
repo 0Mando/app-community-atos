@@ -50,6 +50,7 @@
 
 			&__data {
 				margin-left: 1rem;
+				cursor: pointer;
 
 				small {
 					color: $description-text;
@@ -102,7 +103,7 @@
 	.desktop-version {
 		display: block;
 		width: 8%;
-		margin-top: 1.2rem;
+		margin-top: 2rem;
 	}
 
 	.mobile-version {

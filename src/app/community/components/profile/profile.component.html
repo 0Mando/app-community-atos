@@ -1,13 +1,16 @@
 <main>
-    <div class="banner"></div>
+    <img class="banner" [src]="bg" alt="">
     <section class="profile">
-        <article class="profile__actions">
+        <!-- <article class="profile__actions">
             <button class="profile__actions-block">Block Account</button>
             <button class="profile__actions-verify">Verify Account</button>
-        </article>
-        <div class="profile__image">
+        </article> -->
+        <!-- <div class="profile__image">
             <div class="profile__image-check"><i class="fa-solid fa-check"></i></div>
-        </div>
+        </div> -->
+		<img
+            class="profile__image"
+            [src]="pfp" alt="">
         <article class="profile__info">
             <h2 class="profile__info-name">{{name | firstword}}</h2>
             <span class="profile__info-description">22 years | Frontend</span>
@@ -35,23 +38,23 @@
                     <p><i class="fa-solid fa-paste"></i> {{posts.length}} Posts</p>
                 </div>
                 <div class="resume__list-items">
-                    <div class="resume__list-item" *ngFor="let post of posts">
+                    <div class="resume__list-item" *ngFor="let post of posts |
+					paginate: { itemsPerPage: 5, currentPage: page }">
                         <div class="item__text-content">
-                            <h4>{{post.title}}</h4>
-                            <p>Published: {{post.date}} </p>
+                            <h4>{{post.titlePost}}</h4>
+                            <p>Published: {{post.date | timeAgo }} </p>
                         </div>
                         <div class="item__icons">
-                            <p><i class="fa-solid fa-heart"></i> {{post.likes}} </p>
+                            <p><i class="fa-solid fa-heart"></i> {{post.likes.length}} </p>
                             <p><i class="fa-solid fa-comment"></i> {{post.comments}} </p>
                         </div>
                     </div>
-                    
+					<pagination-controls
+                        (pageChange)="page = $event"
+                        class="my-pagination"
+                        previousLabel=""
+                        nextLabel=""></pagination-controls>
                 </div>
-            </div>
-            <div class="resume__list-pagination">
-                <i class="fa-solid fa-chevron-left"></i>
-                <div class="pagination"><p>1</p></div>
-                <i class="fa-solid fa-chevron-right"></i>
             </div>
         </article>
     </section>

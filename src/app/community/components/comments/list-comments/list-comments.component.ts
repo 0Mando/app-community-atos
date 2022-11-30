@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IComment } from 'src/app/domain/models/icomment';
+import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { CommentsService } from 'src/app/infrastructure/services/comments.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class ListCommentsComponent implements OnInit {
 	constructor(
 		private commentService : CommentsService,
 		private route : ActivatedRoute,
+		private articleService : ArticleService
 	) { }
 
 	ngOnInit(): void {
@@ -38,6 +40,7 @@ export class ListCommentsComponent implements OnInit {
 			(comments) => {
 				this.comments = comments;
 				this.commentsLength = this.comments.length;
+				this.articleService.getComments(idArticle, this.commentsLength);
 				this.amountComments.emit(this.commentsLength);
 			}
 		)

@@ -17,6 +17,7 @@ import { ArticlePageComponent } from './community/components/article/pages/artic
 import { ArticleGuard } from './infrastructure/guards/article.guard';
 import { ArticleGuardService } from './infrastructure/services/article-guard.service';
 import { CrendentialsGuard } from './infrastructure/guards/crendentials.guard';
+import { ProfileGuard } from './infrastructure/guards/profile.guard';
 
 const routes: Routes = [
 	{
@@ -41,8 +42,9 @@ const routes: Routes = [
 		component: ChannelsEmptyComponent
 	},
 	{
-		path: 'profile',
-		component: ProfileComponent
+		path: 'profile/:userId',
+		component: ProfileComponent,
+		canActivate : [ProfileGuard]
 	},
 	{
 		path: 'myprofile',

@@ -1,6 +1,6 @@
-@import 
-    '../../shared/profile/profile', 
-    '../../shared/profile/resume', 
+@import
+    '../../shared/profile/profile',
+    '../../shared/profile/resume',
     '../../shared/profile/icons',
     '../../shared/profile/responsive',
     './sass/responsive',
@@ -22,6 +22,7 @@ main{
     object-fit: cover;
     width: 100%;
     border-radius: 10px;
+
     position: relative;
     // background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     // background-size: cover;

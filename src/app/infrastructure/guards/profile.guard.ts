@@ -28,5 +28,4 @@ export class ProfileGuard implements CanActivate {
 			return false
 		}
 	}
-  
 }

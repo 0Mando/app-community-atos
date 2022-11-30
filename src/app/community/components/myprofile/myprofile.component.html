@@ -44,29 +44,29 @@
         <form class="info__items" [formGroup]="profileForm" (keydown.enter)="$event.preventDefault()">
             <article class="info__items-item">
                 <label for="name">Name</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="name"
                     formControlName="name">
             </article>
             <article class="info__items-item">
                 <label for="name">Email</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="email"
                     formControlName="email">
             </article>
             <article class="info__items-item">
                 <label for="name">Work</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="work"
                     formControlName="work">
             </article>
             <article class="info__items-item">
                 <label for="name">Website</label>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     id="website"
                     formControlName="website">
             </article>
@@ -133,7 +133,7 @@
 
                             <div class="content-misc" *ngIf="post.visulizations; else noSeens">
                                 <i class="fa-solid fa-eye"></i>
-                                {{post.visulizations}}
+                                {{post.views}}
                             </div>
                             <ng-template #noSeens>
                                 <div class="content-misc">
@@ -141,11 +141,11 @@
                                     0
                                 </div>
                             </ng-template>
-                            <i class="fa-solid fa-gear"></i>
+                            <i class="fa-solid fa-gear" (click)="onArticleSettings(post.id)"></i>
                         </div>
                     </div>
-                    <pagination-controls 
-                        (pageChange)="page = $event" 
+                    <pagination-controls
+                        (pageChange)="page = $event"
                         class="my-pagination"
                         previousLabel=""
                         nextLabel=""></pagination-controls>
@@ -176,7 +176,7 @@
                             <p><i class="fa-solid fa-comment"></i> {{post.comments}} </p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="resume__list-pagination">

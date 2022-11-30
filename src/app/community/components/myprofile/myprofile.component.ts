@@ -42,7 +42,7 @@ export class MyprofileComponent implements OnInit {
 
   // postsNum: number;
   postsBool = false;
-  
+
 
   constructor(
       private _profileService: MyprofileService,
@@ -78,7 +78,7 @@ export class MyprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    
+
     this._authService.getCurrentUser().pipe(
       map(data => {
         if(data){
@@ -120,8 +120,8 @@ export class MyprofileComponent implements OnInit {
       switchMap(data => this._articleService.getUserArticles(data, false).pipe(
         map(data => {
           if(data){
-            data.docs.forEach(x => {
-              this.myPosts.push(x.data());
+            data.docs.forEach((x:any) => {
+              this.myPosts.push({...x.data(), id : x.id});
             })
             this.posts = this.myPosts;
             this.totalLength = this.posts.length;
@@ -141,8 +141,8 @@ export class MyprofileComponent implements OnInit {
       switchMap(data => this._articleService.getUserArticles(data, true).pipe(
         map(data => {
           if(data){
-            data.docs.forEach(x => {
-              this.archivedPosts.push(x.data());
+            data.docs.forEach((x:any) => {
+              this.archivedPosts.push({...x.data(), id : x.id});
             })
           }
         })
@@ -152,7 +152,7 @@ export class MyprofileComponent implements OnInit {
 
   switchPosts(type: number){
     let buttons = document.querySelectorAll('.posts__header-button')!as NodeListOf<HTMLButtonElement>;
-    
+
     buttons.forEach( element => {
       element.classList.remove('selected');
     });
@@ -241,7 +241,7 @@ export class MyprofileComponent implements OnInit {
 
     ul?.insertBefore(li, last);
     // ul?.appendChild(li);
-    
+
   }
 
   createInput(){
@@ -265,7 +265,7 @@ export class MyprofileComponent implements OnInit {
     } else {
       ;
     }
-     
+
 
     let remove = document.querySelectorAll('.resume__list-added')!as NodeListOf<HTMLInputElement>;
     remove?.forEach( e => {
@@ -313,5 +313,9 @@ export class MyprofileComponent implements OnInit {
       btn.innerHTML = '<i class="fa-solid fa-check"></i>';
       btn.style.color = 'green';
     }
+  }
+
+  onArticleSettings(articleId: string) {
+	this.router.navigate(['article/'+articleId]);
   }
 }
