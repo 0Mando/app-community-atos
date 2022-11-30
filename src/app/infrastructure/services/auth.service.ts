@@ -1,10 +1,10 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators'
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs';
 import { User } from 'src/app/domain/models/user.model';
-import { collection, query, where } from "firebase/firestore";
+import { deleteUser, getAuth } from "firebase/auth";
 
 @Injectable({
 	providedIn: 'root'
@@ -14,6 +14,8 @@ export class AuthService {
 	userData : any;
 	userID: string;
 	isUserLogged = new BehaviorSubject<boolean>(this.isLoggedIn);
+
+	auth = getAuth();
 
 	constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) {
 		this.fireAuth.authState.subscribe((user) => {
@@ -86,5 +88,9 @@ export class AuthService {
 	
 	undoDisableUser(userId:string, userTypeBackup: "normal-user" | "auth-user" | "moderator" | "admin"){
 		this.afs.collection<User>('Users').doc(userId).update({userType: userTypeBackup});
+	}
+
+	deleteUser(id: string){
+		this.afs.collection<User>('Users').doc(id).delete();
 	}
 }

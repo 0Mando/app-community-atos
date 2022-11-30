@@ -6,6 +6,8 @@ import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-myprofile',
@@ -46,7 +48,32 @@ export class MyprofileComponent implements OnInit {
       private _profileService: MyprofileService,
       private _authService: AuthService,
       private _articleService: ArticleService,
+      private router : Router,
       private storage: Storage) {}
+
+  deleteMyUser(){
+    Confirm.show(
+      'Delete Profile',
+      'Are you sure you want to delete your profile? This action is irreversible',
+      'Yes',
+      'No, take me back',
+      () => {
+        this._authService.deleteUser(this._authService.auth.currentUser.uid);
+        this._authService.auth.currentUser.delete().then(() => {
+          Notify.success('User deleted. Signing Out');
+          this._authService.logout();
+		      this.router.navigate(['sign-in']);
+        })
+      },
+      () => {
+        Notify.info('Action Cancelled')
+      },
+      {
+        titleColor: '#0195ff',
+        okButtonBackground: '#0195ff'
+      }
+    )
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -71,10 +98,10 @@ export class MyprofileComponent implements OnInit {
               'website': new FormControl({value: data.payload.data().website, disabled: this.isDisabled})
             })
           }
-          this.isLoading = false;
+          
         })
       ))
-    ).subscribe()
+    ).subscribe(x => this.isLoading = false)
     
     this.getArchived();
     this.getUnarchived();

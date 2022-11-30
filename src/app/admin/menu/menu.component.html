@@ -1,6 +1,6 @@
 <main class="navbar">
     <section class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Atos.svg/1280px-Atos.svg.png" alt="">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Atos.svg/1280px-Atos.svg.png" alt="" [routerLink]="['/boards']">
     </section>
     <section class="nav">
         <article class="nav__item" [routerLink]="['/admin/home']" routerLinkActive="active">
@@ -15,7 +15,7 @@
             <i class="fa-solid fa-user"></i>
             <div class="nav__item-title">Users</div> 
         </article>
-        <article class="nav__item" routerLinkActive="active">
+        <article class="nav__item" [routerLink]="['/admin/reports']" routerLinkActive="active">
             <i class="fa-solid fa-circle-exclamation"></i>
             <div class="nav__item-title">Reports</div> 
         </article>

@@ -1,3 +1,5 @@
+import { switchMap } from 'rxjs';
+import { ChannelService } from 'src/app/infrastructure/services/channel.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { IArticle } from 'src/app/domain/models/ipost';
 import { User } from 'src/app/domain/models/user.model';
@@ -12,7 +14,6 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 export class ChannelArticlesListComponent implements OnInit {
 
 	posts: IArticle[];
-	@Input() boardNameArticles: string;
 	userProfilePicture: string = '';
 
 	//* Pagination stuff
@@ -21,19 +22,16 @@ export class ChannelArticlesListComponent implements OnInit {
 
 	constructor(
 		private articlesService: ArticleService,
-		private auth: AuthService
+		private auth: AuthService,
+		private _channelService: ChannelService
 	) { }
 
 	ngOnInit(): void {
-		this.fetchArticles(this.boardNameArticles);
-	}
-
-	private fetchArticles(boardName: string) {
-		this.articlesService.fetchPostFromParentBoard<IArticle>(boardName).subscribe(
-			(posts) => {
-				this.posts = posts;
-				this.postsLength = this.posts.length;
-			}
-		)
+		this._channelService.channelRoute.pipe(
+			switchMap(route => this.articlesService.fetchPostFromParentBoard<IArticle>(route))
+		).subscribe((posts) => {
+			this.posts = posts;
+			this.postsLength = this.posts.length;
+		})
 	}
 }

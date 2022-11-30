@@ -6,4 +6,5 @@ export interface Channel {
 	parentBoard?: string;
 	channelCreation?: number;
 	channelMods?: string[];
+	articles?: number;
 }

@@ -118,7 +118,7 @@
         }
     }
 
-    &.active-menu &__toggle{
+    &.active-menu &__toggle, &.active-menu &__logo{
         display: none;
     }
 }

@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminModule } from './admin/admin.module';
 // import * as Notiflix from 'notiflix';
 
 //* Angular Firebase Set up
@@ -24,7 +23,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 //* Pipes
 import { FirstwordPipe } from './infrastructure/pipes/firstword.pipe';
-import { SearchFilterPipe } from './infrastructure/pipes/search-filter.pipe';
 import { ShortStringPipe } from './infrastructure/pipes/short-string.pipe';
 import { FormatUrlPipe } from './infrastructure/pipes/format-url.pipe';
 
@@ -59,6 +57,7 @@ import { ListCommentsComponent } from './community/components/comments/list-comm
 import { ButtonActionsComponent } from './community/components/comments/button-actions/button-actions.component';
 import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
 import { ChannelArticleCardComponent } from './community/components/channels/channel-article-card/channel-article-card.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
 	declarations: [

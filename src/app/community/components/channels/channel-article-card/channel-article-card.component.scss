@@ -2,8 +2,13 @@
 
 .card {
 	display: flex;
+	align-items: center;
 	height: 65px;
 	margin: 10px 25px 0px;
+
+	* {
+		cursor: pointer;
+	}
 
 	&__user-profile-picture {
 		border-radius: 50%;
