@@ -27,7 +27,7 @@
         </ul>
     </section>
     <section class="header__mobile" (click)="toggleMenu()">
-        <div class="profile__mobile" [routerLink]="['/profile']">
+        <div class="profile__mobile" [routerLink]="['/myprofile']">
             <img *ngIf=" currentUser " src="{{ currentUser.profilePicture }}" alt="" class="profile__img">
             <h3 class="profile__mobile-name" *ngIf=" currentUser ">{{ currentUser.name }}</h3>
             <p class="profile__mobile-email" *ngIf=" currentUser ">{{ currentUser.email }}</p>

@@ -5,17 +5,8 @@
 			<h3>Most popular</h3>
 			<div class="channels__popular-items">
 				<div class="channels__popular-item" *ngFor="let channel of popularChannels">
-					<img src="{{channel.channelImage}}" alt="{{channel.channelName}}" title="{{channel.channelName}}" [routerLink]="['/articles',channel.id,'posts']">
+					<img [src]="channel.channelImage" alt="{{channel.channelName}}" title="{{channel.channelName}}" [routerLink]="['/articles',channel.id,'posts']">
 				</div>
-				<!-- <div class="channels__popular-item">
-					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-				</div>
-				<div class="channels__popular-item">
-					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-				</div>
-				<div class="channels__popular-item">
-					<img src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-				</div> -->
 			</div>
 		</section>
 		<section class="channels__lists">
