@@ -6,9 +6,16 @@
           "dummy-profile-76979"
         ]
       }
+    },
+    "atos-community-upgrade": {
+      "hosting": {
+        "app-community-atos": [
+          "atos-community-upgrade"
+        ]
+      }
     }
   },
   "projects": {
-    "default": "dummy-profile-76979"
+    "default": "atos-community-upgrade"
   }
 }

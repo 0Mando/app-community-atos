@@ -108,8 +108,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "app-community-atos:build:production",
-            "firebaseProject": "dummy-profile-76979",
-            "firebaseHostingSite": "dummy-profile-76979"
+            "firebaseProject": "atos-community-upgrade",
+            "firebaseHostingSite": "atos-community-upgrade"
           }
         }
       }
