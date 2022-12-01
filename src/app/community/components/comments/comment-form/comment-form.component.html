@@ -10,7 +10,7 @@
 				formControlName="CommentBody" [styles]="{height: '200px'}"
 				[placeholder]="'Type here to reply to ' + replyToAuthor">
 			</quill-editor>
-			<button class="comment-form__submit">Post comment</button>
+			<button class="comment-form__submit" [disabled]="commentForm.invalid">Post comment</button>
 			<div class="info-box">
 				<i class="fa-regular fa-circle-question"></i>
 				<div class="info-box-info">To insert code, click the top left button, write your code, and once you finish, press enter 3 times</div>
