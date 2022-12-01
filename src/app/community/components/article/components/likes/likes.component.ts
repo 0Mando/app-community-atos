@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Confirm, Report } from 'notiflix';
+import { Subscription } from 'rxjs';
 import { IArticle } from 'src/app/domain/models/ipost';
 import { ArticleService } from 'src/app/infrastructure/services/article.service';
 import { AuthService } from 'src/app/infrastructure/services/auth.service';
@@ -9,11 +10,12 @@ import { AuthService } from 'src/app/infrastructure/services/auth.service';
 	templateUrl: './likes.component.html',
 	styleUrls: ['./likes.component.scss']
 })
-export class LikesComponent implements OnInit {
+export class LikesComponent implements OnInit, OnDestroy{
 
 	counter: number;
 	classNameLikeButton: string = 'likes__heart';
 	@Input() referenceArticleId: string;
+	private subscription: Subscription;
 
 	constructor(
 		private auth: AuthService,
@@ -21,7 +23,7 @@ export class LikesComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
-		this.articleService.getArticleById<IArticle>(this.referenceArticleId)
+		this.subscription = this.articleService.getArticleById<IArticle>(this.referenceArticleId)
 			.subscribe(
 				(article: IArticle) => {
 					this.counter = article.likes.length;
@@ -32,6 +34,10 @@ export class LikesComponent implements OnInit {
 					}
 				}
 			)
+	}
+
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
 
 	onToggleLikeButton() {

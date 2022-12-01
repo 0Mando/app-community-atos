@@ -107,7 +107,6 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 						(channel : Channel) => {
 							this.boardId = channel.parentBoard;
 							this.channelChilds = channel.articles;
-							
 						}
 					)
 				}
@@ -197,6 +196,7 @@ export class CreateArticleComponent implements OnInit, ArticleCanDeactivate {
 	changeEditor(event: EditorChangeContent | EditorChangeSelection) {
 		this.quilleditorContent = event['editor']['root']['innerHTML'];
 		this.titlePost = this.markdownForm.get('titlePostForm').value;
+		this.readingTime = this.markdownForm.get('readingTimeForm').value;
 	}
 
 	/**

@@ -6,6 +6,12 @@
 			</span>
 			<span class="options__list__actions">Edit</span>
 		</li>
+		<li id="delete" *ngIf="canDeleteArticle" (click)="onDeleteArticle()">
+			<span class="material-symbols-outlined">
+				delete
+			</span>
+			<span class="options__list__actions">Delete</span>
+		</li>
 		<li id="warning" *ngIf="canReportArticle" (click)="onReportArticle()">
 			<span class="material-symbols-outlined">
 				warning
