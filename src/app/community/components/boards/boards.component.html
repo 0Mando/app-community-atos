@@ -13,7 +13,7 @@
 					class="board__about-channel__link">Go to section</a>
 			</div>
 			<div class="board__more-information">
-				<div class="board___stadistics">
+				<!-- <div class="board___stadistics">
 					<div class="board__more-information__item">
 						<label>Last topics</label>
 						<p>7</p>
@@ -26,7 +26,8 @@
 						<label>Most recent</label>
 						<p>Lorem, ipsum dolor.</p>
 					</div>
-				</div>
+				</div> -->
+				<app-board-stats [boardId]="board.id"></app-board-stats>
 				<a routerLink="/channels/{{ board.id }}" class="board__btn-i">Access</a>
 			</div>
 		</article>

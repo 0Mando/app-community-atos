@@ -58,6 +58,7 @@ import { ButtonActionsComponent } from './community/components/comments/button-a
 import { ButtonOptionsComponent } from './community/components/article/components/button-options/button-options.component';
 import { ChannelArticleCardComponent } from './community/components/channels/channel-article-card/channel-article-card.component';
 import { AdminModule } from './admin/admin.module';
+import { BoardStatsComponent } from './community/components/boards/board-stats/board-stats.component';
 
 @NgModule({
 	declarations: [
@@ -92,6 +93,7 @@ import { AdminModule } from './admin/admin.module';
 		ButtonActionsComponent,
 		ButtonOptionsComponent,
     ChannelArticleCardComponent,
+    BoardStatsComponent,
 		// ShortenModPipe,
 		// TimeAgoPipe,
 	],
