@@ -68,12 +68,6 @@
 		width: 100%;
 		max-height: 260px;
 		overflow-y: hidden;
-		// background: rgb(255,255,255);
-		// background: linear-gradient(
-		// 	180deg, rgba(255,255,255,1) 0%,
-		// 	rgba(255,255,255,1) 88%,
-		// 	rgba(230,230,230,1) 100%
-		// );
 
 		h3 {
 			margin-bottom: 1rem;
@@ -138,18 +132,6 @@
                 }
             }
 
-            &__btn-arrow-down{
-                background: none;
-                border: none;
-                color: #ccc;
-
-                &__negative{
-                    background: none;
-                    border: none;
-                    color: red;
-                }
-            }
-
             &__counter{
                 text-align: center;
                 color: #ccc;
@@ -166,36 +148,11 @@
         &__header{
             display: flex;
             padding: 0.2rem 0.5rem 0.8rem;
-            // border-bottom: 0.125rem solid #ccc;
             align-items: flex-start;
 
             &__btn-interacction{
                 display: flex;
                 flex-direction: column;
-
-                &__btn-arrow-up{
-                    background: none;
-                    border: none;
-                    color: #ccc;
-
-                    &__positive{
-                        color: $main;
-                        background: none;
-                        border: none;
-                    }
-                }
-
-                &__btn-arrow-down{
-                    background: none;
-                    border: none;
-                    color: #ccc;
-
-                    &__negative{
-                        background: none;
-                        border: none;
-                        color: red;
-                    }
-                }
 
                 &__counter{
                     text-align: center;
@@ -208,7 +165,7 @@
             &__user{
                 display: flex;
                 margin-top: 15px;
-                margin-left: 1.5rem; //! <-------Medium
+                margin-left: 1.5rem;
             }
 
             &__user-profile{
@@ -237,7 +194,6 @@
             margin-top: 1rem;
 			display: block;
 			width: 100%;
-			// background-color: red;
 
             h4{
                 line-height: 1.8rem;
@@ -338,45 +294,5 @@ pre {
 
     .btn-interacction-btn{
         display: none;
-    }
-
-    //! Colocar un position sticky
-    .speakers{
-        display: block;
-        margin-top: 2rem;
-        margin-left: 2.8rem;
-
-        &__title{
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        &__item{
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-
-            &__profile{
-                border-radius: 50%;
-                width: 2.5rem;
-                height: 2.5rem;
-                margin-right: 0.5rem;
-            }
-
-            &__username{
-                color: #888888;
-                margin-right: 0.625rem;
-            }
-
-            &__top-speakers{
-                color: #888888;
-                display: flex;
-            }
-
-            label{
-                margin-left: 0.625rem;
-            }
-        }
     }
 }

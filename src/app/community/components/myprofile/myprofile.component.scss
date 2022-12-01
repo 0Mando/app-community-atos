@@ -24,8 +24,6 @@ main{
     border-radius: 10px;
 
     position: relative;
-    // background-image: url('https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-    // background-size: cover;
 
     &-edit{
         position: absolute;
@@ -76,9 +74,6 @@ main{
     .pagination-next a::after, .pagination-previous a::before {
         opacity: 0.7;
     }
-
-    // .pagination-next.disabled:after, .pagination-previous.disabled:before{
-    // }
 
     li :hover{
         background: none;
