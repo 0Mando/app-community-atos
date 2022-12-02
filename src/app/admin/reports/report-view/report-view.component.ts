@@ -17,6 +17,8 @@ export class ReportViewComponent implements OnInit {
 	report: IReport;
 	article: IArticle;
 	comment: IComment;
+	articleId: string = '';
+	commentId: string = '';
 
 
 	constructor(
@@ -64,7 +66,7 @@ export class ReportViewComponent implements OnInit {
 		this.commentService.deleteComment(commentId);
 		this.removeReportHandler();
 	}
-	
+
 	deleteArticleHandler(articleId){
 		this.articleService.deletePost(articleId);
 		this.removeReportHandler();
