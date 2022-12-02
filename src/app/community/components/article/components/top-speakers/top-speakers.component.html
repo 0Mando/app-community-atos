@@ -3,7 +3,7 @@
 	<article class="speakers__item" *ngFor="let speaker of topSpeaker; let i=index">
 		<ng-container *ngIf="i<6">
 			<img class="speakers__item__profile" src="{{ speaker.profilePicture }}" alt="Profile">
-			<label class="speakers__item__username">{{ speaker.name }}</label>
+			<label routerLink="/profile/{{ speaker.id }}" class="speakers__item__username">{{ speaker.name }}</label>
 			<div class="speakers__item__top-speakers">
 				<span class="material-icons">question_answer</span>
 				<label class="speakers__item__comments">{{ speaker.comments }}</label>

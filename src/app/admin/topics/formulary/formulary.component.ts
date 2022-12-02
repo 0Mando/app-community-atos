@@ -31,9 +31,9 @@ export class FormularyComponent implements OnInit, AfterViewInit{
 
   loading: boolean = false;
   file?: File;
-  imageUrl = 'https://i.pinimg.com/originals/ae/d6/55/aed655409db98115a35385b396dfb252.jpg';
+  imageUrl = 'https://firebasestorage.googleapis.com/v0/b/atos-community-upgrade.appspot.com/o/board-images%2F1662659300337?alt=media&token=35876182-c194-4912-abce-b37f40a15af7';
   imageUrlStyle : SafeStyle;
-  
+
   @Input() type = '';
   @Input() board = '';
   @Input() resetFormSubject: Subject<boolean> = new Subject<boolean>();
@@ -112,7 +112,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           this.title = 'editing';
           this.action = 'edit';
           this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.boardImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
-      
+
         });
         break;
       case 'channel':
@@ -122,7 +122,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
             name: data.channelName,
             description: data.channelDescription,
             parent: data.parentBoard,
-            
+
           });
           this.modsID = [];
 
@@ -137,7 +137,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
           this.title = 'editing';
           this.action = 'edit';
           this.imageUrlStyle = this.sanitizer.bypassSecurityTrustStyle(`url(${data.channelImage || "https://s24953.pcdn.co/blog/wp-content/uploads/2018/01/Templates-Guide-header-1-1024x576.png"})`);
-      
+
         })
         break;
     }
@@ -153,7 +153,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     });
   }
 
-  ngAfterViewInit(): void {        
+  ngAfterViewInit(): void {
     const datalist = document.querySelector('#mod-search')! as HTMLInputElement;
     const addMod = fromEvent(datalist, 'keyup');
     addMod.subscribe((x: KeyboardEvent) => {
@@ -196,7 +196,7 @@ export class FormularyComponent implements OnInit, AfterViewInit{
   }
 
   async uploadImage(file : File){
-    
+
     try {
       const imgRef = ref(this.storage, `${this.type}-images/${file.lastModified}`)
       const res = await uploadBytes(imgRef, file);
@@ -246,12 +246,12 @@ export class FormularyComponent implements OnInit, AfterViewInit{
     this._roomService.createRoom(TYPE, room).then(() => {
       this.newForm.reset();
       this.closeForm();
-      
+
     }, error => {
       console.log(error);
     })
   }
-  
+
   async editRoom(id: string){
     let TYPE: Board | Channel;
     let room = this.type+'s';

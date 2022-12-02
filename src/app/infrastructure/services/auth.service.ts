@@ -106,6 +106,6 @@ export class AuthService {
 			'Users',
 			(ref) => ref
 				.orderBy('comments','desc')
-		).valueChanges();
+		).valueChanges({ idField : 'id' });
 	}
 }
