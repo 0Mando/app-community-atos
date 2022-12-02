@@ -12,6 +12,7 @@ export interface User{
 	work?: string;
 	checked?: boolean;
 	skills?: string[];
+	comments?: number;
 }
 
 /**

@@ -19,6 +19,7 @@ export class CommentFormComponent implements OnInit {
 	commentI: IComment;
 	idPost: string;
 	@Input() replyToAuthor: string;
+	counterComments: number = 0;
 
 	currentUser = {
 		username: '',
@@ -63,6 +64,7 @@ export class CommentFormComponent implements OnInit {
 				this.currentUser.profilePicture = user.profilePicture;
 				this.currentUser.username = user.name;
 				this.currentUser.role = user.userType;
+				this.counterComments = user.comments || 0;
 			}
 		)
 	}
@@ -78,13 +80,15 @@ export class CommentFormComponent implements OnInit {
 				commentBody: this.commentForm.get('CommentBody').value,
 				createdAt: this.currentDate.getTime()
 			}
-			this.commentsService.createComment(comment)
-				.catch(
-					error => {
-						console.log('Something went wrong');
-						console.log(error);
-					}
-				);
+			this.commentsService.createComment(comment).catch(
+				error => {
+					console.log('Something went wrong');
+					console.log(error);
+				}
+			);
+			this.authenticationService.updateComments(this.idUser, (this.counterComments + 1)).catch(
+				error => console.log('An error ocurred '+error)
+			)
 			this.commentForm.reset();
 		} else {
 			this.alertRolePermissions();

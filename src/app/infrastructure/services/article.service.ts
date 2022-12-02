@@ -32,6 +32,7 @@ export class ArticleService {
 			(ref) => ref
 				.where('channelId', '==', channelId)
 				.where('archive', '==', false)
+				.orderBy('date','desc')
 		)
 		return post.valueChanges({ idField: 'id' });
 	}

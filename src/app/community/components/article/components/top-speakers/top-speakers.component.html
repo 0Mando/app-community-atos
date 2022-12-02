@@ -1,11 +1,13 @@
 <section class="speakers">
 	<h4 class="speakers__title">Top Speakers</h4>
-	<article class="speakers__item" *ngFor="let article of articles">
-		<img class="speakers__item__profile" src="https://images.pexels.com/photos/428361/pexels-photo-428361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Profile">
-		<label class="speakers__item__username">Username LastName</label>
-		<div class="speakers__item__top-speakers">
-			<span class="material-icons">question_answer</span>
-			<label>89</label>
-		</div>
+	<article class="speakers__item" *ngFor="let speaker of topSpeaker; let i=index">
+		<ng-container *ngIf="i<6">
+			<img class="speakers__item__profile" src="{{ speaker.profilePicture }}" alt="Profile">
+			<label class="speakers__item__username">{{ speaker.name }}</label>
+			<div class="speakers__item__top-speakers">
+				<span class="material-icons">question_answer</span>
+				<label class="speakers__item__comments">{{ speaker.comments }}</label>
+			</div>
+		</ng-container>
 	</article>
 </section>

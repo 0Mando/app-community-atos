@@ -6,6 +6,7 @@ import { CommentsService } from 'src/app/infrastructure/services/comments.servic
 import { ReportService } from 'src/app/infrastructure/services/report.service';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix';
+import { User } from 'src/app/domain/models/user.model';
 
 @Component({
 	selector: 'app-button-actions',
@@ -32,6 +33,8 @@ export class ButtonActionsComponent implements OnInit {
 		createdAt: 0
 	}
 
+	userCounterComments: number;
+
 	constructor(
 		private commentsService: CommentsService,
 		private reportService: ReportService,
@@ -49,6 +52,11 @@ export class ButtonActionsComponent implements OnInit {
 						createdAt: comment.createdAt
 					}
 				}
+			}
+		)
+		this.authService.getUserInformation(this.currentComment.idUserAuthor).subscribe(
+			(user: User) => {
+				this.userCounterComments = user.comments;
 			}
 		)
 	}
@@ -69,6 +77,7 @@ export class ButtonActionsComponent implements OnInit {
 		this.commentsService.deleteComment(this.idCommentReference).catch(
 			error => console.log('An error ocurred : ' + error)
 		)
+		this.authService.updateComments(this.currentComment.idUserAuthor, (this.userCounterComments - 1));
 		Notify.success('Comment Deleted')
 	}
 

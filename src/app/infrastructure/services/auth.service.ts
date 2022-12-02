@@ -92,8 +92,20 @@ export class AuthService {
 	getUserInformation(userId: string) {
 		return this.afs.collection('Users').doc(userId).valueChanges();
   }
-  
+
 	deleteUser(id: string){
 		this.afs.collection<User>('Users').doc(id).delete();
+	}
+
+	updateComments(userId: string, counterComments: number) {
+		return this.afs.collection('Users').doc(userId).update({comments: counterComments});
+	}
+
+	getTopSpeakers() {
+		return this.afs.collection<User>(
+			'Users',
+			(ref) => ref
+				.orderBy('comments','desc')
+		).valueChanges();
 	}
 }
